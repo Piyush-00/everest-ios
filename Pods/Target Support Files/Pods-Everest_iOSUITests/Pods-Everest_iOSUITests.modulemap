@@ -1,0 +1,6 @@
+framework module Pods_Everest_iOSUITests {
+  umbrella header "Pods-Everest_iOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
