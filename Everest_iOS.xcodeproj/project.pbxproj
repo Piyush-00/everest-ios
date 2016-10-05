@@ -124,8 +124,11 @@
 		98E2F8C61DA1F6C600AAC17E /* Everest_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				9E113AF21DA48CD4009001C6 /* utils */,
+				9E113AF11DA48CC5009001C6 /* views */,
+				9E113AEE1DA48B0D009001C6 /* controllers */,
+				9E113AEC1DA48AF9009001C6 /* models */,
 				98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */,
-				98E2F8C91DA1F6C600AAC17E /* ViewController.swift */,
 				98E2F8CB1DA1F6C600AAC17E /* Main.storyboard */,
 				98E2F8CE1DA1F6C600AAC17E /* Assets.xcassets */,
 				98E2F8D01DA1F6C600AAC17E /* LaunchScreen.storyboard */,
@@ -150,6 +153,35 @@
 				98E2F8E91DA1F6C700AAC17E /* Info.plist */,
 			);
 			path = Everest_iOSUITests;
+			sourceTree = "<group>";
+		};
+		9E113AEC1DA48AF9009001C6 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		9E113AEE1DA48B0D009001C6 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98E2F8C91DA1F6C600AAC17E /* ViewController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		9E113AF11DA48CC5009001C6 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		9E113AF21DA48CD4009001C6 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 		EAB400E4791FCF39D7677757 /* Pods */ = {
