@@ -1,5 +1,5 @@
 //
-//  e.swift
+//  Attendee.swift
 //  Everest_iOS
 //
 //  Created by Sebastian Kolosa on 2016-10-05.
