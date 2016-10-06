@@ -6,7 +6,7 @@ To make a local copy of this repository,:
 $ cd [development folder]
 $ git clone git@bitbucket.org:powerpuffninjas/everestapp.git
 ```
-More information regarding this project will be made available as the project progresses.
+More information regarding this project will be made available as the project progresses.  
 Other related information regarding project Everest:  
 - Everest App (iOS)  
 https://app.nuclino.com/teams/13:11577/documents/Everest-App-iOS-e0d16824-8c22-43dc-9c28-e534b01bff6a  
