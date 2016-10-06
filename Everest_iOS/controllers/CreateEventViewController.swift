@@ -28,3 +28,4 @@ class CreateEventViewController: InputTableViewController {
         return cell
     }
 }
+
