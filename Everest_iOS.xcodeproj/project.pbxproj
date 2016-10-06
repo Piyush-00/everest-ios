@@ -18,10 +18,10 @@
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
 		9E113B1C1DA5F449009001C6 /* UtilsPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */; };
-		9E113B291DA5F761009001C6 /* HeaderViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B281DA5F761009001C6 /* HeaderViewContainer.swift */; };
-		9E113B2B1DA5F7A0009001C6 /* CreateEventViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B2A1DA5F7A0009001C6 /* CreateEventViewContainer.swift */; };
 		9E113B2D1DA5F7D7009001C6 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B2C1DA5F7D7009001C6 /* InputTableViewController.swift */; };
 		9E113B2F1DA5F7E3009001C6 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B2E1DA5F7E3009001C6 /* CreateEventViewController.swift */; };
+		9E113B311DA5F96B009001C6 /* CreateEventViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B301DA5F96B009001C6 /* CreateEventViewContainer.swift */; };
+		9E113B331DA5F97F009001C6 /* HeaderViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B321DA5F97F009001C6 /* HeaderViewContainer.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,10 +65,10 @@
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
 		9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsPlaceholder.swift; sourceTree = "<group>"; };
-		9E113B281DA5F761009001C6 /* HeaderViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewContainer.swift; sourceTree = "<group>"; };
-		9E113B2A1DA5F7A0009001C6 /* CreateEventViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewContainer.swift; sourceTree = "<group>"; };
 		9E113B2C1DA5F7D7009001C6 /* InputTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewController.swift; sourceTree = "<group>"; };
 		9E113B2E1DA5F7E3009001C6 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		9E113B301DA5F96B009001C6 /* CreateEventViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateEventViewContainer.swift; path = Everest_iOS/controllers/CreateEventViewContainer.swift; sourceTree = SOURCE_ROOT; };
+		9E113B321DA5F97F009001C6 /* HeaderViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderViewContainer.swift; path = Everest_iOS/controllers/HeaderViewContainer.swift; sourceTree = SOURCE_ROOT; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE423139FB391E34F01947C6 /* Pods-Everest_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSTests/Pods-Everest_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,8 +195,8 @@
 		9E113B1E1DA5F5CE009001C6 /* containers */ = {
 			isa = PBXGroup;
 			children = (
-				9E113B281DA5F761009001C6 /* HeaderViewContainer.swift */,
-				9E113B2A1DA5F7A0009001C6 /* CreateEventViewContainer.swift */,
+				9E113B301DA5F96B009001C6 /* CreateEventViewContainer.swift */,
+				9E113B321DA5F97F009001C6 /* HeaderViewContainer.swift */,
 			);
 			path = containers;
 			sourceTree = "<group>";
@@ -509,11 +509,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
-				9E113B2B1DA5F7A0009001C6 /* CreateEventViewContainer.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
-				9E113B291DA5F761009001C6 /* HeaderViewContainer.swift in Sources */,
 				9E113B1C1DA5F449009001C6 /* UtilsPlaceholder.swift in Sources */,
+				9E113B331DA5F97F009001C6 /* HeaderViewContainer.swift in Sources */,
 				9E113B2D1DA5F7D7009001C6 /* InputTableViewController.swift in Sources */,
+				9E113B311DA5F96B009001C6 /* CreateEventViewContainer.swift in Sources */,
 				9E113B2F1DA5F7E3009001C6 /* CreateEventViewController.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 			);
