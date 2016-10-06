@@ -19,6 +19,7 @@
 		9E113AF81DA49D40009001C6 /* CreateEventViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113AF71DA49D40009001C6 /* CreateEventViewContainer.swift */; };
 		9E113AFB1DA4A137009001C6 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113AFA1DA4A137009001C6 /* InputTableViewController.swift */; };
 		9E113AFD1DA4A3D8009001C6 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113AFC1DA4A3D8009001C6 /* CreateEventViewController.swift */; };
+		9E113AFF1DA5E02F009001C6 /* testFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113AFE1DA5E02F009001C6 /* testFile.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		9E113AF71DA49D40009001C6 /* CreateEventViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewContainer.swift; sourceTree = "<group>"; };
 		9E113AFA1DA4A137009001C6 /* InputTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewController.swift; sourceTree = "<group>"; };
 		9E113AFC1DA4A3D8009001C6 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		9E113AFE1DA5E02F009001C6 /* testFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testFile.swift; sourceTree = "<group>"; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE423139FB391E34F01947C6 /* Pods-Everest_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSTests/Pods-Everest_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				9E113AF91DA49E4E009001C6 /* containers */,
+				9E113AFE1DA5E02F009001C6 /* testFile.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				9E113AFD1DA4A3D8009001C6 /* CreateEventViewController.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				9E113AFB1DA4A137009001C6 /* InputTableViewController.swift in Sources */,
+				9E113AFF1DA5E02F009001C6 /* testFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
