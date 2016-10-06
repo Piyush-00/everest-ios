@@ -17,4 +17,4 @@ https://app.nuclino.com/teams/13:11577/documents/iOS-Coding-Conventions-764d5dd7
 
 Any questions regarding the EverestApp Project, contact:  
 - Sathoshi Kumarawadu  
-- Sebastian Kolos
+- Sebastian Kolosa
