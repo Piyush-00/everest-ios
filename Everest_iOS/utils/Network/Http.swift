@@ -43,9 +43,4 @@ class Http {
         
     }
     
-    static func printx(test: String){
-        print(test);
-    }
-    
-    
 }
