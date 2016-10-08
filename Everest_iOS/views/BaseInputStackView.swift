@@ -1,5 +1,5 @@
 //
-//  BaseInputStackView.swift
+//  BaseInputView.swift
 //  Everest_iOS
 //
 //  Created by Sebastian Kolosa on 2016-10-06.
@@ -8,36 +8,39 @@
 
 import UIKit
 
-class BaseInputStackView: UIStackView {
+class BaseInputView: UIView {
+    var stackView: UIStackView
     
     init(_ coder: NSCoder? = nil) {
+        self.stackView = UIStackView()
+        self.stackView.axis = UILayoutConstraintAxis.vertical
+        
         if let coder = coder {
-            super.init(coder: coder)
+            super.init(coder: coder)!
         } else {
             super.init(frame: CGRect.zero)
         }
         
-        self.axis = UILayoutConstraintAxis.horizontal
-        self.distribution = UIStackViewDistribution.equalCentering
+        self.addSubview(self.stackView)
+        setupConstraints()
     }
     
     required convenience init(coder: NSCoder) {
         self.init(coder)
     }
     
-    override func addArrangedSubview(_ view: UIView) {
-        super.addArrangedSubview(view)
-        
-        //if user's device is a phone, set autolayout constraints
-        if (UIDevice.current.userInterfaceIdiom == .phone) {
-            view.translatesAutoresizingMaskIntoConstraints = false
-            var dView:[String:UIView] = [:]
-            dView["view"] = view
-            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[view]-|", options: [], metrics: nil, views: dView))
-            view.bounds.size.height = 50
-        //if user's device is an iPad, set frame so view doesn't stretch to margins
-        } else {
-            view.frame = CGRect(x: self.center.x, y: 0, width: 200, height: 50)
-        }
+    private func setupConstraints() {
+        self.addConstraint(
+            NSLayoutConstraint(item: self.stackView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        )
+        self.addConstraint(
+            NSLayoutConstraint(item: self.stackView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        )
+        self.addConstraint(
+            NSLayoutConstraint(item: self.stackView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
+        )
+        self.addConstraint(
+            NSLayoutConstraint(item: self.stackView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        )
     }
 }
