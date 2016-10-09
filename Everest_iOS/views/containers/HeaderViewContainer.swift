@@ -11,25 +11,25 @@ import UIKit
 class HeaderViewContainer: UIView {
     var headerView: UIView
     var contentView: UIView
-    private var headerHeight: CGFloat
+    var statusBarView: UIView
     
     init(_ coder: NSCoder? = nil) {
-        self.headerHeight = 100
-        
-        self.headerView = UIView()
-        self.headerView.backgroundColor = UIColor.blue
-        
-        self.contentView = UIView()
-        self.contentView.backgroundColor = UIColor.gray
+        headerView = UIView()
+        contentView = UIView()
+        statusBarView = UIView()
         
         if let coder = coder {
             super.init(coder: coder)!
         } else {
-            super.init()
+            super.init(frame: CGRect.zero)
         }
         
-        self.addSubview(self.headerView)
-        self.addSubview(self.contentView)
+        statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        headerView.backgroundColor = UIColor.blue
+        
+        addSubview(statusBarView)
+        addSubview(headerView)
+        addSubview(contentView)
         
         setupConstraints()
     }
@@ -39,41 +39,29 @@ class HeaderViewContainer: UIView {
     }
     
     func setHeaderView(view: UIView) {
-        self.headerView.addSubview(view)
+        headerView.addSubview(view)
     }
     
     func setContentView(view: UIView) {
-        self.contentView.addSubview(view)
+        contentView.addSubview(view)
     }
     
     private func setupConstraints() {
-        self.headerView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        translatesAutoresizingMaskIntoConstraints = false
+        statusBarView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraint(
-            NSLayoutConstraint(item: self.headerView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.headerView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.headerView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.headerView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 200)
-        )
+        statusBarView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        statusBarView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
         
-        self.addConstraint(
-            NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.headerView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(
-            NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
-        )
+        headerView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
+        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }

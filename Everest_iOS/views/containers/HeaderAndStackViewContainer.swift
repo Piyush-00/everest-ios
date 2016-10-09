@@ -12,7 +12,7 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
     var baseInputView: BaseInputView
     
     override init(_ coder: NSCoder? = nil) {
-        self.baseInputView = BaseInputView()
+        baseInputView = BaseInputView()
         
         if let coder = coder {
             super.init(coder)
@@ -20,7 +20,7 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
             super.init()
         }
         
-        self.addSubview(self.baseInputView)
+        setContentView(view: baseInputView)
         setupConstraints()
     }
     
@@ -29,13 +29,15 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
     }
     
     private func setupConstraints() {
-        self.addConstraint(NSLayoutConstraint(item: self.baseInputView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(NSLayoutConstraint(item: self.baseInputView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(NSLayoutConstraint(item: self.baseInputView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
-        )
-        self.addConstraint(NSLayoutConstraint(item: self.baseInputView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
-        )
+        translatesAutoresizingMaskIntoConstraints = false
+        baseInputView.translatesAutoresizingMaskIntoConstraints = false
+        
+        baseInputView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        baseInputView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        baseInputView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+    }
+    
+    func addArrangedSubview(view: UIView) {
+        baseInputView.addArrangedSubview(view: view)
     }
 }
