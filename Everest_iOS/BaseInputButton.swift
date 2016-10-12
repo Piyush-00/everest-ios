@@ -8,6 +8,7 @@
 
 import UIKit
 
+//SKO - UIButton with custom UI
 class BaseInputButton: UIButton {
     var buttonText: String
     
@@ -21,7 +22,7 @@ class BaseInputButton: UIButton {
         }
         
         setTitle(buttonText, for: UIControlState.normal)
-        backgroundColor = UIColor.red
+        backgroundColor = UIColor(netHex: 0xBD3333)
         layer.cornerRadius = 4
     }
     
@@ -35,5 +36,15 @@ class BaseInputButton: UIButton {
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init(aDecoder)
+    }
+    
+    //SKO - Set touch UI behaviour
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.5)
+    }
+    
+    //SKO - Set touch UI behaviour
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
     }
 }

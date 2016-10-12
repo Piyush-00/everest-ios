@@ -8,6 +8,12 @@
 
 import UIKit
 
+//SKO
+/*
+ UI skeleton for embedded stack view that
+ specifies in containing textFields and 
+ textViews.
+*/
 class BaseInputView: UIView {
     var stackView: UIStackView
     
@@ -48,6 +54,7 @@ class BaseInputView: UIView {
     private func setupStackViewContraints(view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         
+        //SKO - Set appropriate constraints according to what type of field it is
         if view is BaseInputTextView {
             view.heightAnchor.constraint(equalToConstant: 100).isActive = true
         } else if view is BaseInputTextField || view is BaseInputButton {
@@ -57,6 +64,8 @@ class BaseInputView: UIView {
     
     func addArrangedSubview(view: UIView) {
         stackView.addArrangedSubview(view)
+        
+        //SKO - Setup constraints for each arranged subview added
         setupStackViewContraints(view: view)
     }
 }

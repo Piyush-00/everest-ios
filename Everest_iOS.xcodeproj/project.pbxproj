@@ -24,8 +24,9 @@
 		9E113B4B1DA883CD009001C6 /* HeaderAndStackViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B4A1DA883CD009001C6 /* HeaderAndStackViewContainer.swift */; };
 		9E6C09951DA9997300455FEB /* BaseInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C09941DA9997300455FEB /* BaseInputTextField.swift */; };
 		9E6C09971DA9A19200455FEB /* BaseInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C09961DA9A19200455FEB /* BaseInputTextView.swift */; };
-		9E6C09991DA9E11D00455FEB /* UIViewBorderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C09981DA9E11D00455FEB /* UIViewBorderExtension.swift */; };
+		9E6C09991DA9E11D00455FEB /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C09981DA9E11D00455FEB /* UIViewExtension.swift */; };
 		9E6C099F1DAA0FDB00455FEB /* BaseInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C099E1DAA0FDB00455FEB /* BaseInputButton.swift */; };
+		9E6C09A31DADEBEA00455FEB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6C09A21DADEBEA00455FEB /* UIColorExtension.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +76,9 @@
 		9E113B4A1DA883CD009001C6 /* HeaderAndStackViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderAndStackViewContainer.swift; sourceTree = "<group>"; };
 		9E6C09941DA9997300455FEB /* BaseInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextField.swift; sourceTree = "<group>"; };
 		9E6C09961DA9A19200455FEB /* BaseInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextView.swift; sourceTree = "<group>"; };
-		9E6C09981DA9E11D00455FEB /* UIViewBorderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewBorderExtension.swift; sourceTree = "<group>"; };
+		9E6C09981DA9E11D00455FEB /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		9E6C099E1DAA0FDB00455FEB /* BaseInputButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputButton.swift; sourceTree = "<group>"; };
+		9E6C09A21DADEBEA00455FEB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE423139FB391E34F01947C6 /* Pods-Everest_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSTests/Pods-Everest_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,8 +188,9 @@
 		9E113B131DA5F2D9009001C6 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				9E6C09A11DADC49D00455FEB /* notifications */,
+				9E6C09A01DADC48F00455FEB /* extensions */,
 				9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */,
-				9E6C09981DA9E11D00455FEB /* UIViewBorderExtension.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -236,6 +239,22 @@
 				9E6C099E1DAA0FDB00455FEB /* BaseInputButton.swift */,
 			);
 			name = components;
+			sourceTree = "<group>";
+		};
+		9E6C09A01DADC48F00455FEB /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9E6C09981DA9E11D00455FEB /* UIViewExtension.swift */,
+				9E6C09A21DADEBEA00455FEB /* UIColorExtension.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
+		9E6C09A11DADC49D00455FEB /* notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = notifications;
 			sourceTree = "<group>";
 		};
 		EAB400E4791FCF39D7677757 /* Pods */ = {
@@ -542,8 +561,9 @@
 				9E6C099F1DAA0FDB00455FEB /* BaseInputButton.swift in Sources */,
 				9E113B3D1DA5FAB1009001C6 /* HeaderViewContainer.swift in Sources */,
 				9E113B4B1DA883CD009001C6 /* HeaderAndStackViewContainer.swift in Sources */,
+				9E6C09A31DADEBEA00455FEB /* UIColorExtension.swift in Sources */,
 				9E113B1C1DA5F449009001C6 /* UtilsPlaceholder.swift in Sources */,
-				9E6C09991DA9E11D00455FEB /* UIViewBorderExtension.swift in Sources */,
+				9E6C09991DA9E11D00455FEB /* UIViewExtension.swift in Sources */,
 				9E113B2F1DA5F7E3009001C6 /* CreateEventViewController.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				9E113B471DA714DC009001C6 /* BaseInputView.swift in Sources */,

@@ -8,6 +8,12 @@
 
 import UIKit
 
+//SKO 
+/*
+ UI skeleton composed of a 'header' and 'content' section,
+ the content section containing a stack view for uniform
+ subview layout.
+*/
 class HeaderAndStackViewContainer: HeaderViewContainer {
     var baseInputView: BaseInputView
     
@@ -29,9 +35,9 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
         setupConstraints()
         
+        //SKO - Since sideBorder depends on constraints, call here
         self.headerView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
         self.statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
     }
@@ -45,6 +51,7 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         baseInputView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
     }
     
+    //SKO - Pass subview on for handling by BaseInputView instance
     func addArrangedSubview(view: UIView) {
         baseInputView.addArrangedSubview(view: view)
     }

@@ -8,18 +8,21 @@
 
 import UIKit
 
+//SKO - UITextField with custom UI
 class BaseInputTextView: UITextView, UITextViewDelegate {
     private var placeholderLabel: UILabel
     
     init(_ placeholder: String, coder: NSCoder? = nil) {
+        //SKO - Since no placeholder text for UITextViews, set label
         placeholderLabel = UILabel()
         
         if let coder = coder {
             super.init(coder: coder)!
         } else {
+            //SKO - Frame irrelevant because using auto layout; set to CGRect.zero
             super.init(frame: CGRect.zero, textContainer: nil)
         }
-        
+
         placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
         placeholderLabel.text = placeholder
         placeholderLabel.alpha = 0.2
@@ -44,6 +47,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         self.init(aDecoder)
     }
     
+    //SKO - Emulate placeholder text functionality
     func textViewDidChange(_ textView: UITextView) {
         if text == "" {
             placeholderLabel.isHidden = false

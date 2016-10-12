@@ -8,6 +8,7 @@
 
 import UIKit
 
+//SKO - UITextField with custom UI
 class BaseInputTextField: UITextField {
     init(_ placeholder: String, coder: NSCoder? = nil) {
         if let coder = coder {
@@ -34,6 +35,7 @@ class BaseInputTextField: UITextField {
         self.init(aDecoder)
     }
     
+    //SKO - Set left padding for non-editing state
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         super.textRect(forBounds: bounds)
         
@@ -44,6 +46,7 @@ class BaseInputTextField: UITextField {
         return textRect
     }
     
+    //SKO - Set left padding for editing state
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         super.editingRect(forBounds: bounds)
         
