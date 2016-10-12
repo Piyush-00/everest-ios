@@ -21,11 +21,19 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         }
         
         setContentView(view: baseInputView)
-        setupConstraints()
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init(aDecoder)
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        
+        setupConstraints()
+        
+        self.headerView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        self.statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
     }
     
     private func setupConstraints() {

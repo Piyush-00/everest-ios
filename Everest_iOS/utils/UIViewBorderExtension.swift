@@ -17,23 +17,28 @@ extension UIView {
     }
     
     func sideBorder(side: borderSide, width: CGFloat, colour: UIColor) {
-        let sideBorderLayer = CALayer()
-        sideBorderLayer.backgroundColor = colour.cgColor
+        let sideBorderView = UIView()
+        
+        sideBorderView.backgroundColor = colour
+        addSubview(sideBorderView)
+        
+        sideBorderView.translatesAutoresizingMaskIntoConstraints  = false
         
         switch side {
         case borderSide.left:
-            sideBorderLayer.frame = CGRect(x: 0, y: 0, width: width, height: self.frame.height)
+            
             break
         case borderSide.right:
-            sideBorderLayer.frame = CGRect(x: self.frame.width, y: 0, width: width, height: self.frame.height)
+           
             break
         case borderSide.top:
-            sideBorderLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: width)
+            
             break
         case borderSide.bottom:
-            sideBorderLayer.frame = CGRect(x: 0, y: self.frame.height, width: self.frame.width, height: width)
+            sideBorderView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            sideBorderView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+            sideBorderView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            sideBorderView.heightAnchor.constraint(equalToConstant: width).isActive = true
         }
-        
-        self.layer.addSublayer(sideBorderLayer)
     }
 }

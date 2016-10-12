@@ -9,11 +9,13 @@
 import UIKit
 
 class HeaderViewContainer: UIView {
+    var statusBarView: UIView
+    var scrollView: UIScrollView
     var headerView: UIView
     var contentView: UIView
-    var statusBarView: UIView
     
     init(_ coder: NSCoder? = nil) {
+        scrollView = UIScrollView()
         headerView = UIView()
         contentView = UIView()
         statusBarView = UIView()
@@ -24,18 +26,20 @@ class HeaderViewContainer: UIView {
             super.init(frame: CGRect.zero)
         }
         
-        statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
-        headerView.backgroundColor = UIColor.blue
+        scrollView.addSubview(headerView)
+        scrollView.addSubview(contentView)
         
         addSubview(statusBarView)
-        addSubview(headerView)
-        addSubview(contentView)
-        
-        setupConstraints()
+        addSubview(scrollView)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init(aDecoder)
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        setupConstraints()
     }
     
     func setHeaderView(view: UIView) {
@@ -49,6 +53,7 @@ class HeaderViewContainer: UIView {
     private func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         statusBarView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -56,9 +61,13 @@ class HeaderViewContainer: UIView {
         statusBarView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
         
+        scrollView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo:bottomAnchor).isActive = true
+    
         headerView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
         headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 131).isActive = true
         
         contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true

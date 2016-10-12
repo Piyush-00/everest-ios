@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
+class CreateEventViewController: UIViewController, UITextFieldDelegate {
     var viewContainer: HeaderAndStackViewContainer
 
     init(_ coder: NSCoder? = nil) {
@@ -35,10 +35,10 @@ class CreateEventViewController: UIViewController {
         let dateTimeTextField = BaseInputTextField("Date and Time")
         let continueButton = BaseInputButton("Continue")
         
-        continueButton.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: UIControlEvents.touchUpInside)
-        
         promptLabel.text = "Create a New Event"
         promptLabel.textAlignment = NSTextAlignment.center
+        
+        continueButton.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: UIControlEvents.touchUpInside)
         
         viewContainer.addArrangedSubview(view: promptLabel)
         viewContainer.addArrangedSubview(view: nameTextField)
@@ -61,5 +61,10 @@ class CreateEventViewController: UIViewController {
     
     func onTapContinueButton(sender: UIButton) {
         print("button clicked")
+    }
+    
+    //UITextField Delegate methods
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //viewContainer.scrollView.
     }
 }

@@ -24,11 +24,15 @@ class BaseInputView: UIView {
         }
         
         addSubview(stackView)
-        setupConstraints()
     }
     
     required convenience init(coder: NSCoder) {
         self.init(coder)
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        setupConstraints()
     }
     
     private func setupConstraints() {
