@@ -56,4 +56,10 @@ class BaseInputTextField: UITextField {
         
         return editingRect
     }
+  
+    //SKU - Function to remove any borders
+    func removeBorder() {
+      layer.borderWidth = 0
+      layer.borderColor = nil
+    }
 }
