@@ -9,7 +9,18 @@
 /* Begin PBXBuildFile section */
 		22DCED725034CACEBDAD3576 /* Pods_Everest_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C1787080C2F43D5DB9A8B0 /* Pods_Everest_iOSTests.framework */; };
 		804717C33561938D9B2FC613 /* Pods_Everest_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FBE2F0026E207B61F9DABE /* Pods_Everest_iOS.framework */; };
-		985FD5F01DA727B50040E498 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FD5EF1DA727B50040E498 /* Http.swift */; };
+		982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */; };
+		98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */; };
+		98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */; };
+		98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F01DAF29D50023C9F4 /* Http.swift */; };
+		98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */; };
+		98AE46161DAF2ADE0023C9F4 /* BaseInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */; };
+		98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */; };
+		98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */; };
+		98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */; };
+		98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */; };
+		98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE46141DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift */; };
+		98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE46151DAF2ADE0023C9F4 /* HeaderViewContainer.swift */; };
 		98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */; };
 		98E2F8CD1DA1F6C600AAC17E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E2F8CB1DA1F6C600AAC17E /* Main.storyboard */; };
 		98E2F8CF1DA1F6C600AAC17E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98E2F8CE1DA1F6C600AAC17E /* Assets.xcassets */; };
@@ -18,9 +29,6 @@
 		98E2F8E81DA1F6C700AAC17E /* Everest_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
-		9E113B1C1DA5F449009001C6 /* UtilsPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */; };
-		9E113B431DA5FC3A009001C6 /* ContainersPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B421DA5FC3A009001C6 /* ContainersPlaceholder.swift */; };
-		9E113B451DA5FC49009001C6 /* ControllersPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B441DA5FC49009001C6 /* ControllersPlaceholder.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +57,18 @@
 		4E7B12F21DBDB2E917EFB609 /* Pods-Everest_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSUITests/Pods-Everest_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		86C1787080C2F43D5DB9A8B0 /* Pods_Everest_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Everest_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		890D66367B1DFA049E80D43E /* Pods-Everest_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSUITests/Pods-Everest_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		985FD5EF1DA727B50040E498 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
+		982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAlertController.swift; sourceTree = "<group>"; };
+		98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		98AE45F01DAF29D50023C9F4 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
+		98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsPlaceholder.swift; sourceTree = "<group>"; };
+		98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputButton.swift; sourceTree = "<group>"; };
+		98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextField.swift; sourceTree = "<group>"; };
+		98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextView.swift; sourceTree = "<group>"; };
+		98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputView.swift; sourceTree = "<group>"; };
+		98AE46141DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderAndStackViewContainer.swift; sourceTree = "<group>"; };
+		98AE46151DAF2ADE0023C9F4 /* HeaderViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewContainer.swift; sourceTree = "<group>"; };
 		98E2F8C41DA1F6C600AAC17E /* Everest_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Everest_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98E2F8CC1DA1F6C600AAC17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,9 +83,6 @@
 		98E2F8E91DA1F6C700AAC17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
-		9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsPlaceholder.swift; sourceTree = "<group>"; };
-		9E113B421DA5FC3A009001C6 /* ContainersPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainersPlaceholder.swift; sourceTree = "<group>"; };
-		9E113B441DA5FC49009001C6 /* ControllersPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllersPlaceholder.swift; sourceTree = "<group>"; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE423139FB391E34F01947C6 /* Pods-Everest_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSTests/Pods-Everest_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,12 +125,86 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		985FD5EE1DA726C30040E498 /* Network */ = {
+		98AE45EB1DAF29D50023C9F4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				985FD5EF1DA727B50040E498 /* Http.swift */,
+				98AE45EC1DAF29D50023C9F4 /* extensions */,
+				98AE45EF1DAF29D50023C9F4 /* Network */,
+				98AE45F11DAF29D50023C9F4 /* notifications */,
+				98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		98AE45EC1DAF29D50023C9F4 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */,
+				98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		98AE45EF1DAF29D50023C9F4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				98AE45F01DAF29D50023C9F4 /* Http.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		98AE45F11DAF29D50023C9F4 /* notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = notifications;
+			sourceTree = "<group>";
+		};
+		98AE460A1DAF2ADE0023C9F4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				98AE460B1DAF2ADE0023C9F4 /* components */,
+				98AE460F1DAF2ADE0023C9F4 /* controllers */,
+				98AE46111DAF2ADE0023C9F4 /* views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		98AE460B1DAF2ADE0023C9F4 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */,
+				98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */,
+				98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		98AE460F1DAF2ADE0023C9F4 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
+				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		98AE46111DAF2ADE0023C9F4 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
+				98AE46131DAF2ADE0023C9F4 /* containers */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		98AE46131DAF2ADE0023C9F4 /* containers */ = {
+			isa = PBXGroup;
+			children = (
+				98AE46141DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift */,
+				98AE46151DAF2ADE0023C9F4 /* HeaderViewContainer.swift */,
+			);
+			path = containers;
 			sourceTree = "<group>";
 		};
 		98E2F8BB1DA1F6C600AAC17E = {
@@ -142,9 +232,8 @@
 		98E2F8C61DA1F6C600AAC17E /* Everest_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				9E113B1F1DA5F5D6009001C6 /* controllers */,
-				9E113B1D1DA5F5C7009001C6 /* views */,
-				9E113B131DA5F2D9009001C6 /* utils */,
+				98AE460A1DAF2ADE0023C9F4 /* UI */,
+				98AE45EB1DAF29D50023C9F4 /* utils */,
 				9E113B121DA5F2AE009001C6 /* models */,
 				98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */,
 				98E2F8CB1DA1F6C600AAC17E /* Main.storyboard */,
@@ -180,39 +269,6 @@
 				9E113B171DA5F433009001C6 /* Attendee.swift */,
 			);
 			path = models;
-			sourceTree = "<group>";
-		};
-		9E113B131DA5F2D9009001C6 /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				985FD5EE1DA726C30040E498 /* Network */,
-				9E113B1B1DA5F449009001C6 /* UtilsPlaceholder.swift */,
-			);
-			path = utils;
-			sourceTree = "<group>";
-		};
-		9E113B1D1DA5F5C7009001C6 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				9E113B1E1DA5F5CE009001C6 /* containers */,
-			);
-			path = views;
-			sourceTree = "<group>";
-		};
-		9E113B1E1DA5F5CE009001C6 /* containers */ = {
-			isa = PBXGroup;
-			children = (
-				9E113B421DA5FC3A009001C6 /* ContainersPlaceholder.swift */,
-			);
-			path = containers;
-			sourceTree = "<group>";
-		};
-		9E113B1F1DA5F5D6009001C6 /* controllers */ = {
-			isa = PBXGroup;
-			children = (
-				9E113B441DA5FC49009001C6 /* ControllersPlaceholder.swift */,
-			);
-			path = controllers;
 			sourceTree = "<group>";
 		};
 		EAB400E4791FCF39D7677757 /* Pods */ = {
@@ -513,13 +569,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */,
+				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
+				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
+				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
-				9E113B1C1DA5F449009001C6 /* UtilsPlaceholder.swift in Sources */,
-				9E113B451DA5FC49009001C6 /* ControllersPlaceholder.swift in Sources */,
+				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
+				98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */,
+				98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */,
+				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
+				98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */,
+				98AE46161DAF2ADE0023C9F4 /* BaseInputButton.swift in Sources */,
+				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
-				9E113B431DA5FC3A009001C6 /* ContainersPlaceholder.swift in Sources */,
-				985FD5F01DA727B50040E498 /* Http.swift in Sources */,
+				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
