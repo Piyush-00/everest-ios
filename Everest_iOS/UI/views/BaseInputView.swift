@@ -40,7 +40,7 @@ class BaseInputView: UIView {
         super.didMoveToSuperview()
         setupConstraints()
     }
-    
+  
     private func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,4 +68,8 @@ class BaseInputView: UIView {
         //SKO - Setup constraints for each arranged subview added
         setupStackViewContraints(view: view)
     }
+  
+  func spacing(value: CGFloat){
+    stackView.spacing = value
+  }
 }

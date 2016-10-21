@@ -47,4 +47,10 @@ class BaseInputButton: UIButton {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
     }
+  
+    //SKU - Function to remove any borders
+    func removeBorder() {
+      layer.borderWidth = 0
+      layer.borderColor = nil
+    }
 }

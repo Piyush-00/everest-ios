@@ -12,7 +12,7 @@ import UIKit
 class BaseInputTextView: UITextView, UITextViewDelegate {
     private var placeholderLabel: UILabel
     
-    init(_ placeholder: String, coder: NSCoder? = nil) {
+  init(_ placeholder: String? = nil, textInput: String? = nil, coder: NSCoder? = nil) {
         //SKO - Since no placeholder text for UITextViews, set label
         placeholderLabel = UILabel()
         
@@ -33,6 +33,9 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         font = UIFont.systemFont(ofSize: 17)
         addSubview(placeholderLabel)
         delegate = self
+    
+        text = textInput
+    
     }
     
     convenience init(_ coder: NSCoder? = nil) {
@@ -54,5 +57,10 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         } else {
             placeholderLabel.isHidden = true
         }
+    }
+    //SKU - Function to remove any borders
+    func removeBorder() {
+      layer.borderWidth = 0
+      layer.borderColor = nil
     }
 }
