@@ -62,7 +62,7 @@ class BaseInputView: UIView {
         }
     }
     
-    func addArrangedSubview(view: UIView) {
+    func addArrangedSubviewToStackView(view: UIView) {
         stackView.addArrangedSubview(view)
         
         //SKO - Setup constraints for each arranged subview added
