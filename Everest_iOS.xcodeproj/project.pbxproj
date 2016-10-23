@@ -14,6 +14,7 @@
 		983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */; };
 		9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */; };
 		9877F5531DBC01DA004A7CC2 /* ProfileHeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877F5521DBC01DA004A7CC2 /* ProfileHeaderContainer.swift */; };
+		989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */; };
 		98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */; };
 		98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */; };
 		98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F01DAF29D50023C9F4 /* Http.swift */; };
@@ -66,6 +67,7 @@
 		983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewContainer.swift; sourceTree = "<group>"; };
 		9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpProfileViewController.swift; sourceTree = "<group>"; };
 		9877F5521DBC01DA004A7CC2 /* ProfileHeaderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderContainer.swift; sourceTree = "<group>"; };
+		989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		98AE45F01DAF29D50023C9F4 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */,
 				98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */,
+				989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
 				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
+				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
 				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
