@@ -111,7 +111,9 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
   //SKU - Completion handlers that are built in with UIImagePickerControllerDelegate. Allow user to select photo and display the image in the corresponding UIImageView
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     if let chosenImage:UIImage = (info[UIImagePickerControllerOriginalImage]) as? UIImage {
-      UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil)
+      if (picker.sourceType == .camera){
+        UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil)
+      }
       self.imageReference.image = chosenImage
     }
     self.imagePicker.dismiss(animated: true,completion: nil)
