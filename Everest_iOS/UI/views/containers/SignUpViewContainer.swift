@@ -73,7 +73,7 @@ class SignUpViewContainer: UIView {
   }
   
   func addArrangedContentSubview(view: UIView){
-    contentView.addArrangedSubview(view: view)
+    contentView.addArrangedSubviewToStackView(view: view)
   }
   
   func addArrangedHeaderSubview(view: UIView){
