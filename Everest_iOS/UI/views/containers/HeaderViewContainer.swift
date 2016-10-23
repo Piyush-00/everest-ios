@@ -12,15 +12,21 @@ import UIKit
 class HeaderViewContainer: UIView {
     var statusBarView: UIView
     var scrollView: UIScrollView
+    var scrollViewContentView: UIView
     var headerView: UIView
     var contentView: UIView
-    private var keyboardHeight: CGFloat?
+    private var headerViewHeight: CGFloat
+    
+    private var scrollViewContentViewHeightConstaint: NSLayoutConstraint
     
     init(_ coder: NSCoder? = nil) {
         scrollView = UIScrollView()
+        scrollViewContentView = UIView()
         headerView = UIView()
         contentView = UIView()
         statusBarView = UIView()
+        scrollViewContentViewHeightConstaint = NSLayoutConstraint()
+        headerViewHeight = 131
         
         if let coder = coder {
             super.init(coder: coder)!
@@ -28,23 +34,28 @@ class HeaderViewContainer: UIView {
             super.init(frame: CGRect.zero)
         }
         
+        //SKO - Prioritize touches of scrollView's subviews
         scrollView.delaysContentTouches = false
+        scrollView.showsVerticalScrollIndicator = false
         
-        scrollView.addSubview(headerView)
-        scrollView.addSubview(contentView)
+        scrollViewContentView.addSubview(headerView)
+        scrollViewContentView.addSubview(contentView)
+
+        scrollView.addSubview(scrollViewContentView)
     
         addSubview(statusBarView)
         addSubview(scrollView)
         
         //SKO - Register for 'keyboard did show' notification to get its frame
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init(aDecoder)
     }
     
-    //SKO - setup auto layout constraints once the view has moved to its superview
+    //SKO - Setup auto layout constraints once the view has moved to its superview
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         setupConstraints()
@@ -52,13 +63,21 @@ class HeaderViewContainer: UIView {
     
     //SKO - Keyboard showed up notification listener
     func keyboardDidShow(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                //SKO - Take max/min of both dimensions to account for screen rotation (if landscape eventually implemented)
-                keyboardHeight = min(keyboardSize.height, keyboardSize.width)
-                setupKeyboardConstraints()
-            }
-        }
+        scrollViewContentViewHeightConstaint.isActive = false
+        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight)
+        scrollViewContentViewHeightConstaint.isActive = true
+        
+        //SKO - Prioritize scrollView touches when active
+        scrollView.delaysContentTouches = true
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        scrollViewContentViewHeightConstaint.isActive = false
+        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        scrollViewContentViewHeightConstaint.isActive = true
+        
+        //SKO - Go back to prioritizing touches of scrollView's subviews
+        scrollView.delaysContentTouches = false
     }
     
     func setHeaderView(view: UIView) {
@@ -79,30 +98,38 @@ class HeaderViewContainer: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         statusBarView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollViewContentView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         statusBarView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        statusBarView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        statusBarView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        statusBarView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         //SKO - Get height of statusBar and use it for constraint
         statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
         
         scrollView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    
-        headerView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
-        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 131).isActive = true
+        
+        scrollViewContentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        scrollViewContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        scrollViewContentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        scrollViewContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        scrollViewContentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        
+        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        scrollViewContentViewHeightConstaint.isActive = true
+
+        headerView.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor).isActive = true
+        headerView.leadingAnchor.constraint(equalTo: scrollViewContentView.leadingAnchor).isActive = true
+        headerView.trailingAnchor.constraint(equalTo: scrollViewContentView.trailingAnchor).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
         
         contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    }
-    
-    //SKO - Modify constraints to account for keyboard
-    private func setupKeyboardConstraints() {
-        if keyboardHeight != nil {
-        }
+        contentView.leadingAnchor.constraint(equalTo: scrollViewContentView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollViewContentView.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollViewContentView.bottomAnchor).isActive = true
     }
 }

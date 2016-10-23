@@ -59,12 +59,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         //SKO - Register on-click listener
         continueButton.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: UIControlEvents.touchUpInside)
         
-        viewContainer.addArrangedSubview(view: promptLabel)
-        viewContainer.addArrangedSubview(view: nameTextField)
-        viewContainer.addArrangedSubview(view: aboutTextView)
-        viewContainer.addArrangedSubview(view: locationTextField)
-        viewContainer.addArrangedSubview(view: dateTimeTextField)
-        viewContainer.addArrangedSubview(view: continueButton)
+        viewContainer.addArrangedSubviewToStackView(view: promptLabel)
+        viewContainer.addArrangedSubviewToStackView(view: nameTextField)
+        viewContainer.addArrangedSubviewToStackView(view: aboutTextView)
+        viewContainer.addArrangedSubviewToStackView(view: locationTextField)
+        viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
+        viewContainer.addArrangedSubviewToStackView(view: continueButton)
 
         view.addSubview(viewContainer)
     }
@@ -75,8 +75,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     
     //SKO - Use layout anchors to set auto layout constraints
     private func setupContstraints() {
-        viewContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        viewContainer.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        viewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        viewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        viewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     //SKO - on-click listener
