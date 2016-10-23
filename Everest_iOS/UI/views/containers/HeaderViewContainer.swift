@@ -34,6 +34,9 @@ class HeaderViewContainer: UIView {
             super.init(frame: CGRect.zero)
         }
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSelf))
+        addGestureRecognizer(tapGestureRecognizer)
+        
         //SKO - Prioritize touches of scrollView's subviews
         scrollView.delaysContentTouches = false
         scrollView.showsVerticalScrollIndicator = false
@@ -48,7 +51,7 @@ class HeaderViewContainer: UIView {
         
         //SKO - Register for 'keyboard did show' notification to get its frame
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -71,10 +74,17 @@ class HeaderViewContainer: UIView {
         scrollView.delaysContentTouches = true
     }
     
-    func keyboardDidHide(notification: NSNotification) {
+    func keyboardWillHide(notification: NSNotification) {
+
         scrollViewContentViewHeightConstaint.isActive = false
-        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
-        scrollViewContentViewHeightConstaint.isActive = true
+        self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        self.scrollViewContentViewHeightConstaint.isActive = true
+        
+        if (scrollView.contentOffset.y != 0) {
+            UIView.animate(withDuration: 1000, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.scrollViewContentView.layoutIfNeeded()
+            }, completion: nil)
+        }
         
         //SKO - Go back to prioritizing touches of scrollView's subviews
         scrollView.delaysContentTouches = false
@@ -131,5 +141,21 @@ class HeaderViewContainer: UIView {
         contentView.leadingAnchor.constraint(equalTo: scrollViewContentView.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: scrollViewContentView.trailingAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollViewContentView.bottomAnchor).isActive = true
+    }
+    
+    func didTapSelf(sender: UITapGestureRecognizer) {
+        for subview in contentView.subviews {
+            if subview is BaseInputView {
+                if let stackView = (subview as? BaseInputView)?.stackView {
+                    for arrangedSubview in stackView.arrangedSubviews {
+                        if arrangedSubview.isFirstResponder {
+                            arrangedSubview.resignFirstResponder()
+                            break
+                        }
+                    }
+                    break
+                }
+            }
+        }
     }
 }
