@@ -13,6 +13,7 @@ class SignUpViewContainer: UIView {
   var headerView: UIView
   var contentView: BaseInputView
   var scrollView: UIScrollView
+  var headerViewHeight: CGFloat = 150
   private var keyboardHeight: CGFloat?
   
   init(_ coder: NSCoder? = nil) {
@@ -55,7 +56,7 @@ class SignUpViewContainer: UIView {
     
     headerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
     headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    headerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+    headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
     
     contentView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
     contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -78,6 +79,11 @@ class SignUpViewContainer: UIView {
   
   func addArrangedHeaderSubview(view: UIView){
     headerView.addSubview(view)
+  }
+  
+  func setHeaderViewHeight(height: CGFloat){
+    headerViewHeight = height
+    headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
   }
 
   

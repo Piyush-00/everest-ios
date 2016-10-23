@@ -14,12 +14,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   var extraInfoView: UIView
   var forgotPasswordButton, loginButton: BaseInputButton
   
-  init(_ headerText: String? = nil, coder: NSCoder? = nil) {
+//  init(_ headerText: String? = nil, coder: NSCoder? = nil) {
+  init(_ coder: NSCoder? = nil) {
     viewContainer = SignUpViewContainer()
     extraInfoView = UIView()
     forgotPasswordButton = BaseInputButton("Forgot password?")
     loginButton = BaseInputButton("Log In")
-    headerTextView = BaseInputTextView(textInput: headerText)
+    headerTextView = BaseInputTextView(textInput: "Welcome to Everest")
   
     if let coder = coder {
       super.init(coder: coder)!
@@ -29,7 +30,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   }
 
   required convenience init(coder aDecoder: NSCoder) {
-    self.init(coder: aDecoder)
+    self.init(aDecoder)
   }
   
   override func viewDidLoad() {
