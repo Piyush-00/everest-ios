@@ -40,11 +40,15 @@ class BaseInputButton: UIButton {
     
     //SKO - Set touch UI behaviour
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
         self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.5)
     }
     
     //SKO - Set touch UI behaviour
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
         self.backgroundColor = self.backgroundColor?.withAlphaComponent(1)
     }
   
