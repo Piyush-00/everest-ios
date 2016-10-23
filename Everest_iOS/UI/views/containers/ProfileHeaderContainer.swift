@@ -10,12 +10,12 @@ import UIKit
 
 class ProfileHeaderContainer: UIView {
   
-  var picture: UIImageView
+  var pictureImageView: UIImageView
   private var imageSize: CGFloat
   
   
   init(_ pictureSize: CGFloat = 100, coder: NSCoder? = nil) {
-    self.picture = UIImageView()
+    self.pictureImageView = UIImageView()
     self.imageSize = pictureSize
     
     if let coder = coder {
@@ -24,7 +24,7 @@ class ProfileHeaderContainer: UIView {
       super.init(frame: CGRect.zero)
     }
     
-    addSubview(picture)
+    addSubview(pictureImageView)
 
   }
   
@@ -39,16 +39,16 @@ class ProfileHeaderContainer: UIView {
   
   private func setupConstraints() {
     translatesAutoresizingMaskIntoConstraints = false
-    self.picture.translatesAutoresizingMaskIntoConstraints = false
+    self.pictureImageView.translatesAutoresizingMaskIntoConstraints = false
     
-    self.picture.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    self.picture.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    self.picture.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
-    self.picture.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
-    self.picture.layer.cornerRadius = imageSize/2
-    self.picture.clipsToBounds = true
-    self.picture.contentMode = .scaleAspectFill
-    self.picture.layer.masksToBounds = true
+    self.pictureImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    self.pictureImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    self.pictureImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
+    self.pictureImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
+    self.pictureImageView.layer.cornerRadius = imageSize/2
+    self.pictureImageView.clipsToBounds = true
+    self.pictureImageView.contentMode = .scaleAspectFill
+    self.pictureImageView.layer.masksToBounds = true
     
   }
   
@@ -57,8 +57,8 @@ class ProfileHeaderContainer: UIView {
   }
   
   func setPictureBorder(borderWidth: CGFloat = 1, borderColor: UIColor = UIColor(netHex: 0x000000)){
-    self.picture.layer.borderWidth = borderWidth
-    self.picture.layer.borderColor = borderColor.cgColor
+    self.pictureImageView.layer.borderWidth = borderWidth
+    self.pictureImageView.layer.borderColor = borderColor.cgColor
   }
   
   

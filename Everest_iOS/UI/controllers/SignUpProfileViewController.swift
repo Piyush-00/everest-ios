@@ -11,14 +11,14 @@ import UIKit
 class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
   var viewContainer: SignUpViewContainer
   var headerTextView: BaseInputTextView
-  var profile: ProfileHeaderContainer
+  var profileHeaderContainer: ProfileHeaderContainer
   
   init(_ coder: NSCoder? = nil) {
 
     viewContainer = SignUpViewContainer()
     viewContainer.setHeaderViewHeight(height: 100)
     headerTextView = BaseInputTextView(textInput: "Thanks for signing up!\nCompleting your profile will help people find you.")
-    profile = ProfileHeaderContainer(150)
+    profileHeaderContainer = ProfileHeaderContainer(150)
     
   if let coder = coder {
       super.init(coder: coder)!
@@ -44,10 +44,10 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     
     let singleTap = UITapGestureRecognizer(target: self, action:#selector(tapDetected))
     singleTap.numberOfTapsRequired = 1
-    profile.picture.isUserInteractionEnabled = true
-    profile.picture.addGestureRecognizer(singleTap)
-    profile.picture.image = UIImage(named: "blank-profile-picture-take")
-    profile.setPictureBorder(borderColor: UIColor(netHex: 0x363636))
+    profileHeaderContainer.pictureImageView.isUserInteractionEnabled = true
+    profileHeaderContainer.pictureImageView.addGestureRecognizer(singleTap)
+    profileHeaderContainer.pictureImageView.image = UIImage(named: "blank-profile-picture-take")
+    profileHeaderContainer.setPictureBorder(borderColor: UIColor(netHex: 0x363636))
     
     let firstNameTextField = BaseInputTextField("First Name")
     firstNameTextField.backgroundColor = UIColor(netHex: 0xffffff)
@@ -63,7 +63,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     let continueButton = BaseInputButton("Continue")
     
     viewContainer.addArrangedHeaderSubview(view: headerTextView)
-    viewContainer.addArrangedContentSubview(view: profile)
+    viewContainer.addArrangedContentSubview(view: profileHeaderContainer)
     viewContainer.addArrangedContentSubview(view: firstNameTextField)
     viewContainer.addArrangedContentSubview(view: lastNameTextField)
     viewContainer.addArrangedContentSubview(view: spacerView1)
@@ -86,7 +86,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     
     viewContainer.translatesAutoresizingMaskIntoConstraints = false
     headerTextView.translatesAutoresizingMaskIntoConstraints = false
-    profile.translatesAutoresizingMaskIntoConstraints = false
+    profileHeaderContainer.translatesAutoresizingMaskIntoConstraints = false
     
     viewContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     viewContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -94,17 +94,16 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     
     headerTextView.widthAnchor.constraint(equalTo: viewContainer.contentView.stackView.widthAnchor).isActive = true
     headerTextView.leftAnchor.constraint(equalTo: viewContainer.contentView.stackView.leftAnchor).isActive = true
-    headerTextView.centerYAnchor.constraint(equalTo: viewContainer.headerView.centerYAnchor).isActive = true
     headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
     headerTextView.topAnchor.constraint(equalTo: viewContainer.headerView.topAnchor, constant: 15).isActive = true
 
-    profile.heightAnchor.constraint(equalToConstant: 175).isActive = true
+    profileHeaderContainer.heightAnchor.constraint(equalToConstant: 175).isActive = true
     
   }
   
   func tapDetected() {
     let imageLoader = ImagePickerAlertController(frame: self.view.frame, controller: self)
-    imageLoader.displayAlert(imageReference: profile.picture)
+    imageLoader.displayAlert(imageReference: profileHeaderContainer.pictureImageView)
     
   }
   
