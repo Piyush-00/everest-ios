@@ -18,7 +18,7 @@
 		98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */; };
 		98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F01DAF29D50023C9F4 /* Http.swift */; };
 		98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */; };
-		98AE46161DAF2ADE0023C9F4 /* BaseInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */; };
+		98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460C1DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift */; };
 		98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */; };
 		98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */; };
 		98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */; };
@@ -33,6 +33,8 @@
 		98E2F8E81DA1F6C700AAC17E /* Everest_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
+		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
+		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,7 +73,7 @@
 		98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		98AE45F01DAF29D50023C9F4 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
 		98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsPlaceholder.swift; sourceTree = "<group>"; };
-		98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputButton.swift; sourceTree = "<group>"; };
+		98AE460C1DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseInputButtonContainer.swift; path = ../../components/BaseInputButtonContainer.swift; sourceTree = "<group>"; };
 		98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextField.swift; sourceTree = "<group>"; };
 		98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextView.swift; sourceTree = "<group>"; };
 		98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,8 @@
 		98E2F8E91DA1F6C700AAC17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
+		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
+		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		FE423139FB391E34F01947C6 /* Pods-Everest_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSTests/Pods-Everest_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -138,10 +142,12 @@
 		98AE45EB1DAF29D50023C9F4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				9E4534471DBD4E8300D06929 /* sharedInstances */,
 				98AE45EC1DAF29D50023C9F4 /* extensions */,
 				98AE45EF1DAF29D50023C9F4 /* Network */,
 				98AE45F11DAF29D50023C9F4 /* notifications */,
 				98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */,
+				9E45344A1DBD634000D06929 /* AppUtil.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -183,7 +189,6 @@
 		98AE460B1DAF2ADE0023C9F4 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				98AE460C1DAF2ADE0023C9F4 /* BaseInputButton.swift */,
 				98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */,
 				98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */,
 			);
@@ -213,6 +218,7 @@
 		98AE46131DAF2ADE0023C9F4 /* containers */ = {
 			isa = PBXGroup;
 			children = (
+				98AE460C1DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift */,
 				98AE46141DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift */,
 				98AE46151DAF2ADE0023C9F4 /* HeaderViewContainer.swift */,
 				983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */,
@@ -284,6 +290,14 @@
 				9EC373371DBC760C00D0FCDC /* Event.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		9E4534471DBD4E8300D06929 /* sharedInstances */ = {
+			isa = PBXGroup;
+			children = (
+				9E4534481DBD4EBF00D06929 /* AppStyle.swift */,
+			);
+			path = sharedInstances;
 			sourceTree = "<group>";
 		};
 		EAB400E4791FCF39D7677757 /* Pods */ = {
@@ -589,7 +603,9 @@
 				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
 				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
+				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
+				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
 				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
 				98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */,
@@ -600,7 +616,7 @@
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */,
-				98AE46161DAF2ADE0023C9F4 /* BaseInputButton.swift in Sources */,
+				98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,

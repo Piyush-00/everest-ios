@@ -15,7 +15,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     var aboutTextView: BaseInputTextView
     var locationTextField: BaseInputTextField
     var dateTimeTextField: BaseInputTextField
-    var continueButton: BaseInputButton
+    var continueButtonContainer: BaseInputButtonContainer
+    var picturePromptImageView: UIImageView
     
     //SKO
     /*
@@ -32,7 +33,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         aboutTextView = BaseInputTextView("About")
         locationTextField = BaseInputTextField("Location")
         dateTimeTextField = BaseInputTextField("Date and Time")
-        continueButton = BaseInputButton("Continue")
+        continueButtonContainer = BaseInputButtonContainer("Continue")
+        picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageLarge)
         
         //SKO - If init with coder, call super init with it
         if let coder = coder {
@@ -67,27 +69,39 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         dateTimeTextField.delegate = self
         
         promptLabel.text = "Create a New Event"
-        promptLabel.textAlignment = NSTextAlignment.center
+        promptLabel.font = AppStyle.sharedInstance.headerFontMedium
+        promptLabel.textAlignment = .center
         
         //SKO - Register on-click listener
-        continueButton.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: UIControlEvents.touchUpInside)
+        continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
         
         viewContainer.addArrangedSubviewToStackView(view: promptLabel)
         viewContainer.addArrangedSubviewToStackView(view: nameTextField)
         viewContainer.addArrangedSubviewToStackView(view: aboutTextView)
         viewContainer.addArrangedSubviewToStackView(view: locationTextField)
         viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
-        viewContainer.addArrangedSubviewToStackView(view: continueButton)
-
+        viewContainer.addArrangedSubviewToStackView(view: continueButtonContainer)
+        
+        view.backgroundColor = AppStyle.sharedInstance.backgroundColor
         view.addSubview(viewContainer)
+        
+        picturePromptImageView.clipsToBounds = true
+        picturePromptImageView.contentMode = .scaleAspectFill
+        picturePromptImageView.layer.masksToBounds = true
+        
+        viewContainer.setHeaderView(view: picturePromptImageView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
+        viewContainer.headerView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func viewDidLayoutSubviews() {
-        setupContstraints()
+        super.viewDidLayoutSubviews()
+        setupConstraints()
     }
     
     //SKO - Use layout anchors to set auto layout constraints
-    private func setupContstraints() {
+    private func setupConstraints() {
         viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         viewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         viewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -131,5 +145,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
             return false
         }
         return true
+    }
+    
+    func didTapHeader(sender: UITapGestureRecognizer) {
+        let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
+        imagePicker.displayAlert(imageReference: picturePromptImageView)
     }
 }

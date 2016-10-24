@@ -22,19 +22,18 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
             //SKO - Frame irrelevant because using auto layout; set to CGRect.zero
             super.init(frame: CGRect.zero, textContainer: nil)
         }
-
+        
         placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
         placeholderLabel.text = placeholder
         placeholderLabel.alpha = 0.2
-        
-        textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: 0)
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        font = UIFont.systemFont(ofSize: 17)
+        placeholderLabel.font = AppStyle.sharedInstance.textFontBold
         addSubview(placeholderLabel)
         
-        delegate = self
+        textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: 0)
         
+        font = AppStyle.sharedInstance.textFontBold
+        backgroundColor = AppStyle.sharedInstance.textViewBackgroundColor
+        delegate = self
         text = textInput
     }
     
