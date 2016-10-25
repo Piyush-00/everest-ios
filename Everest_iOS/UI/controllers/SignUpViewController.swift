@@ -16,17 +16,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var extraInfoView: UIView
     var forgotPasswordButton, loginButton: UIButton
 
-    //  init(_ headerText: String? = nil, coder: NSCoder? = nil) {
     init(_ coder: NSCoder? = nil) {
         viewContainer = SignUpViewContainer()
         extraInfoView = UIView()
-        signupButtonContainer = BaseInputButtonContainer("Sign up")
+        signupButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("sign up", comment: "sign up button"))
         forgotPasswordButton = UIButton()
         loginButton = UIButton()
-        headerTextView = BaseInputTextView(textInput: "Welcome to Everest")
-        emailTextField = BaseInputTextField("Email Address")
-        passwordTextField = BaseInputTextField("Password")
-        confirmPasswordTextField = BaseInputTextField("Confirm Password")
+        headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up welcome header", comment: "sign up welcome header"))
+        emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
+        passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
+        confirmPasswordTextField = BaseInputTextField(hintText: NSLocalizedString("confirm password", comment: "confirm password placeholder"))
 
         if let coder = coder {
             super.init(coder: coder)!
@@ -52,15 +51,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.removeBorder()
         confirmPasswordTextField.isSecureTextEntry = true
         confirmPasswordTextField.removeBorder()
-
+        
+        forgotPasswordButton.setTitle(NSLocalizedString("forgot password", comment: "forgot password button"), for: .normal)
         forgotPasswordButton.setTitleColor(AppStyle.sharedInstance.textColor, for: .normal)
         forgotPasswordButton.titleLabel?.font = AppStyle.sharedInstance.textFontBold
-
+        
+        loginButton.setTitle(NSLocalizedString("log in", comment: "login button"), for: .normal)
         loginButton.setTitleColor(AppStyle.sharedInstance.textColor, for: .normal)
         loginButton.titleLabel?.font = AppStyle.sharedInstance.textFontBold
 
         extraInfoView.addSubview(loginButton)
         extraInfoView.addSubview(forgotPasswordButton)
+        
+        loginButton.backgroundColor = UIColor.blue
+        forgotPasswordButton.backgroundColor = UIColor.green
 
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
         viewContainer.addArrangedContentSubview(view: emailTextField)
@@ -103,6 +107,5 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         headerTextView.leftAnchor.constraint(equalTo: viewContainer.contentView.stackView.leftAnchor, constant: -15).isActive = true
         headerTextView.centerYAnchor.constraint(equalTo: viewContainer.headerView.centerYAnchor).isActive = true
         headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
-
     }
 }

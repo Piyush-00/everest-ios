@@ -29,11 +29,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         viewContainer = HeaderAndStackViewContainer()
         //SKO - Init UI subclasses with hint text as param
         promptLabel = UILabel()
-        nameTextField = BaseInputTextField("Name")
-        aboutTextView = BaseInputTextView("About")
-        locationTextField = BaseInputTextField("Location")
-        dateTimeTextField = BaseInputTextField("Date and Time")
-        continueButtonContainer = BaseInputButtonContainer("Continue")
+        nameTextField = BaseInputTextField(hintText: NSLocalizedString("name", comment: "name placeholder"))
+        aboutTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
+        locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
+        dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
+        continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
         picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageLarge)
         
         //SKO - If init with coder, call super init with it

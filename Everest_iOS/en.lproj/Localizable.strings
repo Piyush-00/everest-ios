@@ -1,0 +1,76 @@
+/* forgot password button */
+"forgot password" = "Forgot Password?";
+
+/* login button */
+"log in" = "Log In";
+
+/* sign up button */
+"sign up" = "Sign up";
+
+/* sign up welcome header */
+"sign up welcome header" = "Welcome to Everest";
+
+/* email address placeholder */
+"email address" = "Email Address";
+
+/* password placeholder */
+"password" = "Password";
+
+/* confirm password placeholder */
+"confirm password" = "Confirm Password";
+
+/* sign up profile header */
+"sign up profile header" = "Thanks for signing up!\nCompleting your profile will help people find you.";
+
+/* first name placeholder */
+"first name" = "First Name";
+
+/* last name placeholder */
+"last name" = "Last Name";
+
+/* continue button */
+"continue" = "Continue";
+
+/* name placeholder */
+"name" = "Name";
+
+/* about placeholder */
+"about" = "About";
+
+/* location placeholder */
+"location" = "location";
+
+/* date and time placeholder */
+"date and time" = "Date and Time";
+
+/* gallery action */
+"choose photo" = "Choose Photo";
+
+/* camera action */
+"take photo" = "Take Photo";
+
+/* cancel action */
+"cancel" = "Cancel";
+
+/* gallery error alert title */
+"gallery error title" = "Gallery inaccessable";
+
+/* gallery error alert message */
+"gallery error message" = "Application cannot access the photo library";
+
+/* rear camera error alert title */
+"rear camera error title" = "Rear camera doesn't exist";
+
+/* rear camera error alert message */
+"rear camera error message" = "Application cannot access the camera.";
+
+/* camera error alert title */
+"camera error title" = "Camera inaccessable";
+
+/* camera error alert message */
+"camera error message" = "Application cannot access the camera.";
+
+/* alert action title */
+"ok" = "Ok";
+
+
