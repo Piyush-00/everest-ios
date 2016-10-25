@@ -12,7 +12,7 @@ import UIKit
 class BaseInputTextView: UITextView, UITextViewDelegate {
     var placeholderLabel: UILabel
     
-    init(_ placeholder: String? = nil, textInput: String? = nil, coder: NSCoder? = nil) {
+    init(hintText: String? = nil, textInput: String? = nil, coder: NSCoder? = nil) {
         //SKO - Since no placeholder text for UITextViews, set label
         placeholderLabel = UILabel()
         
@@ -24,7 +24,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         }
         
         placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
-        placeholderLabel.text = placeholder
+        placeholderLabel.text = hintText
         placeholderLabel.alpha = 0.2
         placeholderLabel.font = AppStyle.sharedInstance.textFontBold
         addSubview(placeholderLabel)
@@ -39,9 +39,9 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
     
     convenience init(_ coder: NSCoder? = nil) {
         if let coder = coder {
-            self.init("", coder: coder)
+            self.init(hintText: "", coder: coder)
         } else {
-            self.init("")
+            self.init(hintText: "")
         }
     }
     

@@ -12,9 +12,9 @@ import UIKit
 class BaseInputButtonContainer: UIView {
     var button: UIButton
     
-    init(_ buttonText: String, coder: NSCoder? = nil) {
+    init(buttonTitle: String, coder: NSCoder? = nil) {
         button = AppStyle.sharedInstance.baseInputButton()
-        button.setTitle(buttonText, for: .normal)
+        button.setTitle(buttonTitle, for: .normal)
         
         if let coder = coder {
             super.init(coder: coder)!
@@ -27,9 +27,9 @@ class BaseInputButtonContainer: UIView {
     
     convenience init(_ coder: NSCoder? = nil) {
         if let coder = coder {
-            self.init("", coder: coder)
+            self.init(buttonTitle: "", coder: coder)
         } else {
-            self.init("")
+            self.init(buttonTitle: "")
         }
     }
     
