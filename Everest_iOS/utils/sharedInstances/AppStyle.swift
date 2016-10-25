@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+//SKO - all of the app's UI Styles and general components should be defined here
 class AppStyle {
     static let sharedInstance = AppStyle()
     
