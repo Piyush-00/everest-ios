@@ -8,8 +8,14 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var viewContainer: HeaderAndStackViewContainer
+    var promptLabel: UILabel
+    var nameTextField: BaseInputTextField
+    var aboutTextView: BaseInputTextView
+    var locationTextField: BaseInputTextField
+    var dateTimeTextField: BaseInputTextField
+    var continueButton: BaseInputButton
     
     //SKO
     /*
@@ -20,6 +26,13 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     */
     init(_ coder: NSCoder? = nil) {
         viewContainer = HeaderAndStackViewContainer()
+        //SKO - Init UI subclasses with hint text as param
+        promptLabel = UILabel()
+        nameTextField = BaseInputTextField("Name")
+        aboutTextView = BaseInputTextView("About")
+        locationTextField = BaseInputTextField("Location")
+        dateTimeTextField = BaseInputTextField("Date and Time")
+        continueButton = BaseInputButton("Continue")
         
         //SKO - If init with coder, call super init with it
         if let coder = coder {
@@ -45,13 +58,13 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //SKO - Init UI subclasses with hint text as param
-        let promptLabel = UILabel()
-        let nameTextField = BaseInputTextField("Name")
-        let aboutTextView = BaseInputTextView("About")
-        let locationTextField = BaseInputTextField("Location")
-        let dateTimeTextField = BaseInputTextField("Date and Time")
-        let continueButton = BaseInputButton("Continue")
+        locationTextField.tag = 1
+        dateTimeTextField.tag = 2
+        
+        nameTextField.delegate = self
+        aboutTextView.delegate = self
+        locationTextField.delegate = self
+        dateTimeTextField.delegate = self
         
         promptLabel.text = "Create a New Event"
         promptLabel.textAlignment = NSTextAlignment.center
@@ -84,5 +97,39 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     //SKO - on-click listener
     func onTapContinueButton(sender: UIButton) {
         print("button clicked")
+        //SKO - bring up next vc and carry data over (Event object argument)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            aboutTextView.becomeFirstResponder()
+        } else {
+            let nextTextFieldTag = textField.tag + 1
+            if let nextTextField = view.viewWithTag(nextTextFieldTag) {
+                nextTextField.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+            }
+        }
+        
+        return false
+    }
+    
+    //SKO - Emulate placeholder text functionality
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text == "" {
+            aboutTextView.placeholderLabel.isHidden = false
+        } else {
+            aboutTextView.placeholderLabel.isHidden = true
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        //SKO - If click 'return' key on keyboard
+        if text == "\n" {
+            locationTextField.becomeFirstResponder()
+            return false
+        }
+        return true
     }
 }
