@@ -19,8 +19,6 @@ class SignUpViewContainer: UIView {
   private var scrollViewContentViewHeightConstaint: NSLayoutConstraint
   
   init(_ coder: NSCoder? = nil) {
-    
-  
     statusBarView = UIView()
     headerView = UIView()
     contentView = BaseInputView()
@@ -33,9 +31,6 @@ class SignUpViewContainer: UIView {
     } else {
       super.init(frame: CGRect.zero)
     }
-    
-    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-    addGestureRecognizer(tap)
     
     scrollView.delaysContentTouches = false
     scrollView.showsVerticalScrollIndicator = false
@@ -138,10 +133,4 @@ class SignUpViewContainer: UIView {
     headerViewHeight = height
     headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
   }
-  
-  func dismissKeyboard() {
-    //SKU - Causes the view (or one of its embedded text fields) to resign the first responder status.
-    self.endEditing(true)
-  }
-  
 }

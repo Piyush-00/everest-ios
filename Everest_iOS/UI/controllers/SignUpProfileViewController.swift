@@ -80,6 +80,8 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     viewContainer.backgroundColor = UIColor(netHex: 0xe6e6e6)
     
     view.addSubview(viewContainer)
+    
+    hideKeyboardWhenTappedAround()
   }
 
   override func viewDidLayoutSubviews() {
@@ -120,6 +122,4 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
-  
-  
 }

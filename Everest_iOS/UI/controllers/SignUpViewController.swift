@@ -15,7 +15,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   var signupButton, forgotPasswordButton, loginButton: BaseInputButton
   var emailTextField, passwordTextField, confirmPasswordTextField : BaseInputTextField
   
-//  init(_ headerText: String? = nil, coder: NSCoder? = nil) {
   init(_ coder: NSCoder? = nil) {
     viewContainer = SignUpViewContainer()
     headerTextView = BaseInputTextView(textInput: "Welcome to Everest")
@@ -40,18 +39,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-//    emailTextField.tag = 0
-//    passwordTextField.tag = 1
-//    confirmPasswordTextField.tag = 2
-//    
+
     emailTextField.delegate = self
     passwordTextField.delegate = self
     confirmPasswordTextField.delegate = self
     
     self.emailTextField.nextField = self.passwordTextField
     self.passwordTextField.nextField = self.confirmPasswordTextField
-//    self.confirmPasswordTextField.nextField = self.emailTextField
     
     headerTextView.isEditable = false
     headerTextView.backgroundColor = nil
@@ -99,6 +93,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     viewContainer.backgroundColor = UIColor(netHex: 0xe6e6e6)
     
     view.addSubview(viewContainer)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   override func viewDidLayoutSubviews() {
@@ -143,5 +139,4 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
-  
 }
