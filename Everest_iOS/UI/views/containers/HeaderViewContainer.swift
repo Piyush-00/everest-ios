@@ -50,7 +50,7 @@ class HeaderViewContainer: UIView {
         addSubview(scrollView)
         
         //SKO - Register for 'keyboard did show' notification to get its frame
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
@@ -65,13 +65,13 @@ class HeaderViewContainer: UIView {
     }
     
     //SKO - Keyboard showed up notification listener
-    func keyboardDidShow(notification: NSNotification) {
+    func keyboardWillShow(notification: NSNotification) {
         scrollViewContentViewHeightConstaint.isActive = false
-        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight)
+        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
         scrollViewContentViewHeightConstaint.isActive = true
         
         //SKO - Prioritize scrollView touches when active
-        scrollView.delaysContentTouches = true
+        scrollView.delaysContentTouches = false
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -82,7 +82,7 @@ class HeaderViewContainer: UIView {
         
         if (scrollView.contentOffset.y != 0) {
             UIView.animate(withDuration: 1000, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.scrollViewContentView.layoutIfNeeded()
+                self.scrollView.contentOffset.y = 0
             }, completion: nil)
         }
         
@@ -153,6 +153,7 @@ class HeaderViewContainer: UIView {
         view.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
     }
     
+    //SKO - resignFirstResponder of any UIView when click outside said UIView
     func didTapSelf(sender: UITapGestureRecognizer) {
         for subview in contentView.subviews {
             if subview is BaseInputView {
