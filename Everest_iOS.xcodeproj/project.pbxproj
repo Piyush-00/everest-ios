@@ -32,6 +32,7 @@
 		98E2F8D21DA1F6C600AAC17E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E2F8D01DA1F6C600AAC17E /* LaunchScreen.storyboard */; };
 		98E2F8DD1DA1F6C600AAC17E /* Everest_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8DC1DA1F6C600AAC17E /* Everest_iOSTests.swift */; };
 		98E2F8E81DA1F6C700AAC17E /* Everest_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */; };
+		98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EF2DF11DBF155F000D7288 /* UIViewController.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
 		B3CFA9253A2E8164497B64D8 /* Pods_Everest_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B39098029ED73C1554EA59 /* Pods_Everest_iOSUITests.framework */; };
@@ -91,6 +92,7 @@
 		98E2F8E31DA1F6C700AAC17E /* Everest_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Everest_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Everest_iOSUITests.swift; sourceTree = "<group>"; };
 		98E2F8E91DA1F6C700AAC17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98EF2DF11DBF155F000D7288 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
 		C537596F9D055426C4A0C3BA /* Pods-Everest_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOS/Pods-Everest_iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */,
 				98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */,
 				989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */,
+				98EF2DF11DBF155F000D7288 /* UIViewController.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */,
 				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
+				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */,
 				98AE46161DAF2ADE0023C9F4 /* BaseInputButton.swift in Sources */,
