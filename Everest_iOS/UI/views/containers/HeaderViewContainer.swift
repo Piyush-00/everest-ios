@@ -73,7 +73,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentViewHeightConstaint.isActive = true
         
         //SKO - Prioritize scrollView touches when active
-        scrollView.delaysContentTouches = false
+        scrollView.delaysContentTouches = true
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -170,5 +170,9 @@ class HeaderViewContainer: UIView {
                 }
             }
         }
+    }
+    
+    func getHeaderViewHeight() -> CGFloat {
+        return headerViewHeight
     }
 }

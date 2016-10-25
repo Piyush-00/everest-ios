@@ -34,7 +34,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
         dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
         continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
-        picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageLarge)
+        picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
         
         //SKO - If init with coder, call super init with it
         if let coder = coder {
@@ -68,7 +68,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         locationTextField.delegate = self
         dateTimeTextField.delegate = self
         
-        promptLabel.text = "Create a New Event"
+        promptLabel.text = NSLocalizedString("create a new event", comment: "create a new event label")
         promptLabel.font = AppStyle.sharedInstance.headerFontMedium
         promptLabel.textAlignment = .center
         
@@ -82,7 +82,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
         viewContainer.addArrangedSubviewToStackView(view: continueButtonContainer)
         
-        view.backgroundColor = AppStyle.sharedInstance.backgroundColor
+        viewContainer.statusBarView.backgroundColor = AppStyle.sharedInstance.backgroundColor
+        viewContainer.contentView.backgroundColor = AppStyle.sharedInstance.backgroundColor
+        
         view.addSubview(viewContainer)
         
         picturePromptImageView.clipsToBounds = true
@@ -102,6 +104,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     //SKO - Use layout anchors to set auto layout constraints
     private func setupConstraints() {
+        picturePromptImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         viewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         viewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
