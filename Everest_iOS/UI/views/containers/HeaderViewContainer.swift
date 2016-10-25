@@ -93,6 +93,7 @@ class HeaderViewContainer: UIView {
     
     func setHeaderView(view: UIView) {
         headerView.addSubview(view)
+        setHeaderSubviewConstraints(view: view)
     }
     
     func setContentView(view: UIView) {
@@ -142,6 +143,15 @@ class HeaderViewContainer: UIView {
         contentView.leadingAnchor.constraint(equalTo: scrollViewContentView.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: scrollViewContentView.trailingAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollViewContentView.bottomAnchor).isActive = true
+    }
+    
+    private func setHeaderSubviewConstraints(view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
     }
     
     func didTapSelf(sender: UITapGestureRecognizer) {
