@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+//SKO - implement any general utility methods here
 class AppUtil {
     class func resizableImageWithColor(color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 1.0, height: 1.0), false, UIScreen.main.scale)
