@@ -62,9 +62,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
         extraInfoView.addSubview(loginButton)
         extraInfoView.addSubview(forgotPasswordButton)
-        
-        loginButton.backgroundColor = UIColor.blue
-        forgotPasswordButton.backgroundColor = UIColor.green
 
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
         viewContainer.addArrangedContentSubview(view: emailTextField)
