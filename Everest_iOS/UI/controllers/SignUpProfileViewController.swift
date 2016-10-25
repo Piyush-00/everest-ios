@@ -40,10 +40,10 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     init(_ coder: NSCoder? = nil) {
         viewContainer = SignUpViewContainer()
         viewContainer.setHeaderViewHeight(height: 100)
-        headerTextView = BaseInputTextView(textInput: "Thanks for signing up!\nCompleting your profile will help people find you.")
-        firstNameTextField = BaseInputTextField("First Name")
-        lastNameTextField = BaseInputTextField("Last Name")
-        continueButtonContainer = BaseInputButtonContainer("Continue")
+        headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up profile header", comment: "sign up profile header"))
+        firstNameTextField = BaseInputTextField(hintText: NSLocalizedString("first name", comment: "first name placeholder"))
+        lastNameTextField = BaseInputTextField(hintText: NSLocalizedString("last name", comment: "last name placeholder"))
+        continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
 
         if let coder = coder {
           super.init(coder: coder)!
@@ -159,8 +159,6 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         firstNameTextField.removeBorder()
         lastNameTextField.removeBorder()
         
-        continueButtonContainer.button.setTitle("Continue", for: .normal)
-
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
         viewContainer.addArrangedContentSubview(view: profileHeaderContainer!)
         viewContainer.addArrangedContentSubview(view: firstNameTextField)

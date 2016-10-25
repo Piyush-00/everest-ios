@@ -49,9 +49,9 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
     
     //SKU - Setting up the pop up to allow users to either select images from the gallery or take a new photo
     self.alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    let galleryAction = UIAlertAction(title: "Choose Photo",style:.default, handler:handleGalleryAction)
-    let cameraAction = UIAlertAction(title: "Take Photo",style:.default, handler:handleCameraAction)
-    let cancelAction = UIAlertAction(title: "Cancel",style:.cancel) {action -> Void in }
+    let galleryAction = UIAlertAction(title: NSLocalizedString("choose photo", comment: "gallery action"), style:.default, handler:handleGalleryAction)
+    let cameraAction = UIAlertAction(title: NSLocalizedString("take photo", comment: "camera action"), style:.default, handler:handleCameraAction)
+    let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: "cancel action"), style:.cancel) {action -> Void in }
     
     self.alert.addAction(cancelAction)
     self.alert.addAction(cameraAction)
@@ -83,7 +83,7 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
       
     }
     else{
-      postAlert(title: "Gallery inaccessable", message: "Application cannot access the photo library")
+      postAlert(title: NSLocalizedString("gallery error title", comment: "gallery error alert title"), message: NSLocalizedString("gallery error message", comment: "gallery error alert message"))
     }
     
   }
@@ -100,11 +100,11 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
         self.UIViewController?.present(imagePicker, animated: true, completion: nil)
       }
       else {
-        postAlert(title: "Rear camera doesn't exist",message:"Application cannot access the camera.")
+        postAlert(title: NSLocalizedString("rear camera error title", comment: "rear camera error alert title"), message: NSLocalizedString("rear camera error message", comment: "rear camera error alert message"))
       }
     }
     else {
-      postAlert(title: "Camera inaccessable",message:"Application cannot access the camera.")
+      postAlert(title: NSLocalizedString("camera error title", comment: "camera error alert title"), message: NSLocalizedString("camera error message", comment: "camera error alert message"))
     }
   }
   
@@ -127,7 +127,7 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
   //SKU - Helper function for presenting error messages.
   private func postAlert(title: String, message: String) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+    alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: "alert action title"), style: UIAlertActionStyle.default, handler: nil))
     self.UIViewController?.present(alert, animated: true, completion: nil)
   }
   
