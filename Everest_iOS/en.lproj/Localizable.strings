@@ -73,4 +73,5 @@
 /* alert action title */
 "ok" = "Ok";
 
-
+/* create a new event label */
+"create a new event" = "Create a New Event";
