@@ -85,6 +85,13 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         viewContainer.statusBarView.backgroundColor = AppStyle.sharedInstance.backgroundColor
         viewContainer.contentView.backgroundColor = AppStyle.sharedInstance.backgroundColor
         
+        viewContainer.addArrangedSubviewToStackView(view: promptLabel)
+        viewContainer.addArrangedSubviewToStackView(view: nameTextField)
+        viewContainer.addArrangedSubviewToStackView(view: aboutTextView)
+        viewContainer.addArrangedSubviewToStackView(view: locationTextField)
+        viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
+        viewContainer.addArrangedSubviewToStackView(view: continueButton)
+
         view.addSubview(viewContainer)
         
         picturePromptImageView.clipsToBounds = true
@@ -103,9 +110,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     //SKO - Use layout anchors to set auto layout constraints
-    private func setupConstraints() {
-        picturePromptImageView.translatesAutoresizingMaskIntoConstraints = false
-        
+    private func setupConstraints() {       
         viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         viewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         viewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

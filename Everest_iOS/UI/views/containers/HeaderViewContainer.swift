@@ -70,6 +70,7 @@ class HeaderViewContainer: UIView {
     func keyboardWillShow(notification: NSNotification) {
         scrollViewContentViewHeightConstaint.isActive = false
         scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
+
         scrollViewContentViewHeightConstaint.isActive = true
         
         //SKO - Prioritize scrollView touches when active
