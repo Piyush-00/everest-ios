@@ -34,6 +34,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
         dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
         continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
+
         picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
         
         //SKO - If init with coder, call super init with it

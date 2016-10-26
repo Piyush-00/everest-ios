@@ -49,7 +49,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
 
         firstNameTextField.removeBorder()
         lastNameTextField.removeBorder()
-
+        
         continueButtonContainer.button.setTitle("Continue", for: .normal)
 
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
