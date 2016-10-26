@@ -38,8 +38,8 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         setupConstraints()
         
         //SKO - Since sideBorder depends on constraints, call here
-        self.headerView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
-        self.statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        contentView.sideBorder(side: .top, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
     }
     
     private func setupConstraints() {

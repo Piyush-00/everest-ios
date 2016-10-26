@@ -9,6 +9,7 @@
 import UIKit
 
 class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
+<<<<<<< HEAD
   var viewContainer: SignUpViewContainer
   var headerTextView: BaseInputTextView
   var profileHeaderContainer: ProfileHeaderContainer
@@ -29,15 +30,38 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
       super.init(coder: coder)!
     } else {
       super.init()
-    }
-  }
+=======
+    var viewContainer: SignUpViewContainer
+    var headerTextView: BaseInputTextView
+    var firstNameTextField, lastNameTextField: BaseInputTextField
+    var continueButtonContainer: BaseInputButtonContainer
+    var profileHeaderContainer: ProfileHeaderContainer?
 
-  required convenience init(coder aDecoder: NSCoder) {
-  self.init(aDecoder)
-  }
-  
-  override func viewDidLoad() {
+    init(_ coder: NSCoder? = nil) {
+        viewContainer = SignUpViewContainer()
+        viewContainer.setHeaderViewHeight(height: 100)
+        headerTextView = BaseInputTextView(textInput: "Thanks for signing up!\nCompleting your profile will help people find you.")
+        firstNameTextField = BaseInputTextField("First Name")
+        lastNameTextField = BaseInputTextField("Last Name")
+        continueButtonContainer = BaseInputButtonContainer("Continue")
+
+        if let coder = coder {
+          super.init(coder: coder)!
+        } else {
+          super.init()
+        }
+        
+        profileHeaderContainer = ProfileHeaderContainer(150, controller: self)
+>>>>>>> make refactoring changes plus implement imagePicker in create event view
+    }
+
+    required convenience init(coder aDecoder: NSCoder) {
+        self.init(aDecoder)
+    }
+
+    override func viewDidLoad() {
     super.viewDidLoad()
+<<<<<<< HEAD
     
     firstNameTextField.delegate = self
     lastNameTextField.delegate = self
@@ -122,4 +146,53 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
+=======
+
+        headerTextView.isEditable = false
+        headerTextView.backgroundColor = nil
+        headerTextView.removeBorder()
+        headerTextView.textColor = AppStyle.sharedInstance.textColor
+        headerTextView.font = AppStyle.sharedInstance.headerFontMedium
+        headerTextView.textAlignment = .center
+        headerTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+
+        firstNameTextField.removeBorder()
+        lastNameTextField.removeBorder()
+        
+        continueButtonContainer.button.setTitle("Continue", for: .normal)
+
+        viewContainer.addArrangedHeaderSubview(view: headerTextView)
+        viewContainer.addArrangedContentSubview(view: profileHeaderContainer!)
+        viewContainer.addArrangedContentSubview(view: firstNameTextField)
+        viewContainer.addArrangedContentSubview(view: lastNameTextField)
+        viewContainer.addArrangedContentSubview(view: continueButtonContainer)
+
+        viewContainer.contentView.spacing(value: 10)
+        viewContainer.backgroundColor = AppStyle.sharedInstance.backgroundColor
+
+        view.addSubview(viewContainer)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
+        viewContainer.translatesAutoresizingMaskIntoConstraints = false
+        headerTextView.translatesAutoresizingMaskIntoConstraints = false
+        profileHeaderContainer?.translatesAutoresizingMaskIntoConstraints = false
+
+        viewContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        viewContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        viewContainer.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+
+        headerTextView.widthAnchor.constraint(equalTo: viewContainer.contentView.stackView.widthAnchor).isActive = true
+        headerTextView.leftAnchor.constraint(equalTo: viewContainer.contentView.stackView.leftAnchor).isActive = true
+        headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
+        headerTextView.topAnchor.constraint(equalTo: viewContainer.headerView.topAnchor, constant: 15).isActive = true
+
+        profileHeaderContainer?.heightAnchor.constraint(equalToConstant: 175).isActive = true
+    }
+>>>>>>> make refactoring changes plus implement imagePicker in create event view
 }

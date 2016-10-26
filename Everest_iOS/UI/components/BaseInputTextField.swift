@@ -16,11 +16,12 @@ class BaseInputTextField: UITextField {
         } else {
             super.init(frame: CGRect.zero)
         }
-    
+        
         self.placeholder = placeholder
+        
+        font = AppStyle.sharedInstance.textFontBold
         borderStyle = UITextBorderStyle.none
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
     }
     
     convenience init(_ coder: NSCoder? = nil) {
