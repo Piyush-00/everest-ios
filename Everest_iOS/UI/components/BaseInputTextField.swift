@@ -10,24 +10,25 @@ import UIKit
 
 //SKO - UITextField with custom UI
 class BaseInputTextField: UITextField {
-    init(_ placeholder: String, coder: NSCoder? = nil) {
+    init(hintText: String, coder: NSCoder? = nil) {
         if let coder = coder {
             super.init(coder: coder)!
         } else {
             super.init(frame: CGRect.zero)
         }
-    
-        self.placeholder = placeholder
+        
+        self.placeholder = hintText
+        
+        font = AppStyle.sharedInstance.textFontBold
         borderStyle = UITextBorderStyle.none
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
     }
     
     convenience init(_ coder: NSCoder? = nil) {
         if let coder = coder {
-            self.init("", coder: coder)
+            self.init(hintText: "", coder: coder)
         } else {
-            self.init("")
+            self.init(hintText: "")
         }
     }
     
@@ -55,5 +56,11 @@ class BaseInputTextField: UITextField {
         editingRect.size.width -= 10
         
         return editingRect
+    }
+  
+    //SKU - Function to remove any borders
+    func removeBorder() {
+      layer.borderWidth = 0
+      layer.borderColor = nil
     }
 }

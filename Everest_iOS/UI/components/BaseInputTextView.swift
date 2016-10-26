@@ -10,9 +10,9 @@ import UIKit
 
 //SKO - UITextField with custom UI
 class BaseInputTextView: UITextView, UITextViewDelegate {
-    private var placeholderLabel: UILabel
+    var placeholderLabel: UILabel
     
-    init(_ placeholder: String, coder: NSCoder? = nil) {
+    init(hintText: String? = nil, textInput: String? = nil, coder: NSCoder? = nil) {
         //SKO - Since no placeholder text for UITextViews, set label
         placeholderLabel = UILabel()
         
@@ -22,24 +22,27 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
             //SKO - Frame irrelevant because using auto layout; set to CGRect.zero
             super.init(frame: CGRect.zero, textContainer: nil)
         }
-
+        
         placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
-        placeholderLabel.text = placeholder
+        placeholderLabel.text = hintText
         placeholderLabel.alpha = 0.2
+        placeholderLabel.font = AppStyle.sharedInstance.textFontBold
+        addSubview(placeholderLabel)
         
         textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: 0)
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        font = UIFont.systemFont(ofSize: 17)
-        addSubview(placeholderLabel)
+        
+        font = AppStyle.sharedInstance.textFontBold
+        backgroundColor = AppStyle.sharedInstance.textViewBackgroundColor
         delegate = self
+
+        text = textInput
     }
     
     convenience init(_ coder: NSCoder? = nil) {
         if let coder = coder {
-            self.init("", coder: coder)
+            self.init(hintText: "", coder: coder)
         } else {
-            self.init("")
+            self.init(hintText: "")
         }
     }
     
@@ -54,5 +57,11 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         } else {
             placeholderLabel.isHidden = true
         }
+    }
+    
+    //SKU - Function to remove any borders
+    func removeBorder() {
+      layer.borderWidth = 0
+      layer.borderColor = nil
     }
 }

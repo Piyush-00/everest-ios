@@ -38,21 +38,22 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         setupConstraints()
         
         //SKO - Since sideBorder depends on constraints, call here
-        self.headerView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
-        self.statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        contentView.sideBorder(side: .top, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
     }
     
     private func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
         baseInputView.translatesAutoresizingMaskIntoConstraints = false
         
-        baseInputView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        baseInputView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        baseInputView.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        baseInputView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        baseInputView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        baseInputView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        baseInputView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     //SKO - Pass subview on for handling by BaseInputView instance
-    func addArrangedSubview(view: UIView) {
-        baseInputView.addArrangedSubview(view: view)
+    func addArrangedSubviewToStackView(view: UIView) {
+        baseInputView.addArrangedSubviewToStackView(view: view)
     }
 }
