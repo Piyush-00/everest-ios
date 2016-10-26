@@ -50,6 +50,10 @@ class HeaderViewContainer: UIView {
         addSubview(scrollView)
         
         //SKO - Register for 'keyboard did show' notification to get its frame
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae7e20f32f7110a06e9b1fe6414f7f3c3e2c316e
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -69,7 +73,7 @@ class HeaderViewContainer: UIView {
     func keyboardWillShow(notification: NSNotification) {
         scrollViewContentViewHeightConstaint.isActive = false
         scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
-
+        
         scrollViewContentViewHeightConstaint.isActive = true
         
         //SKO - Prioritize scrollView touches when active
