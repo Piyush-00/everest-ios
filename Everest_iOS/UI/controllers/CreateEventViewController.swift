@@ -84,13 +84,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         viewContainer.statusBarView.backgroundColor = AppStyle.sharedInstance.backgroundColor
         viewContainer.contentView.backgroundColor = AppStyle.sharedInstance.backgroundColor
-        
-        viewContainer.addArrangedSubviewToStackView(view: promptLabel)
-        viewContainer.addArrangedSubviewToStackView(view: nameTextField)
-        viewContainer.addArrangedSubviewToStackView(view: aboutTextView)
-        viewContainer.addArrangedSubviewToStackView(view: locationTextField)
-        viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
-        viewContainer.addArrangedSubviewToStackView(view: continueButton)
 
         view.addSubview(viewContainer)
         

@@ -24,6 +24,7 @@ class AppStyle {
     let textFontBold = UIFont(name: "HelveticaNeue-Bold", size: 15)
     
     let pictureImageViewBorderColor = UIColor(netHex: 0x363636)
+
     let pictureImage = UIImage(named: "blank-profile-picture-take")
     let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
     
