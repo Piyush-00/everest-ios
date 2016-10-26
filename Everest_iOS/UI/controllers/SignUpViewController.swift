@@ -12,16 +12,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   var viewContainer: SignUpViewContainer
   var headerTextView: BaseInputTextView
   var extraInfoView: UIView
-  var forgotPasswordButton, loginButton: BaseInputButton
+  var signupButton, forgotPasswordButton, loginButton: BaseInputButton
+  var emailTextField, passwordTextField, confirmPasswordTextField : BaseInputTextField
   
-//  init(_ headerText: String? = nil, coder: NSCoder? = nil) {
   init(_ coder: NSCoder? = nil) {
     viewContainer = SignUpViewContainer()
+    headerTextView = BaseInputTextView(textInput: "Welcome to Everest")
     extraInfoView = UIView()
     forgotPasswordButton = BaseInputButton("Forgot password?")
     loginButton = BaseInputButton("Log In")
-    headerTextView = BaseInputTextView(textInput: "Welcome to Everest")
-  
+    emailTextField = BaseInputTextField("Email Address")
+    passwordTextField = BaseInputTextField("Password")
+    confirmPasswordTextField = BaseInputTextField("Confirm Password")
+    signupButton = BaseInputButton("Sign up")
+    
     if let coder = coder {
       super.init(coder: coder)!
     } else {
@@ -35,6 +39,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    emailTextField.delegate = self
+    passwordTextField.delegate = self
+    confirmPasswordTextField.delegate = self
+    
+    self.emailTextField.nextField = self.passwordTextField
+    self.passwordTextField.nextField = self.confirmPasswordTextField
     
     headerTextView.isEditable = false
     headerTextView.backgroundColor = nil
@@ -42,21 +53,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     headerTextView.textColor = UIColor(netHex: 0x1a1a1a)
     headerTextView.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
     
-    let emailTextField = BaseInputTextField("Email Address")
     emailTextField.backgroundColor = UIColor(netHex: 0xffffff)
     emailTextField.removeBorder()
     
-    let passwordTextField = BaseInputTextField("Password")
     passwordTextField.isSecureTextEntry = true
     passwordTextField.backgroundColor = UIColor(netHex: 0xffffff)
     passwordTextField.removeBorder()
     
-    let confirmPasswordTextField = BaseInputTextField("Confirm Password")
     confirmPasswordTextField.isSecureTextEntry = true
     confirmPasswordTextField.backgroundColor = UIColor(netHex: 0xffffff)
     confirmPasswordTextField.removeBorder()
 
-    let signupButton = BaseInputButton("Sign up")
     
     //SKU - This is a temporary fix to deal with some of the spacing issues that were brough up in the stack view. --> TODO Item
     let spacerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 100))
@@ -86,6 +93,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     viewContainer.backgroundColor = UIColor(netHex: 0xe6e6e6)
     
     view.addSubview(viewContainer)
+    
+    hideKeyboardWhenTappedAround()
   }
   
   override func viewDidLayoutSubviews() {
@@ -118,5 +127,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     headerTextView.centerYAnchor.constraint(equalTo: viewContainer.headerView.centerYAnchor).isActive = true
     headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
 
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if(textField.nextField == nil)
+    {
+      textField.resignFirstResponder()
+    }
+    else {
+    textField.nextField?.becomeFirstResponder()
+    }
+    return true
   }
 }

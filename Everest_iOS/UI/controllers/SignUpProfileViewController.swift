@@ -12,6 +12,8 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
   var viewContainer: SignUpViewContainer
   var headerTextView: BaseInputTextView
   var profileHeaderContainer: ProfileHeaderContainer
+  var firstNameTextField, lastNameTextField: BaseInputTextField
+  var continueButton: BaseInputButton
   
   init(_ coder: NSCoder? = nil) {
 
@@ -19,6 +21,9 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     viewContainer.setHeaderViewHeight(height: 100)
     headerTextView = BaseInputTextView(textInput: "Thanks for signing up!\nCompleting your profile will help people find you.")
     profileHeaderContainer = ProfileHeaderContainer(150)
+    firstNameTextField = BaseInputTextField("First Name")
+    lastNameTextField = BaseInputTextField("Last Name")
+    continueButton = BaseInputButton("Continue")
     
   if let coder = coder {
       super.init(coder: coder)!
@@ -34,6 +39,11 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    firstNameTextField.delegate = self
+    lastNameTextField.delegate = self
+    
+    firstNameTextField.nextField = lastNameTextField
+    
     headerTextView.isEditable = false
     headerTextView.backgroundColor = nil
     headerTextView.removeBorder()
@@ -48,19 +58,15 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     profileHeaderContainer.pictureImageView.addGestureRecognizer(singleTap)
     profileHeaderContainer.pictureImageView.image = UIImage(named: "blank-profile-picture-take")
     profileHeaderContainer.setPictureBorder(borderColor: UIColor(netHex: 0x363636))
-    
-    let firstNameTextField = BaseInputTextField("First Name")
+  
     firstNameTextField.backgroundColor = UIColor(netHex: 0xffffff)
     firstNameTextField.removeBorder()
-    
-    let lastNameTextField = BaseInputTextField("Last Name")
+  
     lastNameTextField.backgroundColor = UIColor(netHex: 0xffffff)
     lastNameTextField.removeBorder()
     
     let spacerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 100))
     let spacerView2 = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 100))
-    
-    let continueButton = BaseInputButton("Continue")
     
     viewContainer.addArrangedHeaderSubview(view: headerTextView)
     viewContainer.addArrangedContentSubview(view: profileHeaderContainer)
@@ -75,15 +81,14 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     
     view.addSubview(viewContainer)
     
+    hideKeyboardWhenTappedAround()
   }
 
   override func viewDidLayoutSubviews() {
     setupConstraints()
-  
   }
 
   private func setupConstraints() {
-    
     viewContainer.translatesAutoresizingMaskIntoConstraints = false
     headerTextView.translatesAutoresizingMaskIntoConstraints = false
     profileHeaderContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -107,4 +112,14 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     
   }
   
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if(textField.nextField == nil)
+    {
+      textField.resignFirstResponder()
+    }
+    else {
+      textField.nextField?.becomeFirstResponder()
+    }
+    return true
+  }
 }

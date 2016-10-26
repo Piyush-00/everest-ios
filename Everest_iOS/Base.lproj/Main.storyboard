@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Create Event View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="IqX-DO-h1a">
             <objects>
-                <viewController id="kWj-0z-tpm" customClass="CreateEventViewController" customModule="Everest_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kWj-0z-tpm" customClass="SignUpViewController" customModule="Everest_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mif-R4-b1X"/>
                         <viewControllerLayoutGuide type="bottom" id="8VO-RJ-rcR"/>
