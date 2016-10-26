@@ -26,7 +26,6 @@ class ProfileHeaderContainer: UIView {
         
         pictureImageView.layer.borderWidth = 1
         pictureImageView.layer.backgroundColor = AppStyle.sharedInstance.pictureImageViewBorderColor.cgColor
-
         pictureImageView.image = AppStyle.sharedInstance.pictureImage
 
         addSubview(pictureImageView)
