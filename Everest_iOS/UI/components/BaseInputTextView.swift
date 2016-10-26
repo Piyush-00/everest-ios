@@ -34,6 +34,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         font = AppStyle.sharedInstance.textFontBold
         backgroundColor = AppStyle.sharedInstance.textViewBackgroundColor
         delegate = self
+
         text = textInput
     }
     

@@ -621,11 +621,8 @@
 				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
 				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
-<<<<<<< HEAD
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
-=======
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
->>>>>>> make refactoring changes plus implement imagePicker in create event view
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
