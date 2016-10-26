@@ -73,7 +73,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentViewHeightConstaint.isActive = true
         
         //SKO - Prioritize scrollView touches when active
-        scrollView.delaysContentTouches = true
+        scrollView.delaysContentTouches = false
     }
     
     func keyboardWillHide(notification: NSNotification) {
