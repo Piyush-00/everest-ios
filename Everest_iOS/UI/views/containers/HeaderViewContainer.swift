@@ -51,6 +51,7 @@ class HeaderViewContainer: UIView {
         
         //SKO - Register for 'keyboard did show' notification to get its frame
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
