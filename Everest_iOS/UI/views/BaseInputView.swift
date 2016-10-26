@@ -57,12 +57,12 @@ class BaseInputView: UIView {
         //SKO - Set appropriate constraints according to what type of field it is
         if view is BaseInputTextView {
             view.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        } else if view is BaseInputTextField || view is BaseInputButton {
+        } else if view is BaseInputTextField {
             view.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
     }
     
-    func addArrangedSubview(view: UIView) {
+    func addArrangedSubviewToStackView(view: UIView) {
         stackView.addArrangedSubview(view)
         
         //SKO - Setup constraints for each arranged subview added
