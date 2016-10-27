@@ -40,6 +40,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+      
+        emailTextField.nextField = self.passwordTextField
+        passwordTextField.nextField = self.confirmPasswordTextField
 
         headerTextView.isEditable = false
         headerTextView.backgroundColor = nil
@@ -105,4 +113,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         headerTextView.centerYAnchor.constraint(equalTo: viewContainer.headerView.centerYAnchor).isActive = true
         headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
     }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if(textField.nextField == nil){
+      textField.resignFirstResponder()
+    }
+    else {
+      textField.nextField?.becomeFirstResponder()
+    }
+    return true
+  }
+  
 }

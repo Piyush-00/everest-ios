@@ -37,8 +37,14 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func viewDidLoad() {
-    super.viewDidLoad()
-
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+      
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+      
+        firstNameTextField.nextField = lastNameTextField
+      
         headerTextView.isEditable = false
         headerTextView.backgroundColor = nil
         headerTextView.removeBorder()
@@ -85,4 +91,14 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
 
         profileHeaderContainer?.heightAnchor.constraint(equalToConstant: 175).isActive = true
     }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if(textField.nextField == nil){
+      textField.resignFirstResponder()
+    }
+    else {
+      textField.nextField?.becomeFirstResponder()
+    }
+    return true
+  }
 }
