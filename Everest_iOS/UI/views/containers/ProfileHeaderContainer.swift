@@ -31,7 +31,8 @@ class ProfileHeaderContainer: UIView {
         addSubview(pictureImageView)
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
-        addGestureRecognizer(tapGestureRecognizer)
+        pictureImageView.isUserInteractionEnabled = true
+        pictureImageView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     required convenience init(coder aDecoder: NSCoder) {
