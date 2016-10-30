@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-    var viewContainer = HeaderAndStackViewContainer()
+    var viewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
     var promptLabel = UILabel()
     var nameTextField = BaseInputTextField(hintText: NSLocalizedString("name", comment: "name placeholder"))
     var aboutTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
@@ -42,9 +42,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         viewContainer.addArrangedSubviewToStackView(view: locationTextField)
         viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
         viewContainer.addArrangedSubviewToStackView(view: continueButtonContainer)
-        
-        viewContainer.statusBarView.backgroundColor = AppStyle.sharedInstance.backgroundColor
-        viewContainer.contentView.backgroundColor = AppStyle.sharedInstance.backgroundColor
     
         view.addSubview(viewContainer)
         

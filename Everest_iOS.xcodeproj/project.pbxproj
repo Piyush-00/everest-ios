@@ -39,6 +39,7 @@
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
+		9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CD81DC5969E0054614D /* StatusBarView.swift */; };
 		9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */; };
 		9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8CEE71DC5276E00CA9446 /* NavigationBarView.swift */; };
 		9EF8CEEA1DC5277B00CA9446 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8CEE91DC5277B00CA9446 /* ToolBar.swift */; };
@@ -106,6 +107,7 @@
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		9EC79CD81DC5969E0054614D /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		9EF8CEE71DC5276E00CA9446 /* NavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		9EF8CEE91DC5277B00CA9446 /* ToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
+				9EC79CD81DC5969E0054614D /* StatusBarView.swift */,
 				9EF8CEE61DC5270100CA9446 /* navigation */,
 				98AE46131DAF2ADE0023C9F4 /* containers */,
 			);
@@ -640,6 +643,7 @@
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
 				9E1020881DC5717700C08B90 /* DummyViewController.swift in Sources */,
+				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
