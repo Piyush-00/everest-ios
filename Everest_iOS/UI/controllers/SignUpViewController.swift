@@ -9,34 +9,15 @@
 import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
-    var viewContainer: SignUpViewContainer
-    var headerTextView: BaseInputTextView
-    var emailTextField, passwordTextField, confirmPasswordTextField: BaseInputTextField
-    var signupButtonContainer: BaseInputButtonContainer
-    var extraInfoView: UIView
-    var forgotPasswordButton, loginButton: UIButton
-
-    init(_ coder: NSCoder? = nil) {
-        viewContainer = SignUpViewContainer()
-        extraInfoView = UIView()
-        signupButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("sign up", comment: "sign up button"))
-        forgotPasswordButton = UIButton()
-        loginButton = UIButton()
-        headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up welcome header", comment: "sign up welcome header"))
-        emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
-        passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
-        confirmPasswordTextField = BaseInputTextField(hintText: NSLocalizedString("confirm password", comment: "confirm password placeholder"))
-
-        if let coder = coder {
-            super.init(coder: coder)!
-        } else {
-            super.init()
-        }
-    }
-
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init(aDecoder)
-    }
+    var viewContainer = SignUpViewContainer()
+    var headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up welcome header", comment: "sign up welcome header"))
+    var emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
+    var passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
+    var confirmPasswordTextField = BaseInputTextField(hintText: NSLocalizedString("confirm password", comment: "confirm password placeholder"))
+    var signupButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("sign up", comment: "sign up button"))
+    var extraInfoView = UIView()
+    var forgotPasswordButton = UIButton()
+    var loginButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +49,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         loginButton.setTitleColor(AppStyle.sharedInstance.textColor, for: .normal)
         loginButton.titleLabel?.font = AppStyle.sharedInstance.textFontBold
 
+        signupButtonContainer.button.addTarget(self, action: #selector(didTapSignupButton), for: .touchUpInside)
+        
         extraInfoView.addSubview(loginButton)
         extraInfoView.addSubview(forgotPasswordButton)
 
@@ -82,6 +65,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         viewContainer.backgroundColor = AppStyle.sharedInstance.backgroundColor
 
         view.addSubview(viewContainer)
+        
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -112,6 +99,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         headerTextView.leftAnchor.constraint(equalTo: viewContainer.contentView.stackView.leftAnchor, constant: -15).isActive = true
         headerTextView.centerYAnchor.constraint(equalTo: viewContainer.headerView.centerYAnchor).isActive = true
         headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
+    }
+    
+    func didTapSignupButton(sender: UIButton) {
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            let signUpProfileViewController = SignUpProfileViewController()
+            navigationController.pushViewController(signUpProfileViewController, animated: true)
+        }
     }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {

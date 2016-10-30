@@ -19,7 +19,9 @@ class DummyViewController: UIViewController {
     }
     
     func buttonListener(sender: UIButton) {
-        let createEventViewController = CreateEventViewController()
-        navigationController?.pushViewController(createEventViewController, animated: true)
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+                let createEventViewController = CreateEventViewController()
+                navigationController.pushViewController(createEventViewController, withAnimation: .fromRight)
+        }
     }
 }

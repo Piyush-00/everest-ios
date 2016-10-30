@@ -8,9 +8,14 @@
 
 import UIKit
 
+/*SKO
+ Navigation bar that contains a back button that pops the user
+ to the preceding screen when clicked.
+*/
 class NavigationBarView: UIView {
     var backButton = UIButton()
     var backButtonLabel = UILabel()
+    private var height: CGFloat = 60.0
     
     init() {
         super.init(frame: .zero)
@@ -30,7 +35,7 @@ class NavigationBarView: UIView {
     func setup() {
         self.backgroundColor = self.superviewBackgroundColor
         
-        backButtonLabel.text = "<"
+        backButtonLabel.text = "Back"
         backButtonLabel.textAlignment = .center
         
         backButton.addSubview(backButtonLabel)
@@ -40,8 +45,9 @@ class NavigationBarView: UIView {
     }
     
     func didTapBackButton(sender: UIButton) {
-        let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController
-        navigationController?.popViewController(animated: true)
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
+        }
     }
     
     func setupConstraints() {
@@ -49,7 +55,7 @@ class NavigationBarView: UIView {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButtonLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
         
         backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: UIApplication.shared.statusBarFrame.height).isActive = true
         backButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -60,5 +66,9 @@ class NavigationBarView: UIView {
         backButtonLabel.bottomAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
         backButtonLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor).isActive = true
         backButtonLabel.trailingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
+    }
+    
+    func getHeight() -> CGFloat {
+        return height
     }
 }

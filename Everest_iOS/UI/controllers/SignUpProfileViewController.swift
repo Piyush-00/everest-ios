@@ -9,37 +9,22 @@
 import UIKit
 
 class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
-    var viewContainer: SignUpViewContainer
-    var headerTextView: BaseInputTextView
-    var firstNameTextField, lastNameTextField: BaseInputTextField
-    var continueButtonContainer: BaseInputButtonContainer
+    var viewContainer = SignUpViewContainer()
+    var headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up profile header", comment: "sign up profile header"))
+    var firstNameTextField = BaseInputTextField(hintText: NSLocalizedString("first name", comment: "first name placeholder"))
+    var lastNameTextField = BaseInputTextField(hintText: NSLocalizedString("last name", comment: "last name placeholder"))
+    var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
     var profileHeaderContainer: ProfileHeaderContainer?
-
-    init(_ coder: NSCoder? = nil) {
-        viewContainer = SignUpViewContainer()
-        viewContainer.setHeaderViewHeight(height: 100)
-        headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up profile header", comment: "sign up profile header"))
-        firstNameTextField = BaseInputTextField(hintText: NSLocalizedString("first name", comment: "first name placeholder"))
-        lastNameTextField = BaseInputTextField(hintText: NSLocalizedString("last name", comment: "last name placeholder"))
-        continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
-
-        if let coder = coder {
-          super.init(coder: coder)!
-        } else {
-          super.init()
-        }
-        
-        profileHeaderContainer = ProfileHeaderContainer(150, controller: self)
-    }
-
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init(aDecoder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-      
+        
+        viewContainer.navigationBarView.isHidden = true
+        
+        viewContainer.setHeaderViewHeight(height: 100)
+        profileHeaderContainer = ProfileHeaderContainer(150, controller: self)
+        
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
       
@@ -68,6 +53,11 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         viewContainer.backgroundColor = AppStyle.sharedInstance.backgroundColor
 
         view.addSubview(viewContainer)
+        
+        //SKO - disable being able to swipe back to sign up part 1 view
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        }
     }
 
     override func viewDidLayoutSubviews() {
