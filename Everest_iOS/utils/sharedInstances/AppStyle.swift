@@ -19,6 +19,7 @@ class AppStyle {
     let textViewBackgroundColor = UIColor(netHex: 0xffffff)
     
     let baseInputButtonColor = UIColor(netHex: 0xbd3333)
+    let baseInputSecondaryButtonColor = UIColor(netHex: 0x0075c9)
   
     //SKU - Header fonts
     let headerFontLarge = UIFont(name: "HelveticaNeue-Bold", size: 50)
@@ -32,7 +33,6 @@ class AppStyle {
     let textFontBold = UIFont(name: "HelveticaNeue-Bold", size: 15)
     let textFontMedium = UIFont(name: "HelveticaNeue", size: 15)
     let textFontSmall = UIFont(name: "HelveticaNeue-Light", size: 12)
-  
   
   
     let pictureImageViewBorderColor = UIColor(netHex: 0x363636)
