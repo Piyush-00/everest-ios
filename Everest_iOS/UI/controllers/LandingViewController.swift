@@ -9,33 +9,14 @@
 import UIKit
 
 class LandingViewController: UIViewController {
-
-  var baseCameraView: BaseCameraSesssion
-  var overlayView: UIView
-  var scanButtonContainer, createEvenButtonContainer, loginButtonContainer, signupButtonContainer: BaseInputButtonContainer
-  var headerTextView, subHeaderTextView: BaseInputTextView
-  
-  init(_ coder: NSCoder? = nil) {
-    
-    overlayView = UIView()
-    scanButtonContainer = BaseInputButtonContainer(buttonTitle: "Scan")
-    createEvenButtonContainer = BaseInputButtonContainer(buttonTitle: "Create Event")
-    loginButtonContainer = BaseInputButtonContainer(buttonTitle: "Login")
-    signupButtonContainer = BaseInputButtonContainer(buttonTitle: "Sign up")
-    headerTextView = BaseInputTextView(textInput: "Hi! Sign up to get started.")
-    subHeaderTextView = BaseInputTextView(textInput: "Or scan now and join later!")
-    baseCameraView = BaseCameraSesssion()
-    
-    if let coder = coder {
-      super.init(coder: coder)!
-    } else {
-      super.init()
-    }
-  }
-  
-  required convenience init(coder aDecoder: NSCoder) {
-    self.init(aDecoder)
-  }
+  var overlayView = UIView()
+  var scanButtonContainer = BaseInputButtonContainer(buttonTitle: "Scan")
+  var createEvenButtonContainer = BaseInputButtonContainer(buttonTitle: "Create Event")
+  var loginButtonContainer = BaseInputButtonContainer(buttonTitle: "Login")
+  var signupButtonContainer = BaseInputButtonContainer(buttonTitle: "Sign up")
+  var headerTextView = BaseInputTextView(textInput: "Hi! Sign up to get started.")
+  var subHeaderTextView = BaseInputTextView(textInput: "Or scan now and join later!")
+  var baseCameraView = BaseCameraSesssion()
   
   override func viewDidLoad() {
     super.viewDidLoad()
