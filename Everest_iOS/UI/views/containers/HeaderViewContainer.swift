@@ -28,6 +28,7 @@ class HeaderViewContainer: UIView {
         
         if (withNavigationBar) {
             topMostView = NavigationBarView()
+            topMostView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
         } else {
             topMostView = StatusBarView()
         }
@@ -75,7 +76,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentViewHeightConstaint.isActive = false
         
         if topMostView is NavigationBarView {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60) + headerViewHeight + 1)
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()) + headerViewHeight + 1)
         } else {
             scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
         }
@@ -90,7 +91,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentViewHeightConstaint.isActive = false
         
         if topMostView is NavigationBarView {
-            self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60))
+            self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
         } else {
             scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
         }
@@ -146,7 +147,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         if topMostView is NavigationBarView {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60))
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
         } else {
             scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
         }

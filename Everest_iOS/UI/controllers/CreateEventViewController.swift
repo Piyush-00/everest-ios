@@ -53,6 +53,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         viewContainer.headerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,7 +75,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     //SKO - on-click listener
     func onTapContinueButton(sender: UIButton) {
         print("button clicked")
-        navigationController?.popViewController(animated: true)
         //SKO - bring up next vc and carry data over (Event object argument)
     }
     
