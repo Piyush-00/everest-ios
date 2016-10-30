@@ -17,20 +17,20 @@ import UIKit
 class HeaderAndStackViewContainer: HeaderViewContainer {
     var baseInputView: BaseInputView
     
-    override init(_ coder: NSCoder? = nil) {
+    override init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         baseInputView = BaseInputView()
         
         if let coder = coder {
-            super.init(coder)
+            super.init(withNavigationBar: false, coder)
         } else {
-            super.init()
+            super.init(withNavigationBar: withNavigationBar)
         }
         
         setContentView(view: baseInputView)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        self.init(aDecoder)
+        self.init(withNavigationBar: false, aDecoder)
     }
     
     override func didMoveToSuperview() {
@@ -39,7 +39,6 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         
         //SKO - Since sideBorder depends on constraints, call here
         contentView.sideBorder(side: .top, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
-        statusBarView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
     }
     
     private func setupConstraints() {

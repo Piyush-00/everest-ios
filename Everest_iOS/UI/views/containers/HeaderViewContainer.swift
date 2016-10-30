@@ -10,23 +10,28 @@ import UIKit
 
 //SKO - UI skeleton composed of a 'header' and 'content' section
 class HeaderViewContainer: UIView {
-    var statusBarView: UIView
+    var topMostView: UIView
     var scrollView: UIScrollView
     var scrollViewContentView: UIView
     var headerView: UIView
     var contentView: UIView
     private var headerViewHeight: CGFloat
-    
     private var scrollViewContentViewHeightConstaint: NSLayoutConstraint
     
-    init(_ coder: NSCoder? = nil) {
+    init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         scrollView = UIScrollView()
         scrollViewContentView = UIView()
         headerView = UIView()
         contentView = UIView()
-        statusBarView = UIView()
         scrollViewContentViewHeightConstaint = NSLayoutConstraint()
         headerViewHeight = 131
+        
+        if (withNavigationBar) {
+            topMostView = NavigationBarView()
+            topMostView.sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+        } else {
+            topMostView = StatusBarView()
+        }
         
         if let coder = coder {
             super.init(coder: coder)!
@@ -34,6 +39,7 @@ class HeaderViewContainer: UIView {
             super.init(frame: CGRect.zero)
         }
         
+        self.backgroundColor = AppStyle.sharedInstance.backgroundColor
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSelf))
         addGestureRecognizer(tapGestureRecognizer)
         
@@ -46,7 +52,7 @@ class HeaderViewContainer: UIView {
 
         scrollView.addSubview(scrollViewContentView)
     
-        addSubview(statusBarView)
+        addSubview(topMostView)
         addSubview(scrollView)
         
         //SKO - Register for 'keyboard did show' notification to get its frame
@@ -56,7 +62,7 @@ class HeaderViewContainer: UIView {
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        self.init(aDecoder)
+        self.init(withNavigationBar: false, aDecoder)
     }
     
     //SKO - Setup auto layout constraints once the view has moved to its superview
@@ -68,7 +74,12 @@ class HeaderViewContainer: UIView {
     //SKO - Keyboard showed up notification listener
     func keyboardWillShow(notification: NSNotification) {
         scrollViewContentViewHeightConstaint.isActive = false
-        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
+        
+        if topMostView is NavigationBarView {
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()) + headerViewHeight + 1)
+        } else {
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
+        }
         
         scrollViewContentViewHeightConstaint.isActive = true
         
@@ -77,9 +88,14 @@ class HeaderViewContainer: UIView {
     }
     
     func keyboardWillHide(notification: NSNotification) {
-
         scrollViewContentViewHeightConstaint.isActive = false
-        self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        
+        if topMostView is NavigationBarView {
+            self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
+        } else {
+            scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        }
+
         self.scrollViewContentViewHeightConstaint.isActive = true
         
         if (scrollView.contentOffset.y != 0) {
@@ -109,19 +125,17 @@ class HeaderViewContainer: UIView {
          constraining to false.
         */
         translatesAutoresizingMaskIntoConstraints = false
-        statusBarView.translatesAutoresizingMaskIntoConstraints = false
+        topMostView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollViewContentView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        statusBarView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        statusBarView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        statusBarView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        //SKO - Get height of statusBar and use it for constraint
-        statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
+        topMostView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        topMostView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        topMostView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        scrollView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: topMostView.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -132,7 +146,12 @@ class HeaderViewContainer: UIView {
         scrollViewContentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         scrollViewContentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        if topMostView is NavigationBarView {
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
+        } else {
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        }
+        
         scrollViewContentViewHeightConstaint.isActive = true
 
         headerView.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor).isActive = true

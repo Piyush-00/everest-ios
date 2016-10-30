@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpViewContainer: UIView {
-  var statusBarView: UIView
+  var navigationBarView: NavigationBarView
   var headerView: UIView
   var contentView: BaseInputView
   var scrollView: UIScrollView
@@ -19,7 +19,7 @@ class SignUpViewContainer: UIView {
   private var scrollViewContentViewHeightConstaint: NSLayoutConstraint
   
   init(_ coder: NSCoder? = nil) {
-    statusBarView = UIView()
+    navigationBarView = NavigationBarView()
     headerView = UIView()
     contentView = BaseInputView()
     scrollView = UIScrollView()
@@ -41,7 +41,7 @@ class SignUpViewContainer: UIView {
     scrollViewContentView.addSubview(contentView)
     
     scrollView.addSubview(scrollViewContentView)
-    addSubview(statusBarView)
+    addSubview(navigationBarView)
     addSubview(scrollView)
     
     
@@ -65,12 +65,11 @@ class SignUpViewContainer: UIView {
     headerView.translatesAutoresizingMaskIntoConstraints = false
     contentView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.translatesAutoresizingMaskIntoConstraints = false
-    statusBarView.translatesAutoresizingMaskIntoConstraints = false
+    navigationBarView.translatesAutoresizingMaskIntoConstraints = false
     scrollViewContentView.translatesAutoresizingMaskIntoConstraints = false
     
-    statusBarView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    statusBarView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
+    navigationBarView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    navigationBarView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     
     headerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
     headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -80,7 +79,7 @@ class SignUpViewContainer: UIView {
     contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     
-    scrollView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
+    scrollView.topAnchor.constraint(equalTo: navigationBarView.bottomAnchor).isActive = true
     scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
@@ -90,7 +89,7 @@ class SignUpViewContainer: UIView {
     scrollViewContentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     scrollViewContentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     
-    scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+    scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60))
     scrollViewContentViewHeightConstaint.isActive = true
 
   }
@@ -98,7 +97,7 @@ class SignUpViewContainer: UIView {
   //SKU - Calculate the height of the keyboard to account for the scroll view.
   internal func keyboardDidShow(notification: NSNotification) {
     scrollViewContentViewHeightConstaint.isActive = false
-    scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight)
+    scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60) + headerViewHeight)
     scrollViewContentViewHeightConstaint.isActive = true
     
     scrollView.delaysContentTouches = false
@@ -108,7 +107,7 @@ class SignUpViewContainer: UIView {
   internal func keyboardWillHide(notification: NSNotification) {
     
     scrollViewContentViewHeightConstaint.isActive = false
-    self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+    self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60))
     self.scrollViewContentViewHeightConstaint.isActive = true
     
     //SKU - The scroll view will set its offset back to 0 smoothly.

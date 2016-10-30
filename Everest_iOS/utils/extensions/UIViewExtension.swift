@@ -51,4 +51,14 @@ extension UIView {
             sideBorderView.heightAnchor.constraint(equalToConstant: width).isActive = true
         }
     }
+    
+    var superviewBackgroundColor: UIColor? {
+        if let superView = self.superview {
+            if let backgroundColor = superView.backgroundColor {
+                return backgroundColor
+            }
+        }
+        
+        return nil
+    }
 }
