@@ -230,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
-				9E1020871DC5717700C08B90 /* DummyViewController.swift */,
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
@@ -666,7 +665,6 @@
 				9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */,
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
-				9E1020881DC5717700C08B90 /* DummyViewController.swift in Sources */,
 				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
