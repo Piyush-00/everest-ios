@@ -10,6 +10,8 @@
 		22DCED725034CACEBDAD3576 /* Pods_Everest_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C1787080C2F43D5DB9A8B0 /* Pods_Everest_iOSTests.framework */; };
 		804717C33561938D9B2FC613 /* Pods_Everest_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FBE2F0026E207B61F9DABE /* Pods_Everest_iOS.framework */; };
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
+		9828E27B1DC59E9F009CEEDE /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */; };
+		9828E27D1DC65509009CEEDE /* BaseCameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */; };
 		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
 		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
 		982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */; };
@@ -73,6 +75,8 @@
 		86C1787080C2F43D5DB9A8B0 /* Pods_Everest_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Everest_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		890D66367B1DFA049E80D43E /* Pods-Everest_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Everest_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Everest_iOSUITests/Pods-Everest_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCameraSession.swift; sourceTree = "<group>"; };
 		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
 		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAlertController.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 			children = (
 				98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */,
 				98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */,
+				9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
+				9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -637,6 +643,7 @@
 				98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */,
 				9877F5531DBC01DA004A7CC2 /* ProfileHeaderContainer.swift in Sources */,
 				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
+				9828E27D1DC65509009CEEDE /* BaseCameraSession.swift in Sources */,
 				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
@@ -655,6 +662,7 @@
 				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98F742801DC2F55A00B3B0D9 /* EventModalView.swift in Sources */,
+				9828E27B1DC59E9F009CEEDE /* LandingViewController.swift in Sources */,
 				98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */,
 				98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
