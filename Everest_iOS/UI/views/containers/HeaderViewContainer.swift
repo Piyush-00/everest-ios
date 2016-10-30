@@ -119,7 +119,7 @@ class HeaderViewContainer: UIView {
         statusBarView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         statusBarView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         //SKO - Get height of statusBar and use it for constraint
-        statusBarView.heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
+        statusBarView.heightAnchor.constraint(equalToConstant: navigationController).isActive = true
         
         scrollView.topAnchor.constraint(equalTo: statusBarView.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
