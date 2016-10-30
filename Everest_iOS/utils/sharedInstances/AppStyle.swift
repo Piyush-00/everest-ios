@@ -19,11 +19,22 @@ class AppStyle {
     let textViewBackgroundColor = UIColor(netHex: 0xffffff)
     
     let baseInputButtonColor = UIColor(netHex: 0xbd3333)
-    
+  
+    //SKU - Header fonts
     let headerFontLarge = UIFont(name: "HelveticaNeue-Bold", size: 50)
+    let headerFontSemiLarge = UIFont(name: "HelveticaNeue", size: 22.5)
     let headerFontMedium = UIFont(name: "HelveticaNeue-Light", size: 20)
+    let headerFontSmall = UIFont(name: "HelveticaNeue-Light", size: 15)
+  
+    //SKU - General fonts
+    let textFontLarge = UIFont(name: "HelveticaNeue-Bold", size: 20)
+    let textFontSemiLarge = UIFont(name: "HelveticaNeue", size: 17)
     let textFontBold = UIFont(name: "HelveticaNeue-Bold", size: 15)
-    
+    let textFontMedium = UIFont(name: "HelveticaNeue", size: 15)
+    let textFontSmall = UIFont(name: "HelveticaNeue-Light", size: 12)
+  
+  
+  
     let pictureImageViewBorderColor = UIColor(netHex: 0x363636)
     let pictureImage = UIImage(named: "blank-profile-picture-take")
     let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
