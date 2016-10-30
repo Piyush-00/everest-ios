@@ -12,6 +12,8 @@
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
 		9828E27B1DC59E9F009CEEDE /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */; };
 		9828E27D1DC65509009CEEDE /* BaseCameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */; };
+		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
+		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
 		982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */; };
 		983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E23191DB41A08005DB3F2 /* SignUpViewController.swift */; };
 		983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */; };
@@ -75,6 +77,8 @@
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCameraSession.swift; sourceTree = "<group>"; };
+		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
+		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAlertController.swift; sourceTree = "<group>"; };
 		983E23191DB41A08005DB3F2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewContainer.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */,
+				980894AF1DC57DF000499DA3 /* InvalidModalView.swift */,
 				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
 				98AE46131DAF2ADE0023C9F4 /* containers */,
 			);
@@ -320,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				9E4534481DBD4EBF00D06929 /* AppStyle.swift */,
+				980894B11DC585B500499DA3 /* Translation.swift */,
 			);
 			path = sharedInstances;
 			sourceTree = "<group>";
@@ -631,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */,
 				98F7427E1DC2D07500B3B0D9 /* ModalViewContainer.swift in Sources */,
 				980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */,
 				98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */,
@@ -648,6 +655,7 @@
 				98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */,
 				98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */,
 				983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */,
+				980894B21DC585B500499DA3 /* Translation.swift in Sources */,
 				9EC373381DBC760C00D0FCDC /* Event.swift in Sources */,
 				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,

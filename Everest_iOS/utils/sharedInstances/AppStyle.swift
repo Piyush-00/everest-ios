@@ -17,12 +17,14 @@ class AppStyle {
     let textColor = UIColor(netHex: 0x1a1a1a)
     let textFieldBackgroundColor = UIColor(netHex: 0xffffff)
     let textViewBackgroundColor = UIColor(netHex: 0xffffff)
-    
+    let invalidColor = UIColor(hex:"#ff5b5b")
     let baseInputButtonColor = UIColor(netHex: 0xbd3333)
     let baseInputSecondaryButtonColor = UIColor(netHex: 0x0075c9)
   
     //SKU - Header fonts
-    let headerFontLarge = UIFont(name: "HelveticaNeue-Bold", size: 50)
+    let headerFontLargeBold = UIFont(name: "HelveticaNeue-Bold", size: 50)
+    let headerFontLargeRegular = UIFont(name: "HelveticaNeue", size: 50)
+    let headerFontLargeLight = UIFont(name: "HelveticaNeue-Light", size: 50)
     let headerFontSemiLarge = UIFont(name: "HelveticaNeue", size: 22.5)
     let headerFontMedium = UIFont(name: "HelveticaNeue-Light", size: 20)
     let headerFontSmall = UIFont(name: "HelveticaNeue-Light", size: 15)
@@ -35,9 +37,15 @@ class AppStyle {
     let textFontSmall = UIFont(name: "HelveticaNeue-Light", size: 12)
   
   
+    let textFontSmallLight = UIFont(name: "HelveticaNeue-Light", size: 12)
+    let textFontSmallRegular = UIFont(name: "HelveticaNeue", size: 12)
+    let textFontSmallBold = UIFont(name: "HelveticaNeue-Bold", size: 12)
+  
+    //SKU - stored images
     let pictureImageViewBorderColor = UIColor(netHex: 0x363636)
     let pictureImage = UIImage(named: "blank-profile-picture-take")
     let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
+    let scanningErrorImageRed = UIImage(named: "Invalid-QR-scan-image-red")
     
     func baseInputButton() -> UIButton {
         let button = UIButton(type: .custom)
