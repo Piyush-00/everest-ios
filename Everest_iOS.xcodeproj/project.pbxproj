@@ -32,7 +32,6 @@
 		98E2F8DD1DA1F6C600AAC17E /* Everest_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8DC1DA1F6C600AAC17E /* Everest_iOSTests.swift */; };
 		98E2F8E81DA1F6C700AAC17E /* Everest_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */; };
 		98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EF2DF11DBF155F000D7288 /* UIViewController.swift */; };
-		9E1020881DC5717700C08B90 /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1020871DC5717700C08B90 /* DummyViewController.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
@@ -100,7 +99,6 @@
 		98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Everest_iOSUITests.swift; sourceTree = "<group>"; };
 		98E2F8E91DA1F6C700AAC17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98EF2DF11DBF155F000D7288 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		9E1020871DC5717700C08B90 /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
-				9E1020871DC5717700C08B90 /* DummyViewController.swift */,
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
@@ -643,7 +640,6 @@
 				9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */,
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
-				9E1020881DC5717700C08B90 /* DummyViewController.swift in Sources */,
 				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
