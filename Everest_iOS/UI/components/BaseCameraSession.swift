@@ -9,15 +9,16 @@
 import UIKit
 import AVFoundation
 
-class BaseCameraSesssion: UIView {
+class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   
   private var captureSession: AVCaptureSession?
   private var previewLayerView: AVCaptureVideoPreviewLayer
+  private var metaDataOutput: AVCaptureMetadataOutput
   
   init(_ coder: NSCoder? = nil){
-    
     captureSession = AVCaptureSession()
     previewLayerView = AVCaptureVideoPreviewLayer()
+    metaDataOutput = AVCaptureMetadataOutput()
     
     if let coder = coder {
       super.init(coder: coder)!
@@ -33,6 +34,7 @@ class BaseCameraSesssion: UIView {
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
     configureInput()
+    configureOutput()
     configurePreviewLayer()
     self.layer.addSublayer(previewLayerView)
   }
@@ -60,6 +62,25 @@ class BaseCameraSesssion: UIView {
       failedSession()
       return
     }
+  }
+  
+  private func configureOutput() {
+    if let captureSession = captureSession {
+      if (captureSession.canAddOutput(metaDataOutput)) {
+        captureSession.addOutput(metaDataOutput)
+        metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        return
+      }
+    }
+    failedSession()
+  }
+  
+  func addOutput() {
+    metaDataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+  }
+  
+  func removeOutput() {
+    metaDataOutput.metadataObjectTypes = nil
   }
   
   private func configurePreviewLayer(){
