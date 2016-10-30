@@ -98,4 +98,8 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
     previewLayerView.frame = controller.view.frame
     captureSession?.startRunning()
   }
+  
+  func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    print("captured")
+  }
 }
