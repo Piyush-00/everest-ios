@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         headerTextView.backgroundColor = nil
         headerTextView.removeBorder()
         headerTextView.textColor = AppStyle.sharedInstance.textColor
-        headerTextView.font = AppStyle.sharedInstance.headerFontLarge
+        headerTextView.font = AppStyle.sharedInstance.headerFontLargeBold
         
         emailTextField.removeBorder()
         passwordTextField.removeBorder()
