@@ -34,12 +34,28 @@ class LandingViewController: UIViewController {
     baseCameraView.startCameraSession(controller: self)
     
     scanButtonContainer.button.addTarget(self, action: #selector(didTapScanButton), for: .touchUpInside)
+    createEvenButtonContainer.button.addTarget(self, action: #selector(didTapCreateEventButton), for: .touchUpInside)
+    signupButtonContainer.button.addTarget(self, action: #selector(didTapSignupButton), for: .touchUpInside)
     
     setupConstraints()
   }
   
   func didTapScanButton(sender: UIButton) {
     toggleLandingOverlay()
+  }
+  
+  func didTapCreateEventButton(sender: UIButton) {
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let createEventViewController = CreateEventViewController()
+      navigationController.pushViewController(createEventViewController, withAnimation: .fromTop)
+    }
+  }
+  
+  func didTapSignupButton(sender: UIButton) {
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let signupViewController = SignUpViewController()
+      navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
+    }
   }
   
   //SKO - toggles between initial landing page view and scanning view
@@ -66,7 +82,7 @@ class LandingViewController: UIViewController {
       scanButtonContainer.button.setTitle("Back", for: .normal)
     }
     
-    UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+    UIView.animate(withDuration: 0.8, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
         if (self.tappedScanButton) {
           self.headerTextView.alpha = 0
           self.subHeaderTextView.alpha = 0

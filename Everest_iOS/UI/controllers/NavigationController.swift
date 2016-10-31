@@ -14,7 +14,7 @@ import UIKit
 */
 class NavigationController: UINavigationController {
     var currentAnimationType = animationType.void
-    
+  
     //SKO - same functionality as the original pushViewController, but just lets you specify what direction to transition in
     func pushViewController(_ viewController: UIViewController, withAnimation animation: animationType) {
         let transition = CATransition()
