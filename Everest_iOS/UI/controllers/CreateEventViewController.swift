@@ -9,54 +9,14 @@
 import UIKit
 
 class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-    var viewContainer: HeaderAndStackViewContainer
-    var promptLabel: UILabel
-    var nameTextField: BaseInputTextField
-    var aboutTextView: BaseInputTextView
-    var locationTextField: BaseInputTextField
-    var dateTimeTextField: BaseInputTextField
-    var continueButtonContainer: BaseInputButtonContainer
-    var picturePromptImageView: UIImageView
-    
-    //SKO
-    /*
-    Designated initializer.
-        
-        If the view is instantiated from a storyboard, init parameter
-        will be of type NSCoder, else nil.
-    */
-    init(_ coder: NSCoder? = nil) {
-        viewContainer = HeaderAndStackViewContainer()
-        //SKO - Init UI subclasses with hint text as param
-        promptLabel = UILabel()
-        nameTextField = BaseInputTextField(hintText: NSLocalizedString("name", comment: "name placeholder"))
-        aboutTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
-        locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
-        dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
-        continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
-
-        picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
-        
-        //SKO - If init with coder, call super init with it
-        if let coder = coder {
-            super.init(coder: coder)!
-        //SKO - Else, call super init with no parameters
-        } else {
-            super.init()
-        }
-    }
-    
-    //SKO
-    /*
-    Convenience initializer.
-        
-        If the view is instantiated from a storyboard, this init
-        is called which in turn calls the designated initializer
-        with the coder.
-     */
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init(aDecoder)
-    }
+    var viewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
+    var promptLabel = UILabel()
+    var nameTextField = BaseInputTextField(hintText: NSLocalizedString("name", comment: "name placeholder"))
+    var aboutTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
+    var locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
+    var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
+    var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
+    var picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,9 +42,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         viewContainer.addArrangedSubviewToStackView(view: locationTextField)
         viewContainer.addArrangedSubviewToStackView(view: dateTimeTextField)
         viewContainer.addArrangedSubviewToStackView(view: continueButtonContainer)
-        
-        viewContainer.statusBarView.backgroundColor = AppStyle.sharedInstance.backgroundColor
-        viewContainer.contentView.backgroundColor = AppStyle.sharedInstance.backgroundColor
     
         view.addSubview(viewContainer)
         
@@ -96,6 +53,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         viewContainer.headerView.addGestureRecognizer(tapGestureRecognizer)
+        
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,7 +75,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     //SKO - on-click listener
     func onTapContinueButton(sender: UIButton) {
         print("button clicked")
-        //SKO - bring up next vc and carry data over (Event object argument)
+      //SKO - bring up next vc and carry data over (Event object argument)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
