@@ -9,15 +9,16 @@
 import UIKit
 import AVFoundation
 
-class BaseCameraSesssion: UIView {
+class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   
   private var captureSession: AVCaptureSession?
   private var previewLayerView: AVCaptureVideoPreviewLayer
+  private var metaDataOutput: AVCaptureMetadataOutput
   
   init(_ coder: NSCoder? = nil){
-    
     captureSession = AVCaptureSession()
     previewLayerView = AVCaptureVideoPreviewLayer()
+    metaDataOutput = AVCaptureMetadataOutput()
     
     if let coder = coder {
       super.init(coder: coder)!
@@ -33,6 +34,7 @@ class BaseCameraSesssion: UIView {
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
     configureInput()
+    configureOutput()
     configurePreviewLayer()
     self.layer.addSublayer(previewLayerView)
   }
@@ -62,6 +64,27 @@ class BaseCameraSesssion: UIView {
     }
   }
   
+  private func configureOutput() {
+    if let captureSession = captureSession {
+      if (captureSession.canAddOutput(metaDataOutput)) {
+        captureSession.addOutput(metaDataOutput)
+        metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        return
+      }
+    }
+    failedSession()
+  }
+  
+  //SKO - initialize qr code scanner
+  func addOutput() {
+    metaDataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+  }
+  
+  //SKO - remove qr code scanner
+  func removeOutput() {
+    metaDataOutput.metadataObjectTypes = nil
+  }
+  
   private func configurePreviewLayer(){
     previewLayerView = AVCaptureVideoPreviewLayer(session: self.captureSession)
     previewLayerView.videoGravity = AVLayerVideoGravityResizeAspect
@@ -76,5 +99,17 @@ class BaseCameraSesssion: UIView {
   func startCameraSession(controller: UIViewController) {
     previewLayerView.frame = controller.view.frame
     captureSession?.startRunning()
+  }
+  
+  //SKO - delegate method that gets fired when a qr code has been found
+  func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    removeOutput()
+    //SKO - TODO: replace with HTTP class url parsing method to test integrity of url + handle modal display if url correct
+    if let metadataObject = metadataObjects.first {
+      if let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject {
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        print(readableObject.stringValue)
+      }
+    }
   }
 }

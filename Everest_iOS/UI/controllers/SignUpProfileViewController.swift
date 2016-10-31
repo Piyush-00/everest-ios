@@ -21,7 +21,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         self.hideKeyboardWhenTappedAround()
         
         viewContainer.navigationBarView.isHidden = true
-        
+      
         viewContainer.setHeaderViewHeight(height: 100)
         profileHeaderContainer = ProfileHeaderContainer(150, controller: self)
         
@@ -42,6 +42,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         lastNameTextField.removeBorder()
 
         continueButtonContainer.button.setTitle("Continue", for: .normal)
+      continueButtonContainer.button.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
 
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
         viewContainer.addArrangedContentSubview(view: profileHeaderContainer!)
@@ -64,7 +65,14 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLayoutSubviews()
         setupConstraints()
     }
-
+  
+    func didTapContinueButton(sender: UIButton) {
+      //SKO - temporary pop to previous vc while the following vc isn't implemented
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
+      }
+    }
+  
     private func setupConstraints() {
         viewContainer.translatesAutoresizingMaskIntoConstraints = false
         headerTextView.translatesAutoresizingMaskIntoConstraints = false

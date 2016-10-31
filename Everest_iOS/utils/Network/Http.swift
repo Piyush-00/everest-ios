@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class Http {
+class Http  {
   
   //SKU
   /*  I was reading up on completion handlers and there were multiple articles on using inner closures to
