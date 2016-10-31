@@ -17,6 +17,8 @@ class LandingViewController: UIViewController {
   var headerTextView = BaseInputTextView(textInput: "Hi! Sign up to get started.")
   var subHeaderTextView = BaseInputTextView(textInput: "Or scan now and join later!")
   var baseCameraView = BaseCameraSesssion()
+  var scanButtoncontainerBottomConstraint = NSLayoutConstraint()
+  var tappedScanButton = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,7 +33,69 @@ class LandingViewController: UIViewController {
     view.addSubview(overlayView)
     baseCameraView.startCameraSession(controller: self)
     
+    scanButtonContainer.button.addTarget(self, action: #selector(didTapScanButton), for: .touchUpInside)
+    
     setupConstraints()
+  }
+  
+  func didTapScanButton(sender: UIButton) {
+    toggleLandingOverlay()
+  }
+  
+  //SKO - toggles between initial landing page view and scanning view
+  private func toggleLandingOverlay() {
+    tappedScanButton = !tappedScanButton
+    
+    if (!tappedScanButton) {
+      overlayView.addSubview(headerTextView)
+      overlayView.addSubview(subHeaderTextView)
+      overlayView.addSubview(createEvenButtonContainer)
+      overlayView.addSubview(loginButtonContainer)
+      overlayView.addSubview(signupButtonContainer)
+      
+      scanButtoncontainerBottomConstraint.constant = -140
+      
+      setupHeaderTextViewConstraints()
+      setupSubHeaderTextViewConstraints()
+      setupCreateEventButtonContainerConstraints()
+      setupFooterConstraints()
+      
+      scanButtonContainer.button.setTitle("Scan", for: .normal)
+    } else {
+      scanButtoncontainerBottomConstraint.constant = -80
+      scanButtonContainer.button.setTitle("Back", for: .normal)
+    }
+    
+    UIView.animate(withDuration: 1, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        if (self.tappedScanButton) {
+          self.headerTextView.alpha = 0
+          self.subHeaderTextView.alpha = 0
+          self.createEvenButtonContainer.alpha = 0
+          self.loginButtonContainer.alpha = 0
+          self.signupButtonContainer.alpha = 0
+        } else {
+          self.headerTextView.alpha = 1
+          self.subHeaderTextView.alpha = 1
+          self.createEvenButtonContainer.alpha = 1
+          self.loginButtonContainer.alpha = 1
+          self.signupButtonContainer.alpha = 1
+        }
+      
+        self.overlayView.layoutIfNeeded()
+      }, completion: {
+        (value: Bool) in
+        if (self.tappedScanButton) {
+          self.headerTextView.removeFromSuperview()
+          self.subHeaderTextView.removeFromSuperview()
+          self.createEvenButtonContainer.removeFromSuperview()
+          self.loginButtonContainer.removeFromSuperview()
+          self.signupButtonContainer.removeFromSuperview()
+          
+          self.baseCameraView.addOutput()
+        } else {
+          self.baseCameraView.removeOutput()
+        }
+    })
   }
   
   //SKU - Setup constraints for all containers and views
@@ -69,7 +133,9 @@ class LandingViewController: UIViewController {
     
     scanButtonContainer.leadingAnchor.constraint(equalTo: overlayView.leadingAnchor, constant: 40).isActive = true
     scanButtonContainer.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: -40).isActive = true
-    scanButtonContainer.bottomAnchor.constraint(equalTo: createEvenButtonContainer.topAnchor).isActive = true
+    
+    scanButtoncontainerBottomConstraint = scanButtonContainer.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -140)
+    scanButtoncontainerBottomConstraint.isActive = true
   }
   
   func setupCreateEventButtonContainerConstraints(){

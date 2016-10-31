@@ -75,10 +75,12 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
     failedSession()
   }
   
+  //SKO - initialize qr code scanner
   func addOutput() {
     metaDataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
   }
   
+  //SKO - remove qr code scanner
   func removeOutput() {
     metaDataOutput.metadataObjectTypes = nil
   }
@@ -99,7 +101,15 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
     captureSession?.startRunning()
   }
   
+  //SKO - delegate method that gets fired when a qr code has been found
   func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
-    print("captured")
+    removeOutput()
+    //SKO - TODO: replace with HTTP class url parsing method to test integrity of url + handle modal display if url correct
+    if let metadataObject = metadataObjects.first {
+      if let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject {
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        print(readableObject.stringValue)
+      }
+    }
   }
 }

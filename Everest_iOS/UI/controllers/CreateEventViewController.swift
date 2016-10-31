@@ -75,7 +75,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     //SKO - on-click listener
     func onTapContinueButton(sender: UIButton) {
         print("button clicked")
-        //SKO - bring up next vc and carry data over (Event object argument)
+      //SKO - bring up next vc and carry data over (Event object argument)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
