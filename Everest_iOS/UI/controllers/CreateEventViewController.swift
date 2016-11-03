@@ -74,7 +74,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     //SKO - on-click listener
     func onTapContinueButton(sender: UIButton) {
-        print("button clicked")
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        let attendeeFormSetViewController = AttendeeFormSetViewController()
+        navigationController.pushViewController(attendeeFormSetViewController, animated: true)
+      }
       //SKO - bring up next vc and carry data over (Event object argument)
     }
     

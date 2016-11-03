@@ -19,7 +19,7 @@ class BaseInputTextField: UITextField {
         
         self.placeholder = hintText
         
-        font = AppStyle.sharedInstance.textFontBold
+        font = AppStyle.sharedInstance.textFontMedium
         borderStyle = UITextBorderStyle.none
         backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
     }
