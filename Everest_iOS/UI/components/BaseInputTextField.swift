@@ -22,8 +22,6 @@ class BaseInputTextField: UITextField {
         font = AppStyle.sharedInstance.textFontMedium
         borderStyle = UITextBorderStyle.none
         backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
-      
-        setupConstraints()
     }
     
     convenience init(_ coder: NSCoder? = nil) {
@@ -64,10 +62,5 @@ class BaseInputTextField: UITextField {
     func removeBorder() {
       layer.borderWidth = 0
       layer.borderColor = nil
-    }
-  
-    func setupConstraints() {
-      self.translatesAutoresizingMaskIntoConstraints = false
-      self.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
     }
 }

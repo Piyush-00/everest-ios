@@ -90,12 +90,11 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     headerAndStackViewContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     
-    fieldButtonsContainer.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
-    
     addFieldButton.topAnchor.constraint(equalTo: fieldButtonsContainer.topAnchor).isActive = true
     addFieldButton.bottomAnchor.constraint(equalTo: fieldButtonsContainer.bottomAnchor).isActive = true
     addFieldButton.leadingAnchor.constraint(equalTo: fieldButtonsContainer.leadingAnchor).isActive = true
     addFieldButton.trailingAnchor.constraint(equalTo: removeFieldButton.leadingAnchor).isActive = true
+    addFieldButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     
     removeFieldButton.topAnchor.constraint(equalTo: fieldButtonsContainer.topAnchor).isActive = true
     removeFieldButton.bottomAnchor.constraint(equalTo: fieldButtonsContainer.bottomAnchor).isActive = true

@@ -51,13 +51,26 @@ class BaseInputView: UIView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -AppStyle.sharedInstance.baseInputViewSideMargin).isActive = true
     }
     
+    private func setupStackViewContraints(view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        //SKO - Set appropriate constraints according to what type of field it is
+        if view is BaseInputTextView {
+            view.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextViewHeight).isActive = true
+        } else if view is BaseInputTextField {
+            view.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
+        }
+    }
+    
   func addArrangedSubviewToStackView(view: UIView, aboveView subview: UIView? = nil) {
     if let subview = subview {
       stackView.insertSubview(view, aboveSubview: subview)
     } else {
       stackView.addArrangedSubview(view)
     }
-  }
+      //SKO - Setup constraints for each arranged subview added
+      setupStackViewContraints(view: view)
+    }
   
   func spacing(value: CGFloat){
     stackView.spacing = value
