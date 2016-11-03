@@ -36,6 +36,8 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         delegate = self
 
         text = textInput
+      
+        setupConstraints()
     }
     
     convenience init(_ coder: NSCoder? = nil) {
@@ -63,5 +65,10 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
     func removeBorder() {
       layer.borderWidth = 0
       layer.borderColor = nil
+    }
+  
+    func setupConstraints() {
+      self.translatesAutoresizingMaskIntoConstraints = false
+      self.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextViewHeight).isActive = true
     }
 }
