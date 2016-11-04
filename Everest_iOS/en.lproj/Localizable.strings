@@ -106,7 +106,7 @@
 "attendee characteristics description" = "Need any information from your guests? Create a questionnaire for them.";
 
 /* add characteristic text field button */
-"add another field" = "+ add another field";
+"add another field" = "+ add field";
 
 /* remove characteristic text field button */
 "remove a field" = "- remove field";

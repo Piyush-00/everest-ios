@@ -13,9 +13,10 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   private let addFieldButton = UIButton()
   private let removeFieldButton = UIButton()
   private let fieldButtonsContainer = UIView()
-  private let continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
+  private let totalButtonContainer = UIView()
+  private let continueButton = AppStyle.sharedInstance.baseInputButton()
   //SKO - treat as a stack
-  private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("volunteer experience placeholder", comment: "volunteer experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder"), NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder")]
+  private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("volunteer experience placeholder", comment: "volunteer experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder")]
   private var additionalInputTextFieldsArray: [BaseInputTextField] = []
   //SKO - TODO: extract event image from Event singleton
   private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
@@ -44,34 +45,37 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     addFieldButton.setTitle(NSLocalizedString("add another field", comment: "add characteristic text field button"), for: .normal)
     addFieldButton.addTarget(self, action: #selector(didTapAddFieldButton), for: .touchUpInside)
     addFieldButton.translatesAutoresizingMaskIntoConstraints = false
-    addFieldButton.titleLabel?.font = appStyle.textFontSmall
-    addFieldButton.titleLabel?.alpha = 0.8
+    addFieldButton.titleLabel?.font = appStyle.textFontMedium
+    addFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
+    addFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.1), for: .disabled)
     addFieldButton.titleLabel?.textAlignment = .left
-    addFieldButton.backgroundColor = UIColor.blue
     
     removeFieldButton.setTitle(NSLocalizedString("remove a field", comment: "remove characteristic text field button"), for: .normal)
     removeFieldButton.addTarget(self, action: #selector(didTapRemoveFieldButton), for: .touchUpInside)
     removeFieldButton.translatesAutoresizingMaskIntoConstraints = false
-    removeFieldButton.titleLabel?.font = appStyle.textFontSmall
-    removeFieldButton.titleLabel?.alpha = 0.8
+    removeFieldButton.titleLabel?.font = appStyle.textFontMedium
+    removeFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
     removeFieldButton.titleLabel?.textAlignment = .right
     removeFieldButton.isHidden = true
-    removeFieldButton.backgroundColor = UIColor.red
     
     fieldButtonsContainer.addSubview(addFieldButton)
     fieldButtonsContainer.addSubview(removeFieldButton)
     fieldButtonsContainer.translatesAutoresizingMaskIntoConstraints = false
-    fieldButtonsContainer.backgroundColor = UIColor.purple
+    //fieldButtonsContainer.backgroundColor = UIColor.blue
     
-    continueButtonContainer.button.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
-    continueButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+    continueButton.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
+    continueButton.translatesAutoresizingMaskIntoConstraints = false
+    continueButton.setTitle(NSLocalizedString("continue", comment: "continue button"), for: .normal)
+    
+    totalButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+    totalButtonContainer.addSubview(fieldButtonsContainer)
+    totalButtonContainer.addSubview(continueButton)
     
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: eventTitleLabel)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: formSetDescriptionLabel)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: defaultInputTextFieldOne)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: defaultInputTextFieldTwo)
-    headerAndStackViewContainer.addArrangedSubviewToStackView(view: fieldButtonsContainer)
-    headerAndStackViewContainer.addArrangedSubviewToStackView(view: continueButtonContainer)
+    headerAndStackViewContainer.addArrangedSubviewToStackView(view: totalButtonContainer)
     
     headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
     headerAndStackViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +96,11 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     headerAndStackViewContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     
+    totalButtonContainer.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight * 2.5).isActive = true
+    
+    fieldButtonsContainer.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -5).isActive = true
+    fieldButtonsContainer.leadingAnchor.constraint(equalTo: totalButtonContainer.leadingAnchor).isActive = true
+    fieldButtonsContainer.trailingAnchor.constraint(equalTo: totalButtonContainer.trailingAnchor).isActive = true
     fieldButtonsContainer.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
     
     addFieldButton.topAnchor.constraint(equalTo: fieldButtonsContainer.topAnchor).isActive = true
@@ -107,11 +116,16 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     addFieldButton.titleLabel?.leadingAnchor.constraint(equalTo: addFieldButton.leadingAnchor, constant: 10).isActive = true
     removeFieldButton.titleLabel?.trailingAnchor.constraint(equalTo: removeFieldButton.trailingAnchor, constant: -10).isActive = true
+    
+    continueButton.bottomAnchor.constraint(equalTo: totalButtonContainer.bottomAnchor).isActive = true
+    continueButton.leadingAnchor.constraint(equalTo: totalButtonContainer.leadingAnchor).isActive = true
+    continueButton.trailingAnchor.constraint(equalTo: totalButtonContainer.trailingAnchor).isActive = true
+    continueButton.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
   }
   
   func didTapAddFieldButton(sender: UIButton) {
     let nextInputTextField = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
-    headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: fieldButtonsContainer)
+    headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
     additionalInputTextFieldsArray.append(nextInputTextField)
     if placeholderTextArray.isEmpty {
       addFieldButton.isEnabled = false
