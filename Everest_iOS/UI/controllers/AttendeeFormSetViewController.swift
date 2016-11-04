@@ -125,8 +125,16 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   
   func didTapAddFieldButton(sender: UIButton) {
     let nextInputTextField = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
+    
     headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
+    
     additionalInputTextFieldsArray.append(nextInputTextField)
+    
+    headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant += AppStyle.sharedInstance.baseInputTextFieldHeight + 20
+    
+    self.view.setNeedsLayout()
+    self.view.layoutIfNeeded()
+    
     if placeholderTextArray.isEmpty {
       addFieldButton.isEnabled = false
     }
@@ -138,8 +146,9 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   func didTapRemoveFieldButton(sender: UIButton) {
     if let lastInputTextField = additionalInputTextFieldsArray.popLast() {
       if let lastPlaceholderText = lastInputTextField.placeholder {
-        headerAndStackViewContainer.baseInputView.stackView.removeArrangedSubview(lastInputTextField)
+        lastInputTextField.removeFromSuperview()
         placeholderTextArray.append(lastPlaceholderText)
+        headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant -= AppStyle.sharedInstance.baseInputTextFieldHeight + 20
         if additionalInputTextFieldsArray.isEmpty {
           removeFieldButton.isHidden = true
         }
