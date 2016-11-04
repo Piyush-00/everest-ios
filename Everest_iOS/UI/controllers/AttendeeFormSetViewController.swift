@@ -45,14 +45,16 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     addFieldButton.addTarget(self, action: #selector(didTapAddFieldButton), for: .touchUpInside)
     addFieldButton.translatesAutoresizingMaskIntoConstraints = false
     addFieldButton.titleLabel?.font = appStyle.textFontSmall
-    addFieldButton.titleLabel?.alpha = 0.2
+    addFieldButton.titleLabel?.alpha = 0.8
+    addFieldButton.titleLabel?.textAlignment = .left
     addFieldButton.backgroundColor = UIColor.blue
     
     removeFieldButton.setTitle(NSLocalizedString("remove a field", comment: "remove characteristic text field button"), for: .normal)
     removeFieldButton.addTarget(self, action: #selector(didTapRemoveFieldButton), for: .touchUpInside)
     removeFieldButton.translatesAutoresizingMaskIntoConstraints = false
     removeFieldButton.titleLabel?.font = appStyle.textFontSmall
-    removeFieldButton.titleLabel?.alpha = 0.2
+    removeFieldButton.titleLabel?.alpha = 0.8
+    removeFieldButton.titleLabel?.textAlignment = .right
     removeFieldButton.isHidden = true
     removeFieldButton.backgroundColor = UIColor.red
     
@@ -90,16 +92,21 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     headerAndStackViewContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     
+    fieldButtonsContainer.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
+    
     addFieldButton.topAnchor.constraint(equalTo: fieldButtonsContainer.topAnchor).isActive = true
     addFieldButton.bottomAnchor.constraint(equalTo: fieldButtonsContainer.bottomAnchor).isActive = true
     addFieldButton.leadingAnchor.constraint(equalTo: fieldButtonsContainer.leadingAnchor).isActive = true
     addFieldButton.trailingAnchor.constraint(equalTo: removeFieldButton.leadingAnchor).isActive = true
-    addFieldButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    addFieldButton.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.size.width - 2*AppStyle.sharedInstance.baseInputViewSideMargin)/2).isActive = true
     
     removeFieldButton.topAnchor.constraint(equalTo: fieldButtonsContainer.topAnchor).isActive = true
     removeFieldButton.bottomAnchor.constraint(equalTo: fieldButtonsContainer.bottomAnchor).isActive = true
     removeFieldButton.leadingAnchor.constraint(equalTo: addFieldButton.trailingAnchor).isActive = true
     removeFieldButton.trailingAnchor.constraint(equalTo: fieldButtonsContainer.trailingAnchor).isActive = true
+    
+    addFieldButton.titleLabel?.leadingAnchor.constraint(equalTo: addFieldButton.leadingAnchor, constant: 10).isActive = true
+    removeFieldButton.titleLabel?.trailingAnchor.constraint(equalTo: removeFieldButton.trailingAnchor, constant: -10).isActive = true
   }
   
   func didTapAddFieldButton(sender: UIButton) {
@@ -112,20 +119,20 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     if removeFieldButton.isHidden {
       removeFieldButton.isHidden = false
     }
-    
-    headerAndStackViewContainer.baseInputView.setNeedsLayout()
-    headerAndStackViewContainer.baseInputView.layoutIfNeeded()
   }
   
   func didTapRemoveFieldButton(sender: UIButton) {
-    headerAndStackViewContainer.baseInputView.stackView.removeArrangedSubview(additionalInputTextFieldsArray.popLast()!)
-    
-    if additionalInputTextFieldsArray.isEmpty {
-      removeFieldButton.isHidden = true
-    }
-    
-    if !addFieldButton.isEnabled {
-      addFieldButton.isEnabled = true
+    if let lastInputTextField = additionalInputTextFieldsArray.popLast() {
+      if let lastPlaceholderText = lastInputTextField.placeholder {
+        headerAndStackViewContainer.baseInputView.stackView.removeArrangedSubview(lastInputTextField)
+        placeholderTextArray.append(lastPlaceholderText)
+        if additionalInputTextFieldsArray.isEmpty {
+          removeFieldButton.isHidden = true
+        }
+        if !addFieldButton.isEnabled {
+          addFieldButton.isEnabled = true
+        }
+      }
     }
   }
   

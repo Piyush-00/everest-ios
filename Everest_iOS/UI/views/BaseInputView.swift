@@ -64,7 +64,11 @@ class BaseInputView: UIView {
     
   func addArrangedSubviewToStackView(view: UIView, aboveView subview: UIView? = nil) {
     if let subview = subview {
-      stackView.insertSubview(view, aboveSubview: subview)
+      if let subviewIndex = stackView.arrangedSubviews.index(of: subview) {
+        if subviewIndex >= 0 {
+          stackView.insertArrangedSubview(view, at: subviewIndex)
+        }
+      }
     } else {
       stackView.addArrangedSubview(view)
     }
