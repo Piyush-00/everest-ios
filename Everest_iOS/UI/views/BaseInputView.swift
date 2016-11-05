@@ -16,7 +16,9 @@ import UIKit
 */
 class BaseInputView: UIView {
     var stackView: UIStackView
-    
+    var baseInputTextViewHeightConstraintConstant: CGFloat = 100
+    var baseInputTextFieldHeightConstraintConstant: CGFloat = 40
+  
     init(_ coder: NSCoder? = nil) {
         stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
@@ -56,9 +58,9 @@ class BaseInputView: UIView {
         
         //SKO - Set appropriate constraints according to what type of field it is
         if view is BaseInputTextView {
-            view.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            view.heightAnchor.constraint(equalToConstant: baseInputTextViewHeightConstraintConstant).isActive = true
         } else if view is BaseInputTextField {
-            view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            view.heightAnchor.constraint(equalToConstant: baseInputTextFieldHeightConstraintConstant).isActive = true
         }
     }
     

@@ -78,4 +78,14 @@
 /* create a new event label */
 "create a new event" = "Create a New Event";
 
-/* back 
+/* admin description input placeholder */
+"admin description input placeholder" = "Your short description";
+
+/* admin description header placeholder */
+"admin description header placeholder" = "Host Description";
+
+/* admin description info placeholder */
+"admin description info placeholder" = "Write a short description of yourself so that others know a bit about you.";
+
+/* create event button */
+"create" = "Create Event";

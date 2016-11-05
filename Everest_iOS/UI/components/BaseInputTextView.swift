@@ -23,7 +23,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
             super.init(frame: CGRect.zero, textContainer: nil)
         }
         
-        placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
+        placeholderLabel.frame = CGRect(x: 10, y: 10, width: 200, height: 17)
         placeholderLabel.text = hintText
         placeholderLabel.alpha = 0.2
         placeholderLabel.font = AppStyle.sharedInstance.textFontBold
