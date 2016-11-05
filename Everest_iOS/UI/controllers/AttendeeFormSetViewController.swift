@@ -50,7 +50,6 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     addFieldButton.setTitle(NSLocalizedString("add another field", comment: "add characteristic text field button"), for: .normal)
     addFieldButton.addTarget(self, action: #selector(didTapAddFieldButton), for: .touchUpInside)
-    addFieldButton.translatesAutoresizingMaskIntoConstraints = false
     addFieldButton.titleLabel?.font = appStyle.textFontMedium
     addFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
     addFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.1), for: .disabled)
@@ -58,7 +57,6 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     removeFieldButton.setTitle(NSLocalizedString("remove a field", comment: "remove characteristic text field button"), for: .normal)
     removeFieldButton.addTarget(self, action: #selector(didTapRemoveFieldButton), for: .touchUpInside)
-    removeFieldButton.translatesAutoresizingMaskIntoConstraints = false
     removeFieldButton.titleLabel?.font = appStyle.textFontMedium
     removeFieldButton.setTitleColor(UIColor.black.withAlphaComponent(0.3), for: .normal)
     removeFieldButton.titleLabel?.textAlignment = .right
@@ -66,14 +64,10 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     fieldButtonsContainer.addSubview(addFieldButton)
     fieldButtonsContainer.addSubview(removeFieldButton)
-    fieldButtonsContainer.translatesAutoresizingMaskIntoConstraints = false
-    //fieldButtonsContainer.backgroundColor = UIColor.blue
     
     continueButton.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
-    continueButton.translatesAutoresizingMaskIntoConstraints = false
     continueButton.setTitle(NSLocalizedString("continue", comment: "continue button"), for: .normal)
     
-    totalButtonContainer.translatesAutoresizingMaskIntoConstraints = false
     totalButtonContainer.addSubview(fieldButtonsContainer)
     totalButtonContainer.addSubview(continueButton)
     
@@ -84,7 +78,6 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: totalButtonContainer)
     
     headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
-    headerAndStackViewContainer.translatesAutoresizingMaskIntoConstraints = false
     
     let headerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)
@@ -97,6 +90,13 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   private func setupConstraints() {
+    headerAndStackViewContainer.translatesAutoresizingMaskIntoConstraints = false
+    totalButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+    fieldButtonsContainer.translatesAutoresizingMaskIntoConstraints = false
+    addFieldButton.translatesAutoresizingMaskIntoConstraints = false
+    removeFieldButton.translatesAutoresizingMaskIntoConstraints = false
+    continueButton.translatesAutoresizingMaskIntoConstraints = false
+    
     headerAndStackViewContainer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     headerAndStackViewContainer.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     headerAndStackViewContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
