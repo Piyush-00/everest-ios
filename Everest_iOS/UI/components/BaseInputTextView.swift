@@ -31,7 +31,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         
         textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: 0)
         
-        font = AppStyle.sharedInstance.textFontBold
+        font = AppStyle.sharedInstance.textFontMedium
         backgroundColor = AppStyle.sharedInstance.textViewBackgroundColor
         delegate = self
 
