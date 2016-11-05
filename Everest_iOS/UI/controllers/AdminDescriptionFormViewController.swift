@@ -48,7 +48,6 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
     
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)
     headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
-    headerAndStackViewContainer.translatesAutoresizingMaskIntoConstraints = false
     
     self.view.addSubview(headerAndStackViewContainer)
     
@@ -56,6 +55,8 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   }
   
   private func setupConstraints() {
+    headerAndStackViewContainer.translatesAutoresizingMaskIntoConstraints = false
+    
     headerAndStackViewContainer.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     headerAndStackViewContainer.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     headerAndStackViewContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
