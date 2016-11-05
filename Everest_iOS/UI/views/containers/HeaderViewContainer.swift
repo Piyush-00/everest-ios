@@ -17,6 +17,7 @@ class HeaderViewContainer: UIView {
     var contentView: UIView
     private var headerViewHeight: CGFloat
     var scrollViewContentViewHeightConstaint: NSLayoutConstraint
+    var isKeyboardVisible = false
     
     init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         scrollView = UIScrollView()
@@ -73,14 +74,16 @@ class HeaderViewContainer: UIView {
     
     //SKO - Keyboard showed up notification listener
     func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
-          .cgRectValue {
-            let keyboardHeight = keyboardSize.height
-            scrollViewContentViewHeightConstaint.constant += (keyboardHeight + 1)
+      //SKO - prevent scroll view's content size from increasing every time click on textField
+      if !isKeyboardVisible {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+          let keyboardHeight = keyboardSize.height
+          scrollViewContentViewHeightConstaint.constant += (keyboardHeight + 1)
+          isKeyboardVisible = true
         }
-          
         //SKO - Prioritize scrollView touches when active
         scrollView.delaysContentTouches = true
+      }
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -98,6 +101,8 @@ class HeaderViewContainer: UIView {
       
         //SKO - Go back to prioritizing touches of scrollView's subviews
         scrollView.delaysContentTouches = false
+      
+        isKeyboardVisible = false
     }
     
     func setHeaderView(view: UIView) {
