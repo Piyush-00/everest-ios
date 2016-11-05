@@ -170,7 +170,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapContinueButton(sender: UIButton) {
-    
+    print("button clicked")
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {
