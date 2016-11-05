@@ -15,11 +15,19 @@ class AppStyle {
     
     let backgroundColor = UIColor(netHex: 0xe6e6e6)
     let textColor = UIColor(netHex: 0x1a1a1a)
-    let textFieldBackgroundColor = UIColor(netHex: 0xffffff)
-    let textViewBackgroundColor = UIColor(netHex: 0xffffff)
     let invalidColor = UIColor(hex:"#ff5b5b")
+  
+    let baseInputTextFieldHeight: CGFloat = 40
+    let textFieldBackgroundColor = UIColor(netHex: 0xffffff)
+  
+    let baseInputTextViewHeight: CGFloat = 100
+    let textViewBackgroundColor = UIColor(netHex: 0xffffff)
+  
     let baseInputButtonColor = UIColor(netHex: 0xbd3333)
     let baseInputSecondaryButtonColor = UIColor(netHex: 0x0075c9)
+    let baseInputButtonContainerHeight: CGFloat = 50
+  
+    let baseInputViewSideMargin: CGFloat = 32
   
     //SKU - Header fonts
     let headerFontLargeBold = UIFont(name: "HelveticaNeue-Bold", size: 50)
@@ -46,7 +54,7 @@ class AppStyle {
     let pictureImage = UIImage(named: "blank-profile-picture-take")
     let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
     let scanningErrorImageRed = UIImage(named: "Invalid-QR-scan-image-red")
-    
+  
     func baseInputButton() -> UIButton {
         let button = UIButton(type: .custom)
         button.setBackgroundImage(AppUtil.resizableImageWithColor(color: baseInputButtonColor), for: .normal)
