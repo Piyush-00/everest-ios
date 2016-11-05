@@ -20,7 +20,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
     
     let adminDescriptionHeaderLabel = UILabel()
     let adminDescriptionInfoLabel = UILabel()
-    let createEventButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("create", comment: "create event button"))
+    let createEventButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("confirm event", comment: "confirm event button"))
     
     adminDescriptionHeaderLabel.text = NSLocalizedString("admin description header placeholder", comment: "admin description header placeholder")
     adminDescriptionHeaderLabel.textAlignment = .center
