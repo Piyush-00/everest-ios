@@ -49,8 +49,8 @@ class BaseInputView: UIView {
         
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AppStyle.sharedInstance.baseInputViewSideMargin).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -AppStyle.sharedInstance.baseInputViewSideMargin).isActive = true
     }
     
     private func setupStackViewContraints(view: UIView) {
@@ -64,11 +64,18 @@ class BaseInputView: UIView {
         }
     }
     
-    func addArrangedSubviewToStackView(view: UIView) {
-        stackView.addArrangedSubview(view)
-        
-        //SKO - Setup constraints for each arranged subview added
-        setupStackViewContraints(view: view)
+  func addArrangedSubviewToStackView(view: UIView, aboveView subview: UIView? = nil) {
+    if let subview = subview {
+      if let subviewIndex = stackView.arrangedSubviews.index(of: subview) {
+        if subviewIndex >= 0 {
+          stackView.insertArrangedSubview(view, at: subviewIndex)
+        }
+      }
+    } else {
+      stackView.addArrangedSubview(view)
+    }
+      //SKO - Setup constraints for each arranged subview added
+      setupStackViewContraints(view: view)
     }
   
   func spacing(value: CGFloat){

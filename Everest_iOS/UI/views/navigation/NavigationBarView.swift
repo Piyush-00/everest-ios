@@ -36,11 +36,12 @@ class NavigationBarView: UIView {
         self.backgroundColor = self.superviewBackgroundColor
         
         backButtonLabel.text = "Back"
-        backButtonLabel.textAlignment = .center
-        
+        backButtonLabel.textAlignment = .left
+        backButtonLabel.textColor = AppStyle.sharedInstance.textColor
+        backButtonLabel.font = AppStyle.sharedInstance.headerFontMedium
+      
         backButton.addSubview(backButtonLabel)
         backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-        backButton.backgroundColor = UIColor.red
         self.addSubview(backButton)
     }
     
@@ -60,11 +61,11 @@ class NavigationBarView: UIView {
         backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: UIApplication.shared.statusBarFrame.height).isActive = true
         backButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         backButtonLabel.topAnchor.constraint(equalTo: backButton.topAnchor).isActive = true
         backButtonLabel.bottomAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
-        backButtonLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor).isActive = true
+        backButtonLabel.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 5).isActive = true
         backButtonLabel.trailingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
     }
     

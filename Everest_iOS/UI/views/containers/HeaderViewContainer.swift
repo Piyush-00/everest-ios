@@ -16,7 +16,8 @@ class HeaderViewContainer: UIView {
     var headerView: UIView
     var contentView: UIView
     private var headerViewHeight: CGFloat
-    private var scrollViewContentViewHeightConstaint: NSLayoutConstraint
+    var scrollViewContentViewHeightConstaint: NSLayoutConstraint
+    var isKeyboardVisible = false
     
     init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         scrollView = UIScrollView()
@@ -73,39 +74,39 @@ class HeaderViewContainer: UIView {
     
     //SKO - Keyboard showed up notification listener
     func keyboardWillShow(notification: NSNotification) {
-        scrollViewContentViewHeightConstaint.isActive = false
-        
-        if topMostView is NavigationBarView {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()) + headerViewHeight + 1)
-        } else {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height) + headerViewHeight + 1)
+      //SKO - prevent scroll view's content size from increasing every time click on textField
+      if !isKeyboardVisible {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+          let keyboardHeight = keyboardSize.height
+          scrollViewContentViewHeightConstaint.constant += (keyboardHeight + 1)
+          isKeyboardVisible = true
         }
-        
-        scrollViewContentViewHeightConstaint.isActive = true
-        
         //SKO - Prioritize scrollView touches when active
-        scrollView.delaysContentTouches = true
+        if !scrollView.delaysContentTouches {
+          scrollView.delaysContentTouches = true
+        }
+      }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        scrollViewContentViewHeightConstaint.isActive = false
-        
-        if topMostView is NavigationBarView {
-            self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
-        } else {
-            scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
+          .cgRectValue{
+            let keyboardHeight = keyboardSize.height
+            scrollViewContentViewHeightConstaint.constant -= (keyboardHeight + 1)
         }
-
-        self.scrollViewContentViewHeightConstaint.isActive = true
-        
+      
         if (scrollView.contentOffset.y != 0) {
             UIView.animate(withDuration: 1000, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                 self.scrollView.contentOffset.y = 0
             }, completion: nil)
         }
-        
-        //SKO - Go back to prioritizing touches of scrollView's subviews
-        scrollView.delaysContentTouches = false
+      
+        //SKO - Go back to prioritizing touches of scrollView's subviews if scroll view no longer scrolling
+        if (scrollViewContentViewHeightConstaint.constant == (UIScreen.main.bounds.height - topMostView.bounds.height)) {
+            scrollView.delaysContentTouches = false
+        }
+      
+        isKeyboardVisible = false
     }
     
     func setHeaderView(view: UIView) {
