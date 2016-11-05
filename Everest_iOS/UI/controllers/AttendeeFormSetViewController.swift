@@ -29,6 +29,11 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     let defaultInputTextFieldOne = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
     let defaultInputTextFieldTwo = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
     
+    defaultInputTextFieldOne.delegate = self
+    
+    defaultInputTextFieldTwo.delegate = self
+    defaultInputTextFieldTwo.tag = 1
+    
     eventTitleLabel.textAlignment = .center
     eventTitleLabel.numberOfLines = 0
     eventTitleLabel.lineBreakMode = .byWordWrapping
@@ -132,6 +137,11 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant += AppStyle.sharedInstance.baseInputTextFieldHeight + 20
     
+    //SKO - add 2 to accommodate for two default textFields
+    nextInputTextField.tag = (additionalInputTextFieldsArray.index(of: nextInputTextField)! + 2)
+    
+    nextInputTextField.delegate = self
+    
     self.view.setNeedsLayout()
     self.view.layoutIfNeeded()
     
@@ -166,5 +176,14 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
     imagePicker.displayAlert(imageReference: picturePromptImageView)
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if let nextTextField = headerAndStackViewContainer.baseInputView.stackView.viewWithTag(textField.tag + 1) {
+      nextTextField.becomeFirstResponder()
+    } else {
+      textField.resignFirstResponder()
+    }
+    return false
   }
 }
