@@ -45,6 +45,7 @@
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
 		9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */; };
+		9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
 		9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CD81DC5969E0054614D /* StatusBarView.swift */; };
 		9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */; };
@@ -121,6 +122,7 @@
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminDescriptionFormViewController.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9EC79CD81DC5969E0054614D /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
+				9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */,
 				9EF4C5961DCAC7CA001DCE5F /* AttendeeFormSetViewController.swift */,
 				9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */,
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
@@ -686,6 +689,7 @@
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
 				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
+				9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98F742801DC2F55A00B3B0D9 /* EventModalView.swift in Sources */,
 				9828E27B1DC59E9F009CEEDE /* LandingViewController.swift in Sources */,

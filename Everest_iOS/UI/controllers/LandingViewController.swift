@@ -36,6 +36,7 @@ class LandingViewController: UIViewController {
     scanButtonContainer.button.addTarget(self, action: #selector(didTapScanButton), for: .touchUpInside)
     createEvenButtonContainer.button.addTarget(self, action: #selector(didTapCreateEventButton), for: .touchUpInside)
     signupButtonContainer.button.addTarget(self, action: #selector(didTapSignupButton), for: .touchUpInside)
+    loginButtonContainer.button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
     
     setupConstraints()
   }
@@ -55,6 +56,13 @@ class LandingViewController: UIViewController {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signupViewController = SignUpViewController()
       navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
+    }
+  }
+  
+  func didTapLoginButton(sender: UIButton) {
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let signInViewController = SignInViewController()
+      navigationController.pushViewController(signInViewController, withAnimation: .fromBottom)
     }
   }
   
