@@ -52,7 +52,7 @@ class BaseInputButtonContainer: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputButtonContainerHeight).isActive = true
         
         button.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         button.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

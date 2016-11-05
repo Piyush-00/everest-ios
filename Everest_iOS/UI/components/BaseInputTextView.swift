@@ -26,7 +26,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         placeholderLabel.frame = CGRect(x: 10, y: 10, width: 100, height: 17)
         placeholderLabel.text = hintText
         placeholderLabel.alpha = 0.2
-        placeholderLabel.font = AppStyle.sharedInstance.textFontBold
+        placeholderLabel.font = AppStyle.sharedInstance.textFontMedium
         addSubview(placeholderLabel)
         
         textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: 0)

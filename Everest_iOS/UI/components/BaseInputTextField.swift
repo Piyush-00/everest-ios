@@ -10,16 +10,18 @@ import UIKit
 
 //SKO - UITextField with custom UI
 class BaseInputTextField: UITextField {
-    init(hintText: String, coder: NSCoder? = nil) {
+    init(hintText: String?, coder: NSCoder? = nil) {
         if let coder = coder {
             super.init(coder: coder)!
         } else {
             super.init(frame: CGRect.zero)
         }
         
-        self.placeholder = hintText
+        if let hintText = hintText {
+            self.placeholder = hintText
+        }
         
-        font = AppStyle.sharedInstance.textFontBold
+        font = AppStyle.sharedInstance.textFontMedium
         borderStyle = UITextBorderStyle.none
         backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
     }
