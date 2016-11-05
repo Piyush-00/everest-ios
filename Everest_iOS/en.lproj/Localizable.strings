@@ -9,8 +9,8 @@
 /* sign up button */
 "sign up" = "Sign up";
 
-/* sign up welcome header */
-"sign up welcome header" = "Welcome to Everest";
+/* sign in/up welcome header */
+"sign in/up welcome header" = "Welcome to Everest";
 
 /* email address placeholder */
 "email address" = "Email Address";
@@ -77,6 +77,9 @@
 
 /* create a new event label */
 "create a new event" = "Create a New Event";
+
+/* sign in button */
+"sign in" = "Sign In";
 
 /* admin description input placeholder */
 "admin description input placeholder" = "Your short description";
