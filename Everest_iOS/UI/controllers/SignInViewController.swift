@@ -30,7 +30,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     headerLabel.font = appStyle.headerFontLargeBold
     headerLabel.numberOfLines = 0
     headerLabel.lineBreakMode = .byWordWrapping
-    headerLabel.translatesAutoresizingMaskIntoConstraints = false
     
     emailTextField.delegate = self
     emailTextField.nextField = passwordTextField
@@ -43,7 +42,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     forgotPasswordButton.setTitle(NSLocalizedString("forgot password", comment: "forgot password button"), for: .normal)
     forgotPasswordButton.setTitleColor(appStyle.textColor, for: .normal)
     forgotPasswordButton.titleLabel?.font = appStyle.textFontBold
-    forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
     forgotPasswordButton.addTarget(self, action: #selector(didTapForgotPasswordButton), for: .touchUpInside)
     
     extraInfoView.addSubview(forgotPasswordButton)
@@ -53,7 +51,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     viewContainer.addArrangedContentSubview(view: passwordTextField)
     viewContainer.addArrangedContentSubview(view: signInButtonContainer)
     viewContainer.addArrangedContentSubview(view: extraInfoView)
-    viewContainer.translatesAutoresizingMaskIntoConstraints = false
     viewContainer.backgroundColor = appStyle.backgroundColor
     viewContainer.contentView.spacing(value: 10)
     
@@ -63,6 +60,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   }
   
   private func setupConstraints() {
+    viewContainer.translatesAutoresizingMaskIntoConstraints = false
+    forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+    headerLabel.translatesAutoresizingMaskIntoConstraints = false
+    
     viewContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     viewContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     viewContainer.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
