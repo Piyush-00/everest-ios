@@ -82,7 +82,9 @@ class HeaderViewContainer: UIView {
           isKeyboardVisible = true
         }
         //SKO - Prioritize scrollView touches when active
-        scrollView.delaysContentTouches = true
+        if !scrollView.delaysContentTouches {
+          scrollView.delaysContentTouches = true
+        }
       }
     }
     
@@ -90,7 +92,7 @@ class HeaderViewContainer: UIView {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
           .cgRectValue{
             let keyboardHeight = keyboardSize.height
-            self.scrollViewContentViewHeightConstaint.constant -= (keyboardHeight + 1)
+            scrollViewContentViewHeightConstaint.constant -= (keyboardHeight + 1)
         }
       
         if (scrollView.contentOffset.y != 0) {
@@ -99,8 +101,10 @@ class HeaderViewContainer: UIView {
             }, completion: nil)
         }
       
-        //SKO - Go back to prioritizing touches of scrollView's subviews
-        scrollView.delaysContentTouches = false
+        //SKO - Go back to prioritizing touches of scrollView's subviews if scroll view no longer scrolling
+        if (scrollViewContentViewHeightConstaint.constant == (UIScreen.main.bounds.height - topMostView.bounds.height)) {
+            scrollView.delaysContentTouches = false
+        }
       
         isKeyboardVisible = false
     }

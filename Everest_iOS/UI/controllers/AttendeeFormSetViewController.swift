@@ -16,7 +16,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   private let totalButtonContainer = UIView()
   private let continueButton = AppStyle.sharedInstance.baseInputButton()
   //SKO - treat as a stack
-  private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("volunteer experience placeholder", comment: "volunteer experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder")]
+  private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("work experience placeholder", comment: "work experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder")]
   private var additionalInputTextFieldsArray: [BaseInputTextField] = []
   //SKO - TODO: extract event image from Event singleton
   private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
@@ -26,8 +26,9 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     let eventTitleLabel = UILabel()
     let formSetDescriptionLabel = UILabel()
-    let defaultInputTextFieldOne = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
-    let defaultInputTextFieldTwo = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
+    
+    let defaultInputTextFieldOne = BaseInputTextField(hintText: placeholderTextArray.popLast())
+    let defaultInputTextFieldTwo = BaseInputTextField(hintText: placeholderTextArray.popLast())
     
     defaultInputTextFieldOne.delegate = self
     
@@ -129,27 +130,27 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapAddFieldButton(sender: UIButton) {
-    let nextInputTextField = BaseInputTextField(hintText: (placeholderTextArray.popLast() ?? "e.g. placeholder"))
-    
-    headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
-    
-    additionalInputTextFieldsArray.append(nextInputTextField)
-    
-    headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant += AppStyle.sharedInstance.baseInputTextFieldHeight + 20
-    
-    //SKO - add 2 to accommodate for two default textFields
-    nextInputTextField.tag = (additionalInputTextFieldsArray.index(of: nextInputTextField)! + 2)
-    
-    nextInputTextField.delegate = self
-    
-    self.view.setNeedsLayout()
-    self.view.layoutIfNeeded()
-    
-    if placeholderTextArray.isEmpty {
-      addFieldButton.isEnabled = false
-    }
-    if removeFieldButton.isHidden {
-      removeFieldButton.isHidden = false
+    if let nextInputPlaceholder = placeholderTextArray.popLast() {
+      let nextInputTextField = BaseInputTextField(hintText: nextInputPlaceholder)
+      headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
+      additionalInputTextFieldsArray.append(nextInputTextField)
+      //SKO - adjust height of scroll view's content view to accommodate for new textField
+      headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant += AppStyle.sharedInstance.baseInputTextFieldHeight + 20
+      //SKO - add 2 to accommodate for two default textFields
+      nextInputTextField.tag = (additionalInputTextFieldsArray.index(of: nextInputTextField)! + 2)
+      nextInputTextField.delegate = self
+      //SKO - set content touch delay once view is scrollable
+      if !headerAndStackViewContainer.scrollView.delaysContentTouches {
+        headerAndStackViewContainer.scrollView.delaysContentTouches = true
+      }
+      self.view.setNeedsLayout()
+      self.view.layoutIfNeeded()
+      if placeholderTextArray.isEmpty {
+        addFieldButton.isEnabled = false
+      }
+      if removeFieldButton.isHidden {
+        removeFieldButton.isHidden = false
+      }
     }
   }
   
@@ -161,6 +162,8 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
         headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant -= AppStyle.sharedInstance.baseInputTextFieldHeight + 20
         if additionalInputTextFieldsArray.isEmpty {
           removeFieldButton.isHidden = true
+          //SKO - remove content touch delay when scroll view no longer scrollable
+          headerAndStackViewContainer.scrollView.delaysContentTouches = false
         }
         if !addFieldButton.isEnabled {
           addFieldButton.isEnabled = true
