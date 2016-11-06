@@ -24,6 +24,7 @@ class BaseInputTextField: UITextField {
         font = AppStyle.sharedInstance.textFontMedium
         borderStyle = UITextBorderStyle.none
         backgroundColor = AppStyle.sharedInstance.textFieldBackgroundColor
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     convenience init(_ coder: NSCoder? = nil) {

@@ -15,6 +15,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.hideKeyboardWhenTappedAround()
     
     let appStyle = AppStyle.sharedInstance
     

@@ -41,8 +41,6 @@ class HeaderViewContainer: UIView {
         }
         
         self.backgroundColor = AppStyle.sharedInstance.backgroundColor
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapSelf))
-        addGestureRecognizer(tapGestureRecognizer)
         
         //SKO - Prioritize touches of scrollView's subviews
         scrollView.delaysContentTouches = false
@@ -173,23 +171,6 @@ class HeaderViewContainer: UIView {
         view.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: headerView.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: headerView.trailingAnchor).isActive = true
-    }
-    
-    //SKO - resignFirstResponder of any UIView when click outside said UIView
-    func didTapSelf(sender: UITapGestureRecognizer) {
-        for subview in contentView.subviews {
-            if subview is BaseInputView {
-                if let stackView = (subview as? BaseInputView)?.stackView {
-                    for arrangedSubview in stackView.arrangedSubviews {
-                        if arrangedSubview.isFirstResponder {
-                            arrangedSubview.resignFirstResponder()
-                            break
-                        }
-                    }
-                    break
-                }
-            }
-        }
     }
     
     func getHeaderViewHeight() -> CGFloat {

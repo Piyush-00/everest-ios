@@ -9,36 +9,42 @@
 import UIKit
 
 class TitleAndContentContainer: UIView {
-  enum contentType {
-    case label
-    case textField
-    case textView
-    case other
+  private enum contentType {
+    case small
+    case large
   }
   
-  private var contentViewContentType: contentType
+  private var contentViewContentType = contentType.small
+  private var contentViewHeightConstraint: NSLayoutConstraint!
+  private let titleLabel = UILabel()
+  private let contentView = UIView()
+  
   var title: String? {
     get {
-      return self.title
+      return titleLabel.text
     }
     set {
       titleLabel.text = newValue
     }
   }
-  private let titleLabel: UILabel
-  private var contentView: UIView {
+  var content: UIView? {
     get {
-      return self.contentView
+      if let contentSubview = contentView.subviews.first {
+        return contentSubview
+      } else {
+        return nil
+      }
     }
     set {
-      if newValue is UILabel {
-        contentViewContentType = .label
-      } else if newValue is UITextField {
-        contentViewContentType = .textField
-      } else if newValue is UITextView {
-        contentViewContentType = .textView
-      } else {
-        contentViewContentType = .other
+      if let newValue = newValue {
+        contentView.subviews.forEach({$0.removeFromSuperview()})
+        contentView.addSubview(newValue)
+        if newValue is UITextView {
+          contentViewContentType = .large
+        } else {
+          contentViewContentType = .small
+        }
+        setupDynamicConstraints()
       }
     }
   }
@@ -57,15 +63,56 @@ class TitleAndContentContainer: UIView {
     self.init(frame: .zero)
     
     self.title = title
-    self.contentView = content
+    self.content = content
   }
   
-  func setup() {
+  private func setup() {
+    let appStyle = AppStyle.sharedInstance
     
+    titleLabel.textAlignment = .left
+    titleLabel.numberOfLines = 0
+    titleLabel.lineBreakMode = .byWordWrapping
+    titleLabel.font = appStyle.textFontMedium
+    titleLabel.textColor = UIColor.black.withAlphaComponent(0.3)
+    
+    self.addSubview(titleLabel)
+    self.addSubview(contentView)
+    
+    setupStaticConstraints()
   }
   
-  func setupConstraints() {
+  private func setupStaticConstraints() {
+    self.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    content?.translatesAutoresizingMaskIntoConstraints = false
     
+    titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+    titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    titleLabel.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
+    
+    contentView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+    contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    contentViewHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight)
+    contentViewHeightConstraint.isActive = true
   }
-
+  
+  private func setupDynamicConstraints() {
+    switch contentViewContentType {
+    case .large:
+      contentViewHeightConstraint.constant = AppStyle.sharedInstance.baseInputTextViewHeight
+      break
+    case .small:
+      contentViewHeightConstraint.constant = AppStyle.sharedInstance.baseInputTextFieldHeight
+      break
+    }
+    
+    content?.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    content?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    content?.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    content?.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+  }
 }

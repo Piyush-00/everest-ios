@@ -10,6 +10,16 @@ import UIKit
 
 //SKO - UITextField with custom UI
 class BaseInputTextView: UITextView, UITextViewDelegate {
+    //SKO - hide placeholderLabel if set text; show if text is nil or empty string
+    override var text: String! {
+      willSet {
+        if newValue == nil || newValue == "" {
+          placeholderLabel.isHidden = false
+        } else {
+          placeholderLabel.isHidden = true
+        }
+      }
+    }
     var placeholderLabel: UILabel
     
     init(hintText: String? = nil, textInput: String? = nil, coder: NSCoder? = nil) {
@@ -34,7 +44,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
         font = AppStyle.sharedInstance.textFontMedium
         backgroundColor = AppStyle.sharedInstance.textViewBackgroundColor
         delegate = self
-
+        translatesAutoresizingMaskIntoConstraints = false
         text = textInput
     }
     
@@ -49,7 +59,7 @@ class BaseInputTextView: UITextView, UITextViewDelegate {
     required convenience init(coder aDecoder: NSCoder) {
         self.init(aDecoder)
     }
-    
+  
     //SKO - Emulate placeholder text functionality
     func textViewDidChange(_ textView: UITextView) {
         if text == "" {

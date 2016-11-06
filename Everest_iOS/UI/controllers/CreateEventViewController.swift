@@ -11,7 +11,7 @@ import UIKit
 class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     var viewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
     var promptLabel = UILabel()
-    var nameTextField = BaseInputTextField(hintText: NSLocalizedString("name", comment: "name placeholder"))
+    var nameTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
     var aboutTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
     var locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
     var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
@@ -20,6 +20,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         locationTextField.tag = 1
         dateTimeTextField.tag = 2
