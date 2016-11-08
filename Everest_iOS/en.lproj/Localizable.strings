@@ -9,8 +9,8 @@
 /* sign up button */
 "sign up" = "Sign up";
 
-/* sign up welcome header */
-"sign up welcome header" = "Welcome to Everest";
+/* sign in/up welcome header */
+"sign in/up welcome header" = "Welcome to Everest";
 
 /* email address placeholder */
 "email address" = "Email Address";
@@ -78,4 +78,50 @@
 /* create a new event label */
 "create a new event" = "Create a New Event";
 
-/* back 
+/* sign in button */
+"sign in" = "Sign In";
+
+/* admin description input placeholder */
+"admin description input placeholder" = "Your short description";
+
+/* admin description header placeholder */
+"admin description header placeholder" = "Host Description";
+
+/* admin description info placeholder */
+"admin description info placeholder" = "Write a short description of yourself so that others know a bit about you.";
+
+/* confirm event button */
+"confirm event" = "Confirm Event";
+
+/* hobbies placeholder */
+"hobbies placeholder" = "e.g. hobbies";
+
+/* skills placeholder */
+"skills placeholder" = "e.g. skills";
+
+/* interests placeholder */
+"interests placeholder" = "e.g. interests";
+
+/* favourite foods placeholder */
+"favourite foods placeholder" = "e.g. favourite foods";
+
+/* work experience placeholder */
+"work experience placeholder" = "e.g. work experience";
+
+/* volunteer experience placeholder */
+"volunteer experience placeholder" = "e.g. volunteer experience";
+
+/* instruments placeholder */
+"instruments placeholder" = "e.g. instruments played";
+
+/* bands placeholder */
+"bands placeholder" = "e.g. favourite bands";
+
+/* attendee characteristics description label */
+"attendee characteristics description" = "Need any information from your guests? Create a questionnaire for them.";
+
+/* add characteristic text field button */
+"add another field" = "+ add field";
+
+/* remove characteristic text field button */
+"remove a field" = "- remove field";

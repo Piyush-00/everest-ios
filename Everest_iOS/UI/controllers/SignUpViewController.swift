@@ -10,7 +10,7 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     var viewContainer = SignUpViewContainer()
-    var headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign up welcome header", comment: "sign up welcome header"))
+    var headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign in/up welcome header", comment: "sign in/up welcome header"))
     var emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
     var passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
     var confirmPasswordTextField = BaseInputTextField(hintText: NSLocalizedString("confirm password", comment: "confirm password placeholder"))

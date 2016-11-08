@@ -16,7 +16,9 @@ import UIKit
 */
 class BaseInputView: UIView {
     var stackView: UIStackView
-    
+    var baseInputTextViewHeightConstraintConstant: CGFloat = 100
+    var baseInputTextFieldHeightConstraintConstant: CGFloat = 40
+  
     init(_ coder: NSCoder? = nil) {
         stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
@@ -47,8 +49,8 @@ class BaseInputView: UIView {
         
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: AppStyle.sharedInstance.baseInputViewSideMargin).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -AppStyle.sharedInstance.baseInputViewSideMargin).isActive = true
     }
     
     private func setupStackViewContraints(view: UIView) {
@@ -56,17 +58,24 @@ class BaseInputView: UIView {
         
         //SKO - Set appropriate constraints according to what type of field it is
         if view is BaseInputTextView {
-            view.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            view.heightAnchor.constraint(equalToConstant: baseInputTextViewHeightConstraintConstant).isActive = true
         } else if view is BaseInputTextField {
-            view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            view.heightAnchor.constraint(equalToConstant: baseInputTextFieldHeightConstraintConstant).isActive = true
         }
     }
     
-    func addArrangedSubviewToStackView(view: UIView) {
-        stackView.addArrangedSubview(view)
-        
-        //SKO - Setup constraints for each arranged subview added
-        setupStackViewContraints(view: view)
+  func addArrangedSubviewToStackView(view: UIView, aboveView subview: UIView? = nil) {
+    if let subview = subview {
+      if let subviewIndex = stackView.arrangedSubviews.index(of: subview) {
+        if subviewIndex >= 0 {
+          stackView.insertArrangedSubview(view, at: subviewIndex)
+        }
+      }
+    } else {
+      stackView.addArrangedSubview(view)
+    }
+      //SKO - Setup constraints for each arranged subview added
+      setupStackViewContraints(view: view)
     }
   
   func spacing(value: CGFloat){
