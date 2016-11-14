@@ -175,7 +175,10 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapContinueButton(sender: UIButton) {
-    print("button clicked")
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let eventConfirmationViewController = EventConfirmationViewController()
+      navigationController.pushViewController(eventConfirmationViewController, animated: true)
+    }
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {

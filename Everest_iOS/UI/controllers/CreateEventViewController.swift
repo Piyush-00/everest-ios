@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
     var picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+    private let event = Event()
     
     override func viewDidLoad() {
         super.viewDidLoad()
