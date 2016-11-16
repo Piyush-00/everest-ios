@@ -14,6 +14,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     self.hideKeyboardWhenTappedAround()
     
     let appStyle = AppStyle.sharedInstance
@@ -126,7 +127,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    headerAndStackViewController.scrollViewContentViewHeightConstaint.constant = 1500
   }
   
   private func setupConstraints() {

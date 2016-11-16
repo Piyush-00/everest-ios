@@ -16,7 +16,7 @@ class HeaderViewContainer: UIView {
     var headerView: UIView
     var contentView: UIView
     private var headerViewHeight: CGFloat
-    var scrollViewContentViewHeightConstaint: NSLayoutConstraint
+    var scrollViewContentViewHeightConstaint: NSLayoutConstraint!
     var isKeyboardVisible = false
     
     init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
@@ -24,7 +24,7 @@ class HeaderViewContainer: UIView {
         scrollViewContentView = UIView()
         headerView = UIView()
         contentView = UIView()
-        scrollViewContentViewHeightConstaint = NSLayoutConstraint()
+
         headerViewHeight = 131
         
         if (withNavigationBar) {
@@ -53,11 +53,6 @@ class HeaderViewContainer: UIView {
     
         addSubview(topMostView)
         addSubview(scrollView)
-        
-        //SKO - Register for 'keyboard did show' notification to get its frame
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -68,43 +63,6 @@ class HeaderViewContainer: UIView {
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         setupConstraints()
-    }
-    
-    //SKO - Keyboard showed up notification listener
-    func keyboardWillShow(notification: NSNotification) {
-      //SKO - prevent scroll view's content size from increasing every time click on textField
-      if !isKeyboardVisible {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-          let keyboardHeight = keyboardSize.height
-          scrollViewContentViewHeightConstaint.constant += (keyboardHeight + 1)
-          isKeyboardVisible = true
-        }
-        //SKO - Prioritize scrollView touches when active
-        if !scrollView.delaysContentTouches {
-          scrollView.delaysContentTouches = true
-        }
-      }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
-          .cgRectValue{
-            let keyboardHeight = keyboardSize.height
-            scrollViewContentViewHeightConstaint.constant -= (keyboardHeight + 1)
-        }
-      
-        if (scrollView.contentOffset.y != 0) {
-            UIView.animate(withDuration: 1000, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.scrollView.contentOffset.y = 0
-            }, completion: nil)
-        }
-      
-        //SKO - Go back to prioritizing touches of scrollView's subviews if scroll view no longer scrolling
-        if (scrollViewContentViewHeightConstaint.constant == (UIScreen.main.bounds.height - topMostView.bounds.height)) {
-            scrollView.delaysContentTouches = false
-        }
-      
-        isKeyboardVisible = false
     }
     
     func setHeaderView(view: UIView) {
@@ -146,11 +104,12 @@ class HeaderViewContainer: UIView {
         scrollViewContentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         if topMostView is NavigationBarView {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - (topMostView as! NavigationBarView).getHeight()))
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -((topMostView as! NavigationBarView).getHeight()))
         } else {
-            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height))
+            scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -(UIApplication.shared.statusBarFrame.height))
         }
-        
+      
+        scrollViewContentViewHeightConstaint.priority = 250
         scrollViewContentViewHeightConstaint.isActive = true
 
         headerView.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor).isActive = true

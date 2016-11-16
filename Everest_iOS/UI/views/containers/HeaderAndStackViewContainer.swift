@@ -16,7 +16,8 @@ import UIKit
 */
 class HeaderAndStackViewContainer: HeaderViewContainer {
     var baseInputView: BaseInputView
-    
+    var contentViewHeightConstraint: NSLayoutConstraint!
+  
     override init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         baseInputView = BaseInputView()
         
@@ -27,6 +28,11 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         }
         
         setContentView(view: baseInputView)
+      
+        //SKO - Register for 'keyboard did show' notification to get its frame
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -46,11 +52,51 @@ class HeaderAndStackViewContainer: HeaderViewContainer {
         baseInputView.translatesAutoresizingMaskIntoConstraints = false
         
         baseInputView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        baseInputView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        baseInputView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        baseInputView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        baseInputView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        baseInputView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        baseInputView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+      
+        contentViewHeightConstraint = contentView.heightAnchor.constraint(equalTo: baseInputView.stackView.heightAnchor, constant: 80)
+        contentViewHeightConstraint.isActive = true
+    }
+  
+    //SKO - Keyboard showed up notification listener
+    func keyboardWillShow(notification: NSNotification) {
+      //SKO - prevent scroll view's content size from increasing every time click on textField
+      if !isKeyboardVisible {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+          let keyboardHeight = keyboardSize.height
+          contentViewHeightConstraint.constant += (keyboardHeight + 1)
+          isKeyboardVisible = true
+        }
+        //SKO - Prioritize scrollView touches when active
+        if !scrollView.delaysContentTouches {
+          scrollView.delaysContentTouches = true
+        }
+      }
     }
     
+    func keyboardWillHide(notification: NSNotification) {
+      if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
+        .cgRectValue{
+        let keyboardHeight = keyboardSize.height
+        contentViewHeightConstraint.constant -= (keyboardHeight + 1)
+      }
+      
+      if (scrollView.contentOffset.y != 0) {
+        UIView.animate(withDuration: 1000, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+          self.scrollView.contentOffset.y = 0
+        }, completion: nil)
+      }
+      
+      //SKO - Go back to prioritizing touches of scrollView's subviews if scroll view no longer scrolling
+      if (scrollViewContentViewHeightConstaint.constant == (UIScreen.main.bounds.height - topMostView.bounds.height)) {
+        scrollView.delaysContentTouches = false
+      }
+      
+      isKeyboardVisible = false
+    }
+  
     //SKO - Pass subview on for handling by BaseInputView instance
     func addArrangedSubviewToStackView(view: UIView) {
         baseInputView.addArrangedSubviewToStackView(view: view)
