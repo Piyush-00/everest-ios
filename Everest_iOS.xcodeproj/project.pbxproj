@@ -44,6 +44,7 @@
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
+		9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */; };
 		9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */; };
 		9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */; };
 		9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */; };
@@ -122,6 +123,7 @@
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminDescriptionFormViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConfirmationViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleAndContentContainer.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			children = (
 				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
+				9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
 				9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */,
@@ -701,6 +704,7 @@
 				98AE461B1DAF2ADE0023C9F4 /* HeaderAndStackViewContainer.swift in Sources */,
 				9EF4C5971DCAC7CA001DCE5F /* AttendeeFormSetViewController.swift in Sources */,
 				98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */,
+				9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,
