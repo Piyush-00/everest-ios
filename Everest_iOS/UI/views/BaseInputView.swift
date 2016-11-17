@@ -10,6 +10,17 @@ import UIKit
 
 //SKO
 /*
+ Allows conforming classes to access point in lifecycle where
+ stackview's frame has been set.
+ Currently being used to check if a headerAndStackViewContainer
+ is scrollable by default.
+*/
+protocol BaseInputViewProtocol {
+  func stackviewFramesDidGetSet()
+}
+
+//SKO
+/*
  UI skeleton for embedded stack view that
  specifies in containing textFields and 
  textViews.
@@ -18,6 +29,9 @@ class BaseInputView: UIView {
     var stackView: UIStackView
     var baseInputTextViewHeightConstraintConstant: CGFloat = 100
     var baseInputTextFieldHeightConstraintConstant: CGFloat = 40
+    var causesScrollingByDefault: Bool?
+  
+    var delegate: BaseInputViewProtocol?
   
     init(_ coder: NSCoder? = nil) {
         stackView = UIStackView()
@@ -42,6 +56,11 @@ class BaseInputView: UIView {
         super.didMoveToSuperview()
         setupConstraints()
     }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    delegate?.stackviewFramesDidGetSet()
+  }
   
     private func setupConstraints() {
         translatesAutoresizingMaskIntoConstraints = false

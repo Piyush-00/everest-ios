@@ -124,11 +124,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     setupConstraints()
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-  }
-  
   private func setupConstraints() {
     headerAndStackViewController.translatesAutoresizingMaskIntoConstraints = false
     
@@ -136,6 +131,10 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     headerAndStackViewController.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     headerAndStackViewController.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     headerAndStackViewController.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    
+    //SKO - set this constraint for any headerAndStackViewContainer vc that is scrollable by default
+    headerAndStackViewController.contentViewHeightConstraint = headerAndStackViewController.contentView.heightAnchor.constraint(equalTo: headerAndStackViewController.baseInputView.stackView.heightAnchor, constant: 80)
+    headerAndStackViewController.contentViewHeightConstraint?.isActive = true
   }
   
   func didTapCreateEventButton(sender: UIButton) {

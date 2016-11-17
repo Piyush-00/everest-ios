@@ -18,6 +18,9 @@ class HeaderViewContainer: UIView {
     private var headerViewHeight: CGFloat
     var scrollViewContentViewHeightConstaint: NSLayoutConstraint!
     var isKeyboardVisible = false
+    var heightConstraintConstant: CGFloat {
+        return (topMostView is NavigationBarView ? (topMostView as! NavigationBarView).getHeight() : UIApplication.shared.statusBarFrame.height)
+    }
     
     init(withNavigationBar: Bool, _ coder: NSCoder? = nil) {
         scrollView = UIScrollView()
@@ -39,7 +42,7 @@ class HeaderViewContainer: UIView {
         } else {
             super.init(frame: CGRect.zero)
         }
-        
+      
         self.backgroundColor = AppStyle.sharedInstance.backgroundColor
         
         //SKO - Prioritize touches of scrollView's subviews
@@ -64,7 +67,7 @@ class HeaderViewContainer: UIView {
         super.didMoveToSuperview()
         setupConstraints()
     }
-    
+  
     func setHeaderView(view: UIView) {
         headerView.addSubview(view)
         setHeaderSubviewConstraints(view: view)
