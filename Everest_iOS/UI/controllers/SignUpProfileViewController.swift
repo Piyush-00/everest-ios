@@ -42,7 +42,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         lastNameTextField.removeBorder()
 
         continueButtonContainer.button.setTitle("Continue", for: .normal)
-      continueButtonContainer.button.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
+        continueButtonContainer.button.addTarget(self, action: #selector(didTapContinueButton), for: .touchUpInside)
 
         viewContainer.addArrangedHeaderSubview(view: headerTextView)
         viewContainer.addArrangedContentSubview(view: profileHeaderContainer!)

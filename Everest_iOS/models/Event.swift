@@ -12,7 +12,7 @@
  */
 import Foundation
 
-struct Event {
+class Event {
   
   public var name: String
   public var description: String
@@ -21,8 +21,9 @@ struct Event {
   public var startTime: String
   public var endTime: String
   public var headerImage: String
+  public var attendeeCharacteristics: [String]
 
-  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImage:String = ""){
+  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImage:String = "", attendeeCharacteristics:[String] = []){
     self.name = name
     self.description = description
     self.location = location
@@ -30,35 +31,40 @@ struct Event {
     self.startTime = startTime
     self.endTime = endTime
     self.headerImage = headerImage
+    self.attendeeCharacteristics = attendeeCharacteristics
   }
   
   //SKU - Getters and setters for all properties of the struct
-  public mutating func setName(name:String){
+  public func setName(name:String){
     self.name = name
   }
   
-  public mutating func setDescription(description:String){
+  public func setDescription(description:String){
     self.description = description
   }
   
-  public mutating func setLocation(location:String){
+  public func setLocation(location:String){
     self.location = location
   }
   
-  public mutating func setDate(date:String){
+  public func setDate(date:String){
     self.date = date
   }
   
-  public mutating func setStartTime(startTime:String){
+  public func setStartTime(startTime:String){
     self.startTime = startTime
   }
   
-  public mutating func setEndTime(endTime:String){
+  public func setEndTime(endTime:String){
     self.endTime = endTime
   }
   
-  public mutating func setHeaderImage(headerImage:String){
+  public func setHeaderImage(headerImage:String){
     self.headerImage = headerImage
+  }
+  
+  public func setAttendeeCharacteristics(attendeeCharacteristics: [String]) {
+    self.attendeeCharacteristics = attendeeCharacteristics
   }
   
   public func getName() -> String{
@@ -87,6 +93,10 @@ struct Event {
   
   public func getHeaderImage() -> String{
     return self.headerImage
+  }
+  
+  public func getAttendeeCharacteristics() -> [String] {
+    return self.attendeeCharacteristics
   }
   
 }

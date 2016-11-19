@@ -33,14 +33,14 @@
 /* continue button */
 "continue" = "Continue";
 
-/* name placeholder */
-"name" = "Name";
+/* title placeholder */
+"title" = "Title";
 
 /* about placeholder */
 "about" = "About";
 
 /* location placeholder */
-"location" = "location";
+"location" = "Location";
 
 /* date and time placeholder */
 "date and time" = "Date and Time";
@@ -125,3 +125,15 @@
 
 /* remove characteristic text field button */
 "remove a field" = "- remove field";
+
+/* guest questionnaire placeholder */
+"guest questionnaire" = "Guest Questionnaire";
+
+/* create event button */
+"create event" = "Create Event";
+
+/* event confirmation header */
+"event confirmation" = "Event Confirmation";
+
+/* event label */
+"event" = "Event";

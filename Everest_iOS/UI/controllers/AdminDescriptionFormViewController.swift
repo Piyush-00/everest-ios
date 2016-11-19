@@ -15,6 +15,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.hideKeyboardWhenTappedAround()
     
     let appStyle = AppStyle.sharedInstance
     
@@ -64,7 +65,12 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   }
   
   func didTapCreateEventButton(sender: UIButton) {
-    print("button clicked")
+    self.view.endEditing(true)
+    
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let eventConfirmationViewController = EventConfirmationViewController()
+      navigationController.pushViewController(eventConfirmationViewController, animated: true)
+    }
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {
