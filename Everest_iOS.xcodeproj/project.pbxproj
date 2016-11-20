@@ -12,6 +12,9 @@
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
 		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
 		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
+		9821AA951DE111C2005D50B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AA941DE111C2005D50B6 /* User.swift */; };
+		9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AAA41DE12049005D50B6 /* KeyChain.swift */; };
+		9821AAA71DE121F1005D50B6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AAA61DE121F1005D50B6 /* Keys.swift */; };
 		9828E27B1DC59E9F009CEEDE /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */; };
 		9828E27D1DC65509009CEEDE /* BaseCameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */; };
 		982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */; };
@@ -23,7 +26,6 @@
 		98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */; };
 		98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */; };
 		98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F01DAF29D50023C9F4 /* Http.swift */; };
-		98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */; };
 		98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460C1DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift */; };
 		98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */; };
 		98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */; };
@@ -44,8 +46,8 @@
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
-		9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */; };
 		9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */; };
+		9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */; };
 		9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */; };
 		9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
@@ -85,6 +87,9 @@
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
 		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		9821AA941DE111C2005D50B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9821AAA41DE12049005D50B6 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		9821AAA61DE121F1005D50B6 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		9828E27C1DC65509009CEEDE /* BaseCameraSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCameraSession.swift; sourceTree = "<group>"; };
 		982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAlertController.swift; sourceTree = "<group>"; };
@@ -96,7 +101,6 @@
 		98AE45ED1DAF29D50023C9F4 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		98AE45EE1DAF29D50023C9F4 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		98AE45F01DAF29D50023C9F4 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
-		98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsPlaceholder.swift; sourceTree = "<group>"; };
 		98AE460C1DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseInputButtonContainer.swift; path = ../../components/BaseInputButtonContainer.swift; sourceTree = "<group>"; };
 		98AE460D1DAF2ADE0023C9F4 /* BaseInputTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextField.swift; sourceTree = "<group>"; };
 		98AE460E1DAF2ADE0023C9F4 /* BaseInputTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInputTextView.swift; sourceTree = "<group>"; };
@@ -123,8 +127,8 @@
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminDescriptionFormViewController.swift; sourceTree = "<group>"; };
+		9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConfirmationViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleAndContentContainer.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -175,14 +179,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9821AAA31DE1203F005D50B6 /* localStorage */ = {
+			isa = PBXGroup;
+			children = (
+				9821AAA41DE12049005D50B6 /* KeyChain.swift */,
+				9821AAA61DE121F1005D50B6 /* Keys.swift */,
+			);
+			path = localStorage;
+			sourceTree = "<group>";
+		};
 		98AE45EB1DAF29D50023C9F4 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				9821AAA31DE1203F005D50B6 /* localStorage */,
 				9E4534471DBD4E8300D06929 /* sharedInstances */,
 				98AE45EC1DAF29D50023C9F4 /* extensions */,
 				98AE45EF1DAF29D50023C9F4 /* Network */,
 				98AE45F11DAF29D50023C9F4 /* notifications */,
-				98AE45F21DAF29D50023C9F4 /* UtilsPlaceholder.swift */,
 				9E45344A1DBD634000D06929 /* AppUtil.swift */,
 			);
 			path = utils;
@@ -305,8 +318,8 @@
 		98E2F8C61DA1F6C600AAC17E /* Everest_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				98AE460A1DAF2ADE0023C9F4 /* UI */,
 				98AE45EB1DAF29D50023C9F4 /* utils */,
+				98AE460A1DAF2ADE0023C9F4 /* UI */,
 				9E113B121DA5F2AE009001C6 /* models */,
 				9E45344C1DBEE9C500D06929 /* en.lproj */,
 				98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */,
@@ -341,6 +354,7 @@
 				9E113B191DA5F43B009001C6 /* Admin.swift */,
 				9E113B171DA5F433009001C6 /* Attendee.swift */,
 				9EC373371DBC760C00D0FCDC /* Event.swift */,
+				9821AA941DE111C2005D50B6 /* User.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -675,7 +689,6 @@
 				9877F5531DBC01DA004A7CC2 /* ProfileHeaderContainer.swift in Sources */,
 				98AE461A1DAF2ADE0023C9F4 /* BaseInputView.swift in Sources */,
 				9828E27D1DC65509009CEEDE /* BaseCameraSession.swift in Sources */,
-				98AE45F61DAF29D50023C9F4 /* UtilsPlaceholder.swift in Sources */,
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
 				9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */,
 				9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */,
@@ -686,6 +699,7 @@
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
+				9821AA951DE111C2005D50B6 /* User.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
 				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
 				98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */,
@@ -693,6 +707,7 @@
 				983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */,
 				980894B21DC585B500499DA3 /* Translation.swift in Sources */,
 				9EC373381DBC760C00D0FCDC /* Event.swift in Sources */,
+				9821AAA71DE121F1005D50B6 /* Keys.swift in Sources */,
 				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
@@ -705,6 +720,7 @@
 				9EF4C5971DCAC7CA001DCE5F /* AttendeeFormSetViewController.swift in Sources */,
 				98AE46161DAF2ADE0023C9F4 /* BaseInputButtonContainer.swift in Sources */,
 				9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */,
+				9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,
