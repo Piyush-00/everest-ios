@@ -37,8 +37,17 @@ class Http  {
     }
   }
   
+  static func postRequest(requestURL: String, parameters: Parameters? = nil, completionHandler: @escaping (DataResponse<Any>) -> ()) {
+    
+    Alamofire.request(requestURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate()
+      .responseJSON { response in
+      
+        completionHandler(response)
+    }
+  }
+  
   //SKU Simple imageRequest function that will return the ResponseHeader. We can use any values from response for error handelling
-  static func imageRequest(image: UIImage?, requestURL: String, completion : @escaping (HTTPURLResponse) -> ()) {
+  func imageRequest(image: UIImage?, requestURL: String, completion : @escaping (HTTPURLResponse) -> ()) {
     
     Alamofire.upload(multipartFormData: {
       multipartFormData in
