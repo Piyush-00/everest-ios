@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var extraInfoView = UIView()
     var forgotPasswordButton = UIButton()
     var loginButton = UIButton()
+    let user = User()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,10 +103,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     func didTapSignupButton(sender: UIButton) {
-        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-            let signUpProfileViewController = SignUpProfileViewController()
-            navigationController.pushViewController(signUpProfileViewController, animated: true)
+    
+      user.signUp(email: emailTextField.text!, password: passwordTextField.text!) { response in
+        switch response{
+        case true:
+          if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+           let signUpProfileViewController = SignUpProfileViewController()
+           navigationController.pushViewController(signUpProfileViewController, animated: true)
+          }
+          
+        case false:
+        print("error has occurred")
         }
+      }
+
     }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -117,5 +128,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
+  
   
 }

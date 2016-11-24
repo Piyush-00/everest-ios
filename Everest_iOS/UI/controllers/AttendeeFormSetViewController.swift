@@ -22,6 +22,9 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
   
   override func viewDidLoad() {
+    super.viewDidLoad()
+    self.hideKeyboardWhenTappedAround()
+    
     let appStyle = AppStyle.sharedInstance
     
     let eventTitleLabel = UILabel()
@@ -39,8 +42,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     eventTitleLabel.numberOfLines = 0
     eventTitleLabel.lineBreakMode = .byWordWrapping
     eventTitleLabel.font = appStyle.headerFontMedium
-    //SKO - TODO: extract event title from event singleton
-    eventTitleLabel.text = "[EVENT TITLE]"
+    eventTitleLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
     
     formSetDescriptionLabel.textAlignment = .center
     formSetDescriptionLabel.numberOfLines = 0
@@ -173,6 +175,8 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapContinueButton(sender: UIButton) {
+    self.view.endEditing(true)
+    
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let adminDescriptionFormViewController = AdminDescriptionFormViewController()
       navigationController.pushViewController(adminDescriptionFormViewController, animated: true)
