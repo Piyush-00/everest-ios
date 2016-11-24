@@ -11,6 +11,15 @@
  Event(name: "Tesla Solar Roof, Powerpack", description: "Tesla CEO Elon Musk led a fantastic, futuristic presentation this evening at sunset. To be unveiled: solar roof, power wall 2.0", location: "Universal Studio in Los Angeles, California ", date: "Saturday, October 30 2016", startTime: "4:00pm", endTime: "8:00pm", headerImage: "https://electrek.files.wordpress.com/2016/10/tesla-28-oct-event-e1477694135248.jpg?quality=82&strip=all&strip=all&w=1024&h=0")
  */
 import Foundation
+import RealmSwift
+
+class RealmEvent: Object {
+  dynamic var title = ""
+  dynamic var about: String? = nil
+  dynamic var location: String? = nil
+  dynamic var date: Date? = nil
+  dynamic var pictureUrl: String? = nil
+}
 
 class Event {
   
