@@ -13,6 +13,8 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   private let adminDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("admin description input placeholder", comment: "admin description input placeholder"))
   private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
   
+  var event: Event?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.hideKeyboardWhenTappedAround()
@@ -69,6 +71,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
     
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let eventConfirmationViewController = EventConfirmationViewController()
+      eventConfirmationViewController.event = event
       navigationController.pushViewController(eventConfirmationViewController, animated: true)
     }
   }

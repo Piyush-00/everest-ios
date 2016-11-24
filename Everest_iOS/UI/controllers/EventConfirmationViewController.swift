@@ -12,6 +12,8 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   private let headerAndStackViewController = HeaderAndStackViewContainer(withNavigationBar: true)
   private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
   
+  var event: Event?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -45,18 +47,18 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     eventCategoryLabel.font = appStyle.headerFontMedium
     eventCategoryLabel.text = NSLocalizedString("event", comment: "event label")
     
-    eventTitleTextField.text = "eventObject.title"
+    eventTitleTextField.text = event?.getName()
     eventTitleTextField.delegate = self
     
-    eventDescriptionTextView.text = "eventObject.description"
+    eventDescriptionTextView.text = event?.getDescription()
     eventDescriptionTextView.tag = 1
     eventDescriptionTextView.delegate = self
     
-    eventLocationTextField.text = "eventObject.location"
+    eventLocationTextField.text = event?.getLocation()
     eventLocationTextField.tag = 2
     eventLocationTextField.delegate = self
     
-    eventDateAndTimeTextField.text = "eventObject.date"
+    eventDateAndTimeTextField.text = event?.getDate()
     eventDateAndTimeTextField.tag = 3
     eventDateAndTimeTextField.delegate = self
     
@@ -67,28 +69,31 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     headerAndStackViewController.addArrangedSubviewToStackView(view: eventLocationContainer)
     headerAndStackViewController.addArrangedSubviewToStackView(view: eventDateAndTimeContainer)
     
-    //if eventObject.characteristicsArray != nil (or equivalent bool) {
-      let attendeeCharacteristicsCategoryLabel = UILabel()
-    
-      attendeeCharacteristicsCategoryLabel.textAlignment = .center
-      attendeeCharacteristicsCategoryLabel.numberOfLines = 0
-      attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
-      attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
-      attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
-    
-      headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
-      //for characteristic in eventObject.characteristicArray {
-        let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
-        let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic [index of characteristic]", andContent: attendeeCharacteristicTextField)
-    
-        attendeeCharacteristicTextField.text = "characteristic"
-        //SKO - incorporate array index when have eventObject
-        attendeeCharacteristicTextField.tag = 4
-        attendeeCharacteristicTextField.delegate = self
-    
-        headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
-      //}
-    //}
+    if let event = event {
+      if event.getAttendeeCharacteristics().count > 0 {
+        let attendeeCharacteristicsCategoryLabel = UILabel()
+      
+        attendeeCharacteristicsCategoryLabel.textAlignment = .center
+        attendeeCharacteristicsCategoryLabel.numberOfLines = 0
+        attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
+        attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
+        attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
+      
+        headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
+        let attendeeCharacteristics = event.getAttendeeCharacteristics()
+        for characteristic in attendeeCharacteristics {
+          let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
+          let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic \(attendeeCharacteristics.index(of: characteristic)! + 1)", andContent: attendeeCharacteristicTextField)
+      
+          attendeeCharacteristicTextField.text = characteristic
+          //SKO - incorporate array index when have eventObject
+          attendeeCharacteristicTextField.tag = attendeeCharacteristics.index(of: characteristic)! + 5
+          attendeeCharacteristicTextField.delegate = self
+      
+          headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
+        }
+      }
+    }
     
     //if eventObject.adminDescription != nil {
       let adminDescriptionCategoryLabel = UILabel()

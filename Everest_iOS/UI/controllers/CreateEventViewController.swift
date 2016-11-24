@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
     var picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  
     private let event = Event()
     
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         //SKO - Register on-click listener
         continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
+        continueButtonContainer.button.isEnabled = false
         
         viewContainer.addArrangedSubviewToStackView(view: promptLabel)
         viewContainer.addArrangedSubviewToStackView(view: nameTextField)
@@ -79,7 +81,14 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
       self.view.endEditing(true)
       
       if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        event.setName(name: nameTextField.text ?? "")
+        event.setDescription(description: aboutTextView.text)
+        event.setLocation(location: locationTextField.text ?? "")
+        event.setDate(date: dateTimeTextField.text ?? "")
+        event.setStartTime(startTime: "7:00PM")
+        event.setEndTime(endTime: "10:00PM")
         let attendeeFormSetViewController = AttendeeFormSetViewController()
+        attendeeFormSetViewController.event = event
         navigationController.pushViewController(attendeeFormSetViewController, animated: true)
       }
       //SKO - bring up next vc and carry data over (Event object argument)
@@ -99,6 +108,25 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         return false
     }
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if textField == nameTextField {
+      if string != "" {
+        if !continueButtonContainer.button.isEnabled {
+          continueButtonContainer.button.isEnabled = true
+        }
+      } else {
+        if let text = textField.text {
+          if text.characters.count < 2 {
+            if continueButtonContainer.button.isEnabled {
+              continueButtonContainer.button.isEnabled = false
+            }
+          }
+        }
+      }
+    }
+    return true
+  }
     
     //SKO - Emulate placeholder text functionality
     func textViewDidChange(_ textView: UITextView) {

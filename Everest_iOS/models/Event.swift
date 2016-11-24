@@ -14,23 +14,27 @@ import Foundation
 import RealmSwift
 
 class RealmEvent: Object {
-  dynamic var title = ""
+  dynamic var name = ""
   dynamic var about: String? = nil
   dynamic var location: String? = nil
   dynamic var date: Date? = nil
-  dynamic var pictureUrl: String? = nil
+  dynamic var startTime: String? = nil
+  dynamic var endTime: String? = nil
+  dynamic var headerImageUrl: String? = nil
+  dynamic var attendeeCharacteristics: String? = nil
 }
 
 class Event {
+  private var name: String = ""
+  private var description: String = ""
+  private var location: String = ""
+  private var date: String = ""
+  private var startTime: String = ""
+  private var endTime: String = ""
+  private var headerImage: String = ""
+  private var attendeeCharacteristics: [String] = []
   
-  public var name: String
-  public var description: String
-  public var location: String
-  public var date: String
-  public var startTime: String
-  public var endTime: String
-  public var headerImage: String
-  public var attendeeCharacteristics: [String]
+  static let attendeeCharacteristicsSeparator = "%^&"
 
   init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImage:String = "", attendeeCharacteristics:[String] = []){
     self.name = name
@@ -43,7 +47,7 @@ class Event {
     self.attendeeCharacteristics = attendeeCharacteristics
   }
   
-  //SKU - Getters and setters for all properties of the struct
+  //SKU - Getters and setters for all properties of the class
   public func setName(name:String){
     self.name = name
   }
@@ -107,5 +111,4 @@ class Event {
   public func getAttendeeCharacteristics() -> [String] {
     return self.attendeeCharacteristics
   }
-  
 }
