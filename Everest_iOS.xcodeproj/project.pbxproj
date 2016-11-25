@@ -20,6 +20,8 @@
 		982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */; };
 		983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E23191DB41A08005DB3F2 /* SignUpViewController.swift */; };
 		983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */; };
+		9873BF271DE7E258005ED6A1 /* Env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9873BF261DE7E258005ED6A1 /* Env.plist */; };
+		9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9873BF281DE7E5A9005ED6A1 /* Routes.swift */; };
 		9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */; };
 		9877F5531DBC01DA004A7CC2 /* ProfileHeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877F5521DBC01DA004A7CC2 /* ProfileHeaderContainer.swift */; };
 		989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */; };
@@ -39,6 +41,7 @@
 		98E2F8DD1DA1F6C600AAC17E /* Everest_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8DC1DA1F6C600AAC17E /* Everest_iOSTests.swift */; };
 		98E2F8E81DA1F6C700AAC17E /* Everest_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */; };
 		98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EF2DF11DBF155F000D7288 /* UIViewController.swift */; };
+		98F486D61DE7DF9100C9F17B /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F486D51DE7DF9100C9F17B /* NetworkUtil.swift */; };
 		98F7427E1DC2D07500B3B0D9 /* ModalViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F7427D1DC2D07500B3B0D9 /* ModalViewContainer.swift */; };
 		98F742801DC2F55A00B3B0D9 /* EventModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
@@ -95,6 +98,8 @@
 		982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerAlertController.swift; sourceTree = "<group>"; };
 		983E23191DB41A08005DB3F2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewContainer.swift; sourceTree = "<group>"; };
+		9873BF261DE7E258005ED6A1 /* Env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Env.plist; sourceTree = "<group>"; };
+		9873BF281DE7E5A9005ED6A1 /* Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpProfileViewController.swift; sourceTree = "<group>"; };
 		9877F5521DBC01DA004A7CC2 /* ProfileHeaderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderContainer.swift; sourceTree = "<group>"; };
 		989DC9DD1DBD3DD500D70981 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
@@ -120,6 +125,7 @@
 		98E2F8E71DA1F6C700AAC17E /* Everest_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Everest_iOSUITests.swift; sourceTree = "<group>"; };
 		98E2F8E91DA1F6C700AAC17E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98EF2DF11DBF155F000D7288 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		98F486D51DE7DF9100C9F17B /* NetworkUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtil.swift; sourceTree = "<group>"; };
 		98F7427D1DC2D07500B3B0D9 /* ModalViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewContainer.swift; sourceTree = "<group>"; };
 		98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModalView.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				98AE45F01DAF29D50023C9F4 /* Http.swift */,
+				98F486D51DE7DF9100C9F17B /* NetworkUtil.swift */,
+				9873BF281DE7E5A9005ED6A1 /* Routes.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -326,6 +334,7 @@
 				98E2F8CE1DA1F6C600AAC17E /* Assets.xcassets */,
 				98E2F8D01DA1F6C600AAC17E /* LaunchScreen.storyboard */,
 				98E2F8D31DA1F6C600AAC17E /* Info.plist */,
+				9873BF261DE7E258005ED6A1 /* Env.plist */,
 			);
 			path = Everest_iOS;
 			sourceTree = "<group>";
@@ -517,6 +526,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9873BF271DE7E258005ED6A1 /* Env.plist in Resources */,
 				98E2F8D21DA1F6C600AAC17E /* LaunchScreen.storyboard in Resources */,
 				9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */,
 				98E2F8CF1DA1F6C600AAC17E /* Assets.xcassets in Resources */,
@@ -694,6 +704,7 @@
 				9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */,
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */,
+				98F486D61DE7DF9100C9F17B /* NetworkUtil.swift in Sources */,
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
 				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
@@ -722,6 +733,7 @@
 				9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */,
 				9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
+				9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,
 			);

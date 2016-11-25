@@ -47,10 +47,15 @@ class Http  {
   }
   
   //SKU Simple imageRequest function that will return the ResponseHeader. We can use any values from response for error handelling
-  func imageRequest(image: UIImage?, requestURL: String, completion : @escaping (HTTPURLResponse) -> ()) {
+  static func multipartRequest(requestURL: String, image: UIImage? = nil, parameters: Parameters? = nil, completion : @escaping (DataResponse<Any>) -> ()) {
     
     Alamofire.upload(multipartFormData: {
       multipartFormData in
+      for (key, _) in parameters! {
+        if let data = parameters?[key] as? String {
+        multipartFormData.append(data.data(using: .utf8)!, withName: key)
+        }
+      }
       if let uploadImage = image {
         if let imageData = UIImageJPEGRepresentation(uploadImage, 1) {
           multipartFormData.append(imageData, withName: "file",fileName: "file.png", mimeType: "image/png")
@@ -59,10 +64,12 @@ class Http  {
         switch encodingResult {
         case .success(let upload, _, _):
           upload.responseJSON { response in
-            completion(response.response!)
+            completion(response)
           }
-        case .failure(let encodingError):
-          completion(encodingError as! HTTPURLResponse)
+        default:
+          print("Encoding Error")
+        //SKU - TODO: How do we handle encoding errors?
+        //case .failure(let encodingError):
         }
     })
   }
