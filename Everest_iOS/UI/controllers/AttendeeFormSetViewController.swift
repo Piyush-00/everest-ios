@@ -107,6 +107,13 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     } else {
       headerImageView.image = AppStyle.sharedInstance.pictureImageWide
     }
+    
+    if let attendeeCharacteristics = event?.getAttendeeCharacteristics() {
+      for attendeeCharacteristic in attendeeCharacteristics {
+        let index = attendeeCharacteristics.index(of: attendeeCharacteristic)
+        inputTextFieldsArray[index!].text = attendeeCharacteristic
+      }
+    }
   }
   
   private func setupConstraints() {

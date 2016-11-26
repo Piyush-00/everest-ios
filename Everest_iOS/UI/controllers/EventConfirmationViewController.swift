@@ -11,6 +11,11 @@ import UIKit
 class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewController = HeaderAndStackViewContainer(withNavigationBar: true)
   private let headerImageView: UIImageView = UIImageView()
+  private let eventTitleTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
+  private let eventDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
+  private let eventLocationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
+  private let eventDateAndTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
+  private var attendeeCharacteristicsTextFields: [BaseInputTextField] = []
   
   var event: Event?
   
@@ -27,11 +32,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     let eventConfirmationTitleLabel = UILabel()
     
     let eventCategoryLabel = UILabel()
-    
-    let eventTitleTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
-    let eventDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
-    let eventLocationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
-    let eventDateAndTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     
     let eventTitleContainer = TitleAndContentContainer(withTitle: NSLocalizedString("title", comment: "title placeholder"), andContent: eventTitleTextField)
     let eventDescriptionContainer = TitleAndContentContainer(withTitle: NSLocalizedString("about", comment: "about placeholder"), andContent: eventDescriptionTextView)
@@ -94,6 +94,8 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
           attendeeCharacteristicTextField.delegate = self
       
           headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
+          
+          attendeeCharacteristicsTextFields.append(attendeeCharacteristicTextField)
         }
       }
     }
@@ -166,6 +168,37 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     return false
   }
   
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    if let text = textField.text, let event = event {
+      switch textField {
+      case eventTitleTextField:
+        event.setName(name: text)
+        break
+      case eventLocationTextField:
+        event.setLocation(location: text)
+        break
+      case eventDateAndTimeTextField:
+        event.setDate(date: text)
+        break
+      default:
+        var attendeeCharacteristics = event.getAttendeeCharacteristics()
+        for attendeeCharacteristicTextField in attendeeCharacteristicsTextFields {
+          let index = attendeeCharacteristicsTextFields.index(of: attendeeCharacteristicTextField)
+          if let text = attendeeCharacteristicTextField.text {
+            if text != attendeeCharacteristics[index!] {
+              attendeeCharacteristics[index!] = text
+            }
+          }
+        }
+        if attendeeCharacteristics != event.getAttendeeCharacteristics() {
+          event.setAttendeeCharacteristics(attendeeCharacteristics: attendeeCharacteristics)
+        }
+        break
+      }
+    }
+    return true
+  }
+  
   //MARK: UITextViewDelegate
   
   func textViewDidChange(_ textView: UITextView) {
@@ -176,6 +209,17 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         textView.placeholderLabel.isHidden = true
       }
     }
+  }
+  
+  func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+    switch textView {
+    case eventDescriptionTextView:
+      event?.setDescription(description: textView.text)
+      break
+    default:
+      break
+    }
+    return true
   }
   
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

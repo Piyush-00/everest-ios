@@ -78,6 +78,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
       } else {
         headerImageView.image = AppStyle.sharedInstance.pictureImageWide
       }
+      
+      nameTextField.text = event.getName()
+      aboutTextView.text = event.getDescription()
+      locationTextField.text = event.getLocation()
+      dateTimeTextField.text = event.getDate()
     }
   
     //SKO - Use layout anchors to set auto layout constraints
