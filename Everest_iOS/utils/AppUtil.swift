@@ -23,6 +23,8 @@ class AppUtil {
     return resizableImage
   }
   
+  //SKO - following two methods used by RealmEvent model to convert attendeeCharacteristic array to a single string and vise-versa
+  
   class func convertStringArrayToString(_ stringArray: [String], usingSeparator separator: String) -> String {
     return stringArray.joined(separator: separator)
   }

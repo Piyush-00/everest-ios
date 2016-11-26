@@ -35,6 +35,7 @@ class Event {
   private var headerImage: UIImage?
   private var attendeeCharacteristics: [String] = []
   
+  //SKO - will be used by RealmEvent as separator between attendeeCharacteristics when concatenated
   static let attendeeCharacteristicsSeparator = "%^&"
 
   init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImageUrl:String = "", attendeeCharacteristics:[String] = []){
