@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
+class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
   private let addFieldButton = UIButton()
   private let removeFieldButton = UIButton()
@@ -21,8 +21,8 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   //SKO - treat as a stack
   private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("work experience placeholder", comment: "work experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder")]
   private var inputTextFieldsArray: [BaseInputTextField] = []
-  //SKO - TODO: extract event image from Event singleton
-  private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  
+  private var headerImageView: UIImageView = UIImageView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -85,7 +85,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: defaultInputTextFieldTwo)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: totalButtonContainer)
     
-    headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
+    headerAndStackViewContainer.setHeaderView(view: headerImageView)
     
     let headerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)
@@ -95,6 +95,18 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     self.view.backgroundColor = appStyle.backgroundColor
     
     setupConstraints()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if let headerImage = event?.getHeaderImage() {
+      if headerImageView.image != headerImage {
+        headerImageView.image = headerImage
+      }
+    } else {
+      headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+    }
   }
   
   private func setupConstraints() {
@@ -199,7 +211,8 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.displayAlert(imageReference: picturePromptImageView)
+    imagePicker.delegate = self
+    imagePicker.displayAlert()
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -209,5 +222,12 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
       textField.resignFirstResponder()
     }
     return false
+  }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event?.setHeaderImage(image: image)
   }
 }

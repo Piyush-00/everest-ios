@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ImagePickerAlertProtocol {
     var viewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
     var promptLabel = UILabel()
     var nameTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
@@ -16,7 +16,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     var locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
     var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
-    var picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+    var headerImageView = UIImageView()
   
     private let event = Event()
     
@@ -49,11 +49,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
         view.addSubview(viewContainer)
         
-        picturePromptImageView.clipsToBounds = true
-        picturePromptImageView.contentMode = .scaleAspectFill
-        picturePromptImageView.layer.masksToBounds = true
+        headerImageView.clipsToBounds = true
+        headerImageView.contentMode = .scaleAspectFill
+        headerImageView.layer.masksToBounds = true
         
-        viewContainer.setHeaderView(view: picturePromptImageView)
+        viewContainer.setHeaderView(view: headerImageView)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         viewContainer.headerView.addGestureRecognizer(tapGestureRecognizer)
@@ -67,7 +67,19 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         super.viewDidLayoutSubviews()
         setupConstraints()
     }
-    
+  
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      if let headerImage = event.getHeaderImage() {
+        if headerImageView.image != headerImage {
+          headerImageView.image = headerImage
+        }
+      } else {
+        headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+      }
+    }
+  
     //SKO - Use layout anchors to set auto layout constraints
     private func setupConstraints() {       
         viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -87,6 +99,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         event.setDate(date: dateTimeTextField.text ?? "")
         event.setStartTime(startTime: "7:00PM")
         event.setEndTime(endTime: "10:00PM")
+        event.setHeaderImage(image: headerImageView.image)
         let attendeeFormSetViewController = AttendeeFormSetViewController()
         attendeeFormSetViewController.event = event
         navigationController.pushViewController(attendeeFormSetViewController, animated: true)
@@ -127,7 +140,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     return true
   }
-    
+  
     //SKO - Emulate placeholder text functionality
     func textViewDidChange(_ textView: UITextView) {
         if textView.text == "" {
@@ -148,6 +161,14 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func didTapHeader(sender: UITapGestureRecognizer) {
         let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-        imagePicker.displayAlert(imageReference: picturePromptImageView)
+        imagePicker.delegate = self
+        imagePicker.displayAlert()
     }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event.setHeaderImage(image: image)
+  }
 }

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewController = HeaderAndStackViewContainer(withNavigationBar: true)
-  private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  private let headerImageView: UIImageView = UIImageView()
   
   var event: Event?
   
@@ -20,6 +20,9 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     self.hideKeyboardWhenTappedAround()
     
     let appStyle = AppStyle.sharedInstance
+    
+    let headerImage = event?.getHeaderImage() ?? appStyle.pictureImageWide
+    headerImageView.image = headerImage
     
     let eventConfirmationTitleLabel = UILabel()
     
@@ -119,7 +122,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     createEventButtonContainer.button.addTarget(self, action: #selector(didTapCreateEventButton), for: .touchUpInside)
     
     headerAndStackViewController.addArrangedSubviewToStackView(view: createEventButtonContainer)
-    headerAndStackViewController.setHeaderView(view: picturePromptImageView)
+    headerAndStackViewController.setHeaderView(view: headerImageView)
     
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     headerAndStackViewController.headerView.addGestureRecognizer(tapGestureRecognizer)
@@ -148,8 +151,11 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.displayAlert(imageReference: picturePromptImageView)
+    imagePicker.delegate = self
+    imagePicker.displayAlert()
   }
+  
+  //MARK: UITextFieldDelegate
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextResponder = self.view.viewWithTag(textField.tag + 1) {
@@ -159,6 +165,8 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     }
     return false
   }
+  
+  //MARK: UITextViewDelegate
   
   func textViewDidChange(_ textView: UITextView) {
     if let textView = textView as? BaseInputTextView {
@@ -180,5 +188,12 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
       return false
     }
     return true
+  }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event?.setHeaderImage(image: image)
   }
 }

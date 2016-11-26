@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
+class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
   private let adminDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("admin description input placeholder", comment: "admin description input placeholder"))
-  private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  private let headerImageView: UIImageView = UIImageView()
   
   var event: Event?
   
@@ -50,11 +50,23 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
     let headerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)
-    headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
+    headerAndStackViewContainer.setHeaderView(view: headerImageView)
     
     self.view.addSubview(headerAndStackViewContainer)
     
     setupConstraints()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if let headerImage = event?.getHeaderImage() {
+      if headerImageView.image != headerImage {
+        headerImageView.image = headerImage
+      }
+    } else {
+      headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+    }
   }
   
   private func setupConstraints() {
@@ -78,10 +90,12 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
   
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.displayAlert(imageReference: picturePromptImageView)
+    imagePicker.delegate = self
+    imagePicker.displayAlert()
   }
   
-  //SKO - Emulate placeholder text functionality
+  //MARK: UITextViewDelegate
+  
   func textViewDidChange(_ textView: UITextView) {
     if textView.text == "" {
       adminDescriptionTextView.placeholderLabel.isHidden = false
@@ -97,5 +111,12 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate {
       return false
     }
     return true
+  }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event?.setHeaderImage(image: image)
   }
 }

@@ -20,7 +20,7 @@ class RealmEvent: Object {
   dynamic var date: Date? = nil
   dynamic var startTime: String? = nil
   dynamic var endTime: String? = nil
-  dynamic var headerImageUrl: String? = nil
+  dynamic var headerImage: UIImage? = nil
   dynamic var attendeeCharacteristics: String? = nil
 }
 
@@ -31,19 +31,20 @@ class Event {
   private var date: String = ""
   private var startTime: String = ""
   private var endTime: String = ""
-  private var headerImage: String = ""
+  private var headerImageUrl: String = ""
+  private var headerImage: UIImage?
   private var attendeeCharacteristics: [String] = []
   
   static let attendeeCharacteristicsSeparator = "%^&"
 
-  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImage:String = "", attendeeCharacteristics:[String] = []){
+  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImageUrl:String = "", attendeeCharacteristics:[String] = []){
     self.name = name
     self.description = description
     self.location = location
     self.date = date
     self.startTime = startTime
     self.endTime = endTime
-    self.headerImage = headerImage
+    self.headerImageUrl = headerImageUrl
     self.attendeeCharacteristics = attendeeCharacteristics
   }
   
@@ -72,8 +73,8 @@ class Event {
     self.endTime = endTime
   }
   
-  public func setHeaderImage(headerImage:String){
-    self.headerImage = headerImage
+  public func setHeaderImageUrl(headerImageUrl:String){
+    self.headerImageUrl = headerImageUrl
   }
   
   public func setAttendeeCharacteristics(attendeeCharacteristics: [String]) {
@@ -104,11 +105,19 @@ class Event {
     return self.endTime
   }
   
-  public func getHeaderImage() -> String{
-    return self.headerImage
+  public func getHeaderImageUrl() -> String{
+    return self.headerImageUrl
   }
   
   public func getAttendeeCharacteristics() -> [String] {
     return self.attendeeCharacteristics
+  }
+  
+  public func getHeaderImage() -> UIImage? {
+    return self.headerImage
+  }
+  
+  public func setHeaderImage(image: UIImage?) {
+    self.headerImage = image
   }
 }
