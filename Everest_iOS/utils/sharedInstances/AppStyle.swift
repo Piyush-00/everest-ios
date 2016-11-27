@@ -16,12 +16,15 @@ class AppStyle {
     let backgroundColor = UIColor(netHex: 0xe6e6e6)
     let textColor = UIColor(netHex: 0x1a1a1a)
     let invalidColor = UIColor(hex:"#ff5b5b")
+    let regularTextColor = UIColor.black
   
     let baseInputTextFieldHeight: CGFloat = 40
     let textFieldBackgroundColor = UIColor(netHex: 0xffffff)
   
     let baseInputTextViewHeight: CGFloat = 100
     let textViewBackgroundColor = UIColor(netHex: 0xffffff)
+  
+    let eventFeedCardViewBackgroundColor = UIColor.white
   
     let baseInputButtonColor = UIColor(netHex: 0xbd3333)
     let baseInputSecondaryButtonColor = UIColor(netHex: 0x0075c9)

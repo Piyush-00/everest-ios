@@ -53,6 +53,8 @@
 		9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */; };
 		9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */; };
 		9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */; };
+		9E6F37B41DEB52BA0080C9AD /* EventFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B31DEB52BA0080C9AD /* EventFeedViewController.swift */; };
+		9E6F37B61DEB53BD0080C9AD /* EventFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
 		9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CD81DC5969E0054614D /* StatusBarView.swift */; };
 		9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */; };
@@ -137,6 +139,8 @@
 		9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventConfirmationViewController.swift; sourceTree = "<group>"; };
 		9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleAndContentContainer.swift; sourceTree = "<group>"; };
+		9E6F37B31DEB52BA0080C9AD /* EventFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedViewController.swift; sourceTree = "<group>"; };
+		9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewCell.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9EC79CD81DC5969E0054614D /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				9877F5501DBBE3FC004A7CC2 /* SignUpProfileViewController.swift */,
 				9E5E3B191DCD825C009A456A /* AdminDescriptionFormViewController.swift */,
 				9EF4C5961DCAC7CA001DCE5F /* AttendeeFormSetViewController.swift */,
+				9E6F37B31DEB52BA0080C9AD /* EventFeedViewController.swift */,
 				9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */,
 				9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */,
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
@@ -278,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */,
+				9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */,
 				980894AF1DC57DF000499DA3 /* InvalidModalView.swift */,
 				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
 				9EC79CD81DC5969E0054614D /* StatusBarView.swift */,
@@ -706,8 +712,10 @@
 				9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */,
 				98F486D61DE7DF9100C9F17B /* NetworkUtil.swift in Sources */,
 				9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */,
+				9E6F37B61DEB53BD0080C9AD /* EventFeedTableViewCell.swift in Sources */,
 				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
+				9E6F37B41DEB52BA0080C9AD /* EventFeedViewController.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
 				9821AA951DE111C2005D50B6 /* User.swift in Sources */,
