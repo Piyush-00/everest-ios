@@ -19,6 +19,10 @@
  
 */
 
+protocol ImagePickerAlertProtocol {
+  func didPickImage(image: UIImage)
+}
+
 import UIKit
 
 class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -28,6 +32,8 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
   var imageReference: UIImageView = UIImageView()
   
   let imagePicker = UIImagePickerController()
+  
+  var delegate: ImagePickerAlertProtocol?
   
   //SKU - When creating an Image picker controller, Object must be given its frame of reference as well as its UIViewController reference.
   init(frame: CGRect, controller: UIViewController){
@@ -44,8 +50,7 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
   }
   
   //SKU - To fire any events associated with images, an UIImageView reference must be given.
-  public func displayAlert(imageReference: UIImageView){
-    self.imageReference = imageReference
+  public func displayAlert() {
     
     //SKU - Setting up the pop up to allow users to either select images from the gallery or take a new photo
     self.alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -114,7 +119,7 @@ class ImagePickerAlertController: UIView, UIImagePickerControllerDelegate,UINavi
       if (picker.sourceType == .camera){
         UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil)
       }
-      self.imageReference.image = chosenImage
+      delegate?.didPickImage(image: chosenImage)
     }
     self.imagePicker.dismiss(animated: true,completion: nil)
 

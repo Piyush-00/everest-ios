@@ -17,12 +17,12 @@ class EventModalView: ModalViewContainer {
   
    init(_ event: Event, coder: NSCoder? = nil) {
     headerContentView = UIImageView()
-    headerContentView.downloadedFrom(link: event.headerImage)
+    headerContentView.downloadedFrom(link: event.getHeaderImageUrl())
     //SKU - 50 character limit on event title
-    eventNameTextView = BaseInputTextView(textInput: event.name)
-    eventDescriptionTextView = BaseInputTextView(textInput: event.description)
-    eventDateTextView = BaseInputTextView(textInput: event.date + "\n" + event.startTime + " - " + event.endTime)
-    eventLocationTextView = BaseInputTextView(textInput: event.location)
+    eventNameTextView = BaseInputTextView(textInput: event.getName())
+    eventDescriptionTextView = BaseInputTextView(textInput: event.getDescription())
+    eventDateTextView = BaseInputTextView(textInput: event.getDate() + "\n" + event.getStartTime() + " - " + event.getEndTime())
+    eventLocationTextView = BaseInputTextView(textInput: event.getLocation())
     joinEventButtonView = BaseInputButtonContainer(buttonTitle: "Join Event")
 
     if let coder = coder {

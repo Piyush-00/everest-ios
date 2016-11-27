@@ -8,9 +8,16 @@
 
 import UIKit
 
-class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewController = HeaderAndStackViewContainer(withNavigationBar: true)
-  private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  private let headerImageView: UIImageView = UIImageView()
+  private let eventTitleTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
+  private let eventDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
+  private let eventLocationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
+  private let eventDateAndTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
+  private var attendeeCharacteristicsTextFields: [BaseInputTextField] = []
+  
+  var event: Event?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -19,14 +26,12 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     
     let appStyle = AppStyle.sharedInstance
     
+    let headerImage = event?.getHeaderImage() ?? appStyle.pictureImageWide
+    headerImageView.image = headerImage
+    
     let eventConfirmationTitleLabel = UILabel()
     
     let eventCategoryLabel = UILabel()
-    
-    let eventTitleTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
-    let eventDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("about", comment: "about placeholder"))
-    let eventLocationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
-    let eventDateAndTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     
     let eventTitleContainer = TitleAndContentContainer(withTitle: NSLocalizedString("title", comment: "title placeholder"), andContent: eventTitleTextField)
     let eventDescriptionContainer = TitleAndContentContainer(withTitle: NSLocalizedString("about", comment: "about placeholder"), andContent: eventDescriptionTextView)
@@ -45,18 +50,18 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     eventCategoryLabel.font = appStyle.headerFontMedium
     eventCategoryLabel.text = NSLocalizedString("event", comment: "event label")
     
-    eventTitleTextField.text = "eventObject.title"
+    eventTitleTextField.text = event?.getName()
     eventTitleTextField.delegate = self
     
-    eventDescriptionTextView.text = "eventObject.description"
+    eventDescriptionTextView.text = event?.getDescription()
     eventDescriptionTextView.tag = 1
     eventDescriptionTextView.delegate = self
     
-    eventLocationTextField.text = "eventObject.location"
+    eventLocationTextField.text = event?.getLocation()
     eventLocationTextField.tag = 2
     eventLocationTextField.delegate = self
     
-    eventDateAndTimeTextField.text = "eventObject.date"
+    eventDateAndTimeTextField.text = event?.getDate()
     eventDateAndTimeTextField.tag = 3
     eventDateAndTimeTextField.delegate = self
     
@@ -67,28 +72,33 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     headerAndStackViewController.addArrangedSubviewToStackView(view: eventLocationContainer)
     headerAndStackViewController.addArrangedSubviewToStackView(view: eventDateAndTimeContainer)
     
-    //if eventObject.characteristicsArray != nil (or equivalent bool) {
-      let attendeeCharacteristicsCategoryLabel = UILabel()
-    
-      attendeeCharacteristicsCategoryLabel.textAlignment = .center
-      attendeeCharacteristicsCategoryLabel.numberOfLines = 0
-      attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
-      attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
-      attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
-    
-      headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
-      //for characteristic in eventObject.characteristicArray {
-        let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
-        let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic [index of characteristic]", andContent: attendeeCharacteristicTextField)
-    
-        attendeeCharacteristicTextField.text = "characteristic"
-        //SKO - incorporate array index when have eventObject
-        attendeeCharacteristicTextField.tag = 4
-        attendeeCharacteristicTextField.delegate = self
-    
-        headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
-      //}
-    //}
+    if let event = event {
+      if event.getAttendeeCharacteristics().count > 0 {
+        let attendeeCharacteristicsCategoryLabel = UILabel()
+      
+        attendeeCharacteristicsCategoryLabel.textAlignment = .center
+        attendeeCharacteristicsCategoryLabel.numberOfLines = 0
+        attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
+        attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
+        attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
+      
+        headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
+        let attendeeCharacteristics = event.getAttendeeCharacteristics()
+        for characteristic in attendeeCharacteristics {
+          let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
+          let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic \(attendeeCharacteristics.index(of: characteristic)! + 1)", andContent: attendeeCharacteristicTextField)
+      
+          attendeeCharacteristicTextField.text = characteristic
+          //SKO - incorporate array index when have eventObject
+          attendeeCharacteristicTextField.tag = attendeeCharacteristics.index(of: characteristic)! + 5
+          attendeeCharacteristicTextField.delegate = self
+      
+          headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
+          
+          attendeeCharacteristicsTextFields.append(attendeeCharacteristicTextField)
+        }
+      }
+    }
     
     //if eventObject.adminDescription != nil {
       let adminDescriptionCategoryLabel = UILabel()
@@ -114,7 +124,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     createEventButtonContainer.button.addTarget(self, action: #selector(didTapCreateEventButton), for: .touchUpInside)
     
     headerAndStackViewController.addArrangedSubviewToStackView(view: createEventButtonContainer)
-    headerAndStackViewController.setHeaderView(view: picturePromptImageView)
+    headerAndStackViewController.setHeaderView(view: headerImageView)
     
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     headerAndStackViewController.headerView.addGestureRecognizer(tapGestureRecognizer)
@@ -143,8 +153,11 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.displayAlert(imageReference: picturePromptImageView)
+    imagePicker.delegate = self
+    imagePicker.displayAlert()
   }
+  
+  //MARK: UITextFieldDelegate
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let nextResponder = self.view.viewWithTag(textField.tag + 1) {
@@ -155,6 +168,39 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     return false
   }
   
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    if let text = textField.text, let event = event {
+      switch textField {
+      case eventTitleTextField:
+        event.setName(name: text)
+        break
+      case eventLocationTextField:
+        event.setLocation(location: text)
+        break
+      case eventDateAndTimeTextField:
+        event.setDate(date: text)
+        break
+      default:
+        var attendeeCharacteristics = event.getAttendeeCharacteristics()
+        for attendeeCharacteristicTextField in attendeeCharacteristicsTextFields {
+          let index = attendeeCharacteristicsTextFields.index(of: attendeeCharacteristicTextField)
+          if let text = attendeeCharacteristicTextField.text {
+            if text != attendeeCharacteristics[index!] {
+              attendeeCharacteristics[index!] = text
+            }
+          }
+        }
+        if attendeeCharacteristics != event.getAttendeeCharacteristics() {
+          event.setAttendeeCharacteristics(attendeeCharacteristics: attendeeCharacteristics)
+        }
+        break
+      }
+    }
+    return true
+  }
+  
+  //MARK: UITextViewDelegate
+  
   func textViewDidChange(_ textView: UITextView) {
     if let textView = textView as? BaseInputTextView {
       if textView.text == "" {
@@ -163,6 +209,17 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         textView.placeholderLabel.isHidden = true
       }
     }
+  }
+  
+  func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+    switch textView {
+    case eventDescriptionTextView:
+      event?.setDescription(description: textView.text)
+      break
+    default:
+      break
+    }
+    return true
   }
   
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -175,5 +232,12 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
       return false
     }
     return true
+  }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event?.setHeaderImage(image: image)
   }
 }

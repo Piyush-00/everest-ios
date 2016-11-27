@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, ImagePickerAlertProtocol {
     var viewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
     var promptLabel = UILabel()
     var nameTextField = BaseInputTextField(hintText: NSLocalizedString("title", comment: "title placeholder"))
@@ -16,7 +16,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     var locationTextField = BaseInputTextField(hintText: NSLocalizedString("location", comment: "location placeholder"))
     var dateTimeTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
-    var picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+    var headerImageView = UIImageView()
+  
     private let event = Event()
     
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         //SKO - Register on-click listener
         continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
+        continueButtonContainer.button.isEnabled = false
         
         viewContainer.addArrangedSubviewToStackView(view: promptLabel)
         viewContainer.addArrangedSubviewToStackView(view: nameTextField)
@@ -47,11 +49,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
         view.addSubview(viewContainer)
         
-        picturePromptImageView.clipsToBounds = true
-        picturePromptImageView.contentMode = .scaleAspectFill
-        picturePromptImageView.layer.masksToBounds = true
+        headerImageView.clipsToBounds = true
+        headerImageView.contentMode = .scaleAspectFill
+        headerImageView.layer.masksToBounds = true
         
-        viewContainer.setHeaderView(view: picturePromptImageView)
+        viewContainer.setHeaderView(view: headerImageView)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         viewContainer.headerView.addGestureRecognizer(tapGestureRecognizer)
@@ -65,7 +67,24 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         super.viewDidLayoutSubviews()
         setupConstraints()
     }
-    
+  
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      if let headerImage = event.getHeaderImage() {
+        if headerImageView.image != headerImage {
+          headerImageView.image = headerImage
+        }
+      } else {
+        headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+      }
+      
+      nameTextField.text = event.getName()
+      aboutTextView.text = event.getDescription()
+      locationTextField.text = event.getLocation()
+      dateTimeTextField.text = event.getDate()
+    }
+  
     //SKO - Use layout anchors to set auto layout constraints
     private func setupConstraints() {       
         viewContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -79,7 +98,15 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
       self.view.endEditing(true)
       
       if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        event.setName(name: nameTextField.text ?? "")
+        event.setDescription(description: aboutTextView.text)
+        event.setLocation(location: locationTextField.text ?? "")
+        event.setDate(date: dateTimeTextField.text ?? "")
+        event.setStartTime(startTime: "7:00PM")
+        event.setEndTime(endTime: "10:00PM")
+        event.setHeaderImage(image: headerImageView.image)
         let attendeeFormSetViewController = AttendeeFormSetViewController()
+        attendeeFormSetViewController.event = event
         navigationController.pushViewController(attendeeFormSetViewController, animated: true)
       }
       //SKO - bring up next vc and carry data over (Event object argument)
@@ -99,7 +126,26 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         return false
     }
-    
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if textField == nameTextField {
+      if string != "" {
+        if !continueButtonContainer.button.isEnabled {
+          continueButtonContainer.button.isEnabled = true
+        }
+      } else {
+        if let text = textField.text {
+          if text.characters.count < 2 {
+            if continueButtonContainer.button.isEnabled {
+              continueButtonContainer.button.isEnabled = false
+            }
+          }
+        }
+      }
+    }
+    return true
+  }
+  
     //SKO - Emulate placeholder text functionality
     func textViewDidChange(_ textView: UITextView) {
         if textView.text == "" {
@@ -120,6 +166,14 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func didTapHeader(sender: UITapGestureRecognizer) {
         let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-        imagePicker.displayAlert(imageReference: picturePromptImageView)
+        imagePicker.delegate = self
+        imagePicker.displayAlert()
     }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event.setHeaderImage(image: image)
+  }
 }

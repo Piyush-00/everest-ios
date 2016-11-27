@@ -8,18 +8,21 @@
 
 import UIKit
 
-class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
+class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, ImagePickerAlertProtocol {
   private let headerAndStackViewContainer = HeaderAndStackViewContainer(withNavigationBar: true)
   private let addFieldButton = UIButton()
   private let removeFieldButton = UIButton()
   private let fieldButtonsContainer = UIView()
   private let totalButtonContainer = UIView()
   private let continueButton = AppStyle.sharedInstance.baseInputButton()
+  
+  var event: Event?
+  
   //SKO - treat as a stack
   private var placeholderTextArray = [NSLocalizedString("instruments placeholder", comment: "instruments placeholder"), NSLocalizedString("work experience placeholder", comment: "work experience placeholder"), NSLocalizedString("hobbies placeholder", comment: "hobbies placeholder"),NSLocalizedString("favourite foods placeholder", comment: "favourite foods placeholder"), NSLocalizedString("skills placeholder", comment: "skills placeholder")]
-  private var additionalInputTextFieldsArray: [BaseInputTextField] = []
-  //SKO - TODO: extract event image from Event singleton
-  private let picturePromptImageView = UIImageView(image: AppStyle.sharedInstance.pictureImageWide)
+  private var inputTextFieldsArray: [BaseInputTextField] = []
+  
+  private var headerImageView: UIImageView = UIImageView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,6 +40,9 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     
     defaultInputTextFieldTwo.delegate = self
     defaultInputTextFieldTwo.tag = 1
+    
+    inputTextFieldsArray.append(defaultInputTextFieldOne)
+    inputTextFieldsArray.append(defaultInputTextFieldTwo)
     
     eventTitleLabel.textAlignment = .center
     eventTitleLabel.numberOfLines = 0
@@ -79,7 +85,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: defaultInputTextFieldTwo)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: totalButtonContainer)
     
-    headerAndStackViewContainer.setHeaderView(view: picturePromptImageView)
+    headerAndStackViewContainer.setHeaderView(view: headerImageView)
     
     let headerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)
@@ -89,6 +95,25 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     self.view.backgroundColor = appStyle.backgroundColor
     
     setupConstraints()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if let headerImage = event?.getHeaderImage() {
+      if headerImageView.image != headerImage {
+        headerImageView.image = headerImage
+      }
+    } else {
+      headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+    }
+    
+    if let attendeeCharacteristics = event?.getAttendeeCharacteristics() {
+      for attendeeCharacteristic in attendeeCharacteristics {
+        let index = attendeeCharacteristics.index(of: attendeeCharacteristic)
+        inputTextFieldsArray[index!].text = attendeeCharacteristic
+      }
+    }
   }
   
   private func setupConstraints() {
@@ -135,11 +160,11 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     if let nextInputPlaceholder = placeholderTextArray.popLast() {
       let nextInputTextField = BaseInputTextField(hintText: nextInputPlaceholder)
       headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
-      additionalInputTextFieldsArray.append(nextInputTextField)
+      inputTextFieldsArray.append(nextInputTextField)
       //SKO - adjust height of scroll view's content view to accommodate for new textField
       headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant += AppStyle.sharedInstance.baseInputTextFieldHeight + 20
-      //SKO - add 2 to accommodate for two default textFields
-      nextInputTextField.tag = (additionalInputTextFieldsArray.index(of: nextInputTextField)! + 2)
+      
+      nextInputTextField.tag = (inputTextFieldsArray.index(of: nextInputTextField)!)
       nextInputTextField.delegate = self
       //SKO - set content touch delay once view is scrollable
       if !headerAndStackViewContainer.scrollView.delaysContentTouches {
@@ -157,12 +182,12 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapRemoveFieldButton(sender: UIButton) {
-    if let lastInputTextField = additionalInputTextFieldsArray.popLast() {
+    if let lastInputTextField = inputTextFieldsArray.popLast() {
       if let lastPlaceholderText = lastInputTextField.placeholder {
         lastInputTextField.removeFromSuperview()
         placeholderTextArray.append(lastPlaceholderText)
         headerAndStackViewContainer.scrollViewContentViewHeightConstaint.constant -= AppStyle.sharedInstance.baseInputTextFieldHeight + 20
-        if additionalInputTextFieldsArray.isEmpty {
+        if inputTextFieldsArray.count == 2 {
           removeFieldButton.isHidden = true
           //SKO - remove content touch delay when scroll view no longer scrollable
           headerAndStackViewContainer.scrollView.delaysContentTouches = false
@@ -178,14 +203,23 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
     self.view.endEditing(true)
     
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      var attendeeCharacteristicsArray: [String] = []
+      for textField in inputTextFieldsArray {
+        if textField.hasText {
+          attendeeCharacteristicsArray.append(textField.text!)
+        }
+      }
+      event?.setAttendeeCharacteristics(attendeeCharacteristics: attendeeCharacteristicsArray)
       let adminDescriptionFormViewController = AdminDescriptionFormViewController()
+      adminDescriptionFormViewController.event = event
       navigationController.pushViewController(adminDescriptionFormViewController, animated: true)
     }
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.displayAlert(imageReference: picturePromptImageView)
+    imagePicker.delegate = self
+    imagePicker.displayAlert()
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -195,5 +229,12 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate {
       textField.resignFirstResponder()
     }
     return false
+  }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    headerImageView.image = image
+    event?.setHeaderImage(image: image)
   }
 }
