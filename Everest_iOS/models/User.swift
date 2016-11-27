@@ -87,8 +87,8 @@ class User {
     return self.UserID
   }
   
-  public func getKeyChainUserID() -> String{
-    return Keychain.get(key: Keys.sharedInstance.UserID) as! String
+  static func getKeyChainUserID() -> String? {
+    return Keychain.get(key: Keys.sharedInstance.UserID) as String?
   }
   
   

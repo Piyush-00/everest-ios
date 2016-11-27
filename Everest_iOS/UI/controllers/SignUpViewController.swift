@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     var forgotPasswordButton = UIButton()
     var loginButton = UIButton()
     let user = User()
+    var initialFlowViewController:  UIViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +111,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
           if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
            let signUpProfileViewController = SignUpProfileViewController()
            signUpProfileViewController.user = self.user
+           signUpProfileViewController.initialFlowViewController = self.initialFlowViewController
            navigationController.pushViewController(signUpProfileViewController, animated: true)
+            
           }
           
         case false:

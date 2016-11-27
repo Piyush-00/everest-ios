@@ -148,7 +148,35 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   }
   
   func didTapCreateEventButton(sender: UIButton) {
-    print("tapped button")
+
+    let userID = (event?.isUserSignedIn())!
+    print(userID)
+    if (userID == "") {
+      //SKU - If there is no userID, Tell user to sign up.
+      
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        let signupViewController = SignUpViewController()
+        signupViewController.initialFlowViewController = self
+        navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
+      }
+    } else {
+      //SKU - If there is a userID, Send the post request to create event.
+      event?.createEvent() {
+        response in
+        switch response{
+        case true:
+          
+          if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+            let landingViewController = LandingViewController()
+            navigationController.pushViewController(landingViewController, withAnimation: .fromBottom)
+          }
+          
+        case false:
+          print("error has occurred")
+        }
+      }
+    }
+  
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {
