@@ -15,6 +15,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     var lastNameTextField = BaseInputTextField(hintText: NSLocalizedString("last name", comment: "last name placeholder"))
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
     var profileHeaderContainer: ProfileHeaderContainer?
+    var user: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,10 +68,22 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     }
   
     func didTapContinueButton(sender: UIButton) {
-      //SKO - temporary pop to previous vc while the following vc isn't implemented
-      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-        navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
+      
+      user?.signUpProfile(image: profileHeaderContainer?.pictureImageView.image, firstName: firstNameTextField.text, lastName: lastNameTextField.text) {
+        response in
+        switch response{
+          case true:
+            print(self.user?.getProfileImageURL())
+            //SKO - temporary pop to previous vc while the following vc isn't implemented
+            if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+              navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
+            }
+  
+          case false:
+          print("error has occurred")
+          }
       }
+
     }
   
     private func setupConstraints() {
