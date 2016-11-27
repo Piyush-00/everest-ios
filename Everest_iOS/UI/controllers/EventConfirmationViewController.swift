@@ -150,7 +150,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   func didTapCreateEventButton(sender: UIButton) {
 
     let userID = (event?.isUserSignedIn())!
-    print(userID)
     if (userID == "") {
       //SKU - If there is no userID, Tell user to sign up.
       
