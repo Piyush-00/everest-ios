@@ -16,6 +16,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
     var continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue button"))
     var profileHeaderContainer: ProfileHeaderContainer?
     var user: User?
+    var initialFlowViewController:  UIViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,10 +75,17 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         switch response{
           case true:
             print(self.user?.getProfileImageURL())
-            //SKO - temporary pop to previous vc while the following vc isn't implemented
+            //SKU - Pop back to the original view that the user came into the sign up flow from
             if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-              navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
-            }
+              if (self.initialFlowViewController != nil){
+              navigationController.popToViewController(self.initialFlowViewController!, animated: true)
+              } else {
+              
+                //SKU - If an initial flow is not specified, pop into the landing page.
+                let landingViewController = LandingViewController()
+                //SKU - TODO : Change landign page text based on gathered user info
+                navigationController.pushViewController(landingViewController, withAnimation: .fromBottom)
+              }}
   
           case false:
           print("error has occurred")

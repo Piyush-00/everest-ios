@@ -55,6 +55,7 @@ class LandingViewController: UIViewController {
   func didTapSignupButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signupViewController = SignUpViewController()
+      signupViewController.initialFlowViewController = self
       navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
     }
   }

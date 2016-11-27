@@ -54,8 +54,11 @@ class Http  {
       for (key, _) in parameters! {
         if let data = parameters?[key] as? String {
         multipartFormData.append(data.data(using: .utf8)!, withName: key)
+        } else if let data = parameters?[key] as? [Any] {
+          multipartFormData.append(data.description.data(using: .utf8)!, withName: key)
         }
       }
+      
       if let uploadImage = image {
         if let imageData = UIImageJPEGRepresentation(uploadImage, 1) {
           multipartFormData.append(imageData, withName: "file",fileName: "file.png", mimeType: "image/png")

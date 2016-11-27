@@ -14,6 +14,7 @@ struct Routes {
     
     static let CreateNewUser: String = "/createNewUser"
     static let SetUpUserProfile : String = "/setUserProfileFields?id="
+    static let CreateNewEvent: String = "/createEvent"
     
   }
 }

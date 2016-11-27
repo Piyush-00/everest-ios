@@ -121,4 +121,35 @@ class Event {
   public func setHeaderImage(image: UIImage?) {
     self.headerImage = image
   }
+  
+  public func isUserSignedIn() -> String? {
+    return User.getKeyChainUserID()
+  }
+  
+  public func createEvent(completionHandler: @escaping (Bool) -> ()){
+    
+    let params = ["EventName": name, "Description": description, "StartTime": Date(), "EndTime" :  Date(), "EventQuestions" : attendeeCharacteristics, "UserId" : isUserSignedIn() , "Location" : location ] as [String : Any]
+    
+    Http.multipartRequest(requestURL: t(Routes.Api.CreateNewEvent), image: self.headerImage, parameters: params) {
+      response in
+      switch response.result {
+      case .success :
+        
+        if let httpStatusCode = response.response?.statusCode {
+          switch (httpStatusCode) {
+          case 200:
+              completionHandler(true)
+            
+          default:
+            print("default case")
+            completionHandler(false)
+          }
+        }
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+
+  
 }
