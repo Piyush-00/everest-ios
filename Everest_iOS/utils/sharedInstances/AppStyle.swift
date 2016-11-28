@@ -32,6 +32,8 @@ class AppStyle {
   
     let baseInputViewSideMargin: CGFloat = 32
   
+  let headerViewContainerHeaderHeight: CGFloat = 131
+  
     //SKU - Header fonts
     let headerFontLargeBold = UIFont(name: "HelveticaNeue-Bold", size: 50)
     let headerFontLargeRegular = UIFont(name: "HelveticaNeue", size: 50)

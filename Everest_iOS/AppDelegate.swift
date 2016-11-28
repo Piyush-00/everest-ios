@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let rootView = LandingViewController()
+        let rootView = EventFeedViewController()
         
         navigationController = NavigationController()
         navigationController?.navigationBar.isHidden = true
