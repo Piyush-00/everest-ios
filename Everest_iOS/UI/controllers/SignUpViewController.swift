@@ -109,6 +109,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         case true:
           if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
            let signUpProfileViewController = SignUpProfileViewController()
+           signUpProfileViewController.user = self.user
            navigationController.pushViewController(signUpProfileViewController, animated: true)
           }
           
@@ -116,6 +117,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         print("error has occurred")
         }
       }
+      
+
 
     }
   

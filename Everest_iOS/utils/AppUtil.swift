@@ -11,15 +11,25 @@ import UIKit
 
 //SKO - implement any general utility methods here
 class AppUtil {
-    class func resizableImageWithColor(color: UIColor) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1.0, height: 1.0), false, UIScreen.main.scale)
-        var resizableImage = UIImage()
-        if let context = UIGraphicsGetCurrentContext() {
-            color.set()
-            context.fill(CGRect(x: 0, y: 0, width: 1.0, height: 1.0))
-            resizableImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: .zero, resizingMode: .tile) ?? resizableImage
-            UIGraphicsEndImageContext()
-        }
-        return resizableImage
+  class func resizableImageWithColor(color: UIColor) -> UIImage {
+    UIGraphicsBeginImageContextWithOptions(CGSize(width: 1.0, height: 1.0), false, UIScreen.main.scale)
+    var resizableImage = UIImage()
+    if let context = UIGraphicsGetCurrentContext() {
+      color.set()
+      context.fill(CGRect(x: 0, y: 0, width: 1.0, height: 1.0))
+      resizableImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: .zero, resizingMode: .tile) ?? resizableImage
+      UIGraphicsEndImageContext()
     }
+    return resizableImage
+  }
+  
+  //SKO - following two methods used by RealmEvent model to convert attendeeCharacteristic array to a single string and vise-versa
+  
+  class func convertStringArrayToString(_ stringArray: [String], usingSeparator separator: String) -> String {
+    return stringArray.joined(separator: separator)
+  }
+  
+  class func convertStringToStringArray(_ string: String, usingSeparator separator: String) -> [String] {
+    return string.components(separatedBy: separator)
+  }
 }

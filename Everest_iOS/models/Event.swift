@@ -11,30 +11,45 @@
  Event(name: "Tesla Solar Roof, Powerpack", description: "Tesla CEO Elon Musk led a fantastic, futuristic presentation this evening at sunset. To be unveiled: solar roof, power wall 2.0", location: "Universal Studio in Los Angeles, California ", date: "Saturday, October 30 2016", startTime: "4:00pm", endTime: "8:00pm", headerImage: "https://electrek.files.wordpress.com/2016/10/tesla-28-oct-event-e1477694135248.jpg?quality=82&strip=all&strip=all&w=1024&h=0")
  */
 import Foundation
+import RealmSwift
+
+class RealmEvent: Object {
+  dynamic var name = ""
+  dynamic var about: String? = nil
+  dynamic var location: String? = nil
+  dynamic var date: Date? = nil
+  dynamic var startTime: String? = nil
+  dynamic var endTime: String? = nil
+  dynamic var headerImage: UIImage? = nil
+  dynamic var attendeeCharacteristics: String? = nil
+}
 
 class Event {
+  private var name: String = ""
+  private var description: String = ""
+  private var location: String = ""
+  private var date: String = ""
+  private var startTime: String = ""
+  private var endTime: String = ""
+  private var headerImageUrl: String = ""
+  private var headerImage: UIImage?
+  private var attendeeCharacteristics: [String] = []
   
-  public var name: String
-  public var description: String
-  public var location: String
-  public var date: String
-  public var startTime: String
-  public var endTime: String
-  public var headerImage: String
-  public var attendeeCharacteristics: [String]
+  //SKO - will be used by RealmEvent as separator between attendeeCharacteristics when concatenated
+  static let attendeeCharacteristicsSeparator = "%^&"
 
-  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImage:String = "", attendeeCharacteristics:[String] = []){
+  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImageUrl:String = "", attendeeCharacteristics:[String] = []){
     self.name = name
     self.description = description
     self.location = location
     self.date = date
     self.startTime = startTime
     self.endTime = endTime
-    self.headerImage = headerImage
+    self.headerImageUrl = headerImageUrl
     self.attendeeCharacteristics = attendeeCharacteristics
   }
   
-  //SKU - Getters and setters for all properties of the struct
+  //SKU - Getters and setters for all properties of the class
   public func setName(name:String){
     self.name = name
   }
@@ -59,8 +74,8 @@ class Event {
     self.endTime = endTime
   }
   
-  public func setHeaderImage(headerImage:String){
-    self.headerImage = headerImage
+  public func setHeaderImageUrl(headerImageUrl:String){
+    self.headerImageUrl = headerImageUrl
   }
   
   public func setAttendeeCharacteristics(attendeeCharacteristics: [String]) {
@@ -91,12 +106,19 @@ class Event {
     return self.endTime
   }
   
-  public func getHeaderImage() -> String{
-    return self.headerImage
+  public func getHeaderImageUrl() -> String{
+    return self.headerImageUrl
   }
   
   public func getAttendeeCharacteristics() -> [String] {
     return self.attendeeCharacteristics
   }
   
+  public func getHeaderImage() -> UIImage? {
+    return self.headerImage
+  }
+  
+  public func setHeaderImage(image: UIImage?) {
+    self.headerImage = image
+  }
 }
