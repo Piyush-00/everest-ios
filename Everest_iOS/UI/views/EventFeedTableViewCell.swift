@@ -9,20 +9,23 @@
 import UIKit
 
 class EventFeedTableViewCell: UITableViewCell {
+  private let nameAndContentContainerStackView = UIStackView()
   private let nameLabel = UILabel()
-  private let postContentLabel: UILabel = UILabel()
+  private let postContentLabel = UILabel()
   private let timestampLabel = UILabel()
+  private var nameLabelHeightConstraint: NSLayoutConstraint?
+  private var postContentLabelHeightConstraint: NSLayoutConstraint?
   
   private let profilePictureViewDiameter: CGFloat = 40.0
-  private let cardViewVerticalMargin: CGFloat = 10.0
   private let cardViewWidthRatio: CGFloat = 0.9
+  private let cardViewHeightRatio: CGFloat = 0.9
   private let profilePictureTopMargin: CGFloat = 15.0
   private let profilePictureLeadingMargin: CGFloat = 10.0
-  private let nameAndContentContainerLeadingMargin: CGFloat = 5.0
+  private let nameAndContentContainerLeadingMargin: CGFloat = 10.0
+  private let nameAndContentContainerTrailingMargin: CGFloat = 60.0
   private let nameAndContentVerticalMargin: CGFloat = 25.0
   private let nameAndContentContainerSpacing: CGFloat = 10.0
-  private let nameAndContentContainerWidthRatio: CGFloat = 0.8
-  private let timestampLabelTrailingMargin: CGFloat = 10.0
+  private let timestampLabelTrailingMargin: CGFloat = 20.0
   var profilePictureImage = UIImage()
   var name: String? {
     get {
@@ -50,7 +53,6 @@ class EventFeedTableViewCell: UITableViewCell {
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setup()
-    self.backgroundColor = .red
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -61,14 +63,9 @@ class EventFeedTableViewCell: UITableViewCell {
   private func setup() {
     let appStyle = AppStyle.sharedInstance
     
-    name = "Laymes Lees"
-    post = "Test post."
-    timestamp = "16:55"
-    
     let cardView = UIView()
     let profilePictureView = UIView()
     let profilePictureImageView = UIImageView(image: profilePictureImage)
-    let nameAndContentContainerStackView = UIStackView()
     
     cardView.translatesAutoresizingMaskIntoConstraints = false
     cardView.backgroundColor = appStyle.eventFeedCardViewBackgroundColor
@@ -78,7 +75,11 @@ class EventFeedTableViewCell: UITableViewCell {
     cardView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
     cardView.layer.shadowRadius = 2.0
     cardView.layer.shadowOpacity = 0.3
+    cardView.layer.masksToBounds = false
+
     self.contentView.addSubview(cardView)
+    self.backgroundColor = .clear
+    self.selectionStyle = .none
     
     profilePictureImageView.translatesAutoresizingMaskIntoConstraints = false
     profilePictureImageView.clipsToBounds = true
@@ -106,6 +107,7 @@ class EventFeedTableViewCell: UITableViewCell {
     nameAndContentContainerStackView.axis = .vertical
     nameAndContentContainerStackView.spacing = nameAndContentContainerSpacing
     nameAndContentContainerStackView.translatesAutoresizingMaskIntoConstraints = false
+    
     nameAndContentContainerStackView.addArrangedSubview(nameLabel)
     nameAndContentContainerStackView.addArrangedSubview(postContentLabel)
     cardView.addSubview(nameAndContentContainerStackView)
@@ -116,29 +118,25 @@ class EventFeedTableViewCell: UITableViewCell {
     timestampLabel.textAlignment = .right
     cardView.addSubview(timestampLabel)
     
-    cardView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: cardViewVerticalMargin).isActive = true
-    cardView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -cardViewVerticalMargin).isActive = true
     cardView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+    cardView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
     cardView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: cardViewWidthRatio).isActive = true
+    cardView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: cardViewHeightRatio).isActive = true
 
     profilePictureView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: profilePictureTopMargin).isActive = true
     profilePictureView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: profilePictureLeadingMargin).isActive = true
     profilePictureView.widthAnchor.constraint(equalToConstant: profilePictureViewDiameter).isActive = true
     profilePictureView.heightAnchor.constraint(equalToConstant: profilePictureViewDiameter).isActive = true
-    
-    nameLabel.heightAnchor.constraint(equalToConstant: nameLabel.intrinsicContentSize.height).isActive = true
-    postContentLabel.heightAnchor.constraint(equalToConstant: postContentLabel.intrinsicContentSize.height).isActive = true
-    
-    postContentLabel.backgroundColor = .purple
+  
     profilePictureImageView.topAnchor.constraint(equalTo: profilePictureView.topAnchor).isActive = true
     profilePictureImageView.bottomAnchor.constraint(equalTo: profilePictureView.bottomAnchor).isActive = true
-    profilePictureView.leadingAnchor.constraint(equalTo: profilePictureView.leadingAnchor).isActive = true
-    profilePictureView.trailingAnchor.constraint(equalTo: profilePictureView.trailingAnchor).isActive = true
+    profilePictureImageView.leadingAnchor.constraint(equalTo: profilePictureView.leadingAnchor).isActive = true
+    profilePictureImageView.trailingAnchor.constraint(equalTo: profilePictureView.trailingAnchor).isActive = true
     
     nameAndContentContainerStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: nameAndContentVerticalMargin).isActive = true
     nameAndContentContainerStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -nameAndContentVerticalMargin).isActive = true
     nameAndContentContainerStackView.leadingAnchor.constraint(equalTo: profilePictureView.trailingAnchor, constant: nameAndContentContainerLeadingMargin).isActive = true
-    nameAndContentContainerStackView.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: nameAndContentContainerWidthRatio).isActive = true
+    nameAndContentContainerStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -nameAndContentContainerTrailingMargin).isActive = true
     
     timestampLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -timestampLabelTrailingMargin).isActive = true
     timestampLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: nameAndContentVerticalMargin).isActive = true

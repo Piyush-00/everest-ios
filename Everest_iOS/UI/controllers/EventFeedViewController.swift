@@ -28,12 +28,12 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableView.tableHeaderView = tableHeaderImageView
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = 50.0
-    
+    tableView.estimatedRowHeight = 400.0
     tableView.delegate = self
     tableView.dataSource = self
   
     self.view.addSubview(tableView)
+    tableView.backgroundColor = appStyle.backgroundColor
     
     setupConstraints()
   }
@@ -51,6 +51,12 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+    
+    if let cell = cell as? EventFeedTableViewCell {
+      cell.name = "Test Name"
+      cell.post = "Test Post"
+      cell.timestamp = "16:55"
+    }
     
     return cell
   }
