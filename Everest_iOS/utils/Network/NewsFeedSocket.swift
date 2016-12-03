@@ -10,7 +10,6 @@ import Foundation
 
 class NewsFeedSocket {
   
-  init(){}
   
   public func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {
     let params = ["user_id": userID,"event_id": eventID]
