@@ -19,7 +19,11 @@ class NetworkUtil {
   
 }
 
-func t(_ url: String) -> String{
-  let returnEndPoint: String = NetworkUtil.getEnvironment() + url
-  return returnEndPoint
+func t(_ url: String? = nil) -> String {
+  if (url != nil) {
+  return NetworkUtil.getEnvironment() + url!
+  } else {
+  //SKU - If the function t(), is called, then return the enviornment.
+  return NetworkUtil.getEnvironment()
+  }
 }
