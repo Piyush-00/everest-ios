@@ -11,12 +11,24 @@ import UIKit
 class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   private let tableView = UITableView()
   private let tableHeaderImageView = UIImageView()
+  private let postButton = UIButton()
+  
   private let cellReuseIdentifier = "Cell"
+  
+  private let postButtonDiameter: CGFloat = 60.0
+  private let postButtonTrailingMargin: CGFloat = 20.0
+  private let postButtonBottomMargin: CGFloat = 20.0
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let appStyle = AppStyle.sharedInstance
+    
+    postButton.layer.cornerRadius = postButtonDiameter / 2
+    postButton.layer.masksToBounds = true
+    postButton.backgroundColor = appStyle.baseInputButtonColor
+    postButton.setTitle("+", for: .normal)
+    postButton.addTarget(self, action: #selector(didClickPostButton), for: .touchUpInside)
     
     tableHeaderImageView.clipsToBounds = true
     tableHeaderImageView.contentMode = .scaleAspectFill
@@ -31,20 +43,31 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableView.estimatedRowHeight = 400.0
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.backgroundColor = appStyle.backgroundColor
   
     self.view.addSubview(tableView)
-    tableView.backgroundColor = appStyle.backgroundColor
+    self.view.addSubview(postButton)
     
     setupConstraints()
   }
   
   private func setupConstraints() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
+    postButton.translatesAutoresizingMaskIntoConstraints = false
     
     tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    
+    postButton.widthAnchor.constraint(equalToConstant: postButtonDiameter).isActive = true
+    postButton.heightAnchor.constraint(equalToConstant: postButtonDiameter).isActive = true
+    postButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -postButtonTrailingMargin).isActive = true
+    postButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: -postButtonBottomMargin).isActive = true
+  }
+  
+  func didClickPostButton(sender: UIButton) {
+    
   }
   
   //MARK: UITableViewDelegate
@@ -71,9 +94,5 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return AppStyle.sharedInstance.headerViewContainerHeaderHeight
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
   }
 }

@@ -69,13 +69,13 @@ class EventFeedTableViewCell: UITableViewCell {
     
     cardView.translatesAutoresizingMaskIntoConstraints = false
     cardView.backgroundColor = appStyle.eventFeedCardViewBackgroundColor
-    cardView.layer.cornerRadius = 4.0
-    cardView.layer.shadowPath = UIBezierPath(roundedRect: cardView.bounds, cornerRadius: 4.0).cgPath
-    cardView.layer.shadowColor = UIColor.black.cgColor
-    cardView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-    cardView.layer.shadowRadius = 2.0
-    cardView.layer.shadowOpacity = 0.3
-    cardView.layer.masksToBounds = false
+//    cardView.layer.cornerRadius = 4.0
+//    cardView.layer.shadowPath = UIBezierPath(roundedRect: cardView.bounds, cornerRadius: 4.0).cgPath
+//    cardView.layer.shadowColor = UIColor.black.cgColor
+//    cardView.layer.shadowOffset = CGSize(width: 0, height: 3.0)
+//    cardView.layer.shadowRadius = 2.0
+//    cardView.layer.shadowOpacity = 0.3
+//    cardView.layer.masksToBounds = false
 
     self.contentView.addSubview(cardView)
     self.backgroundColor = .clear
