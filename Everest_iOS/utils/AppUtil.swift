@@ -32,4 +32,27 @@ class AppUtil {
   class func convertStringToStringArray(_ string: String, usingSeparator separator: String) -> [String] {
     return string.components(separatedBy: separator)
   }
+  
+  //SKU - Format Date Appropriatley into string
+  
+  class func formatDateString(_ dateString: String) -> String{
+    
+    let dateFormatter = DateFormatter()
+    let dateStringFormatter = DateFormatter()
+    dateFormatter.calendar = Calendar(identifier: .iso8601)
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    let dateISO = dateFormatter.date(from: dateString)
+    
+
+    dateStringFormatter.dateStyle = DateFormatter.Style.long
+    dateStringFormatter.timeStyle = DateFormatter.Style.short
+    if (dateISO != nil){
+      let formattedString = dateStringFormatter.string(from: dateISO!)
+      return formattedString
+    } else {
+      return ""
+    }
+  }
 }

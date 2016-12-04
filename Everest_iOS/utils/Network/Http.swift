@@ -20,20 +20,11 @@ class Http  {
    This wrapper is simply a working progress and will most definitely not work yet. Once we have some
    clarity from the backend, I will clean this function up. */
   
-  static func getRequest<T>(requestURL: String, parameters: Parameters? = nil, ObjectType: T, completionHandler: @escaping (_ inner: () throws -> String) -> ()) {
+  static func getRequest(requestURL: String, parameters: Parameters? = nil, completionHandler: @escaping (DataResponse<Any>) -> ()) {
     
-    Alamofire.request(requestURL, method: .get, parameters: parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
-      switch response.result {
-        case .success:
-          if (response.request?.value) != nil {
-            //SKU - JSON parsing into the respected objects
-            completionHandler({ return "" })
-          }
-        case .failure(let error):
-          print(error)
-          //SKU - We need to talk with DB to figure out appropriate error handling
-          completionHandler({ return "" })
-        }
+    Alamofire.request(requestURL, method: .get, parameters: parameters, encoding: JSONEncoding.default).validate()
+      .responseJSON { response in
+        completionHandler(response)
     }
   }
   
@@ -41,7 +32,6 @@ class Http  {
     
     Alamofire.request(requestURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate()
       .responseJSON { response in
-      
         completionHandler(response)
     }
   }
@@ -58,7 +48,6 @@ class Http  {
           multipartFormData.append(data.description.data(using: .utf8)!, withName: key)
         }
       }
-      
       if let uploadImage = image {
         if let imageData = UIImageJPEGRepresentation(uploadImage, 1) {
           multipartFormData.append(imageData, withName: "file",fileName: "file.png", mimeType: "image/png")
