@@ -38,7 +38,7 @@ public class Keychain: NSObject {
     let mirrored_object = Mirror(reflecting: Keys.sharedInstance)
     
     for (_, attr) in mirrored_object.children.enumerated() {
-      if let property_name = attr.label as String! {
+      if (attr.label as String!) != nil {
         self.delete(service: attr.value as! NSString, data: "" )
       }
     }

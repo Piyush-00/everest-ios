@@ -150,6 +150,35 @@ class Event {
       }
     }
   }
-
   
+  public func QRScanEvent(eventURL: String, completionHandler: @escaping (Bool) -> ()){
+    Http.getRequest(requestURL: t(eventURL)){
+      response in
+      switch response.result {
+      case .success (let JSON):
+        if let httpStatusCode = response.response?.statusCode {
+          switch (httpStatusCode) {
+          case 200:
+            if let json = JSON as? Dictionary<String,Any> {
+              
+              self.setName(name: json["EventName"] as! String)
+              self.setDescription(description: json["Description"] as! String)
+              self.setLocation(location: json["Location"] as! String)
+              self.setDate(date:"Thursday")
+              self.setStartTime(startTime: AppUtil.formatDateString(json["StartTime"] as! String))
+              self.setEndTime(endTime: AppUtil.formatDateString(json["EndTime"] as! String))
+              self.setHeaderImageUrl(headerImageUrl: t(json["EventImageURL"] as! String?))
+              completionHandler(true)
+            }
+          default:
+            print("default case")
+            completionHandler(false)
+          }
+        }
+      case .failure(let error):
+        print(error)
+       completionHandler(false)
+      }
+    }
+  }
 }
