@@ -57,6 +57,8 @@
 		9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */; };
 		9E6F37B41DEB52BA0080C9AD /* EventFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B31DEB52BA0080C9AD /* EventFeedViewController.swift */; };
 		9E6F37B61DEB53BD0080C9AD /* EventFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */; };
+		9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B71DF4F0240080C9AD /* EventFeedModal.swift */; };
+		9E6F37BA1DF4FCDA0080C9AD /* EventFeedModalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
 		9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CD81DC5969E0054614D /* StatusBarView.swift */; };
 		9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */; };
@@ -145,6 +147,8 @@
 		9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleAndContentContainer.swift; sourceTree = "<group>"; };
 		9E6F37B31DEB52BA0080C9AD /* EventFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedViewController.swift; sourceTree = "<group>"; };
 		9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewCell.swift; sourceTree = "<group>"; };
+		9E6F37B71DF4F0240080C9AD /* EventFeedModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventFeedModal.swift; path = containers/EventFeedModal.swift; sourceTree = "<group>"; };
+		9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedModalContainer.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9EC79CD81DC5969E0054614D /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 				980894AF1DC57DF000499DA3 /* InvalidModalView.swift */,
 				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
 				9EC79CD81DC5969E0054614D /* StatusBarView.swift */,
+				9E6F37B71DF4F0240080C9AD /* EventFeedModal.swift */,
 				9EF8CEE61DC5270100CA9446 /* navigation */,
 				98AE46131DAF2ADE0023C9F4 /* containers */,
 			);
@@ -309,6 +314,7 @@
 				9877F5521DBC01DA004A7CC2 /* ProfileHeaderContainer.swift */,
 				98F7427D1DC2D07500B3B0D9 /* ModalViewContainer.swift */,
 				9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */,
+				9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */,
 			);
 			path = containers;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 			files = (
 				980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */,
 				98FAF69F1DF11A5600F3766B /* NewsFeedSocket.swift in Sources */,
+				9E6F37BA1DF4FCDA0080C9AD /* EventFeedModalContainer.swift in Sources */,
 				98F7427E1DC2D07500B3B0D9 /* ModalViewContainer.swift in Sources */,
 				980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */,
 				98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */,
@@ -749,6 +756,7 @@
 				9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */,
 				9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
+				9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */,
 				9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */,
 				98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */,
 				98AE46191DAF2ADE0023C9F4 /* CreateEventViewController.swift in Sources */,
