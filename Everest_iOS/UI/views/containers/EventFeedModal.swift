@@ -16,12 +16,19 @@ class EventFeedModal: UIView, UITextViewDelegate {
   private let wordCountLabel = UILabel()
   private let postTextView = BaseInputTextView(hintText: NSLocalizedString("feed modal text placeholder", comment: "event feed modal text placeholder"))
   private let postButton = UIButton()
-  private var wordCount: Int = 200 {
-    willSet {
+  private let wordCountMax: Int = 200
+  private var wordCount: Int {
+    get {
+      if let wordCount = wordCountLabel.text?.characters.count {
+        return wordCountMax - wordCount
+      }
+      return wordCountMax
+    }
+    set {
       wordCountLabel.text = String(newValue)
       if newValue < 0 {
         if !(wordCountLabel.textColor == UIColor.red.withAlphaComponent(0.6)) {
-           wordCountLabel.textColor = UIColor.red.withAlphaComponent(0.6)
+          wordCountLabel.textColor = UIColor.red.withAlphaComponent(0.6)
         }
         if postButton.isEnabled {
           postButton.isEnabled = false
@@ -185,7 +192,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
       } else {
         textView.placeholderLabel.isHidden = true
       }
-      wordCount = 200 - textView.text.characters.count
+      wordCount = wordCountMax - textView.text.characters.count
     }
   }
 }
