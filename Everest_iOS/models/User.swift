@@ -87,8 +87,8 @@ class User {
     return self.UserID
   }
   
-  public func getKeyChainUserID() -> String{
-    return Keychain.get(key: Keys.sharedInstance.UserID) as! String
+  static func getKeyChainUserID() -> String? {
+    return Keychain.get(key: Keys.sharedInstance.UserID) as String?
   }
   
   
@@ -111,6 +111,54 @@ class User {
     return Keychain.get(key: Keys.sharedInstance.Password) as! String
   }
   
+  //SKU - Signin
+  public func signIn(email: String, password: String, completionHandler: @escaping (Bool) -> ()){
+    let params = ["Email": email, "Password": password]
+    Http.postRequest(requestURL: t(Routes.Api.SignInUser), parameters: params) {
+      response in
+      
+      switch response.result {
+      case .success (let JSON):
+        
+        if let httpStatusCode = response.response?.statusCode {
+          switch (httpStatusCode) {
+          case 200:
+            if let jsonResult = JSON as? Dictionary<String,Any> {
+              self.setUserID(userID: jsonResult["_id"]! as! String, keyChain: true)
+              self.setKeyChainEmail(email: email)
+              self.setKeyChainPassword(password: password)
+              
+              if let firstName = jsonResult["FirstName"] as? String {
+                self.setFirstName(firstName: firstName, keyChain: true)
+              } else {
+                self.setFirstName(firstName: "", keyChain: true)
+              }
+              
+              if let lastName = jsonResult["LastName"] as? String {
+                self.setLastName(lastName: lastName, keyChain: true)
+              } else {
+                self.setLastName(lastName: "", keyChain: true)
+              }
+              
+              if let profilePicURL = jsonResult["ProfileImageURL"] as? String {
+                self.setProfileImageURL(profileImageURL: profilePicURL, keyChain: true)
+              } else {
+                self.setProfileImageURL(profileImageURL: "", keyChain: true)
+              }
+              
+              completionHandler(true)
+            }
+          default:
+            print("default case")
+            completionHandler(false)
+          }
+        }
+      case .failure(let error):
+        print(error)
+      }
+    }
+
+  }
   
   //SKU - Signup
   public func signUp(email: String, password: String, completionHandler: @escaping (Bool) -> ()){
@@ -158,6 +206,8 @@ class User {
           case 200:
             if let jsonResult = JSON as? Dictionary<String,Any> {
               self.setProfileImageURL(profileImageURL: jsonResult["ProfileImageURL"]! as! String, keyChain: true)
+              self.setFirstName(firstName: firstName!, keyChain: true)
+              self.setLastName(lastName: lastName!, keyChain: true)
               completionHandler(true)
             }
           default:

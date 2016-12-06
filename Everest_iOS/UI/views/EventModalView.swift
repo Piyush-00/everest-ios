@@ -21,7 +21,7 @@ class EventModalView: ModalViewContainer {
     //SKU - 50 character limit on event title
     eventNameTextView = BaseInputTextView(textInput: event.getName())
     eventDescriptionTextView = BaseInputTextView(textInput: event.getDescription())
-    eventDateTextView = BaseInputTextView(textInput: event.getDate() + "\n" + event.getStartTime() + " - " + event.getEndTime())
+    eventDateTextView = BaseInputTextView(textInput: event.getStartTime() + "\n" + event.getEndTime())
     eventLocationTextView = BaseInputTextView(textInput: event.getLocation())
     joinEventButtonView = BaseInputButtonContainer(buttonTitle: "Join Event")
 

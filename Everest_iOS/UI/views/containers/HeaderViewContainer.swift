@@ -15,7 +15,7 @@ class HeaderViewContainer: UIView {
     var scrollViewContentView: UIView
     var headerView: UIView
     var contentView: UIView
-    private var headerViewHeight: CGFloat
+    private var headerViewHeight: CGFloat = AppStyle.sharedInstance.headerViewContainerHeaderHeight
     var scrollViewContentViewHeightConstaint: NSLayoutConstraint!
     var isKeyboardVisible = false
     var heightConstraintConstant: CGFloat {
@@ -27,8 +27,6 @@ class HeaderViewContainer: UIView {
         scrollViewContentView = UIView()
         headerView = UIView()
         contentView = UIView()
-
-        headerViewHeight = 131
         
         if (withNavigationBar) {
             topMostView = NavigationBarView()

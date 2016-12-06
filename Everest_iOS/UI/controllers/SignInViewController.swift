@@ -13,6 +13,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   private let headerLabel = UILabel()
   private let forgotPasswordButton = UIButton()
   private let extraInfoView = UIView()
+  private var emailTextField, passwordTextField : BaseInputTextField?
+  var user = User()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,8 +23,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     let appStyle = AppStyle.sharedInstance
     
-    let emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
-    let passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
+    emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
+    passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
     let signInButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("sign in", comment: "sign in button"))
     
     headerLabel.text = NSLocalizedString("sign in/up welcome header", comment: "sign in/up welcome header")
@@ -31,11 +33,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     headerLabel.numberOfLines = 0
     headerLabel.lineBreakMode = .byWordWrapping
     
-    emailTextField.delegate = self
-    emailTextField.nextField = passwordTextField
+    emailTextField?.delegate = self
+    emailTextField?.nextField = passwordTextField
     
-    passwordTextField.delegate = self
-    passwordTextField.isSecureTextEntry = true
+    passwordTextField?.delegate = self
+    passwordTextField?.isSecureTextEntry = true
     
     signInButtonContainer.button.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)
     
@@ -47,8 +49,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     extraInfoView.addSubview(forgotPasswordButton)
     
     viewContainer.addArrangedHeaderSubview(view: headerLabel)
-    viewContainer.addArrangedContentSubview(view: emailTextField)
-    viewContainer.addArrangedContentSubview(view: passwordTextField)
+    viewContainer.addArrangedContentSubview(view: emailTextField!)
+    viewContainer.addArrangedContentSubview(view: passwordTextField!)
     viewContainer.addArrangedContentSubview(view: signInButtonContainer)
     viewContainer.addArrangedContentSubview(view: extraInfoView)
     viewContainer.backgroundColor = appStyle.backgroundColor
@@ -79,7 +81,18 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   }
   
   func didTapSignInButton(sender: UIButton) {
-    print("signin button pressed")
+    user.signIn(email: (emailTextField?.text!)!, password: (passwordTextField?.text!)!) { response in
+      switch response{
+      case true:
+        if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+          let landingViewController = LandingViewController()
+          navigationController.pushViewController(landingViewController, animated: true)
+        }
+        
+      case false:
+        print("error has occurred")
+      }
+    }
   }
   
   func didTapForgotPasswordButton(sender: UIButton) {

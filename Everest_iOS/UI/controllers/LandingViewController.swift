@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LandingViewController: UIViewController {
+class LandingViewController: UIViewController, BaseCameraSesssionProtocol, ModalViewContainerProtocol {
   var overlayView = UIView()
   var scanButtonContainer = BaseInputButtonContainer(buttonTitle: "Scan")
   var createEvenButtonContainer = BaseInputButtonContainer(buttonTitle: "Create Event")
@@ -23,6 +23,7 @@ class LandingViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    baseCameraView.delegate = self
     overlayView.addSubview(headerTextView)
     overlayView.addSubview(subHeaderTextView)
     overlayView.addSubview(scanButtonContainer)
@@ -55,6 +56,7 @@ class LandingViewController: UIViewController {
   func didTapSignupButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signupViewController = SignUpViewController()
+      signupViewController.initialFlowViewController = self
       navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
     }
   }
@@ -215,5 +217,43 @@ class LandingViewController: UIViewController {
     signupButtonContainer.widthAnchor.constraint(equalTo: signupButtonContainer.button.widthAnchor).isActive = true
     signupButtonContainer.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: -5).isActive = true
     signupButtonContainer.button.setBackgroundImage(nil, for: .normal)
+  }
+  
+  func setupModalConstraints(modal: UIView){
+    modal.translatesAutoresizingMaskIntoConstraints = false
+    modal.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    modal.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+    modal.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    modal.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+  }
+  
+  func launchEventModal(modalData: Event) {
+    let eventModal = EventModalView(modalData)
+    eventModal.delegate = self
+    self.view.addSubview(eventModal)
+    setupModalConstraints(modal: eventModal)
+  }
+  
+  func launchInvalidModal() {
+    let invalidModal = InvalidModalView()
+    invalidModal.delegate = self
+    self.view.addSubview(invalidModal)
+    setupModalConstraints(modal: invalidModal)
+  }
+  
+  //MARK: BaseCameraSesssionProtocol
+  func didScanQRCode(response: String?) {
+    let event = Event()
+    event.QRScanEvent(eventURL: response!){
+      response in
+      response ? self.launchEventModal(modalData: event) : self.launchInvalidModal()
+    }
+  }
+  
+  //MARK: ModalViewContainerProtocol
+  func didTapModalBackground(view: UIView) {
+    view.removeFromSuperview()
+    //SKU - Once the modal has been removed, add QR Scanner output onto the session
+    self.baseCameraView.addOutput()
   }
 }

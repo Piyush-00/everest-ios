@@ -137,3 +137,9 @@
 
 /* event label */
 "event" = "Event";
+
+/* event feed modal text placeholder */
+"feed modal text placeholder" = "Your post";
+
+/* event feed modal post button */
+"post button" = "post";
