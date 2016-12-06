@@ -50,6 +50,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         loginButton.setTitle(NSLocalizedString("log in", comment: "login button"), for: .normal)
         loginButton.setTitleColor(AppStyle.sharedInstance.textColor, for: .normal)
         loginButton.titleLabel?.font = AppStyle.sharedInstance.textFontBold
+        loginButton.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
+
 
         signupButtonContainer.button.addTarget(self, action: #selector(didTapSignupButton), for: .touchUpInside)
         
@@ -113,17 +115,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
            signUpProfileViewController.user = self.user
            signUpProfileViewController.initialFlowViewController = self.initialFlowViewController
            navigationController.pushViewController(signUpProfileViewController, animated: true)
-            
           }
-          
         case false:
         print("error has occurred")
         }
       }
-      
-
-
     }
+  
+  func didTapLoginButton(sender: UIButton) {
+    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+      let signInViewController = SignInViewController()
+      navigationController.pushViewController(signInViewController, withAnimation: .fromBottom)
+    }
+  }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if(textField.nextField == nil){
