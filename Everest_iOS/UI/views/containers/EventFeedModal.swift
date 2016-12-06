@@ -16,7 +16,6 @@ class EventFeedModal: UIView, UITextViewDelegate {
   private let wordCountLabel = UILabel()
   private let postTextView = BaseInputTextView(hintText: NSLocalizedString("feed modal text placeholder", comment: "event feed modal text placeholder"))
   private let postButton = UIButton()
-
   private var wordCount: Int = 200 {
     willSet {
       wordCountLabel.text = String(newValue)
@@ -31,11 +30,13 @@ class EventFeedModal: UIView, UITextViewDelegate {
         if (wordCountLabel.textColor == UIColor.red.withAlphaComponent(0.6)) {
           wordCountLabel.textColor = UIColor.black.withAlphaComponent(0.6)
         }
-        if !postButton.isEnabled {
-          postButton.isEnabled = true
-        } else {
-          if newValue == 200 {
+        if newValue == 200 {
+          if postButton.isEnabled {
             postButton.isEnabled = false
+          }
+        } else {
+          if !postButton.isEnabled {
+            postButton.isEnabled = true
           }
         }
       }
@@ -184,16 +185,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
       } else {
         textView.placeholderLabel.isHidden = true
       }
+      wordCount = 200 - textView.text.characters.count
     }
-  }
-  
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    if text == "" {
-      wordCount += range.length
-    } else {
-      wordCount -= text.characters.count
-    }
-  
-    return true
   }
 }
