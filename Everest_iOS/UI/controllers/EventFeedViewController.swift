@@ -22,6 +22,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    hideKeyboardWhenTappedAround()
+    
     let appStyle = AppStyle.sharedInstance
     
     postButton.layer.cornerRadius = postButtonDiameter / 2
@@ -67,7 +69,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   }
   
   func didClickPostButton(sender: UIButton) {
+    let eventFeedModalContainer = EventFeedModalContainer()
     
+    self.view.addSubview(eventFeedModalContainer)
+    
+    eventFeedModalContainer.translatesAutoresizingMaskIntoConstraints = false
+    
+    eventFeedModalContainer.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
+    eventFeedModalContainer.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
+    eventFeedModalContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+    eventFeedModalContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
   }
   
   //MARK: UITableViewDelegate

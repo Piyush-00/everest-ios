@@ -9,6 +9,8 @@
 import UIKit
 
 class EventFeedModalContainer: UIView {
+  let modal = EventFeedModal()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
@@ -20,6 +22,19 @@ class EventFeedModalContainer: UIView {
   }
   
   private func setup() {
+    self.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    self.addSubview(modal)
+    setupConstraints()
+  }
+  
+  private func setupConstraints() {
+    let modalWidthRatio: CGFloat = 0.9
+    let modalHeightDisplacement: CGFloat = 30.0
     
+    modal.translatesAutoresizingMaskIntoConstraints = false
+    
+    modal.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    modal.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -modalHeightDisplacement).isActive = true
+    modal.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: modalWidthRatio).isActive = true
   }
 }
