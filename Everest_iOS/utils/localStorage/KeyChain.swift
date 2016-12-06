@@ -33,6 +33,16 @@ public class Keychain: NSObject {
 
    //SKU - public setters and getters for keychain.
 
+  static func deleteAll(){
+    
+    let mirrored_object = Mirror(reflecting: Keys.sharedInstance)
+    
+    for (_, attr) in mirrored_object.children.enumerated() {
+      if (attr.label as String!) != nil {
+        self.delete(service: attr.value as! NSString, data: "" )
+      }
+    }
+  }
   
   public class func set(key: NSString, token: NSString) {
     self.save(service: key, data: token)
@@ -41,6 +51,23 @@ public class Keychain: NSObject {
   public class func get(key: NSString) -> NSString? {
     return self.load(service: key)
   }
+  
+  //SKU - Internal function for deleting all keychain data
+  private class func delete(service: NSString, data: NSString) {
+    
+    let dataFromString: NSData = data.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)! as NSData
+    
+    //SKU - Instantiate a new default keychain query
+    let keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
+    
+    //SKU - Delete any existing items to prevent duplicates
+    SecItemDelete(keychainQuery as CFDictionary)
+    
+    //SKU - Add the new keychain item
+    SecItemAdd(keychainQuery as CFDictionary, nil)
+
+  }
+  
   
   //SKU - Internal function for saving to keychain
   private class func save(service: NSString, data: NSString) {

@@ -5,6 +5,9 @@
 //  Created by Sathoshi Kumarawadu on 2016-10-30.
 //  Copyright © 2016 Everest. All rights reserved.
 //
+protocol BaseCameraSesssionProtocol {
+  func didScanQRCode(response: String?)
+}
 
 import UIKit
 import AVFoundation
@@ -14,6 +17,8 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   private var captureSession: AVCaptureSession?
   private var previewLayerView: AVCaptureVideoPreviewLayer
   private var metaDataOutput: AVCaptureMetadataOutput
+  
+  var delegate: BaseCameraSesssionProtocol?
   
   init(_ coder: NSCoder? = nil){
     captureSession = AVCaptureSession()
@@ -109,6 +114,7 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
       if let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject {
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         print(readableObject.stringValue)
+        delegate?.didScanQRCode(response: readableObject.stringValue!)
       }
     }
   }

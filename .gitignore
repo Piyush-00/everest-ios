@@ -1,4 +1,7 @@
 Everest_iOS.xcworkspace/xcuserdata/Sathoshi.xcuserdatad/xcdebugger/
 Everest_iOS.xcworkspace/xcuserdata/Sathoshi.xcuserdatad/UserInterfaceState.xcuserstate
 Everest_iOS.xcworkspace/xcuserdata/Sathoshi.xcuserdatad/UserInterfaceState.xcuserstate
-Everest_iOS/Env.plist 
+Everest_iOS/Env.plist
+Pods/Pods.xcodeproj/xcuserdata/Sathoshi.xcuserdatad/xcschemes/Realm.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Sathoshi.xcuserdatad/xcschemes/RealmSwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/Sathoshi.xcuserdatad/xcschemes/Socket.IO-Client-Swift.xcscheme
