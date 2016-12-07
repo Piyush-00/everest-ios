@@ -9,6 +9,9 @@
 import UIKit
 
 class EventFeedModal: UIView, UITextViewDelegate {
+  private let userID = "583a10da2db1b150f71760a3"
+  private let newsFeedID = "584472a41ef0ebd8e34c006d"
+  private let eventID = "584472a41ef0ebd8e34c006c"
   private let headerView = UIView()
   private let contentView = UIView()
   private let footerView = UIView()
@@ -171,7 +174,14 @@ class EventFeedModal: UIView, UITextViewDelegate {
   }
   
   func didClickPostButton(sender: UIButton) {
+    let post = postTextView.text
     
+    displayLoadingButton()
+    
+    NewsFeedSocket.createNewPost(userID: userID, firstName:"firstName", lastName: "lastName", profilePicURL: "public/uploads/file-1480200461591.png", eventID: eventID, newsFeedID: newsFeedID, post: post!, completionHandler: { response in
+      print("createNewPost: \(response)")
+      self.superview?.removeFromSuperview()
+    })
   }
   
   private func animateIn() {
@@ -182,6 +192,26 @@ class EventFeedModal: UIView, UITextViewDelegate {
       self.alpha = 1
       self.transform = CGAffineTransform.identity
     }
+  }
+  
+  private func displayLoadingButton() {
+    for subview in postButton.subviews {
+      if subview is UIActivityIndicatorView {
+        return
+      }
+    }
+    
+    let activityIndicator = UIActivityIndicatorView()
+    
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+    activityIndicator.startAnimating()
+    
+    postButton.setTitle("", for: .normal)
+    postButton.isEnabled = false
+    postButton.addSubview(activityIndicator)
+    
+    activityIndicator.centerXAnchor.constraint(equalTo: postButton.centerXAnchor).isActive = true
+    activityIndicator.centerYAnchor.constraint(equalTo: postButton.centerYAnchor).isActive = true
   }
   
   //SKO - Emulate placeholder text functionality

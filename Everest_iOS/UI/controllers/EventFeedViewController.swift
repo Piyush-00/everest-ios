@@ -13,6 +13,11 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   private let tableHeaderImageView = UIImageView()
   private let postButton = UIButton()
   
+  private let userID = "583a10da2db1b150f71760a3"
+  private let newsFeedID = "584472a41ef0ebd8e34c006d"
+  private let eventID = "584472a41ef0ebd8e34c006c"
+  
+  private var cellData: [Dictionary<String, Any>] = []
   private let cellReuseIdentifier = "Cell"
   
   private let postButtonDiameter: CGFloat = 60.0
@@ -51,6 +56,23 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     self.view.addSubview(postButton)
     
     setupConstraints()
+    
+    Socket.establishConnection()
+    
+    NewsFeedSocket.onNewPost() { response in
+      var postData = response
+      if let profilePictureUrl = postData["profilePicURL"] as? String {
+        let profilePictureImageView = UIImageView()
+        profilePictureImageView.downloadedFrom(link: profilePictureUrl, completionHandler: { success in
+          DispatchQueue.main.async {
+            postData["profilePicURL"] = nil
+            postData["profileImage"] = profilePictureImageView.image
+            self.cellData.append(postData)
+            self.displayNewPost()
+          }
+        })
+      }
+    }
   }
   
   private func setupConstraints() {
@@ -79,6 +101,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     eventFeedModalContainer.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     eventFeedModalContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     eventFeedModalContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+
+    NewsFeedSocket.joinNewsFeedRoom(userID: userID, eventID: eventID, completionHandler: { response in
+      print("joinNewsFeedRoom: \(response)")
+    })
+  }
+  
+  private func displayNewPost() {
+    tableView.beginUpdates()
+    tableView.insertRows(at: [IndexPath(row: cellData.count - 1, section: 0)], with: .automatic)
+    tableView.endUpdates()
   }
   
   //MARK: UITableViewDelegate
@@ -86,17 +118,23 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     
-    if let cell = cell as? EventFeedTableViewCell {
-      cell.name = "Test Name"
-      cell.post = "Test Post"
-      cell.timestamp = "16:55"
-    }
+    let postData = cellData[indexPath.row]
     
-    return cell
+    guard let eventFeedCell = cell as? EventFeedTableViewCell,
+          let post = postData["post"] as? String,
+          let name = postData["name"] as? String,
+          let profileImage = postData["profileImage"] as? UIImage?
+          else { return cell }
+    
+    eventFeedCell.post = post
+    eventFeedCell.name = name
+    eventFeedCell.profilePictureImage = profileImage
+    
+    return eventFeedCell
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 15
+    return cellData.count
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {

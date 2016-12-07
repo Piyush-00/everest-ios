@@ -166,8 +166,8 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         case true:
           
           if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-            let landingViewController = LandingViewController()
-            navigationController.pushViewController(landingViewController, withAnimation: .fromBottom)
+            let eventFeedViewController = EventFeedViewController()
+            navigationController.pushViewController(eventFeedViewController, animated: true)
           }
           
         case false:
