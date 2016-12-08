@@ -48,6 +48,7 @@
 		98FAF69F1DF11A5600F3766B /* NewsFeedSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
+		9E2CB00C1DF90FBD00464953 /* EventTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CB00B1DF90FBD00464953 /* EventTabBarViewController.swift */; };
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
@@ -138,6 +139,7 @@
 		98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedSocket.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
+		9E2CB00B1DF90FBD00464953 /* EventTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabBarViewController.swift; sourceTree = "<group>"; };
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
+				9E2CB00B1DF90FBD00464953 /* EventTabBarViewController.swift */,
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
 				9E5E3B1B1DCD9684009A456A /* SignInViewController.swift */,
 				982A11761DB2F9D20083ACC5 /* ImagePickerAlertController.swift */,
@@ -722,6 +725,7 @@
 				9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */,
 				9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */,
 				9E5E3B1E1DCE7D55009A456A /* EventConfirmationViewController.swift in Sources */,
+				9E2CB00C1DF90FBD00464953 /* EventTabBarViewController.swift in Sources */,
 				989DC9DE1DBD3DD500D70981 /* UITextFieldExtension.swift in Sources */,
 				9E5E3B201DCE7F18009A456A /* TitleAndContentContainer.swift in Sources */,
 				98F486D61DE7DF9100C9F17B /* NetworkUtil.swift in Sources */,
