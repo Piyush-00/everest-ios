@@ -37,6 +37,11 @@ class AppUtil {
   
   class func formatDateString(_ dateString: String) -> String{
     
+    //SKU - The date can be nul if called asyc
+    if (dateString == nil) {
+      return ""
+    }
+    
     let dateFormatter = DateFormatter()
     let dateStringFormatter = DateFormatter()
     dateFormatter.calendar = Calendar(identifier: .iso8601)
@@ -54,5 +59,14 @@ class AppUtil {
     } else {
       return ""
     }
+  }
+  
+  class func formatISODate() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.calendar = Calendar(identifier: .iso8601)
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    return dateFormatter.string(from: Date())
   }
 }

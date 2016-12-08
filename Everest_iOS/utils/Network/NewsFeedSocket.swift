@@ -11,7 +11,7 @@ import Foundation
 class NewsFeedSocket {
   
   
-  public func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {
+  static func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {
     let params = ["user_id": userID,"event_id": eventID]
     Socket.emit(channel: Routes.Socket.NewsFeed.Subscribe, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String,Any> {
@@ -21,12 +21,13 @@ class NewsFeedSocket {
           completionHandler(false)
         }
       } else {
+        print("Socket has disconnected")
         completionHandler(false)
       }
     }
   }
   
-  public func onNewPost(completionHandler: @escaping (Dictionary<String,Any>) -> ()) {
+  static func onNewPost(completionHandler: @escaping (Dictionary<String,Any>) -> ()) {
     Socket.on(channel: Routes.Socket.NewsFeed.NewPost){ response in
       if let jsonResult = response as? Dictionary<String,Any> {
         completionHandler(jsonResult)
@@ -36,8 +37,8 @@ class NewsFeedSocket {
     }
   }
   
-  public func createNewPost(userID: String, firstName: String, lastName: String, profilePicURL: String, eventID: String, newsFeedID: String, post: String,  completionHandler: @escaping (Bool) -> () ) {
-    let params = ["user_id": userID, "event_id": eventID, "room": newsFeedID, "post": post, "firstName": firstName, "lastName": lastName, "profilePicURL": profilePicURL]
+  static func createNewPost(userID: String, firstName: String, lastName: String, profilePicURL: String, eventID: String, newsFeedID: String, post: String,  completionHandler: @escaping (Bool) -> () ) {
+    let params = ["user_id": userID, "event_id": eventID, "room": newsFeedID, "post": post, "firstName": firstName, "lastName": lastName, "profilePicURL": profilePicURL, "timeStamp" : AppUtil.formatISODate()]
     Socket.emit(channel: Routes.Socket.NewsFeed.AddPost, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String,Any> {
         if (jsonResult["valid"] != nil) {
