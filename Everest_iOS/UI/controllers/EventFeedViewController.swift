@@ -57,6 +57,10 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableView.translatesAutoresizingMaskIntoConstraints = false
     postButton.translatesAutoresizingMaskIntoConstraints = false
     
+    guard let tabBar = self.tabBarController?.tabBar else {
+      fatalError("EventFeedViewController is not a child view controller of EventTabBarViewController.")
+    }
+    
     tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -65,7 +69,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     postButton.widthAnchor.constraint(equalToConstant: postButtonDiameter).isActive = true
     postButton.heightAnchor.constraint(equalToConstant: postButtonDiameter).isActive = true
     postButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -postButtonTrailingMargin).isActive = true
-    postButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: -postButtonBottomMargin).isActive = true
+    postButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: -(tabBar.bounds.height + postButtonBottomMargin)).isActive = true
   }
   
   func didClickPostButton(sender: UIButton) {

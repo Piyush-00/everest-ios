@@ -9,5 +9,22 @@
 import UIKit
 
 class EventTabBarViewController: UITabBarController {
-  override init(
+  override init(nibName: String?, bundle: Bundle?) {
+    super.init(nibName: nibName, bundle: bundle)
+    setup()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setup()
+  }
+  
+  private func setup() {
+    let eventNavigationController = UINavigationController()
+    let eventFeedViewController = EventFeedViewController()
+    
+    eventNavigationController.viewControllers = [eventFeedViewController]
+    
+    self.viewControllers = [eventNavigationController]
+  }
 }
