@@ -90,6 +90,7 @@ class EventFeedTableViewCell: UITableViewCell {
     profilePictureView.translatesAutoresizingMaskIntoConstraints = false
     profilePictureView.layer.cornerRadius = profilePictureViewDiameter / 2.0
     profilePictureView.layer.masksToBounds = true
+    profilePictureView.clipsToBounds = true
     profilePictureView.addSubview(profilePictureImageView)
     cardView.addSubview(profilePictureView)
     

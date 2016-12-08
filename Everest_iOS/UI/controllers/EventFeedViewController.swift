@@ -63,14 +63,13 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
       var postData = response
       if let profilePictureUrl = postData["profilePicURL"] as? String {
         let profilePictureImageView = UIImageView()
-        profilePictureImageView.downloadedFrom(link: profilePictureUrl, completionHandler: { success in
-          DispatchQueue.main.async {
-            postData["profilePicURL"] = nil
-            postData["profileImage"] = profilePictureImageView.image
-            self.cellData.append(postData)
-            self.displayNewPost()
-          }
-        })
+        profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
+          success in
+          postData["profilePicURL"] = nil
+          postData["profileImage"] = profilePictureImageView.image
+          self.cellData.append(postData)
+          self.displayNewPost()
+        }
       }
     }
   }

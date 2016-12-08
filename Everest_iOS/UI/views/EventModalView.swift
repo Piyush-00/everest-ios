@@ -17,7 +17,7 @@ class EventModalView: ModalViewContainer {
   
    init(_ event: Event, coder: NSCoder? = nil) {
     headerContentView = UIImageView()
-    headerContentView.downloadedFrom(link: event.getHeaderImageUrl()) { success in }
+    headerContentView.downloadedFrom(link: event.getHeaderImageUrl())
     //SKU - 50 character limit on event title
     eventNameTextView = BaseInputTextView(textInput: event.getName())
     eventDescriptionTextView = BaseInputTextView(textInput: event.getDescription())
