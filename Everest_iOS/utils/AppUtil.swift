@@ -37,11 +37,6 @@ class AppUtil {
   
   class func formatDateString(_ dateString: String) -> String{
     
-    //SKU - The date can be nul if called asyc
-    if (dateString == nil) {
-      return ""
-    }
-    
     let dateFormatter = DateFormatter()
     let dateStringFormatter = DateFormatter()
     dateFormatter.calendar = Calendar(identifier: .iso8601)
