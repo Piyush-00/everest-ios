@@ -39,6 +39,7 @@ public class Keychain: NSObject {
     
     for (_, attr) in mirrored_object.children.enumerated() {
       if (attr.label as String!) != nil {
+        print("deleting key: " + ((attr.value as! NSString) as String))
         self.delete(service: attr.value as! NSString, data: "" )
       }
     }

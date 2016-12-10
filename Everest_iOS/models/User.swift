@@ -14,7 +14,6 @@ class User {
   private var FirstName: String?
   private var LastName: String?
   private var ProfileImageURL: String?
-  private var UserID: String?
   
   //SKU - First Name
   public func setFirstName(firstName: String, keyChain: Bool = false){
@@ -22,7 +21,7 @@ class User {
     if (keyChain) { self.setKeyChainFirstName(firstName: firstName) }
   }
   
-  public func setKeyChainFirstName(firstName: String){
+  private func setKeyChainFirstName(firstName: String){
     Keychain.set(key: Keys.sharedInstance.FirstName, token: firstName as NSString)
   }
   
@@ -30,7 +29,7 @@ class User {
     return self.FirstName
   }
   
-  public func getKeyChainFirstName() -> String{
+  private func getKeyChainFirstName() -> String{
     return Keychain.get(key: Keys.sharedInstance.FirstName) as! String
   }
 
@@ -41,7 +40,7 @@ class User {
     if (keyChain) { self.setKeyChainLastName(lastName: lastName) }
   }
   
-  public func setKeyChainLastName(lastName: String){
+  private func setKeyChainLastName(lastName: String){
     Keychain.set(key: Keys.sharedInstance.LastName, token: lastName as NSString)
   }
   
@@ -49,7 +48,7 @@ class User {
     return self.LastName
   }
   
-  public func getKeyChainLastName() -> String{
+  private func getKeyChainLastName() -> String{
     return Keychain.get(key: Keys.sharedInstance.LastName) as! String
   }
   
@@ -60,7 +59,7 @@ class User {
     if (keyChain) { self.setKeyChainProfileImageURL(profileImageURL: profileImageURL) }
   }
   
-  public func setKeyChainProfileImageURL(profileImageURL: String){
+  private func setKeyChainProfileImageURL(profileImageURL: String){
     Keychain.set(key: Keys.sharedInstance.ProfileImage, token: profileImageURL as NSString)
   }
   
@@ -68,32 +67,31 @@ class User {
     return self.ProfileImageURL
   }
   
-  public func getKeyChainProfileImageURL() -> String{
+  private func getKeyChainProfileImageURL() -> String{
     return Keychain.get(key: Keys.sharedInstance.ProfileImage) as! String
   }
   
   
   //SKU - User ID
-  public func setUserID(userID: String, keyChain: Bool = false){
-    self.UserID = userID
-    if (keyChain) { self.setKeyChainUserID(userID: userID) }
+  public func setUserID(userID: String){
+    self.setKeyChainUserID(userID: userID)
   }
   
-  public func setKeyChainUserID(userID: String){
+  private func setKeyChainUserID(userID: String){
     Keychain.set(key: Keys.sharedInstance.UserID, token: userID as NSString)
   }
   
-  public func getUserID() -> String?{
-    return self.UserID
+  static func getUserID()-> String? {
+    return self.getKeyChainUserID()
   }
   
-  static func getKeyChainUserID() -> String? {
+  private static func getKeyChainUserID() -> String? {
     return Keychain.get(key: Keys.sharedInstance.UserID) as String?
   }
   
-  
+
   //SKU - Keychain storage functions for Email Address
-  public func setKeyChainEmail(email: String){
+  private func setKeyChainEmail(email: String){
     Keychain.set(key: Keys.sharedInstance.Email, token: email as NSString)
   }
   
@@ -103,12 +101,18 @@ class User {
   
   
   //SKU - Keychain storage functions for Password
-  public func setKeyChainPassword(password: String){
+  private func setKeyChainPassword(password: String){
     Keychain.set(key: Keys.sharedInstance.Password, token: password as NSString)
   }
   
   public func getKeyChainPassword() -> String{
     return Keychain.get(key: Keys.sharedInstance.Password) as! String
+  }
+  
+  public func loadKeyChainData() {
+    self.FirstName = self.getKeyChainFirstName()
+    self.LastName = self.getKeyChainLastName()
+    self.ProfileImageURL = self.getKeyChainProfileImageURL()
   }
   
   //SKU - Signin
@@ -124,7 +128,7 @@ class User {
           switch (httpStatusCode) {
           case 200:
             if let jsonResult = JSON as? Dictionary<String,Any> {
-              self.setUserID(userID: jsonResult["_id"]! as! String, keyChain: true)
+              self.setUserID(userID: jsonResult["_id"]! as! String)
               self.setKeyChainEmail(email: email)
               self.setKeyChainPassword(password: password)
               
@@ -174,7 +178,7 @@ class User {
           switch (httpStatusCode) {
           case 200:
             if let jsonResult = JSON as? Dictionary<String,Any> {
-              self.setUserID(userID: jsonResult["_id"]! as! String, keyChain: true)
+              self.setUserID(userID: jsonResult["_id"]! as! String)
               self.setKeyChainEmail(email: email)
               self.setKeyChainPassword(password: password)
               completionHandler(true)
@@ -196,7 +200,7 @@ class User {
     
     let params = ["FirstName": firstName, "LastName": lastName]
     
-    Http.multipartRequest(requestURL: t(Routes.Api.SetUpUserProfile + self.getUserID()!), image: image, parameters: params) {
+    Http.multipartRequest(requestURL: t(Routes.Api.SetUpUserProfile + User.getUserID()!), image: image, parameters: params) {
       response in
       switch response.result {
       case .success (let JSON):
