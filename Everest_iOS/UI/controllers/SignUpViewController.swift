@@ -10,7 +10,7 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     var viewContainer = SignUpViewContainer()
-    var headerTextView = BaseInputTextView(textInput: NSLocalizedString("sign in/up welcome header", comment: "sign in/up welcome header"))
+    var headerTextView = BaseInputTextView(textInput: nil)
     var emailTextField = BaseInputTextField(hintText: NSLocalizedString("email address", comment: "email address placeholder"))
     var passwordTextField = BaseInputTextField(hintText: NSLocalizedString("password", comment: "password placeholder"))
     var confirmPasswordTextField = BaseInputTextField(hintText: NSLocalizedString("confirm password", comment: "confirm password placeholder"))
@@ -74,6 +74,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             navigationController.interactivePopGestureRecognizer?.isEnabled = false
         }
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    if initialFlowViewController is EventConfirmationViewController {
+      headerTextView.text = NSLocalizedString("sign in/up create event", comment: "sign in/up create event")
+      headerTextView.font = AppStyle.sharedInstance.headerFontLargeRegular
+    } else {
+      headerTextView.text = NSLocalizedString("sign in/up welcome header", comment: "sign in/up welcome header")
+    }
+  }
 
     override func viewDidLayoutSubviews() {
         setupContstraints()
@@ -110,6 +119,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
       user.signUp(email: emailTextField.text!, password: passwordTextField.text!) { response in
         switch response{
         case true:
+          Session.manager.user? = self.user
+          //SKU - Update the session information
+          Session.manager.checkState()
           if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
            let signUpProfileViewController = SignUpProfileViewController()
            signUpProfileViewController.user = self.user
@@ -125,6 +137,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
   func didTapLoginButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signInViewController = SignInViewController()
+      //SKU - If there is an initial view controller, let signInViewController know about it.
+      signInViewController.initialFlowViewController = self.initialFlowViewController
       navigationController.pushViewController(signInViewController, withAnimation: .fromBottom)
     }
   }

@@ -12,6 +12,7 @@
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
 		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
 		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
+		98211FF41DFA422D005D99C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98211FF31DFA422D005D99C7 /* Session.swift */; };
 		9821AA951DE111C2005D50B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AA941DE111C2005D50B6 /* User.swift */; };
 		9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AAA41DE12049005D50B6 /* KeyChain.swift */; };
 		9821AAA71DE121F1005D50B6 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AAA61DE121F1005D50B6 /* Keys.swift */; };
@@ -96,6 +97,7 @@
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
 		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		98211FF31DFA422D005D99C7 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		9821AA941DE111C2005D50B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9821AAA41DE12049005D50B6 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		9821AAA61DE121F1005D50B6 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 			children = (
 				9E4534481DBD4EBF00D06929 /* AppStyle.swift */,
 				980894B11DC585B500499DA3 /* Translation.swift */,
+				98211FF31DFA422D005D99C7 /* Session.swift */,
 			);
 			path = sharedInstances;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
 				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
+				98211FF41DFA422D005D99C7 /* Session.swift in Sources */,
 				9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */,
 				98704A411DEBA495001323FF /* Socket.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
