@@ -12,6 +12,9 @@
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
 		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
 		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
+		981BB8DF1DFCBB6700EDC9FE /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */; };
+		981BB8E11DFCBD6300EDC9FE /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */; };
+		981BB8E31DFDE3D400EDC9FE /* HeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8E21DFDE3D400EDC9FE /* HeaderContainer.swift */; };
 		98211FF41DFA422D005D99C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98211FF31DFA422D005D99C7 /* Session.swift */; };
 		9821AA951DE111C2005D50B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AA941DE111C2005D50B6 /* User.swift */; };
 		9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9821AAA41DE12049005D50B6 /* KeyChain.swift */; };
@@ -97,6 +100,9 @@
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
 		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
+		981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
+		981BB8E21DFDE3D400EDC9FE /* HeaderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderContainer.swift; sourceTree = "<group>"; };
 		98211FF31DFA422D005D99C7 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		9821AA941DE111C2005D50B6 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9821AAA41DE12049005D50B6 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
@@ -287,6 +293,7 @@
 				9E5E3B1D1DCE7D55009A456A /* EventConfirmationViewController.swift */,
 				9828E27A1DC59E9F009CEEDE /* LandingViewController.swift */,
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
+				981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 		98AE46111DAF2ADE0023C9F4 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */,
 				98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */,
 				9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */,
 				980894AF1DC57DF000499DA3 /* InvalidModalView.swift */,
@@ -317,6 +325,7 @@
 				98F7427D1DC2D07500B3B0D9 /* ModalViewContainer.swift */,
 				9E5E3B1F1DCE7F18009A456A /* TitleAndContentContainer.swift */,
 				9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */,
+				981BB8E21DFDE3D400EDC9FE /* HeaderContainer.swift */,
 			);
 			path = containers;
 			sourceTree = "<group>";
@@ -733,6 +742,7 @@
 				9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */,
 				9EF8CEE51DC51F4800CA9446 /* NavigationController.swift in Sources */,
 				9E6F37B41DEB52BA0080C9AD /* EventFeedViewController.swift in Sources */,
+				981BB8E11DFCBD6300EDC9FE /* EventListTableViewCell.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
 				9821AA951DE111C2005D50B6 /* User.swift in Sources */,
@@ -748,8 +758,10 @@
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
 				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
+				981BB8E31DFDE3D400EDC9FE /* HeaderContainer.swift in Sources */,
 				98211FF41DFA422D005D99C7 /* Session.swift in Sources */,
 				9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */,
+				981BB8DF1DFCBB6700EDC9FE /* EventListViewController.swift in Sources */,
 				98704A411DEBA495001323FF /* Socket.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98F742801DC2F55A00B3B0D9 /* EventModalView.swift in Sources */,
