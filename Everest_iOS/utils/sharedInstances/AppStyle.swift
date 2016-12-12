@@ -37,10 +37,17 @@ class AppStyle {
   let headerContainerHeight: CGFloat = 90
   let headerViewContainerHeaderHeight: CGFloat = 131
   
+  //SKU - Tag Property Attributes
+  let tagPropertyHeight: CGFloat = 30
+  let tagPropertyMargin: CGFloat = 40
+  let tagPropertySpacing: CGFloat = 8
+  
   //SKU - Header fonts
   let headerFontLargeBold = UIFont(name: "HelveticaNeue-Bold", size: 50)
   let headerFontLargeRegular = UIFont(name: "HelveticaNeue", size: 50)
-  let headerFontLargeLight = UIFont(name: "HelveticaNeue-Light", size: 50)
+  let headerFontLargerLight = UIFont(name: "HelveticaNeue-Light", size: 50)
+  let headerFontLarge30Light = UIFont(name: "HelveticaNeue-Light", size: 30)
+  let headerFontLarge25Light = UIFont(name: "HelveticaNeue-Light", size: 25)
   let headerFontSemiLarge = UIFont(name: "HelveticaNeue", size: 22.5)
   let headerFontMedium = UIFont(name: "HelveticaNeue-Light", size: 20)
   let headerFontSmall = UIFont(name: "HelveticaNeue-Light", size: 15)
