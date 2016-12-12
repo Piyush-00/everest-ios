@@ -47,4 +47,11 @@ extension UIColor {
       }
     }
   
+    static func randomColor() -> UIColor {
+      
+      let red:CGFloat = .random()
+      let green:CGFloat = .random()
+      let blue:CGFloat = .random()
+      return UIColor(red:red, green: green, blue: blue, alpha: 0.7)
+    }
 }
