@@ -14,7 +14,7 @@ class TagFlowLayoutManager : UICollectionViewFlowLayout {
     let attributesForElementsinRect = super.layoutAttributesForElements(in: rect)
     var newAttributesForElementsinRect = [UICollectionViewLayoutAttributes]()
     
-    var leftMargin: CGFloat = 0.0;
+    var leftMargin: CGFloat = 0.0
     
     for attributes in attributesForElementsinRect! {
       let refAttributes = attributes.copy() as! UICollectionViewLayoutAttributes
