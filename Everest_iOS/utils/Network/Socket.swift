@@ -12,9 +12,16 @@ import SocketIO
 class Socket : NSObject {
 
   private static let socket = SocketIOClient(socketURL: URL(string: t())!)
-  
-  static func establishConnection() {
+  static func establishConnection(completionHandler : @escaping (Bool) -> ()) {
     socket.connect()
+    
+    socket.on("connect"){ data, ack in
+      completionHandler(true)
+    }
+    socket.on("error"){ _,_ in
+      closeConnection()
+      completionHandler(false)
+    }
   }
   
   static func closeConnection() {

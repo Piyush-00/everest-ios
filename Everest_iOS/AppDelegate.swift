@@ -16,19 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+      
+      Session.manager.updateUserState()
+    
+      self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+      let rootView = LandingViewController()
         
-        let rootView = LandingViewController()
+      self.navigationController = NavigationController()
+      self.navigationController?.navigationBar.isHidden = true
+      self.navigationController?.viewControllers = [rootView]
         
-        navigationController = NavigationController()
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.viewControllers = [rootView]
-        
-        window!.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-        
-        return true
+      self.window!.rootViewController = self.navigationController
+      self.window?.makeKeyAndVisible()
+      
+      
+      return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
