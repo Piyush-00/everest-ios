@@ -10,6 +10,7 @@ import UIKit
 
 class EventFeedTableViewCell: UITableViewCell {
   private let nameAndContentContainerStackView = UIStackView()
+  private let profilePictureImageView = UIImageView()
   private let nameLabel = UILabel()
   private let postContentLabel = UILabel()
   private let timestampLabel = UILabel()
@@ -26,7 +27,14 @@ class EventFeedTableViewCell: UITableViewCell {
   private let nameAndContentVerticalMargin: CGFloat = 25.0
   private let nameAndContentContainerSpacing: CGFloat = 10.0
   private let timestampLabelTrailingMargin: CGFloat = 20.0
-  var profilePictureImage = UIImage()
+  var profilePictureImage: UIImage? {
+    get {
+      return profilePictureImageView.image
+    }
+    set {
+      profilePictureImageView.image = newValue
+    }
+  }
   var name: String? {
     get {
       return nameLabel.text
@@ -65,7 +73,6 @@ class EventFeedTableViewCell: UITableViewCell {
     
     let cardView = UIView()
     let profilePictureView = UIView()
-    let profilePictureImageView = UIImageView(image: profilePictureImage)
     
     cardView.translatesAutoresizingMaskIntoConstraints = false
     cardView.backgroundColor = appStyle.eventFeedCardViewBackgroundColor
@@ -83,7 +90,7 @@ class EventFeedTableViewCell: UITableViewCell {
     profilePictureView.translatesAutoresizingMaskIntoConstraints = false
     profilePictureView.layer.cornerRadius = profilePictureViewDiameter / 2.0
     profilePictureView.layer.masksToBounds = true
-    profilePictureView.backgroundColor = UIColor.blue
+    profilePictureView.clipsToBounds = true
     profilePictureView.addSubview(profilePictureImageView)
     cardView.addSubview(profilePictureView)
     
