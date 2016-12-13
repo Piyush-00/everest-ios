@@ -8,14 +8,14 @@
 
 import UIKit
 
-class LandingViewController: UIViewController, BaseCameraSesssionProtocol, ModalViewContainerProtocol {
+class LandingViewController: UIViewController, BaseCameraSesssionProtocol, ModalViewContainerProtocol, SessionProtocol {
   var overlayView = UIView()
   var scanButtonContainer = BaseInputButtonContainer(buttonTitle: "Scan")
   var createEvenButtonContainer = BaseInputButtonContainer(buttonTitle: "Create Event")
   var loginButtonContainer = BaseInputButtonContainer(buttonTitle: "Login")
   var signupButtonContainer = BaseInputButtonContainer(buttonTitle: "Sign up")
-  var headerTextView = BaseInputTextView(textInput: "Hi! Sign up to get started.")
-  var subHeaderTextView = BaseInputTextView(textInput: "Or scan now and join later!")
+  var headerTextView = BaseInputTextView(textInput : nil)
+  var subHeaderTextView = BaseInputTextView(textInput : nil)
   var baseCameraView = BaseCameraSesssion()
   var scanButtoncontainerBottomConstraint = NSLayoutConstraint()
   var tappedScanButton = false
@@ -24,6 +24,7 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     super.viewDidLoad()
     
     baseCameraView.delegate = self
+    Session.delegate = self
     overlayView.addSubview(headerTextView)
     overlayView.addSubview(subHeaderTextView)
     overlayView.addSubview(scanButtonContainer)
@@ -40,6 +41,19 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     loginButtonContainer.button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
     
     setupConstraints()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    switch Session.manager.userState {
+      case .loggedIn:
+        self.loginButtonContainer.removeFromSuperview()
+        self.signupButtonContainer.removeFromSuperview()
+        self.headerTextView.text = "Hey " + (Session.manager.user?.getFirstName())! + "!"
+        self.subHeaderTextView.text = "Scan or create an event"
+      case .loggedOut:
+        self.headerTextView.text = "Hi! Sign up to get started."
+        self.subHeaderTextView.text = "Scan or create an event"
+    }
   }
   
   func didTapScanButton(sender: UIButton) {
@@ -255,5 +269,11 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     view.removeFromSuperview()
     //SKU - Once the modal has been removed, add QR Scanner output onto the session
     self.baseCameraView.addOutput()
+  }
+
+  //MARK: SessionProtocol
+  func didReceiveUserState(response: Bool) {
+    //SKU - This deletegate protocol would only be activated if user is already signed in
+    self.headerTextView.text = "Hey " + (Session.manager.user?.getFirstName())! + "!"
   }
 }

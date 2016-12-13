@@ -123,7 +123,7 @@ class Event {
   }
   
   public func isUserSignedIn() -> String? {
-    return User.getKeyChainUserID()
+    return User.getUserID()
   }
   
   public func createEvent(completionHandler: @escaping (Bool) -> ()){

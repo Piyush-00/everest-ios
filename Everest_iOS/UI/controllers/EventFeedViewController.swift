@@ -57,7 +57,13 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     setupConstraints()
     
-    Socket.establishConnection()
+    Socket.establishConnection() { response in
+      if response {
+        NewsFeedSocket.joinNewsFeedRoom(userID: self.userID, eventID: self.eventID, completionHandler: { response in
+          print("joinNewsFeedRoom: \(response)")
+        })
+      }
+    }
     
     NewsFeedSocket.onNewPost() { response in
       var postData = response
@@ -100,10 +106,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     eventFeedModalContainer.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     eventFeedModalContainer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     eventFeedModalContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-
-    NewsFeedSocket.joinNewsFeedRoom(userID: userID, eventID: eventID, completionHandler: { response in
-      print("joinNewsFeedRoom: \(response)")
-    })
   }
   
   private func displayNewPost() {

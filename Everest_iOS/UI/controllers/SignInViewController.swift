@@ -15,6 +15,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
   private let extraInfoView = UIView()
   private var emailTextField, passwordTextField : BaseInputTextField?
   var user = User()
+  var initialFlowViewController:  UIViewController? = nil
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -84,9 +85,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     user.signIn(email: (emailTextField?.text!)!, password: (passwordTextField?.text!)!) { response in
       switch response{
       case true:
+        Session.manager.user = self.user
+        Session.manager.checkState()
         if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-          let landingViewController = LandingViewController()
-          navigationController.pushViewController(landingViewController, animated: true)
+          
+          if (self.initialFlowViewController != nil) {
+            navigationController.popToViewController(self.initialFlowViewController!, animated: true)
+          } else {
+            let landingViewController = LandingViewController()
+            navigationController.pushViewController(landingViewController, animated: true)
+          }
         }
         
       case false:
