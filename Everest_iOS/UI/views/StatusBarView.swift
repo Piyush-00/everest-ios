@@ -9,20 +9,31 @@
 import UIKit
 
 class StatusBarView: UIView {
-    init() {
-        super.init(frame: .zero)
-        setup()
-    }
+  
+  private var defaultBackground : Bool = false
+  
+  init(defaultBackground: Bool = false) {
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
+    self.defaultBackground = defaultBackground
     
-    func setup() {
-        backgroundColor = self.superviewBackgroundColor
-        sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
+    super.init(frame: .zero)
+    setup()
+  }
+    
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setup()
+  }
+    
+  func setup() {
+    
+    if (defaultBackground == false) {
+      backgroundColor = self.superviewBackgroundColor
+    } else {
+      backgroundColor = AppStyle.sharedInstance.nativeStatusBarColor
+    }
+    sideBorder(side: .bottom, width: 1, colour: UIColor.black.withAlphaComponent(0.2))
         
-        heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
-    }
+    heightAnchor.constraint(equalToConstant: UIApplication.shared.statusBarFrame.height).isActive = true
+  }
 }

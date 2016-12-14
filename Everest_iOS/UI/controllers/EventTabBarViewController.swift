@@ -26,5 +26,6 @@ class EventTabBarViewController: UITabBarController {
     eventNavigationController.viewControllers = [eventFeedViewController]
     
     self.viewControllers = [eventNavigationController]
+    
   }
 }
