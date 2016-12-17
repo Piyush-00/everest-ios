@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTabBarViewController: UITabBarController {
+class EventTabBarViewController: UIViewController {
   override init(nibName: String?, bundle: Bundle?) {
     super.init(nibName: nibName, bundle: bundle)
     setup()
@@ -22,10 +22,21 @@ class EventTabBarViewController: UITabBarController {
   private func setup() {
     let eventNavigationController = UINavigationController()
     let eventFeedViewController = EventFeedViewController()
+    let createEventViewController = CreateEventViewController()
     
     eventNavigationController.viewControllers = [eventFeedViewController]
+  
+    let test = UIView()
     
-    self.viewControllers = [eventNavigationController]
+    test.translatesAutoresizingMaskIntoConstraints = false
+    test.backgroundColor = .black
+    self.view.addSubview(test)
+    
+    test.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    test.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+    test.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    test.heightAnchor.constraint(equalToConstant: 60).isActive = true
+
     
   }
 }

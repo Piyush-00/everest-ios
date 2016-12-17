@@ -70,6 +70,8 @@
 		9E6F37B61DEB53BD0080C9AD /* EventFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */; };
 		9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B71DF4F0240080C9AD /* EventFeedModal.swift */; };
 		9E6F37BA1DF4FCDA0080C9AD /* EventFeedModalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */; };
+		9E7A78F91E04FCA30049EE17 /* EventTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7A78F81E04FCA30049EE17 /* EventTabBarView.swift */; };
+		9E7A78FB1E04FCBF0049EE17 /* EventTabBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7A78FA1E04FCBF0049EE17 /* EventTabBarButtonView.swift */; };
 		9EC373381DBC760C00D0FCDC /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC373371DBC760C00D0FCDC /* Event.swift */; };
 		9EC79CD91DC5969E0054614D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CD81DC5969E0054614D /* StatusBarView.swift */; };
 		9EC79CDB1DC664140054614D /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */; };
@@ -171,6 +173,8 @@
 		9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedTableViewCell.swift; sourceTree = "<group>"; };
 		9E6F37B71DF4F0240080C9AD /* EventFeedModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventFeedModal.swift; path = containers/EventFeedModal.swift; sourceTree = "<group>"; };
 		9E6F37B91DF4FCDA0080C9AD /* EventFeedModalContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFeedModalContainer.swift; sourceTree = "<group>"; };
+		9E7A78F81E04FCA30049EE17 /* EventTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabBarView.swift; sourceTree = "<group>"; };
+		9E7A78FA1E04FCBF0049EE17 /* EventTabBarButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTabBarButtonView.swift; sourceTree = "<group>"; };
 		9EC373371DBC760C00D0FCDC /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		9EC79CD81DC5969E0054614D /* StatusBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		9EC79CDA1DC664140054614D /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */,
 				98F7427F1DC2F55A00B3B0D9 /* EventModalView.swift */,
 				9E6F37B51DEB53BD0080C9AD /* EventFeedTableViewCell.swift */,
+				9E7A78F81E04FCA30049EE17 /* EventTabBarView.swift */,
+				9E7A78FA1E04FCBF0049EE17 /* EventTabBarButtonView.swift */,
 				980894AF1DC57DF000499DA3 /* InvalidModalView.swift */,
 				98AE46121DAF2ADE0023C9F4 /* BaseInputView.swift */,
 				9EC79CD81DC5969E0054614D /* StatusBarView.swift */,
@@ -780,6 +786,7 @@
 				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
 				98AE45F51DAF29D50023C9F4 /* Http.swift in Sources */,
 				98AE46171DAF2ADE0023C9F4 /* BaseInputTextField.swift in Sources */,
+				9E7A78F91E04FCA30049EE17 /* EventTabBarView.swift in Sources */,
 				983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */,
 				980894B21DC585B500499DA3 /* Translation.swift in Sources */,
 				9EC373381DBC760C00D0FCDC /* Event.swift in Sources */,
@@ -806,6 +813,7 @@
 				9E5E3B1C1DCD9684009A456A /* SignInViewController.swift in Sources */,
 				9821AAA51DE12049005D50B6 /* KeyChain.swift in Sources */,
 				98D1E7AD1DFE175000F6A8FE /* TagFlowLayoutManager.swift in Sources */,
+				9E7A78FB1E04FCBF0049EE17 /* EventTabBarButtonView.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */,
 				9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */,
