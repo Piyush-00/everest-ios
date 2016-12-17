@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class EventTabBarButtonView: UIView {
   private let button = UIButton()
+  private let iconSize: CGSize = CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)
+  
+  private var _viewController: EventContainerViewProtocol?
+  
+  var viewController: EventContainerViewProtocol? {
+    return _viewController
+  }
   
   var icon: UIImage? {
     return button.image(for: .normal)
@@ -38,11 +46,24 @@ class EventTabBarButtonView: UIView {
     button.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
   }
   
-  func setIcon(to icon: String?) {
-  
+  func setViewController(to viewController: EventContainerViewProtocol?) {
+    _viewController = viewController
+    setIcon(to: viewController?.tabIcon)
   }
   
-  func addAction(_ action: Selector) {
-    button.addTarget(self, action: action, for: .touchUpInside)
+  func setIcon(to iconString: String?) {
+    if let iconString = iconString {
+      let iconImageNormal = UIImage.fontAwesomeIcon(code: iconString, textColor: UIColor.black.withAlphaComponent(0.5), size: iconSize)
+      let iconImageFocused = UIImage.fontAwesomeIcon(code: iconString, textColor: UIColor.black.withAlphaComponent(0.7), size: iconSize)
+      button.setImage(iconImageNormal, for: .normal)
+      button.setImage(iconImageFocused, for: .focused)
+    } else {
+      button.setImage(nil, for: .normal)
+      button.setImage(nil, for: .focused)
+    }
+  }
+  
+  func addAction(_ action: Selector, to target: Any?) {
+    button.addTarget(target, action: action, for: .touchUpInside)
   }
 }

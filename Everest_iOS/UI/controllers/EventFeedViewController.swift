@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventContainerViewProtocol {
   private let tableView = UITableView()
   private let tableHeaderImageView = UIImageView()
   private let postButton = UIButton()
@@ -150,5 +150,15 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return AppStyle.sharedInstance.headerViewContainerHeaderHeight
+  }
+  
+  //MARK: EventContainerViewProtocol
+  
+  var tabIcon: String? {
+    return String.fontAwesomeIcon(name: .bullhorn)
+  }
+  
+  var navigationBarTitle: String? {
+    return "event feed"
   }
 }
