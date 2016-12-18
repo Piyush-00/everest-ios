@@ -146,3 +146,12 @@
 
 /* event feed modal post button */
 "post button" = "post";
+
+/* QR Code view header text */
+"qrcode header" = "Share your event!\nScan to join ";
+
+/* QR Code view disclaimer text */
+"qrcode disclaimer" = "his QR Code will provide access to your event. Be careful of who you share your Admin code with.";
+
+/* QR Code view pro tip text */
+"qrcode pro tip" = "Tip: Only share your code to your attendees or people you trust!";
