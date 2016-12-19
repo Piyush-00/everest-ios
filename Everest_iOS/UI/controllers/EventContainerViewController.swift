@@ -20,10 +20,6 @@ extension EventContainerViewProtocol {
   func attachTabButton() {
     tabButton.setViewController(to: viewController as? EventContainerViewProtocol)
   }
-  
-  func setIsCurrentViewController(_ isCurrentViewController: Bool) {
-    tabButton.isSelected = isCurrentViewController
-  }
 }
 
 class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
@@ -35,8 +31,11 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   }
   
   private var _currentViewController: EventContainerViewProtocol? {
+    willSet {
+      
+    }
     didSet {
-      eventTabBar.setCurrentTabBarButton(to: _currentViewController?.tabButton) 
+      
     }
   }
   
@@ -77,12 +76,14 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     eventTabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
   }
   
+  //TODO: implement check to see if viewController is in viewControllers
   func setCurrentViewController(to viewController: EventContainerViewProtocol?) {
+    eventTabBar.setCurrentTabBarButton(to: viewController?.tabButton)
     _currentViewController = viewController
   }
   
   //MARK: EventTabBarViewDelegate
   func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton tabButton: EventTabBarButtonView) {
-    setCurrentViewController(to: tabButton.viewController)
+    _currentViewController = tabButton.viewController
   }
 }
