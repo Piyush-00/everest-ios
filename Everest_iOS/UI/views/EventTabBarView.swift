@@ -25,7 +25,13 @@ class EventTabBarView: UIView {
       _currentTabBarButton?.isSelected = false
     }
     didSet {
+      if let currentTabBarButton = _currentTabBarButton {
+        tabBarHamburgerButton?.isSelected = popupStackView.arrangedSubviews.contains(currentTabBarButton)
+      }
       _currentTabBarButton?.isSelected = true
+      if isTabPoppedUp {
+        isTabPoppedUp = false
+      }
     }
   }
   
@@ -58,13 +64,13 @@ class EventTabBarView: UIView {
       var topConstraintConstant: CGFloat
       var viewAnimationOption: UIViewAnimationOptions
       if isTabPoppedUp {
-        topConstraintConstant = -popupContainer.bounds.height
+        topConstraintConstant = -self.bounds.height
         viewAnimationOption = .curveEaseIn
       } else {
-        topConstraintConstant = popupContainer.bounds.height
+        topConstraintConstant = -tabContainer.bounds.height
         viewAnimationOption = .curveEaseOut
       }
-      topConstraint?.constant += topConstraintConstant
+      topConstraint?.constant = topConstraintConstant
       UIView.animate(withDuration: 0.2, delay: 0, options: viewAnimationOption, animations: {
         self.superview?.layoutIfNeeded()
       }, completion: nil)
@@ -84,10 +90,10 @@ class EventTabBarView: UIView {
   }
   
   private func setup() {
-    tabContainer.backgroundColor = .white
+    tabContainer.backgroundColor = AppStyle.sharedInstance.backgroundColor
     tabContainer.addSubview(tabStackView)
     
-    popupContainer.backgroundColor = .red
+    popupContainer.backgroundColor = .white
     popupContainer.clipsToBounds = false
     popupContainer.addSubview(popupStackView)
     

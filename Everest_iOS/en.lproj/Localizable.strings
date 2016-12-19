@@ -146,3 +146,21 @@
 
 /* event feed modal post button */
 "post button" = "post";
+
+/* event navigation header */
+"event feed navigation" = "Feed";
+
+/* event navigation header */
+"event chat navigation" = "Groups";
+
+/* event navigation header */
+"event list navigation" = "People";
+
+/* event navigation header */
+"event profile navigation" = "Profile";
+
+/* event navigation header */
+"event qr code navigation" = "Connect";
+
+/* event navigation header */
+"event page navigation" = "Event";

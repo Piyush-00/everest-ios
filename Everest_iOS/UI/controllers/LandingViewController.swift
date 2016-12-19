@@ -44,6 +44,8 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
   }
   
   override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
     switch Session.manager.userState {
       case .loggedIn:
         self.loginButtonContainer.removeFromSuperview()
@@ -62,7 +64,7 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
   
   func didTapCreateEventButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-      let createEventViewController = CreateEventViewController()
+      let createEventViewController = EventContainerViewController()
       navigationController.pushViewController(createEventViewController, withAnimation: .fromTop)
     }
   }

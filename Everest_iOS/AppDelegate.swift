@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
       self.window = UIWindow(frame: UIScreen.main.bounds)
       
-      let rootView = EventContainerViewController()
+      let rootView = LandingViewController()
       
       self.navigationController = NavigationController()
       self.navigationController?.navigationBar.isHidden = true
