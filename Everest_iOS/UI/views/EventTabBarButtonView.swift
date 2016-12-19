@@ -14,13 +14,32 @@ class EventTabBarButtonView: UIView {
   private let iconSize: CGSize = CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)
   
   private var _viewController: EventContainerViewProtocol?
+  private var _icon: FontAwesome?
+  
+  private var iconColorNormal: UIColor {
+    return UIColor.black.withAlphaComponent(0.5)
+  }
+  private var iconColorSelected: UIColor {
+    return UIColor.black.withAlphaComponent(0.7)
+  }
   
   var viewController: EventContainerViewProtocol? {
     return _viewController
   }
   
-  var icon: UIImage? {
-    return button.image(for: .normal)
+  var icon: FontAwesome? {
+    return _icon
+  }
+  
+  var isSelected: Bool = false {
+    didSet {
+      guard let icon = _icon else {
+        return
+      }
+      let iconColorState: UIColor = isSelected ? iconColorSelected : iconColorNormal
+      let iconImage = UIImage.fontAwesomeIcon(name: icon, textColor: iconColorState, size: iconSize)
+      button.setImage(iconImage, for: .normal)
+    }
   }
   
   override init(frame: CGRect) {
@@ -35,6 +54,9 @@ class EventTabBarButtonView: UIView {
   
   private func setup() {
     self.addSubview(button)
+    self.layer.borderColor = UIColor.black.cgColor
+    self.layer.borderWidth = 1.0
+    self.backgroundColor = .white
     setupConstraints()
   }
   
@@ -51,16 +73,15 @@ class EventTabBarButtonView: UIView {
     setIcon(to: viewController?.tabIcon)
   }
   
-  func setIcon(to iconString: String?) {
-    if let iconString = iconString {
-      let iconImageNormal = UIImage.fontAwesomeIcon(code: iconString, textColor: UIColor.black.withAlphaComponent(0.5), size: iconSize)
-      let iconImageFocused = UIImage.fontAwesomeIcon(code: iconString, textColor: UIColor.black.withAlphaComponent(0.7), size: iconSize)
+  func setIcon(to icon: FontAwesome?) {
+    if let icon = icon {
+      let iconImageNormal = UIImage.fontAwesomeIcon(name: icon, textColor: iconColorNormal, size: iconSize)
       button.setImage(iconImageNormal, for: .normal)
-      button.setImage(iconImageFocused, for: .focused)
     } else {
       button.setImage(nil, for: .normal)
-      button.setImage(nil, for: .focused)
     }
+    
+    _icon = icon
   }
   
   func addAction(_ action: Selector, to target: Any?) {

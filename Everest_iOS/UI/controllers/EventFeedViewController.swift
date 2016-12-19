@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventContainerViewProtocol {
   private let tableView = UITableView()
   private let tableHeaderImageView = UIImageView()
   private let postButton = UIButton()
+  
+  private let eventFeedTabButton = EventTabBarButtonView()
   
   private let userID = "583a10da2db1b150f71760a3"
   private let newsFeedID = "584472a41ef0ebd8e34c006d"
@@ -23,6 +26,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   private let postButtonDiameter: CGFloat = 60.0
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
+  
+  override init(nibName: String?, bundle: Bundle?) {
+    super.init(nibName: nibName, bundle: bundle)
+    self.attachTabButton()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    self.attachTabButton()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -154,8 +167,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   //MARK: EventContainerViewProtocol
   
-  var tabIcon: String? {
-    return String.fontAwesomeIcon(name: .bullhorn)
+  var viewController: EventContainerViewProtocol {
+    return self
+  }
+  
+  var tabButton: EventTabBarButtonView {
+    return eventFeedTabButton
+  }
+  
+  var tabIcon: FontAwesome? {
+    return FontAwesome.bullhorn
   }
   
   var navigationBarTitle: String? {

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 protocol EventTabBarViewDelegate: class {
-  func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton: EventTabBarButtonView)
+  func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton tabButton: EventTabBarButtonView)
 }
 
 class EventTabBarView: UIView {
@@ -20,9 +21,6 @@ class EventTabBarView: UIView {
     var tabBarButtonArray: [EventTabBarButtonView] = []
   
     for tabBarButton in tabStackView.arrangedSubviews {
-      if tabBarButton == tabStackView.arrangedSubviews.first {
-        continue
-      }
       guard let tabBarButton = tabBarButton as? EventTabBarButtonView else {
         return []
       }
@@ -37,6 +35,15 @@ class EventTabBarView: UIView {
     }
     
     return tabBarButtonArray
+  }
+  
+  private var currentTabBarButton: EventTabBarButtonView? {
+    willSet {
+      currentTabBarButton?.isSelected = false
+    }
+    didSet {
+      currentTabBarButton?.isSelected = true
+    }
   }
   
   weak var delegate: EventTabBarViewDelegate?
@@ -54,13 +61,14 @@ class EventTabBarView: UIView {
   private func setup() {
     tabStackView.axis = .horizontal
     tabStackView.spacing = 0
+    tabStackView.distribution = .fillEqually
     
     popupStackView.axis = .vertical
     popupStackView.spacing = 0
+    popupStackView.distribution = .fillEqually
     
     self.addSubview(tabStackView)
     self.addSubview(popupStackView)
-    tabStackView.backgroundColor = .red
     
     setupConstraints()
   }
@@ -84,28 +92,25 @@ class EventTabBarView: UIView {
     tabStackView.arrangedSubviews.forEach({tabStackView.removeArrangedSubview($0)})
     popupStackView.arrangedSubviews.forEach({popupStackView.removeArrangedSubview($0)})
     
-    if viewControllers.count < 5 {
+    if viewControllers.count < 4 {
       for viewController in viewControllers {
-        let tabBarButton = EventTabBarButtonView()
-        tabBarButton.setViewController(to: viewController)
+        let tabBarButton = viewController.tabButton
         tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
         tabStackView.addArrangedSubview(tabBarButton)
       }
     } else {
       var i = 0
       for viewController in viewControllers {
-        let tabBarButton = EventTabBarButtonView()
+        let tabBarButton = viewController.tabButton
         if i < 4 {
           if i == 0 {
-            tabBarButton.setIcon(to: String.fontAwesomeIcon(name: .bars))
+            tabBarButton.setIcon(to: FontAwesome.bars)
             tabBarButton.addAction(#selector(didTapHamburgerTabButton), to: self)
           } else {
-            tabBarButton.setViewController(to: viewController)
             tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
           }
           tabStackView.addArrangedSubview(tabBarButton)
         } else {
-          tabBarButton.setViewController(to: viewController)
           popupStackView.addArrangedSubview(tabBarButton)
         }
         i += 1

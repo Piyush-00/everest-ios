@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 protocol EventContainerViewProtocol {
-  var tabIcon: String? {get}
+  var viewController: EventContainerViewProtocol {get}
+  var tabButton: EventTabBarButtonView {get}
+  var tabIcon: FontAwesome? {get}
   var navigationBarTitle: String? {get}
+}
+
+extension EventContainerViewProtocol {
+  func attachTabButton() {
+    tabButton.setViewController(to: viewController)
+  }
 }
 
 class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   private var eventTabBar = EventTabBarView()
   var viewControllers: [EventContainerViewProtocol] = [] {
     didSet {
-      
       eventTabBar.setupTabButtons(usingViewControllers: viewControllers)
     }
   }
@@ -33,12 +41,12 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   }
   
   private func setup() {
-    let eventFeedViewController = EventFeedViewController()
-    let createEventViewController = CreateEventViewController()
-    let eventConfirmVC = EventConfirmationViewController()
-    let eventDescription = AdminDescriptionFormViewController()
+    let testVC1 = EventFeedViewController()
+    let testVC2 = EventFeedViewController()
+    let testVC3 = EventFeedViewController()
+    let testVC4 = EventFeedViewController()
     
-    viewControllers = [eventFeedViewController]
+    viewControllers = [testVC1, testVC2, testVC3, testVC4]
     
     self.view.addSubview(eventTabBar)
     setupConstraints()
@@ -53,7 +61,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   }
   
   //MARK: EventTabBarViewDelegate
-  func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton: EventTabBarButtonView) {
+  func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton tabButton: EventTabBarButtonView) {
     print("tapped")
   }
 }
