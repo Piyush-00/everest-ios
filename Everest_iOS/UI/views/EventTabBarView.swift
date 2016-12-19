@@ -14,8 +14,11 @@ protocol EventTabBarViewDelegate: class {
 }
 
 class EventTabBarView: UIView {
+  private let tabContainer = UIView()
   private let tabStackView = UIStackView()
+  private let popupContainer = UIView()
   private let popupStackView = UIStackView()
+  private var topConstraint: NSLayoutConstraint?
   private var tabBarHamburgerButton: EventTabBarButtonView?
   private var _currentTabBarButton: EventTabBarButtonView? {
     willSet {
@@ -50,6 +53,24 @@ class EventTabBarView: UIView {
     return _currentTabBarButton
   }
   
+  var isTabPoppedUp: Bool = false {
+    didSet {
+      var topConstraintConstant: CGFloat
+      var viewAnimationOption: UIViewAnimationOptions
+      if isTabPoppedUp {
+        topConstraintConstant = -popupContainer.bounds.height
+        viewAnimationOption = .curveEaseIn
+      } else {
+        topConstraintConstant = popupContainer.bounds.height
+        viewAnimationOption = .curveEaseOut
+      }
+      topConstraint?.constant += topConstraintConstant
+      UIView.animate(withDuration: 0.2, delay: 0, options: viewAnimationOption, animations: {
+        self.superview?.layoutIfNeeded()
+      }, completion: nil)
+    }
+  }
+  
   weak var delegate: EventTabBarViewDelegate?
   
   override init(frame: CGRect) {
@@ -63,6 +84,13 @@ class EventTabBarView: UIView {
   }
   
   private func setup() {
+    tabContainer.backgroundColor = .white
+    tabContainer.addSubview(tabStackView)
+    
+    popupContainer.backgroundColor = .red
+    popupContainer.clipsToBounds = false
+    popupContainer.addSubview(popupStackView)
+    
     tabStackView.axis = .horizontal
     tabStackView.spacing = 0
     tabStackView.distribution = .fillEqually
@@ -71,25 +99,36 @@ class EventTabBarView: UIView {
     popupStackView.spacing = 0
     popupStackView.distribution = .fillEqually
     
-    self.addSubview(tabStackView)
-    self.addSubview(popupStackView)
+    self.addSubview(tabContainer)
+    self.addSubview(popupContainer)
     
     setupConstraints()
   }
   
   private func setupConstraints() {
+    tabContainer.translatesAutoresizingMaskIntoConstraints = false
+    popupContainer.translatesAutoresizingMaskIntoConstraints = false
     tabStackView.translatesAutoresizingMaskIntoConstraints = false
     popupStackView.translatesAutoresizingMaskIntoConstraints = false
     
-    tabStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-    tabStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    tabStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    tabStackView.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.tabBarButtonIconSize).isActive = true
+    tabContainer.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    tabContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    tabContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     
-    popupStackView.topAnchor.constraint(equalTo: tabStackView.bottomAnchor).isActive = true
-    popupStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    popupStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    popupStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    popupContainer.topAnchor.constraint(equalTo: tabContainer.bottomAnchor).isActive = true
+    popupContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    popupContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    popupContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    
+    tabStackView.topAnchor.constraint(equalTo: tabContainer.topAnchor).isActive = true
+    tabStackView.bottomAnchor.constraint(equalTo: tabContainer.bottomAnchor).isActive = true
+    tabStackView.leadingAnchor.constraint(equalTo: tabContainer.leadingAnchor).isActive = true
+    tabStackView.trailingAnchor.constraint(equalTo: tabContainer.trailingAnchor).isActive = true
+    
+    popupStackView.topAnchor.constraint(equalTo: popupContainer.topAnchor).isActive = true
+    popupStackView.leadingAnchor.constraint(equalTo: popupContainer.leadingAnchor).isActive = true
+    popupStackView.trailingAnchor.constraint(equalTo: popupContainer.trailingAnchor).isActive = true
+    popupStackView.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor).isActive = true
   }
   
   func setupTabButtons(usingViewControllers viewControllers: [EventContainerViewProtocol]) {
@@ -116,6 +155,7 @@ class EventTabBarView: UIView {
           tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
           tabStackView.addArrangedSubview(tabBarButton)
         } else {
+          tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
           popupStackView.addArrangedSubview(tabBarButton)
         }
         i += 1
@@ -136,6 +176,16 @@ class EventTabBarView: UIView {
   }
   
   func didTapHamburgerTabButton(sender: UIButton) {
+    isTabPoppedUp = !isTabPoppedUp
+  }
+  
+  func position(in superView: UIView) {
+    self.translatesAutoresizingMaskIntoConstraints = false
     
+    topConstraint = self.topAnchor.constraint(equalTo: superView.bottomAnchor, constant: -AppStyle.sharedInstance.tabBarButtonIconSize)
+    topConstraint?.isActive = true
+    
+    self.leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
+    self.trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
   }
 }

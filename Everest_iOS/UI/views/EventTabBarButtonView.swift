@@ -56,7 +56,6 @@ class EventTabBarButtonView: UIView {
     self.addSubview(button)
     self.layer.borderColor = UIColor.black.cgColor
     self.layer.borderWidth = 1.0
-    self.backgroundColor = .white
     setupConstraints()
   }
   

@@ -58,22 +58,22 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     let testVC2 = EventFeedViewController()
     let testVC3 = EventFeedViewController()
     let testVC4 = EventFeedViewController()
+    let testVC5 = EventFeedViewController()
+    let testVC6 = EventFeedViewController()
     
     eventTabBar.delegate = self
     
-    viewControllers = [testVC1, testVC2, testVC3, testVC4]
+    viewControllers = [testVC1, testVC2, testVC3, testVC4, testVC5, testVC6]
     setCurrentViewController(to: viewControllers.first)
     
     self.view.addSubview(eventTabBar)
+    eventTabBar.position(in: self.view)
+    
     setupConstraints()
   }
   
   private func setupConstraints() {
-    eventTabBar.translatesAutoresizingMaskIntoConstraints = false
     
-    eventTabBar.topAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: -AppStyle.sharedInstance.tabBarButtonIconSize).isActive = true
-    eventTabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-    eventTabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
   }
   
   //TODO: implement check to see if viewController is in viewControllers

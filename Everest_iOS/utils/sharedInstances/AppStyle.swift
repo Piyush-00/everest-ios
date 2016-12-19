@@ -69,7 +69,7 @@ class AppStyle {
   let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
   let scanningErrorImageRed = UIImage(named: "Invalid-QR-scan-image-red")
   
-  let tabBarButtonIconSize: CGFloat = 40.0
+  let tabBarButtonIconSize: CGFloat = 60.0
   
   func baseInputButton() -> UIButton {
     let button = UIButton(type: .custom)
