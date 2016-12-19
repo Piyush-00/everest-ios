@@ -74,11 +74,9 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     navigationBarTitleLabel.textAlignment = .center
     navigationBarTitleLabel.text = testVC1.navigationBarTitle
     
-    eventNavigationBar.backgroundColor = AppStyle.sharedInstance.backgroundColor
+    eventNavigationBar.backgroundColor = .white
     eventNavigationBar.addSubview(navigationBarTitleLabel)
-    
-    contentView.layer.borderColor = UIColor.red.cgColor
-    contentView.layer.borderWidth = 1.0
+    eventNavigationBar.sideBorder(side: .bottom, width: 1.0, colour: UIColor.black.withAlphaComponent(0.5))
     
     eventTabBar.delegate = self
     

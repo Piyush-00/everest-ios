@@ -90,7 +90,8 @@ class EventTabBarView: UIView {
   }
   
   private func setup() {
-    tabContainer.backgroundColor = AppStyle.sharedInstance.backgroundColor
+    tabContainer.backgroundColor = .white
+    tabContainer.sideBorder(side: .top, width: 1.0, colour: UIColor.black.withAlphaComponent(0.5))
     tabContainer.addSubview(tabStackView)
     
     popupContainer.backgroundColor = .white
@@ -188,7 +189,7 @@ class EventTabBarView: UIView {
   func position(in superView: UIView) {
     self.translatesAutoresizingMaskIntoConstraints = false
     
-    topConstraint = self.topAnchor.constraint(equalTo: superView.bottomAnchor, constant: -AppStyle.sharedInstance.tabBarButtonIconSize)
+    topConstraint = self.topAnchor.constraint(equalTo: superView.bottomAnchor, constant: -AppStyle.sharedInstance.tabBarHeight)
     topConstraint?.isActive = true
     
     self.leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true

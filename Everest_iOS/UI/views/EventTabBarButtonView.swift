@@ -53,16 +53,16 @@ class EventTabBarButtonView: UIView {
   }
   
   private func setup() {
+    self.sideBorder(side: .bottom, width: 1.0, colour: UIColor.black.withAlphaComponent(0.5))
     self.addSubview(button)
-    self.layer.borderColor = UIColor.black.cgColor
-    self.layer.borderWidth = 1.0
+    
     setupConstraints()
   }
   
   private func setupConstraints() {
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-    button.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    button.topAnchor.constraint(equalTo: self.topAnchor, constant: AppStyle.sharedInstance.tabBarButtonVerticalPadding).isActive = true
+    button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -AppStyle.sharedInstance.tabBarButtonVerticalPadding).isActive = true
     button.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     button.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
   }
