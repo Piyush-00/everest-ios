@@ -164,11 +164,12 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         response in
         switch response{
         case true:
-          if let window = (UIApplication.shared.delegate as! AppDelegate).window {
+          if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
             let eventContainerViewController = EventContainerViewController()
             eventNavigationController.viewControllers = [eventContainerViewController]
-            window.rootViewController = eventNavigationController
+            appDelegate.navigationController = nil
+            appDelegate.window?.rootViewController = eventNavigationController
           }
           break
         case false:
