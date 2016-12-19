@@ -24,10 +24,8 @@ extension EventContainerViewProtocol {
 
 class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   private let settingsButton = UIButton()
-  private let eventNavigationBar = UIView()
   private let contentView = UIView()
   private let eventTabBar = EventTabBarView()
-  private let navigationBarTitleLabel = UILabel()
   var viewControllers: [EventContainerViewProtocol] = [] {
     didSet {
       displayCurrentViewControllerView()
@@ -41,7 +39,8 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     }
     didSet {
       displayCurrentViewControllerView()
-      navigationBarTitleLabel.text = _currentViewController?.navigationBarTitle
+      title = _currentViewController?.navigationBarTitle
+      self.navigationController?.navigationBar.isHidden = _currentViewController is UINavigationController
     }
   }
   
@@ -59,58 +58,33 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     setup()
   }
   
-  private func setup() {
-    let appStyle = AppStyle.sharedInstance
-    
-    let testVC1 = EventFeedViewController()
-    let testVC2 = EventFeedViewController()
-    let testVC3 = EventFeedViewController()
-    let testVC4 = EventFeedViewController()
-    let testVC5 = EventFeedViewController()
-    let testVC6 = EventFeedViewController()
-    
-    navigationBarTitleLabel.font = appStyle.textFontLarge
-    navigationBarTitleLabel.textColor = .black
-    navigationBarTitleLabel.textAlignment = .center
-    navigationBarTitleLabel.text = testVC1.navigationBarTitle
-    
-    eventNavigationBar.backgroundColor = .white
-    eventNavigationBar.addSubview(navigationBarTitleLabel)
-    eventNavigationBar.sideBorder(side: .bottom, width: 1.0, colour: UIColor.black.withAlphaComponent(0.5))
+  private func setup() {    
+    let eventFeedViewController = EventFeedViewController()
+    let eventChatNavigationController = EventChatNavigationController(nibName: nil, bundle: nil)
+    let eventProfileNavigationController = EventProfileNavigationController(nibName: nil, bundle: nil)
+    let eventPageNavigationController = EventPageNavigationController(nibName: nil, bundle: nil)
+    let settingsBarButtonItem = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .cog, textColor: UIColor.black, size: CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)), style: UIBarButtonItemStyle.plain, target: self, action: #selector(didTapSettingsButton))
     
     eventTabBar.delegate = self
     
-    viewControllers = [testVC1, testVC2, testVC3, testVC4, testVC5, testVC6]
+    viewControllers = [eventFeedViewController, eventChatNavigationController, eventProfileNavigationController, eventPageNavigationController]
     setCurrentViewController(to: viewControllers.first)
     
-    self.view.addSubview(eventNavigationBar)
     self.view.addSubview(contentView)
     self.view.addSubview(eventTabBar)
     eventTabBar.position(in: self.view)
+    
+    settingsBarButtonItem.tintColor = UIColor.black.withAlphaComponent(0.5)
+    self.navigationItem.rightBarButtonItem = settingsBarButtonItem
     
     setupConstraints()
   }
   
   private func setupConstraints() {
-    guard let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController else {
-      fatalError("fatal error: appDelegate does not have a navigationController property.")
-    }
-    
-    eventNavigationBar.translatesAutoresizingMaskIntoConstraints = false
     settingsButton.translatesAutoresizingMaskIntoConstraints = false
-    navigationBarTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     contentView.translatesAutoresizingMaskIntoConstraints = false
     
-    eventNavigationBar.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
-    eventNavigationBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-    eventNavigationBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-    eventNavigationBar.heightAnchor.constraint(equalToConstant: navigationController.navigationBar.bounds.height + UIApplication.shared.statusBarFrame.height).isActive = true
-    
-    navigationBarTitleLabel.centerXAnchor.constraint(equalTo: eventNavigationBar.centerXAnchor).isActive = true
-    navigationBarTitleLabel.centerYAnchor.constraint(equalTo: eventNavigationBar.centerYAnchor, constant: UIApplication.shared.statusBarFrame.height/2).isActive = true
-    navigationBarTitleLabel.widthAnchor.constraint(equalTo: eventNavigationBar.widthAnchor, multiplier: 0.5).isActive = true
-    
-    contentView.topAnchor.constraint(equalTo: eventNavigationBar.bottomAnchor).isActive = true
+    contentView.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
     contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     contentView.bottomAnchor.constraint(equalTo: eventTabBar.topAnchor).isActive = true
@@ -149,6 +123,20 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     currentViewController.willMove(toParentViewController: nil)
     currentViewController.view.removeFromSuperview()
     currentViewController.removeFromParentViewController()
+  }
+  
+  func didTapSettingsButton(sender: UIBarButtonItem) {
+    let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    let cancelActionButton = UIAlertAction(title: NSLocalizedString("cancel button", comment: "event settings options"), style: .cancel)
+    let logoutActionButton = UIAlertAction(title: NSLocalizedString("log out button", comment: "event settings options"), style: .default)
+      { action in
+        print("logout")
+    }
+    
+    actionSheetController.addAction(cancelActionButton)
+    actionSheetController.addAction(logoutActionButton)
+    self.present(actionSheetController, animated: true, completion: nil)
   }
   
   //MARK: EventTabBarViewDelegate

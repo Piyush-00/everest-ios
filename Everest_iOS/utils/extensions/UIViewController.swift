@@ -25,6 +25,8 @@ extension UIViewController {
   }
   
   func dismissKeyboard() {
-    view.endEditing(true)
+    if view != nil {
+      view.endEditing(true)
+    }
   }
 }

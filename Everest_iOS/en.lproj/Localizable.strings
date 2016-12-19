@@ -164,3 +164,9 @@
 
 /* event navigation header */
 "event page navigation" = "Event";
+
+/* event settings options */
+"cancel button" = "Cancel";
+
+/* event settings options */
+"log out button" = "Sign Out";
