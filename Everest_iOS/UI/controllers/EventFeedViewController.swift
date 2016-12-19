@@ -167,7 +167,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   //MARK: EventContainerViewProtocol
   
-  var viewController: EventContainerViewProtocol {
+  var viewController: UIViewController {
     return self
   }
   

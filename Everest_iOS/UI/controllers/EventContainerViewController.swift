@@ -10,7 +10,7 @@ import UIKit
 import FontAwesome_swift
 
 protocol EventContainerViewProtocol {
-  var viewController: EventContainerViewProtocol {get}
+  var viewController: UIViewController {get}
   var tabButton: EventTabBarButtonView {get}
   var tabIcon: FontAwesome? {get}
   var navigationBarTitle: String? {get}
@@ -18,7 +18,11 @@ protocol EventContainerViewProtocol {
 
 extension EventContainerViewProtocol {
   func attachTabButton() {
-    tabButton.setViewController(to: viewController)
+    tabButton.setViewController(to: viewController as? EventContainerViewProtocol)
+  }
+  
+  func setIsCurrentViewController(_ isCurrentViewController: Bool) {
+    tabButton.isSelected = isCurrentViewController
   }
 }
 
@@ -28,6 +32,16 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     didSet {
       eventTabBar.setupTabButtons(usingViewControllers: viewControllers)
     }
+  }
+  
+  private var _currentViewController: EventContainerViewProtocol? {
+    didSet {
+      eventTabBar.setCurrentTabBarButton(to: _currentViewController?.tabButton) 
+    }
+  }
+  
+  var currentViewController: EventContainerViewProtocol? {
+    return _currentViewController
   }
   
   override init(nibName: String?, bundle: Bundle?) {
@@ -46,7 +60,10 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     let testVC3 = EventFeedViewController()
     let testVC4 = EventFeedViewController()
     
+    eventTabBar.delegate = self
+    
     viewControllers = [testVC1, testVC2, testVC3, testVC4]
+    setCurrentViewController(to: viewControllers.first)
     
     self.view.addSubview(eventTabBar)
     setupConstraints()
@@ -60,8 +77,12 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     eventTabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
   }
   
+  func setCurrentViewController(to viewController: EventContainerViewProtocol?) {
+    _currentViewController = viewController
+  }
+  
   //MARK: EventTabBarViewDelegate
   func eventTabBar(_ eventTabBar: EventTabBarView, didTapTabButton tabButton: EventTabBarButtonView) {
-    print("tapped")
+    setCurrentViewController(to: tabButton.viewController)
   }
 }

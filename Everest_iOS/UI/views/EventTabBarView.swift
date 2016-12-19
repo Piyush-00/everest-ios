@@ -16,6 +16,15 @@ protocol EventTabBarViewDelegate: class {
 class EventTabBarView: UIView {
   private let tabStackView = UIStackView()
   private let popupStackView = UIStackView()
+  private var tabBarHamburgerButton: EventTabBarButtonView?
+  private var _currentTabBarButton: EventTabBarButtonView? {
+    willSet {
+      _currentTabBarButton?.isSelected = false
+    }
+    didSet {
+      _currentTabBarButton?.isSelected = true
+    }
+  }
   
   var tabButtons: [EventTabBarButtonView] {
     var tabBarButtonArray: [EventTabBarButtonView] = []
@@ -37,13 +46,8 @@ class EventTabBarView: UIView {
     return tabBarButtonArray
   }
   
-  private var currentTabBarButton: EventTabBarButtonView? {
-    willSet {
-      currentTabBarButton?.isSelected = false
-    }
-    didSet {
-      currentTabBarButton?.isSelected = true
-    }
+  var currentTabBarButton: EventTabBarButtonView? {
+    return _currentTabBarButton
   }
   
   weak var delegate: EventTabBarViewDelegate?
@@ -102,13 +106,14 @@ class EventTabBarView: UIView {
       var i = 0
       for viewController in viewControllers {
         let tabBarButton = viewController.tabButton
-        if i < 4 {
+        if i < 3 {
           if i == 0 {
-            tabBarButton.setIcon(to: FontAwesome.bars)
-            tabBarButton.addAction(#selector(didTapHamburgerTabButton), to: self)
-          } else {
-            tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
+            tabBarHamburgerButton = EventTabBarButtonView()
+            tabBarHamburgerButton!.setIcon(to: FontAwesome.bars)
+            tabBarHamburgerButton!.addAction(#selector(didTapHamburgerTabButton), to: self)
+            tabStackView.addArrangedSubview(tabBarHamburgerButton!)
           }
+          tabBarButton.addAction(#selector(didTapTabBarButton), to: self)
           tabStackView.addArrangedSubview(tabBarButton)
         } else {
           popupStackView.addArrangedSubview(tabBarButton)
@@ -116,6 +121,10 @@ class EventTabBarView: UIView {
         i += 1
       }
     }
+  }
+  
+  func setCurrentTabBarButton(to tabBarButton: EventTabBarButtonView?) {
+    _currentTabBarButton = tabBarButton
   }
   
   func didTapTabBarButton(sender: UIButton) {
@@ -126,6 +135,6 @@ class EventTabBarView: UIView {
   }
   
   func didTapHamburgerTabButton(sender: UIButton) {
-  
+    setCurrentTabBarButton(to: tabBarHamburgerButton!)
   }
 }
