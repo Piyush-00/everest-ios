@@ -131,15 +131,13 @@ class QRCodeView: UIView {
   
   private func setupAdminToggleButton() {
     AdminToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputInActiveButtonColor
-    AdminToggleButton.setTitle("Admin", for: .normal)
+    AdminToggleButton.setTitle(NSLocalizedString("host button", comment: "host QR code button"), for: .normal)
     AdminToggleButton.layer.cornerRadius = 4.0
   }
   
   private func setupAttendeeToggleButton() {
     AttendeeToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputInActiveButtonColor
-    AttendeeToggleButton.setTitle("Attendee", for: .normal)
+    AttendeeToggleButton.setTitle(NSLocalizedString("guest button", comment: "guest QR code button"), for: .normal)
     AttendeeToggleButton.layer.cornerRadius = 4.0
   }
-  
-  
 }

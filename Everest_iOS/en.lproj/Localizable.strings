@@ -155,3 +155,9 @@
 
 /* QR Code view pro tip text */
 "qrcode pro tip" = "Tip: Only share your code to your attendees or people you trust!";
+
+/* host QR code button */
+"host button" = "Host";
+
+/* guest QR code button */
+"guest button" = "Guest";
