@@ -58,6 +58,7 @@
 		98FAF69F1DF11A5600F3766B /* NewsFeedSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
+		9E15A0B61E08BECD00ABD1C5 /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */; };
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
@@ -158,6 +159,7 @@
 		98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedSocket.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
+		9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageViewController.swift; sourceTree = "<group>"; };
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
 				981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */,
 				98D1E7AA1DFE08C700F6A8FE /* ProfileViewController.swift */,
+				9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				980894B21DC585B500499DA3 /* Translation.swift in Sources */,
 				9EC373381DBC760C00D0FCDC /* Event.swift in Sources */,
 				9821AAA71DE121F1005D50B6 /* Keys.swift in Sources */,
+				9E15A0B61E08BECD00ABD1C5 /* EventPageViewController.swift in Sources */,
 				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
