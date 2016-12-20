@@ -12,6 +12,8 @@
 		980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AD1DC5779800499DA3 /* UIImageView.swift */; };
 		980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894AF1DC57DF000499DA3 /* InvalidModalView.swift */; };
 		980894B21DC585B500499DA3 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980894B11DC585B500499DA3 /* Translation.swift */; };
+		981669B11E05A32500D1B6A8 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981669B01E05A32500D1B6A8 /* QRCodeView.swift */; };
+		981669B31E05A82500D1B6A8 /* EventQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981669B21E05A82500D1B6A8 /* EventQRCodeViewController.swift */; };
 		981BB8DF1DFCBB6700EDC9FE /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */; };
 		981BB8E11DFCBD6300EDC9FE /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */; };
 		981BB8E31DFDE3D400EDC9FE /* HeaderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981BB8E21DFDE3D400EDC9FE /* HeaderContainer.swift */; };
@@ -112,6 +114,8 @@
 		980894AD1DC5779800499DA3 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		980894AF1DC57DF000499DA3 /* InvalidModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidModalView.swift; sourceTree = "<group>"; };
 		980894B11DC585B500499DA3 /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		981669B01E05A32500D1B6A8 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		981669B21E05A82500D1B6A8 /* EventQRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventQRCodeViewController.swift; sourceTree = "<group>"; };
 		981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListViewController.swift; sourceTree = "<group>"; };
 		981BB8E01DFCBD6300EDC9FE /* EventListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
 		981BB8E21DFDE3D400EDC9FE /* HeaderContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderContainer.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
 				981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */,
 				98D1E7AA1DFE08C700F6A8FE /* ProfileViewController.swift */,
+				981669B21E05A82500D1B6A8 /* EventQRCodeViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				9EF8CEE61DC5270100CA9446 /* navigation */,
 				98AE46131DAF2ADE0023C9F4 /* containers */,
 				98D1E7A81DFE076300F6A8FE /* PropertyTagCell.swift */,
+				981669B01E05A32500D1B6A8 /* QRCodeView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -792,6 +798,7 @@
 				981BB8E11DFCBD6300EDC9FE /* EventListTableViewCell.swift in Sources */,
 				98AE45F31DAF29D50023C9F4 /* UIColorExtension.swift in Sources */,
 				9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */,
+				981669B31E05A82500D1B6A8 /* EventQRCodeViewController.swift in Sources */,
 				9821AA951DE111C2005D50B6 /* User.swift in Sources */,
 				9E113B181DA5F433009001C6 /* Attendee.swift in Sources */,
 				982A11771DB2F9D20083ACC5 /* ImagePickerAlertController.swift in Sources */,
@@ -811,6 +818,7 @@
 				98211FF41DFA422D005D99C7 /* Session.swift in Sources */,
 				98E53F5D1DFE435900CA1C0D /* ProfileStatsContainer.swift in Sources */,
 				9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */,
+				981669B11E05A32500D1B6A8 /* QRCodeView.swift in Sources */,
 				981BB8DF1DFCBB6700EDC9FE /* EventListViewController.swift in Sources */,
 				98704A411DEBA495001323FF /* Socket.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
