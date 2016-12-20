@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
-class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventContainerViewProtocol {
   private let tableView = UITableView()
   private let tableHeaderImageView = UIImageView()
   private let postButton = UIButton()
+  
+  private let eventFeedTabButton = EventTabBarButtonView()
   
   private let userID = "583a10da2db1b150f71760a3"
   private let newsFeedID = "584472a41ef0ebd8e34c006d"
@@ -24,12 +27,24 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
+  override init(nibName: String?, bundle: Bundle?) {
+    super.init(nibName: nibName, bundle: bundle)
+    self.attachTabButton()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    self.attachTabButton()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     hideKeyboardWhenTappedAround()
     
     let appStyle = AppStyle.sharedInstance
+    
+    self.title = "Event Feed"
     
     postButton.layer.cornerRadius = postButtonDiameter / 2
     postButton.layer.masksToBounds = true
@@ -83,7 +98,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   private func setupConstraints() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     postButton.translatesAutoresizingMaskIntoConstraints = false
-    
+   
     tableView.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true
     tableView.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor).isActive = true
     tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
@@ -144,5 +159,23 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return AppStyle.sharedInstance.headerViewContainerHeaderHeight
+  }
+  
+  //MARK: EventContainerViewProtocol
+  
+  var viewController: UIViewController {
+    return self
+  }
+  
+  var tabButton: EventTabBarButtonView {
+    return eventFeedTabButton
+  }
+  
+  var tabIcon: FontAwesome? {
+    return FontAwesome.bullhorn
+  }
+  
+  var navigationBarTitle: String? {
+    return NSLocalizedString("event feed navigation", comment: "event navigation header")
   }
 }

@@ -9,6 +9,7 @@ target 'Everest_iOS' do
   pod 'Alamofire', '~> 4.0'
   pod 'RealmSwift'
   pod 'Socket.IO-Client-Swift', '~> 8.1.2'
+  pod 'FontAwesome.swift'
 
   target 'Everest_iOSTests' do
     inherit! :search_paths

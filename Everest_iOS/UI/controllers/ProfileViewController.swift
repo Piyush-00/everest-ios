@@ -8,12 +8,15 @@
 
 import UIKit
 
-class ProfileViewController : UIViewController{
+class ProfileViewController : UIViewController {
   
   private let headerAndStackView = HeaderAndStackViewContainer(withNavigationBar: true)
   private var profileHeaderContainer = ProfileHeaderContainer(110)
   private var profileStats = ProfileStatsContainer()
   private var userName = UILabel()
+  private var barEditButton: UIBarButtonItem!
+  private var barCancelButton: UIBarButtonItem!
+  private var barSaveButton: UIBarButtonItem!
   
   let tags = ["Tech", "Designrdafd", "Humor", "Travel", "Music", "Writing"]
   
@@ -28,8 +31,21 @@ class ProfileViewController : UIViewController{
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.hideKeyboardWhenTappedAround()
     let appStyle = AppStyle.sharedInstance
+    let barButtonSize = CGSize(width: appStyle.tabBarButtonIconSize, height: appStyle.tabBarButtonIconSize)
+    
+    barEditButton = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .pencil, textColor: UIColor.black, size: barButtonSize), style: .plain, target: self, action: #selector(didTapEditButton))
+    barEditButton.tintColor = UIColor.black.withAlphaComponent(0.5)
+    
+    barCancelButton = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .times, textColor: UIColor.black, size: barButtonSize), style: .plain, target: self, action: #selector(didTapCancelButton))
+    barCancelButton.tintColor = UIColor.black.withAlphaComponent(0.5)
+    
+    barSaveButton = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .check, textColor: UIColor.black, size: barButtonSize), style: .plain, target: self, action: #selector(didTapSaveButton))
+    barSaveButton.tintColor = UIColor.black.withAlphaComponent(0.5)
+    
+    self.navigationItem.rightBarButtonItem = barEditButton
+    
+    self.hideKeyboardWhenTappedAround()
     profileHeaderContainer.pictureImageView.downloadedFrom(link: t("/public/uploads/toronto7.png"))
     
     abcd = [tags, bleh, bleh1, bleh2, bleh3]
@@ -46,6 +62,8 @@ class ProfileViewController : UIViewController{
     loadUserCharacteristics()
     
     self.view.addSubview(headerAndStackView)
+    
+    self.title = NSLocalizedString("event profile navigation", comment: "event navigation header")
     
     setupConstraints()
     adjustBackgroundColor()
@@ -86,5 +104,23 @@ class ProfileViewController : UIViewController{
   func enableViewScrolling() {
     headerAndStackView.contentViewHeightConstraint = headerAndStackView.contentView.heightAnchor.constraint(equalTo: headerAndStackView.baseInputView.stackView.heightAnchor, constant: 80)
     headerAndStackView.contentViewHeightConstraint?.isActive = true
+  }
+  
+  func didTapEditButton(sender: UIBarButtonItem) {
+    self.navigationItem.rightBarButtonItem = barSaveButton
+    self.navigationItem.leftBarButtonItem = barCancelButton
+    //TODO: Put view into editing mode
+  }
+  
+  func didTapCancelButton(sender: UIBarButtonItem) {
+    self.navigationItem.leftBarButtonItem = nil
+    self.navigationItem.rightBarButtonItem = barEditButton
+    //TODO: Put view back into viewing mode
+  }
+  
+  func didTapSaveButton(sender: UIBarButtonItem) {
+    self.navigationItem.rightBarButtonItem = barEditButton
+    self.navigationItem.leftBarButtonItem = nil
+    //TODO: Make POST request with new profile data
   }
 }

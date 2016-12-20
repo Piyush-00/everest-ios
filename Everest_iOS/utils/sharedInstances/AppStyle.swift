@@ -29,6 +29,7 @@ class AppStyle {
   let eventFeedCardViewBackgroundColor = UIColor.white
   
   let baseInputButtonColor = UIColor(netHex: 0xbd3333)
+  let baseInputInActiveButtonColor = UIColor(netHex: 0x404040)
   let baseInputSecondaryButtonColor = UIColor(netHex: 0x0075c9)
   let baseInputButtonContainerHeight: CGFloat = 50
   
@@ -36,6 +37,7 @@ class AppStyle {
   
   let headerContainerHeight: CGFloat = 90
   let headerViewContainerHeaderHeight: CGFloat = 131
+  let QRCodeViewHeight: CGFloat = 225
   
   //SKU - Tag Property Attributes
   let tagPropertyHeight: CGFloat = 30
@@ -68,6 +70,12 @@ class AppStyle {
   let pictureImage = UIImage(named: "blank-profile-picture-take")
   let pictureImageWide = UIImage(named: "blank-profile-picture-take-wide")
   let scanningErrorImageRed = UIImage(named: "Invalid-QR-scan-image-red")
+  
+  let tabBarButtonIconSize: CGFloat = 30.0
+  let tabBarButtonVerticalPadding:CGFloat = 10.0
+  var tabBarHeight: CGFloat {
+    return AppStyle.sharedInstance.tabBarButtonIconSize + 2*AppStyle.sharedInstance.tabBarButtonVerticalPadding
+  }
   
   func baseInputButton() -> UIButton {
     let button = UIButton(type: .custom)

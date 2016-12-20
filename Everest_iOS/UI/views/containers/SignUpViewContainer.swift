@@ -132,4 +132,9 @@ class SignUpViewContainer: UIView {
     headerViewHeight = height
     headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
   }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
 }
