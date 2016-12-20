@@ -23,7 +23,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        
+      
+        self.title = "Create Event"
+      
         locationTextField.tag = 1
         dateTimeTextField.tag = 2
         

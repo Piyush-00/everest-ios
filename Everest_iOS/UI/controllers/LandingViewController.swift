@@ -44,6 +44,8 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
   }
   
   override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
     switch Session.manager.userState {
       case .loggedIn:
         self.loginButtonContainer.removeFromSuperview()
