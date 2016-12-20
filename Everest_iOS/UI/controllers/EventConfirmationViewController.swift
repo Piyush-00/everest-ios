@@ -164,15 +164,18 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         response in
         switch response{
         case true:
-          
-          if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-            let eventFeedViewController = EventFeedViewController()
-            navigationController.pushViewController(eventFeedViewController, animated: true)
+          if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
+            let eventContainerViewController = EventContainerViewController()
+            eventNavigationController.viewControllers = [eventContainerViewController]
+            appDelegate.navigationController = nil
+            appDelegate.window?.rootViewController = eventNavigationController
           }
-          
+          break
         case false:
           print("error has occurred")
         }
+        
       }
     }
   

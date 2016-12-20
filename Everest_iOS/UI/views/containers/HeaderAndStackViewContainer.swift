@@ -121,7 +121,12 @@ class HeaderAndStackViewContainer: HeaderViewContainer, BaseInputViewProtocol {
     func getIsCurrentlyScrollable() -> Bool {
       return (scrollViewContentView.bounds.height > (UIScreen.main.bounds.height - heightConstraintConstant))
     }
-    
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+  }
+  
     //MARK: BaseInputViewProtocol
   
     func stackviewFramesDidGetSet() {

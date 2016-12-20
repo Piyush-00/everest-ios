@@ -20,16 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       Session.manager.updateUserState()
     
       self.window = UIWindow(frame: UIScreen.main.bounds)
-        
+      
       let rootView = LandingViewController()
-        
+
       self.navigationController = NavigationController()
       self.navigationController?.navigationBar.isHidden = true
       self.navigationController?.viewControllers = [rootView]
-        
+      
       self.window!.rootViewController = self.navigationController
       self.window?.makeKeyAndVisible()
-      
       
       return true
     }
