@@ -37,7 +37,7 @@ class AppStyle {
   
   let headerContainerHeight: CGFloat = 90
   let headerViewContainerHeaderHeight: CGFloat = 131
-  let QRCodeViewHeight: CGFloat = 250
+  let QRCodeViewHeight: CGFloat = 225
   
   //SKU - Tag Property Attributes
   let tagPropertyHeight: CGFloat = 30

@@ -16,11 +16,11 @@ class QRCodeView: UIView {
   private let toggleViewWrapper = UIView()
   let disclaimerLabelView = UILabel()
   let proTipLabelView = UILabel()
-
   
   //SKU - Constant property decleration
   private let headerViewHeight = AppStyle.sharedInstance.headerViewContainerHeaderHeight
   private let QRCodeHeight = AppStyle.sharedInstance.QRCodeViewHeight
+  private let topMargin:CGFloat = 15
   
   init(_ coder: NSCoder? = nil) {
     
@@ -49,58 +49,65 @@ class QRCodeView: UIView {
     super.didMoveToSuperview()
     
     setupConstraints()
+    setupComponents()
   }
   
-  private func setupConstraints() {
-    
-    translatesAutoresizingMaskIntoConstraints = false
-    headerLabelView.translatesAutoresizingMaskIntoConstraints = false
-    QRCodeImageView.translatesAutoresizingMaskIntoConstraints = false
-    toggleViewWrapper.translatesAutoresizingMaskIntoConstraints = false
-    disclaimerLabelView.translatesAutoresizingMaskIntoConstraints = false
-    proTipLabelView.translatesAutoresizingMaskIntoConstraints = false
-    
-    headerLabelView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-    headerLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
-    headerLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
-    headerLabelView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
+  private func setupComponents() {
     headerLabelView.numberOfLines = 0
     headerLabelView.textAlignment = .center
     headerLabelView.lineBreakMode = .byWordWrapping
     headerLabelView.font = AppStyle.sharedInstance.headerFontLarge25Light
     
-    toggleViewWrapper.topAnchor.constraint(equalTo: headerLabelView.bottomAnchor, constant: 20).isActive = true
-    toggleViewWrapper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
-    toggleViewWrapper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
-    toggleViewWrapper.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    
-    QRCodeImageView.topAnchor.constraint(equalTo: toggleViewWrapper.bottomAnchor, constant: 20).isActive = true
-    QRCodeImageView.heightAnchor.constraint(equalToConstant: QRCodeHeight).isActive = true
-    QRCodeImageView.widthAnchor.constraint(equalToConstant: QRCodeHeight).isActive = true
-    QRCodeImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     QRCodeImageView.clipsToBounds = true
     QRCodeImageView.contentMode = .scaleAspectFit
     QRCodeImageView.layer.masksToBounds = true
     
-    disclaimerLabelView.topAnchor.constraint(equalTo: QRCodeImageView.bottomAnchor, constant: 30).isActive = true
-    disclaimerLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
-    disclaimerLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
     disclaimerLabelView.numberOfLines = 0
     disclaimerLabelView.textAlignment = .center
     disclaimerLabelView.lineBreakMode = .byWordWrapping
     disclaimerLabelView.sizeToFit()
-    disclaimerLabelView.font = AppStyle.sharedInstance.textFontSmallLight
+    disclaimerLabelView.font = AppStyle.sharedInstance.textFontSmallRegular
     disclaimerLabelView.textColor = UIColor(hex: "#4f4f4f")
     
-    proTipLabelView.topAnchor.constraint(equalTo: disclaimerLabelView.bottomAnchor, constant: 15).isActive = true
-    proTipLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
-    proTipLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
     proTipLabelView.numberOfLines = 0
     proTipLabelView.textAlignment = .center
     proTipLabelView.lineBreakMode = .byWordWrapping
     proTipLabelView.sizeToFit()
     proTipLabelView.font = AppStyle.sharedInstance.textFontSmallRegular
     proTipLabelView.textColor = AppStyle.sharedInstance.regularTextColor
+    
+  }
+  
+  private func setupConstraints() {
+    translatesAutoresizingMaskIntoConstraints = false
+    
+    headerLabelView.translatesAutoresizingMaskIntoConstraints = false
+    headerLabelView.topAnchor.constraint(equalTo: topAnchor, constant: topMargin).isActive = true
+    headerLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
+    headerLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
+    headerLabelView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
+    
+    toggleViewWrapper.translatesAutoresizingMaskIntoConstraints = false
+    toggleViewWrapper.topAnchor.constraint(equalTo: headerLabelView.bottomAnchor, constant: topMargin).isActive = true
+    toggleViewWrapper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50).isActive = true
+    toggleViewWrapper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
+    toggleViewWrapper.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    QRCodeImageView.translatesAutoresizingMaskIntoConstraints = false
+    QRCodeImageView.topAnchor.constraint(equalTo: toggleViewWrapper.bottomAnchor, constant: topMargin).isActive = true
+    QRCodeImageView.heightAnchor.constraint(equalToConstant: QRCodeHeight).isActive = true
+    QRCodeImageView.widthAnchor.constraint(equalToConstant: QRCodeHeight).isActive = true
+    QRCodeImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    
+    disclaimerLabelView.translatesAutoresizingMaskIntoConstraints = false
+    disclaimerLabelView.topAnchor.constraint(equalTo: QRCodeImageView.bottomAnchor, constant: topMargin).isActive = true
+    disclaimerLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
+    disclaimerLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
+
+    proTipLabelView.translatesAutoresizingMaskIntoConstraints = false
+    proTipLabelView.topAnchor.constraint(equalTo: disclaimerLabelView.bottomAnchor, constant: topMargin).isActive = true
+    proTipLabelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
+    proTipLabelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32).isActive = true
   }
   
   private func setupToggleViewWrapperConstraints() {

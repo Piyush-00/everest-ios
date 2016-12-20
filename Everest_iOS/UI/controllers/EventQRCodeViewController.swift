@@ -39,11 +39,6 @@ class EventQRCodeViewController : UIViewController {
         self.contentView.AttendeeToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputButtonColor
       }
     }
-  
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
   }
   
   private func setupConstraints() {
