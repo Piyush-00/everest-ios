@@ -10,9 +10,21 @@ import UIKit
 
 class EventPageViewController: UIViewController {
   private let headerAndStackViewContainer = HeaderAndStackViewContainer(withNavigationBar: false)
+  private let headerImageView = UIImageView()
+  private var descriptionContainer: TitleAndContentContainer?
+  private var dateContainer: TitleAndContentContainer?
+  private var locationContainer: TitleAndContentContainer?
+  private var descriptionTextView: BaseInputTextView?
+  private var dateTextField: BaseInputTextField?
+  private var locationTextField: BaseInputTextField?
+  private var promptLabel: UILabel?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    let headerImageView = UIImageView()
-    let description
+    
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
+    
+    headerAndStackViewContainer.setHeaderView(view: headerImageView)
   }
 }
