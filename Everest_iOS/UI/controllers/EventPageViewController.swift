@@ -31,6 +31,8 @@ class EventPageViewController: UIViewController {
     self.view.addSubview(headerAndStackViewContainer)
     self.edgesForExtendedLayout = []
     
+    headerAndStackViewContainer.baseInputView.spacing(value: 10.0)
+    
     setupConstraints()
     
     loadViews()
@@ -51,7 +53,7 @@ class EventPageViewController: UIViewController {
       fatalError("fatal error: event singleton is nil in EventPageViewController instance.")
     }
     
-    let titleToContentConstant: CGFloat = -7.0
+    let titleToContentConstant: CGFloat = -10.0
     
     self.title = event.getName()
     
@@ -61,6 +63,7 @@ class EventPageViewController: UIViewController {
       if !description.isEmpty {
         let descriptionLabelContainer = UIView()
         let leftPaddingGuide = UILayoutGuide()
+        let bottomPaddingGuide = UILayoutGuide()
         
         descriptionLabel = UILabel()
         descriptionLabel?.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +75,7 @@ class EventPageViewController: UIViewController {
         descriptionLabelContainer.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabelContainer.addLayoutGuide(leftPaddingGuide)
         descriptionLabelContainer.addSubview(descriptionLabel!)
+        //descriptionLabelContainer.addLayoutGuide(bottomPaddingGuide)
         
         leftPaddingGuide.widthAnchor.constraint(equalToConstant: 10.0).isActive = true
         leftPaddingGuide.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true
@@ -79,12 +83,12 @@ class EventPageViewController: UIViewController {
         leftPaddingGuide.leadingAnchor.constraint(equalTo: descriptionLabelContainer.leadingAnchor).isActive = true
         
         descriptionLabel?.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true
-        descriptionLabel?.bottomAnchor.constraint(equalTo: descriptionLabelContainer.bottomAnchor).isActive = true
+        descriptionLabel?.bottomAnchor.constraint(equalTo: descriptionLabelContainer.bottomAnchor, constant: -10.0).isActive = true
         descriptionLabel?.leadingAnchor.constraint(equalTo: leftPaddingGuide.trailingAnchor).isActive = true
         descriptionLabel?.trailingAnchor.constraint(equalTo: descriptionLabelContainer.trailingAnchor).isActive = true
         
         descriptionContainer = TitleAndContentContainer(withTitle: NSLocalizedString("about", comment: "about placeholder"), andContent: descriptionLabelContainer)
-        
+        descriptionContainer?.contentViewTopConstraint.constant = -1.0
         descriptionContainer?.contentViewHeightConstraint.isActive = false
         descriptionContainer?.setNeedsLayout()
         descriptionContainer?.layoutIfNeeded()
@@ -99,7 +103,7 @@ class EventPageViewController: UIViewController {
       if !date.isEmpty && !startTime.isEmpty && !endTime.isEmpty {
         dateTextField = BaseInputTextField(hintText: NSLocalizedString("date and time", comment: "date and time placeholder"))
         dateTextField?.isUserInteractionEnabled = false
-        dateTextField?.text = "\(date), from \(startTime) to \(endTime)."
+        dateTextField?.text = "\(date), \(startTime) to \(endTime)."
         dateContainer = TitleAndContentContainer(withTitle: NSLocalizedString("date and time", comment: "date and time placeholder"), andContent: dateTextField!)
         dateContainer?.contentViewTopConstraint.constant = titleToContentConstant
         dateContainer?.setNeedsLayout()
