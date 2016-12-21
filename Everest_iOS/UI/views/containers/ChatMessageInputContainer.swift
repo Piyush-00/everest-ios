@@ -5,18 +5,18 @@
 //  Created by Sathoshi Kumarawadu on 2016-12-18.
 //  Copyright © 2016 Everest. All rights reserved.
 //
-protocol ChatMessageInputContainerProtocol {
+protocol ChatMessageInputContainerProtocol: class {
   func didTapSendButton(inputText: String)
 }
 
 import UIKit
 
-class ChatMessageInputContainer: UIView {
+class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   
   private let textInputView = UITextField()
   private let sendButton = AppStyle.sharedInstance.baseInputButton()
   
-  var delegate: ChatMessageInputContainerProtocol?
+  weak var delegate: ChatMessageInputContainerProtocol?
   
   init(_ coder: NSCoder? = nil) {
     if let coder = coder {
@@ -27,23 +27,19 @@ class ChatMessageInputContainer: UIView {
   
     backgroundColor = UIColor.white
     sideBorder(side: .top, width: 1, colour: UIColor.lightGray)
+    self.textInputView.delegate = self
     setupInputComponents()
   }
-  
   
   required convenience init(coder aDecoder: NSCoder) {
     self.init(aDecoder)
   }
-  
-  override func didMoveToSuperview() {
-    super.didMoveToSuperview()
-  }
-  
+
   private func setupInputComponents() {
-    textInputView.placeholder = "Enter message..."
+    textInputView.placeholder = NSLocalizedString("chat input message", comment: "chat input message text")
     textInputView.font = AppStyle.sharedInstance.headerFontSmall
     
-    sendButton.setTitle("Send", for: .normal)
+    sendButton.setTitle(NSLocalizedString("chat send button", comment: "chat send button text"), for: .normal)
     sendButton.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
     addSubview(sendButton)
     addSubview(textInputView)
@@ -70,5 +66,11 @@ class ChatMessageInputContainer: UIView {
       delegate?.didTapSendButton(inputText: textInputView.text!)
       textInputView.clearText()
     }
+  }
+  
+  //MARK - UITextFieldDelegate
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.endEditing(true)
+    return false
   }
 }

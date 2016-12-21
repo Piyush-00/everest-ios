@@ -33,7 +33,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     hideKeyboardWhenTappedAround()
   
     tableView.register(ChatViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 400.0
