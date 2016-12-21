@@ -185,3 +185,9 @@
 
 /* guest QR code button */
 "guest button" = "Guest";
+
+/* chat input message container */
+"chat input message" = "Enter message...";
+
+/* chat send button text */
+"chat send button" = "Send";

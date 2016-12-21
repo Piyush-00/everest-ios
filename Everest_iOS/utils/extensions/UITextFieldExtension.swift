@@ -19,4 +19,8 @@ extension UITextField {
       objc_setAssociatedObject(self, &kAssociationKeyNextField, newField, .OBJC_ASSOCIATION_RETAIN)
     }
   }
+  
+  func clearText() {
+    self.text = ""
+  }
 }
