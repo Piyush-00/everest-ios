@@ -17,9 +17,10 @@ class Session {
   static let manager = Session()
   
   var user: User?
+  var event: Event?
   var userState: State = .loggedOut
-  static var delegate: SessionProtocol?
   
+  static var delegate: SessionProtocol?
   
   func checkState() {
     let userID: String? = User.getUserID()
