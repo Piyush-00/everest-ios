@@ -63,6 +63,7 @@
 		98FAF69F1DF11A5600F3766B /* NewsFeedSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */; };
 		9E113B181DA5F433009001C6 /* Attendee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B171DA5F433009001C6 /* Attendee.swift */; };
 		9E113B1A1DA5F43B009001C6 /* Admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E113B191DA5F43B009001C6 /* Admin.swift */; };
+		9E15A0B61E08BECD00ABD1C5 /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */; };
 		9E15A0B01E08726100ABD1C5 /* EventChatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0AF1E08726100ABD1C5 /* EventChatNavigationController.swift */; };
 		9E15A0B21E08727100ABD1C5 /* EventProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B11E08727100ABD1C5 /* EventProfileNavigationController.swift */; };
 		9E15A0B41E08728400ABD1C5 /* EventPageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B31E08728400ABD1C5 /* EventPageNavigationController.swift */; };
@@ -174,6 +175,7 @@
 		98FAF69E1DF11A5600F3766B /* NewsFeedSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedSocket.swift; sourceTree = "<group>"; };
 		9E113B171DA5F433009001C6 /* Attendee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendee.swift; sourceTree = "<group>"; };
 		9E113B191DA5F43B009001C6 /* Admin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Admin.swift; sourceTree = "<group>"; };
+		9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageViewController.swift; sourceTree = "<group>"; };
 		9E15A0AF1E08726100ABD1C5 /* EventChatNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatNavigationController.swift; sourceTree = "<group>"; };
 		9E15A0B11E08727100ABD1C5 /* EventProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventProfileNavigationController.swift; sourceTree = "<group>"; };
 		9E15A0B31E08728400ABD1C5 /* EventPageNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageNavigationController.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				9EF8CEE41DC51F4800CA9446 /* NavigationController.swift */,
 				981BB8DE1DFCBB6700EDC9FE /* EventListViewController.swift */,
 				98D1E7AA1DFE08C700F6A8FE /* ProfileViewController.swift */,
+				9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */,
 				982ECBCC1E06FD8300B1D088 /* ChatViewController.swift */,
 				981669B21E05A82500D1B6A8 /* EventQRCodeViewController.swift */,
 			);
@@ -820,6 +823,7 @@
 				982ECBCD1E06FD8300B1D088 /* ChatViewController.swift in Sources */,
 				9EC373381DBC760C00D0FCDC /* Event.swift in Sources */,
 				9821AAA71DE121F1005D50B6 /* Keys.swift in Sources */,
+				9E15A0B61E08BECD00ABD1C5 /* EventPageViewController.swift in Sources */,
 				98AE461C1DAF2ADE0023C9F4 /* HeaderViewContainer.swift in Sources */,
 				9EF8CEE81DC5276E00CA9446 /* NavigationBarView.swift in Sources */,
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,

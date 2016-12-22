@@ -23,7 +23,12 @@ class EventPageNavigationController: UINavigationController, EventContainerViewP
   }
   
   private func setup() {
-    //instantiate vc and add it as [viewController] to viewController property
+    let eventPageViewController = EventPageViewController()
+    
+    self.viewControllers = [eventPageViewController]
+    
+    self.navigationBar.backgroundColor = .white
+    self.navigationBar.isTranslucent = false
     
     self.attachTabButton()
   }
