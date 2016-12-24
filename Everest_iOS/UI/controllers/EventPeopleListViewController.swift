@@ -20,6 +20,8 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let appStyle = AppStyle.sharedInstance
+    
     let evd1 = EventPersonData(withPicture: nil, name: "Sebastian Kolosa", content: "Swift, Objective-C, AngularJS, HTML/CSS", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
     let evd2 = EventPersonData(withPicture: nil, name: "Sathoshi Kumarawadu", content: "NodeJS, ExpressJS, Swift, MongoDB", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
     let evd3 = EventPersonData(withPicture: nil, name: "Hayes Lee", content: "ReactJS, UI/UX, HTML/CSS, SQL", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.attendee, person: nil)
@@ -46,6 +48,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     self.view.addSubview(tableView)
     self.title = NSLocalizedString("event people list navigation", comment: "event navigation header")
     self.definesPresentationContext = true
+    self.navigationItem.rightBarButtonItem = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
     
     setupConstraints()
   }
@@ -72,6 +75,10 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     tableView.reloadData()
+  }
+  
+  @objc private func didTapSettingsButton(sender: UIBarButtonItem) {
+    AppUtil.presentEventSettingsActionSheet(using: self)
   }
   
   //MARK: UITableViewDataSource

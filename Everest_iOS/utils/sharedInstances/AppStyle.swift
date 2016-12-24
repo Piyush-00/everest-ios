@@ -78,6 +78,10 @@ class AppStyle {
   }
   
   let eventNavigationBarBackgroundColor: UIColor = .white
+
+  let highlightedColor = UIColor(netHex: 0x0075c9)
+  let normalColor = UIColor(netHex: 0x7f7f7f)
+  let selectedColor = UIColor(netHex: 0x4c4c4c)
   
   func baseInputButton() -> UIButton {
     let button = UIButton(type: .custom)
@@ -86,5 +90,29 @@ class AppStyle {
     button.layer.cornerRadius = 4.0
     button.titleLabel?.font = textFontBold
     return button
+  }
+  
+  func eventSettingsActionSheet() -> UIAlertController {
+    let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+    let cancelActionButton = UIAlertAction(title: NSLocalizedString("cancel button", comment: "event settings options"), style: .cancel)
+    let logoutActionButton = UIAlertAction(title: NSLocalizedString("log out button", comment: "event settings options"), style: .default)
+    { action in
+      print("logout")
+    }
+    
+    alertController.addAction(cancelActionButton)
+    alertController.addAction(logoutActionButton)
+    
+    return alertController
+  }
+  
+  func eventSettingsBarButtonItem(withTarget target: Any?, andAction action: Selector) -> UIBarButtonItem {
+    
+    let barButtonItem = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .cog, textColor: UIColor.black, size: CGSize(width: tabBarButtonIconSize, height: tabBarButtonIconSize)), style: .plain, target: target, action: action)
+    
+    barButtonItem.tintColor = normalColor
+    
+    return barButtonItem
   }
 }

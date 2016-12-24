@@ -64,4 +64,9 @@ class AppUtil {
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
     return dateFormatter.string(from: Date())
   }
+  
+  class func presentEventSettingsActionSheet(using viewController: UIViewController) {
+    let alertController = AppStyle.sharedInstance.eventSettingsActionSheet()
+    viewController.present(alertController, animated: true, completion: nil)
+  }
 }
