@@ -22,7 +22,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     
     let appStyle = AppStyle.sharedInstance
     
-    let evd1 = EventPersonData(withPicture: nil, name: "Sebastian Kolosa", content: "Swift, Objective-C, AngularJS, HTML/CSS", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
+    let evd1 = EventPersonData(withPicture: nil, name: "Sebastian Kolosa", content: "Swift, Objective-C, AngularJS, HTML/CSS woeifnwoefinweofinweofinweoifn", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
     let evd2 = EventPersonData(withPicture: nil, name: "Sathoshi Kumarawadu", content: "NodeJS, ExpressJS, Swift, MongoDB", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
     let evd3 = EventPersonData(withPicture: nil, name: "Hayes Lee", content: "ReactJS, UI/UX, HTML/CSS, SQL", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.attendee, person: nil)
     let evd4 = EventPersonData(withPicture: nil, name: "Zain Khan", content: "NodeJS, ExpressJS, MongoDB, ReactJS", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
@@ -101,7 +101,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     cell.name = eventPersonData.name
     cell.content = eventPersonData.content
     cell.person = eventPersonData.person
-    cell.setContentLeadingMargin(to: tableView.separatorInset.left)
+    cell.setContentHorizontalMargin(to: tableView.separatorInset.left)
     
     return cell
   }

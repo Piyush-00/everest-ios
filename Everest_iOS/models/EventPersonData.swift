@@ -8,15 +8,13 @@
 
 import UIKit
 
-class EventPersonData {
+struct EventPersonData {
   enum EventPersonType: String {
     case admin = "host"
     case attendee = "guest"
   }
   
-  convenience init(withPicture picture: UIImage?, name: String?, content: String?, timestamp: String?, id: String?, type: EventPersonType?, person: Person?) {
-    self.init()
-    
+  init(withPicture picture: UIImage?, name: String?, content: String?, timestamp: String?, id: String?, type: EventPersonType?, person: Person?) {
     _picture = picture
     _name = name
     _content = content
@@ -62,31 +60,31 @@ class EventPersonData {
     return _person
   }
   
-  func setPicture(to picture: UIImage?) {
+  mutating func setPicture(to picture: UIImage?) {
     _picture = picture
   }
   
-  func setName(to name: String?) {
+  mutating func setName(to name: String?) {
     _name = name
   }
   
-  func setContent(to content: String?) {
+  mutating func setContent(to content: String?) {
     _content = content
   }
   
-  func setTimestamp(to timestamp: String?) {
+  mutating func setTimestamp(to timestamp: String?) {
     _timestamp = timestamp
   }
   
-  func setId(to id: String?) {
+  mutating func setId(to id: String?) {
     _id = id
   }
   
-  func setType(to type: EventPersonType?) {
+  mutating func setType(to type: EventPersonType?) {
     _type = type
   }
   
-  func setPerson(to person: Person?) {
+  mutating func setPerson(to person: Person?) {
     _person = person
   }
 }

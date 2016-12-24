@@ -15,6 +15,7 @@ class EventPeopleListTableViewCell: UITableViewCell {
   private let contentLabel = UILabel()
   
   private var cellContentLeadingConstraint: NSLayoutConstraint!
+  private var cellContentTrailingConstraint: NSLayoutConstraint!
   
   var person: Person?
   
@@ -107,9 +108,13 @@ class EventPeopleListTableViewCell: UITableViewCell {
     
     nameAndContentContainer.topAnchor.constraint(equalTo: profilePictureView.topAnchor).isActive = true
     nameAndContentContainer.leadingAnchor.constraint(equalTo: profilePictureView.trailingAnchor, constant: nameAndContentContainerLeadingMargin).isActive = true
+    
+    cellContentTrailingConstraint = nameAndContentContainer.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+    cellContentTrailingConstraint.isActive = true
   }
   
-  func setContentLeadingMargin(to leadingMargin: CGFloat) {
-    cellContentLeadingConstraint.constant = leadingMargin
+  func setContentHorizontalMargin(to margin: CGFloat) {
+    cellContentLeadingConstraint.constant = margin
+    cellContentTrailingConstraint.constant = -margin
   }
 }

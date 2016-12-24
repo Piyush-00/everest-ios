@@ -9,13 +9,13 @@
 import UIKit
 
 class Attendee: Person {
-  private var _characteristics: [String]?
+  private var _characteristics: Dictionary<String, [String]>?
   
-  var characteristics: [String]? {
+  var characteristics: Dictionary<String, [String]>? {
     return _characteristics
   }
   
-  func setCharacteristics(to characteristics: [String]?) {
+  func setCharacteristics(to characteristics: Dictionary<String, [String]>?) {
     _characteristics = characteristics
   }
 }
