@@ -13,6 +13,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   private let searchController = UISearchController(searchResultsController: nil)
   
   private let cellReuseIdentifier = "Cell"
+  
   private var eventPeopleData: [EventPersonData] = []
   private var filteredEventPeopleData: [EventPersonData] = []
   
@@ -59,11 +60,17 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   }
   
   func filterContentForSearchText(searchText: String, scope: String = NSLocalizedString("search all", comment: "search filter option")) {
-    filteredEventPeopleData = eventPeopleData.filter { eventPerson in
-      let categoryMatch = (scope == NSLocalizedString("search all", comment: "search filter option")) || (scope.lowercased() == eventPerson.type?.rawValue)
-      let parseMatch = (eventPerson.name!.lowercased().contains(searchText.lowercased())) || (eventPerson.content!.lowercased().contains(searchText.lowercased()))
-      return categoryMatch && parseMatch
+    
+    filteredEventPeopleData = eventPeopleData.filter { eventPersonData in
+      let categoryMatch = (scope == NSLocalizedString("search all", comment: "search filter option")) || (scope.lowercased() == eventPersonData.type?.rawValue)
+      if searchText.isEmpty {
+        return categoryMatch
+      } else {
+        let parseMatch = (eventPersonData.name!.lowercased().contains(searchText.lowercased())) || (eventPersonData.content!.lowercased().contains(searchText.lowercased()))
+        return categoryMatch && parseMatch
+      }
     }
+    
     tableView.reloadData()
   }
   
@@ -77,7 +84,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     
     var eventPersonData: EventPersonData
     
-    if searchController.isActive && searchController.searchBar.text != "" {
+    if searchController.isActive {
       eventPersonData = filteredEventPeopleData[indexPath.row]
     } else {
       eventPersonData = eventPeopleData[indexPath.row]
@@ -93,7 +100,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if searchController.isActive && searchController.searchBar.text != "" {
+    if searchController.isActive {
       return filteredEventPeopleData.count
     }
     return eventPeopleData.count
