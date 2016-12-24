@@ -77,6 +77,8 @@ class AppStyle {
     return AppStyle.sharedInstance.tabBarButtonIconSize + 2*AppStyle.sharedInstance.tabBarButtonVerticalPadding
   }
   
+  let eventNavigationBarBackgroundColor: UIColor = .white
+  
   func baseInputButton() -> UIButton {
     let button = UIButton(type: .custom)
     button.setBackgroundImage(AppUtil.resizableImageWithColor(color: baseInputButtonColor), for: .normal)

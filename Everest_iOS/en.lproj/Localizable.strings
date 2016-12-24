@@ -154,7 +154,7 @@
 "event chat navigation" = "Groups";
 
 /* event navigation header */
-"event list navigation" = "People";
+"event people list navigation" = "People";
 
 /* event navigation header */
 "event profile navigation" = "Profile";
@@ -191,3 +191,18 @@
 
 /* chat send button text */
 "chat send button" = "Send";
+
+/* search filter option */
+"search all" = "All";
+
+/* search filter option */
+"search admin" = "Host";
+
+/* search filter option */
+"search attendee" = "Guest";
+
+/* event person data type */
+"admin" = "Host";
+
+/* event person data type */
+"attendee" = "Guest";

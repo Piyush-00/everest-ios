@@ -61,13 +61,16 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   private func setup() {    
     let eventFeedViewController = EventFeedViewController()
     let eventChatNavigationController = EventChatNavigationController(nibName: nil, bundle: nil)
+    let eventPeopleListNavigationController = EventPeopleListNavigationController(nibName: nil, bundle: nil)
     let eventProfileNavigationController = EventProfileNavigationController(nibName: nil, bundle: nil)
     let eventPageNavigationController = EventPageNavigationController(nibName: nil, bundle: nil)
+    
     let settingsBarButtonItem = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .cog, textColor: UIColor.black, size: CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)), style: UIBarButtonItemStyle.plain, target: self, action: #selector(didTapSettingsButton))
     
     eventTabBar.delegate = self
     
-    viewControllers = [eventFeedViewController, eventChatNavigationController, eventProfileNavigationController, eventPageNavigationController]
+    viewControllers = [eventFeedViewController, eventChatNavigationController, eventPeopleListNavigationController, eventProfileNavigationController, eventPageNavigationController]
+    
     setCurrentViewController(to: viewControllers.first)
     
     self.view.addSubview(contentView)
