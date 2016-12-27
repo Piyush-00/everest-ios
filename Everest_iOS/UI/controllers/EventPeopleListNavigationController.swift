@@ -1,15 +1,15 @@
 //
-//  EventPageNavigationController.swift
+//  EventPeopleListNavigationController.swift
 //  Everest_iOS
 //
-//  Created by Sebastian Kolosa on 2016-12-19.
+//  Created by Sebastian Kolosa on 2016-12-23.
 //  Copyright © 2016 Everest. All rights reserved.
 //
 
 import UIKit
 import FontAwesome_swift
 
-class EventPageNavigationController: UINavigationController, EventContainerViewProtocol {
+class EventPeopleListNavigationController: UINavigationController, EventContainerViewProtocol {
   private let eventPageTabButton = EventTabBarButtonView()
   
   override init(nibName: String?, bundle: Bundle?) {
@@ -23,9 +23,9 @@ class EventPageNavigationController: UINavigationController, EventContainerViewP
   }
   
   private func setup() {
-    let eventPageViewController = EventPageViewController()
+    let eventPeopleListViewController = EventPeopleListViewController()
     
-    self.viewControllers = [eventPageViewController]
+    self.viewControllers = [eventPeopleListViewController]
     
     self.navigationBar.backgroundColor = AppStyle.sharedInstance.eventNavigationBarBackgroundColor
     self.navigationBar.isTranslucent = false
@@ -44,7 +44,7 @@ class EventPageNavigationController: UINavigationController, EventContainerViewP
   }
   
   var tabIcon: FontAwesome? {
-    return FontAwesome.bookmark
+    return FontAwesome.users
   }
   
   var navigationBarTitle: String? {

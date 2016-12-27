@@ -63,7 +63,6 @@ class EventPageViewController: UIViewController {
       if !description.isEmpty {
         let descriptionLabelContainer = UIView()
         let leftPaddingGuide = UILayoutGuide()
-        let bottomPaddingGuide = UILayoutGuide()
         
         descriptionLabel = UILabel()
         descriptionLabel?.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +74,6 @@ class EventPageViewController: UIViewController {
         descriptionLabelContainer.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabelContainer.addLayoutGuide(leftPaddingGuide)
         descriptionLabelContainer.addSubview(descriptionLabel!)
-        //descriptionLabelContainer.addLayoutGuide(bottomPaddingGuide)
         
         leftPaddingGuide.widthAnchor.constraint(equalToConstant: 10.0).isActive = true
         leftPaddingGuide.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true

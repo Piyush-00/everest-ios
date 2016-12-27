@@ -129,7 +129,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableView.endUpdates()
   }
   
-  //MARK: UITableViewDelegate
+  //MARK: UITableViewDataSource
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)

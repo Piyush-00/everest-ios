@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var navigationController: NavigationController?
+    var testNavCtrl = EventPeopleListNavigationController(nibName: nil, bundle: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.navigationController = NavigationController()
       self.navigationController?.navigationBar.isHidden = true
       self.navigationController?.viewControllers = [rootView]
+      
+      
       
       self.window!.rootViewController = self.navigationController
       self.window?.makeKeyAndVisible()

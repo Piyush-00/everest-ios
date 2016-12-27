@@ -10,6 +10,7 @@ import UIKit
 import FontAwesome_swift
 
 class EventTabBarButtonView: UIView {
+  private let appStyle = AppStyle.sharedInstance
   private let button = UIButton()
   private let iconSize: CGSize = CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)
   
@@ -17,10 +18,10 @@ class EventTabBarButtonView: UIView {
   private var _icon: FontAwesome?
   
   private var iconColorNormal: UIColor {
-    return UIColor.black.withAlphaComponent(0.5)
+    return appStyle.normalColor
   }
   private var iconColorSelected: UIColor {
-    return UIColor.black.withAlphaComponent(0.7)
+    return appStyle.selectedColor
   }
   
   var viewController: EventContainerViewProtocol? {
@@ -53,7 +54,7 @@ class EventTabBarButtonView: UIView {
   }
   
   private func setup() {
-    self.sideBorder(side: .bottom, width: 1.0, colour: UIColor.black.withAlphaComponent(0.5))
+    self.sideBorder(side: .bottom, width: 1.0, colour: appStyle.normalColor)
     self.addSubview(button)
     setupConstraints()
   }
