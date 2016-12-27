@@ -14,8 +14,9 @@ class TitleAndContentContainer: UIView {
     case large
   }
   
+  var contentViewHeightConstraint: NSLayoutConstraint!
+  var contentViewTopConstraint: NSLayoutConstraint!
   private var contentViewContentType = contentType.small
-  private var contentViewHeightConstraint: NSLayoutConstraint!
   private let titleLabel = UILabel()
   private let contentView = UIView()
   
@@ -92,7 +93,8 @@ class TitleAndContentContainer: UIView {
     titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     titleLabel.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
     
-    contentView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+    contentViewTopConstraint = contentView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor)
+    contentViewTopConstraint.isActive = true
     contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true

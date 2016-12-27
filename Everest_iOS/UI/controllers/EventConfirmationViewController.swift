@@ -73,29 +73,31 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     headerAndStackViewController.addArrangedSubviewToStackView(view: eventDateAndTimeContainer)
     
     if let event = event {
-      if event.getAttendeeCharacteristics().count > 0 {
-        let attendeeCharacteristicsCategoryLabel = UILabel()
-      
-        attendeeCharacteristicsCategoryLabel.textAlignment = .center
-        attendeeCharacteristicsCategoryLabel.numberOfLines = 0
-        attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
-        attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
-        attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
-      
-        headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
-        let attendeeCharacteristics = event.getAttendeeCharacteristics()
-        for characteristic in attendeeCharacteristics {
-          let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
-          let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic \(attendeeCharacteristics.index(of: characteristic)! + 1)", andContent: attendeeCharacteristicTextField)
-      
-          attendeeCharacteristicTextField.text = characteristic
-          //SKO - incorporate array index when have eventObject
-          attendeeCharacteristicTextField.tag = attendeeCharacteristics.index(of: characteristic)! + 5
-          attendeeCharacteristicTextField.delegate = self
-      
-          headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
+      if let attendeeCharacteristics = event.getAttendeeCharacteristics() {
+        if attendeeCharacteristics.count > 0 {
+          let attendeeCharacteristicsCategoryLabel = UILabel()
           
-          attendeeCharacteristicsTextFields.append(attendeeCharacteristicTextField)
+          attendeeCharacteristicsCategoryLabel.textAlignment = .center
+          attendeeCharacteristicsCategoryLabel.numberOfLines = 0
+          attendeeCharacteristicsCategoryLabel.lineBreakMode = .byWordWrapping
+          attendeeCharacteristicsCategoryLabel.font = appStyle.headerFontMedium
+          attendeeCharacteristicsCategoryLabel.text = NSLocalizedString("guest questionnaire", comment: "guest questionnaire placeholder")
+          
+          headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicsCategoryLabel)
+          
+          for characteristic in attendeeCharacteristics {
+            let attendeeCharacteristicTextField = BaseInputTextField(hintText: "e.g. placeholder")
+            let attendeeCharacteristicContainer = TitleAndContentContainer(withTitle: "characteristic \(attendeeCharacteristics.index(of: characteristic)! + 1)", andContent: attendeeCharacteristicTextField)
+            
+            attendeeCharacteristicTextField.text = characteristic
+            //SKO - incorporate array index when have eventObject
+            attendeeCharacteristicTextField.tag = attendeeCharacteristics.index(of: characteristic)! + 5
+            attendeeCharacteristicTextField.delegate = self
+            
+            headerAndStackViewController.addArrangedSubviewToStackView(view: attendeeCharacteristicContainer)
+            
+            attendeeCharacteristicsTextFields.append(attendeeCharacteristicTextField)
+          }
         }
       }
     }
@@ -167,6 +169,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
           if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
             let eventContainerViewController = EventContainerViewController()
+            Session.manager.event = self.event
             eventNavigationController.viewControllers = [eventContainerViewController]
             appDelegate.navigationController = nil
             appDelegate.window?.rootViewController = eventNavigationController
@@ -211,17 +214,18 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
         event.setDate(date: text)
         break
       default:
-        var attendeeCharacteristics = event.getAttendeeCharacteristics()
-        for attendeeCharacteristicTextField in attendeeCharacteristicsTextFields {
-          let index = attendeeCharacteristicsTextFields.index(of: attendeeCharacteristicTextField)
-          if let text = attendeeCharacteristicTextField.text {
-            if text != attendeeCharacteristics[index!] {
-              attendeeCharacteristics[index!] = text
+        if var attendeeCharacteristics = event.getAttendeeCharacteristics() {
+          for attendeeCharacteristicTextField in attendeeCharacteristicsTextFields {
+            let index = attendeeCharacteristicsTextFields.index(of: attendeeCharacteristicTextField)
+            if let text = attendeeCharacteristicTextField.text {
+              if text != attendeeCharacteristics[index!] {
+                attendeeCharacteristics[index!] = text
+              }
             }
           }
-        }
-        if attendeeCharacteristics != event.getAttendeeCharacteristics() {
-          event.setAttendeeCharacteristics(attendeeCharacteristics: attendeeCharacteristics)
+          if attendeeCharacteristics != event.getAttendeeCharacteristics()! {
+            event.setAttendeeCharacteristics(attendeeCharacteristics: attendeeCharacteristics)
+          }
         }
         break
       }

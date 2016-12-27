@@ -25,20 +25,20 @@ class RealmEvent: Object {
 }
 
 class Event {
-  private var name: String = ""
-  private var description: String = ""
-  private var location: String = ""
-  private var date: String = ""
-  private var startTime: String = ""
-  private var endTime: String = ""
-  private var headerImageUrl: String = ""
+  private var name: String
+  private var description: String?
+  private var location: String?
+  private var date: String?
+  private var startTime: String?
+  private var endTime: String?
+  private var headerImageUrl: String?
   private var headerImage: UIImage?
-  private var attendeeCharacteristics: [String] = []
+  private var attendeeCharacteristics: [String]?
   
   //SKO - will be used by RealmEvent as separator between attendeeCharacteristics when concatenated
   static let attendeeCharacteristicsSeparator = "%^&"
 
-  init(name:String = "", description:String = "", location:String = "", date:String = "", startTime:String = "", endTime:String = "", headerImageUrl:String = "", attendeeCharacteristics:[String] = []){
+  init(name: String = "", description: String = "", location: String = "", date: String = "", startTime: String = "", endTime: String = "", headerImageUrl: String = "", attendeeCharacteristics: [String] = []) {
     self.name = name
     self.description = description
     self.location = location
@@ -50,67 +50,71 @@ class Event {
   }
   
   //SKU - Getters and setters for all properties of the class
-  public func setName(name:String){
+  public func setName(name: String) {
     self.name = name
   }
   
-  public func setDescription(description:String){
+  public func setDescription(description: String?) {
     self.description = description
   }
   
-  public func setLocation(location:String){
+  public func setLocation(location: String?) {
     self.location = location
   }
   
-  public func setDate(date:String){
+  public func setDate(date: String?) {
     self.date = date
   }
   
-  public func setStartTime(startTime:String){
+  public func setStartTime(startTime: String?) {
     self.startTime = startTime
   }
   
-  public func setEndTime(endTime:String){
+  public func setEndTime(endTime: String?) {
     self.endTime = endTime
   }
   
-  public func setHeaderImageUrl(headerImageUrl:String){
+  public func setHeaderImageUrl(headerImageUrl: String?) {
     self.headerImageUrl = headerImageUrl
   }
   
-  public func setAttendeeCharacteristics(attendeeCharacteristics: [String]) {
+  public func setAttendeeCharacteristics(attendeeCharacteristics: [String]?) {
     self.attendeeCharacteristics = attendeeCharacteristics
   }
   
-  public func getName() -> String{
+  public func setHeaderImage(image: UIImage?) {
+    self.headerImage = image
+  }
+  
+  public func getName() -> String {
     return self.name
   }
   
-  public func getDescription() -> String {
+  public func getDescription() -> String? {
     return self.description
   }
   
-  public func getLocation() -> String{
+  public func getLocation() -> String? {
     return self.location
   }
   
-  public func getDate() -> String{
+  public func getDate() -> String? {
     return self.date
   }
   
-  public func getStartTime() -> String{
+  public func getStartTime() -> String? {
     return self.startTime
   }
   
-  public func getEndTime() -> String{
+  public func getEndTime() -> String? {
     return self.endTime
   }
   
-  public func getHeaderImageUrl() -> String{
+  public func getHeaderImageUrl() -> String? {
     return self.headerImageUrl
   }
   
-  public func getAttendeeCharacteristics() -> [String] {
+  public func getAttendeeCharacteristics() -> [String]? {
     return self.attendeeCharacteristics
   }
   
@@ -118,15 +122,11 @@ class Event {
     return self.headerImage
   }
   
-  public func setHeaderImage(image: UIImage?) {
-    self.headerImage = image
-  }
-  
   public func isUserSignedIn() -> String? {
     return User.getUserID()
   }
   
-  public func createEvent(completionHandler: @escaping (Bool) -> ()){
+  public func createEvent(completionHandler: @escaping (Bool) -> ()) {
     
     let params = ["EventName": name, "Description": description, "StartTime": Date(), "EndTime" :  Date(), "EventQuestions" : attendeeCharacteristics, "UserId" : isUserSignedIn() , "Location" : location ] as [String : Any]
     
@@ -151,7 +151,7 @@ class Event {
     }
   }
   
-  public func QRScanEvent(eventURL: String, completionHandler: @escaping (Bool) -> ()){
+  public func QRScanEvent(eventURL: String, completionHandler: @escaping (Bool) -> ()) {
     Http.getRequest(requestURL: t(eventURL)){
       response in
       switch response.result {

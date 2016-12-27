@@ -58,24 +58,26 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     setup()
   }
   
-  private func setup() {    
+  private func setup() {
+    let appStyle = AppStyle.sharedInstance
+    
     let eventFeedViewController = EventFeedViewController()
     let eventChatNavigationController = EventChatNavigationController(nibName: nil, bundle: nil)
+    let eventPeopleListNavigationController = EventPeopleListNavigationController(nibName: nil, bundle: nil)
     let eventProfileNavigationController = EventProfileNavigationController(nibName: nil, bundle: nil)
     let eventPageNavigationController = EventPageNavigationController(nibName: nil, bundle: nil)
-    let settingsBarButtonItem = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .cog, textColor: UIColor.black, size: CGSize(width: AppStyle.sharedInstance.tabBarButtonIconSize, height: AppStyle.sharedInstance.tabBarButtonIconSize)), style: UIBarButtonItemStyle.plain, target: self, action: #selector(didTapSettingsButton))
     
     eventTabBar.delegate = self
     
-    viewControllers = [eventFeedViewController, eventChatNavigationController, eventProfileNavigationController, eventPageNavigationController]
+    viewControllers = [eventFeedViewController, eventChatNavigationController, eventPeopleListNavigationController, eventProfileNavigationController, eventPageNavigationController]
+    
     setCurrentViewController(to: viewControllers.first)
     
     self.view.addSubview(contentView)
     self.view.addSubview(eventTabBar)
     eventTabBar.position(in: self.view)
     
-    settingsBarButtonItem.tintColor = UIColor.black.withAlphaComponent(0.5)
-    self.navigationItem.rightBarButtonItem = settingsBarButtonItem
+    self.navigationItem.rightBarButtonItem = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
     
     setupConstraints()
   }
@@ -126,17 +128,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   }
   
   func didTapSettingsButton(sender: UIBarButtonItem) {
-    let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
-    let cancelActionButton = UIAlertAction(title: NSLocalizedString("cancel button", comment: "event settings options"), style: .cancel)
-    let logoutActionButton = UIAlertAction(title: NSLocalizedString("log out button", comment: "event settings options"), style: .default)
-      { action in
-        print("logout")
-    }
-    
-    actionSheetController.addAction(cancelActionButton)
-    actionSheetController.addAction(logoutActionButton)
-    self.present(actionSheetController, animated: true, completion: nil)
+    AppUtil.presentEventSettingsActionSheet(using: self)
   }
   
   //MARK: EventTabBarViewDelegate
