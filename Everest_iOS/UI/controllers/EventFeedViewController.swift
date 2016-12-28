@@ -178,4 +178,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   var navigationBarTitle: String? {
     return NSLocalizedString("event feed navigation", comment: "event navigation header")
   }
+  
+  var rightBarButtonItem: UIBarButtonItem? {
+    return nil
+  }
 }

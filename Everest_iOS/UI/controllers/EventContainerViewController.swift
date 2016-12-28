@@ -14,6 +14,7 @@ protocol EventContainerViewProtocol {
   var tabButton: EventTabBarButtonView {get}
   var tabIcon: FontAwesome? {get}
   var navigationBarTitle: String? {get}
+  var rightBarButtonItem: UIBarButtonItem? {get}
 }
 
 extension EventContainerViewProtocol {
@@ -23,7 +24,7 @@ extension EventContainerViewProtocol {
 }
 
 class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
-  private let settingsButton = UIButton()
+  private var settingsButton: UIBarButtonItem!
   private let contentView = UIView()
   private let eventTabBar = EventTabBarView()
   var viewControllers: [EventContainerViewProtocol] = [] {
@@ -41,6 +42,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
       displayCurrentViewControllerView()
       title = _currentViewController?.navigationBarTitle
       self.navigationController?.navigationBar.isHidden = _currentViewController is UINavigationController
+      self.navigationItem.rightBarButtonItem = _currentViewController?.rightBarButtonItem ?? settingsButton
     }
   }
   
@@ -62,14 +64,14 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     let appStyle = AppStyle.sharedInstance
     
     let eventFeedViewController = EventFeedViewController()
-    let eventChatNavigationController = EventChatNavigationController(nibName: nil, bundle: nil)
+    let eventChatListViewController = EventChatListViewController()
     let eventPeopleListNavigationController = EventPeopleListNavigationController(nibName: nil, bundle: nil)
     let eventProfileNavigationController = EventProfileNavigationController(nibName: nil, bundle: nil)
     let eventPageNavigationController = EventPageNavigationController(nibName: nil, bundle: nil)
     
     eventTabBar.delegate = self
     
-    viewControllers = [eventFeedViewController, eventChatNavigationController, eventPeopleListNavigationController, eventProfileNavigationController, eventPageNavigationController]
+    viewControllers = [eventFeedViewController, eventChatListViewController, eventPeopleListNavigationController, eventProfileNavigationController, eventPageNavigationController]
     
     setCurrentViewController(to: viewControllers.first)
     
@@ -77,13 +79,13 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     self.view.addSubview(eventTabBar)
     eventTabBar.position(in: self.view)
     
-    self.navigationItem.rightBarButtonItem = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
+    settingsButton = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
+    self.navigationItem.rightBarButtonItem = settingsButton
     
     setupConstraints()
   }
   
   private func setupConstraints() {
-    settingsButton.translatesAutoresizingMaskIntoConstraints = false
     contentView.translatesAutoresizingMaskIntoConstraints = false
     
     contentView.topAnchor.constraint(equalTo: self.topLayoutGuide.topAnchor).isActive = true

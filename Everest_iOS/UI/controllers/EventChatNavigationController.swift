@@ -23,8 +23,10 @@ class EventChatNavigationController: UINavigationController, EventContainerViewP
   }
   
   private func setup() {
-    //instantiate vc and add it as [viewController] to viewController property
-
+    let eventChatListViewController = EventChatListViewController()
+    
+    self.viewControllers = [eventChatListViewController]
+    
     self.attachTabButton()
   }
   
@@ -43,6 +45,10 @@ class EventChatNavigationController: UINavigationController, EventContainerViewP
   }
   
   var navigationBarTitle: String? {
+    return nil
+  }
+  
+  var rightBarButtonItem: UIBarButtonItem? {
     return nil
   }
 }

@@ -101,6 +101,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     cell.name = eventPersonData.name
     cell.content = eventPersonData.content
     cell.person = eventPersonData.person
+    
     cell.setContentHorizontalMargin(to: tableView.separatorInset.left)
     
     return cell

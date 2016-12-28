@@ -14,16 +14,6 @@ struct EventPersonData {
     case attendee = "guest"
   }
   
-  init(withPicture picture: UIImage?, name: String?, content: String?, timestamp: String?, id: String?, type: EventPersonType?, person: Person?) {
-    _picture = picture
-    _name = name
-    _content = content
-    _timestamp = timestamp
-    _id = id
-    _type = type
-    _person = person
-  }
-  
   private var _picture: UIImage?
   private var _name: String?
   private var _content: String?
@@ -35,7 +25,7 @@ struct EventPersonData {
   var picture: UIImage? {
     return _picture
   }
-
+  
   var name: String? {
     return _name
   }
@@ -58,6 +48,16 @@ struct EventPersonData {
   
   var person: Person? {
     return _person
+  }
+  
+  init(withPicture picture: UIImage?, name: String?, content: String?, timestamp: String?, id: String?, type: EventPersonType?, person: Person?) {
+    _picture = picture
+    _name = name
+    _content = content
+    _timestamp = timestamp
+    _id = id
+    _type = type
+    _person = person
   }
   
   mutating func setPicture(to picture: UIImage?) {

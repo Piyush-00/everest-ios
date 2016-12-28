@@ -67,6 +67,9 @@
 		9E15A0B21E08727100ABD1C5 /* EventProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B11E08727100ABD1C5 /* EventProfileNavigationController.swift */; };
 		9E15A0B41E08728400ABD1C5 /* EventPageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B31E08728400ABD1C5 /* EventPageNavigationController.swift */; };
 		9E15A0B61E08BECD00ABD1C5 /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */; };
+		9E1F3D241E131A5000E33B43 /* EventChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F3D231E131A5000E33B43 /* EventChatListViewController.swift */; };
+		9E1F3D261E13216A00E33B43 /* EventChatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F3D251E13216A00E33B43 /* EventChatData.swift */; };
+		9E1F3D281E13242D00E33B43 /* EventChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F3D271E13242D00E33B43 /* EventChatListTableViewCell.swift */; };
 		9E2CB00C1DF90FBD00464953 /* EventContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CB00B1DF90FBD00464953 /* EventContainerViewController.swift */; };
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
@@ -184,6 +187,9 @@
 		9E15A0B11E08727100ABD1C5 /* EventProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventProfileNavigationController.swift; sourceTree = "<group>"; };
 		9E15A0B31E08728400ABD1C5 /* EventPageNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageNavigationController.swift; sourceTree = "<group>"; };
 		9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageViewController.swift; sourceTree = "<group>"; };
+		9E1F3D231E131A5000E33B43 /* EventChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatListViewController.swift; sourceTree = "<group>"; };
+		9E1F3D251E13216A00E33B43 /* EventChatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatData.swift; sourceTree = "<group>"; };
+		9E1F3D271E13242D00E33B43 /* EventChatListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatListTableViewCell.swift; sourceTree = "<group>"; };
 		9E2CB00B1DF90FBD00464953 /* EventContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventContainerViewController.swift; sourceTree = "<group>"; };
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 				9E94ECCD1E0E09F10031F859 /* EventPeopleListViewController.swift */,
 				9E2CB00B1DF90FBD00464953 /* EventContainerViewController.swift */,
 				9E15A0AF1E08726100ABD1C5 /* EventChatNavigationController.swift */,
+				9E1F3D231E131A5000E33B43 /* EventChatListViewController.swift */,
 				9E15A0B11E08727100ABD1C5 /* EventProfileNavigationController.swift */,
 				9E15A0B31E08728400ABD1C5 /* EventPageNavigationController.swift */,
 				983E23191DB41A08005DB3F2 /* SignUpViewController.swift */,
@@ -374,6 +381,7 @@
 				98AE46131DAF2ADE0023C9F4 /* containers */,
 				98D1E7A81DFE076300F6A8FE /* PropertyTagCell.swift */,
 				981669B01E05A32500D1B6A8 /* QRCodeView.swift */,
+				9E1F3D271E13242D00E33B43 /* EventChatListTableViewCell.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -470,6 +478,7 @@
 				9EC373371DBC760C00D0FCDC /* Event.swift */,
 				9821AA941DE111C2005D50B6 /* User.swift */,
 				9E94ECD31E0F03DF0031F859 /* Person.swift */,
+				9E1F3D251E13216A00E33B43 /* EventChatData.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -807,6 +816,7 @@
 				9E6F37BA1DF4FCDA0080C9AD /* EventFeedModalContainer.swift in Sources */,
 				98F7427E1DC2D07500B3B0D9 /* ModalViewContainer.swift in Sources */,
 				980894AE1DC5779800499DA3 /* UIImageView.swift in Sources */,
+				9E1F3D281E13242D00E33B43 /* EventChatListTableViewCell.swift in Sources */,
 				98AE45F41DAF29D50023C9F4 /* UIViewExtension.swift in Sources */,
 				9E15A0B21E08727100ABD1C5 /* EventProfileNavigationController.swift in Sources */,
 				9877F5531DBC01DA004A7CC2 /* ProfileHeaderContainer.swift in Sources */,
@@ -854,6 +864,7 @@
 				9E5E3B1A1DCD825C009A456A /* AdminDescriptionFormViewController.swift in Sources */,
 				981669B11E05A32500D1B6A8 /* QRCodeView.swift in Sources */,
 				981BB8DF1DFCBB6700EDC9FE /* EventListViewController.swift in Sources */,
+				9E1F3D241E131A5000E33B43 /* EventChatListViewController.swift in Sources */,
 				98704A411DEBA495001323FF /* Socket.swift in Sources */,
 				9877F5511DBBE3FC004A7CC2 /* SignUpProfileViewController.swift in Sources */,
 				98F742801DC2F55A00B3B0D9 /* EventModalView.swift in Sources */,
@@ -871,6 +882,7 @@
 				9E94ECD01E0E0C260031F859 /* EventPeopleListTableViewCell.swift in Sources */,
 				9E94ECCC1E0E09610031F859 /* EventPeopleListNavigationController.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
+				9E1F3D261E13216A00E33B43 /* EventChatData.swift in Sources */,
 				9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */,
 				9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */,
 				98D1E7A91DFE076300F6A8FE /* PropertyTagCell.swift in Sources */,
