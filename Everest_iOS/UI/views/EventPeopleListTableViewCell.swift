@@ -17,39 +17,36 @@ class EventPeopleListTableViewCell: UITableViewCell {
   private var cellContentLeadingConstraint: NSLayoutConstraint!
   private var cellContentTrailingConstraint: NSLayoutConstraint!
   
-  var person: Person?
-  
   private let cellContentTopMargin: CGFloat = 10.0
   private let cellContentBottomMargin: CGFloat = 10.0
   private let nameAndContentContainerLeadingMargin: CGFloat = 10.0
   private let nameAndContentContainerSpacing: CGFloat = 5.0
   private let profilePictureViewDiameter: CGFloat = 40.0
   
+  var person: ListPerson? {
+    didSet {
+      if let person = person {
+        nameLabel.text = "\(person.firstName) \(person.lastName)"
+        profilePictureImageView.image = person.picture
+        contentLabel.text = person.content
+      } else {
+        nameLabel.text = nil
+        profilePictureImageView.image = nil //TODO: set to default image
+        contentLabel.text = nil
+      }
+    }
+  }
+  
   var picture: UIImage? {
-    get {
-      return profilePictureImageView.image
-    }
-    set {
-      profilePictureImageView.image = newValue
-    }
+    return profilePictureImageView.image
   }
   
   var name: String? {
-    get {
-      return nameLabel.text
-    }
-    set {
-      nameLabel.text = newValue
-    }
+    return nameLabel.text
   }
   
   var content: String? {
-    get {
-      return contentLabel.text
-    }
-    set {
-      contentLabel.text = newValue
-    }
+    return contentLabel.text
   }
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -79,6 +76,7 @@ class EventPeopleListTableViewCell: UITableViewCell {
     
     nameLabel.font = appStyle.textFontMedium
     nameLabel.textColor = appStyle.regularTextColor
+    nameLabel.text = "testing"
     
     contentLabel.font = appStyle.textFontSmall
     contentLabel.textColor = appStyle.regularTextColor

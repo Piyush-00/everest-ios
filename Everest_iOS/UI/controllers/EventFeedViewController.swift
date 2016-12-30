@@ -58,7 +58,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableHeaderImageView.image = appStyle.pictureImageWide
     
     tableView.register(EventFeedTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableHeaderView = tableHeaderImageView
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableViewAutomaticDimension

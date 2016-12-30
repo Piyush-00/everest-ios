@@ -26,6 +26,39 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let newsFeedID = "5850c22ddabe3d01ff24a753"
   private let eventID = "5850c22ddabe3d01ff24a752"
   
+  private var _chatPeople: [ChatPerson] = []
+  
+  private var chatPeople: [ChatPerson] {
+    get {
+      return _chatPeople
+    }
+    set {
+      _chatPeople = newValue
+      if _chatPeople.isEmpty {
+        self.title = "Chat"
+      } else {
+        for chatPerson in _chatPeople {
+          self.title = self.title ?? "" + ((chatPerson.id == chatPeople.last!.id) ? "\(chatPerson.name)" : "\(chatPerson.name), ")
+        }
+      }
+    }
+  }
+  
+  override init(nibName: String?, bundle: Bundle?) {
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  convenience init(withChatPeople chatPeople: [ChatPerson]) {
+    self.init(nibName: nil, bundle: nil)
+    self.chatPeople = chatPeople
+  }
+  
+  //TODO: Convenience init with chatID, latestMessage, lowerbound
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.white

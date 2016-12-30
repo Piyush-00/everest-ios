@@ -165,6 +165,9 @@
 /* event navigation header */
 "event page navigation" = "Event";
 
+/* event navigation header */
+"event add chat people navigation" = "Select People";
+
 /* event settings options */
 "cancel button" = "Cancel";
 

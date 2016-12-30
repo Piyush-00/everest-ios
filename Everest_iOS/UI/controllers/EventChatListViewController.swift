@@ -20,7 +20,6 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   
   override init(nibName: String?, bundle: Bundle?) {
     super.init(nibName: nibName, bundle: bundle)
-    
     self.attachTabButton()
   }
   
@@ -54,10 +53,17 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     self.view.addSubview(tableView)
     self.navigationItem.rightBarButtonItem = addChatButton
-    self.edgesForExtendedLayout = .top
-    
     setupConstraints()
   }
+  
+//  //SKO - Temporary fix to bug where tableView portion was under navigationBar
+//  override func viewDidLayoutSubviews() {
+//    super.viewDidLayoutSubviews()
+//    if let rect = self.navigationController?.navigationBar.frame {
+//      let y = rect.size.height + rect.origin.y
+//      tableView.contentInset = UIEdgeInsets(top: y, left: 0, bottom: 0, right: 0)
+//    }
+//  }
   
   private func setupConstraints() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +75,8 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   }
   
   @objc private func didTapAddChatButton(sender: UIBarButtonItem) {
-    
+    let eventChatPeopleListViewController = EventChatPeopleListViewController()
+    self.navigationController?.pushViewController(eventChatPeopleListViewController, animated: true)
   }
   
   //MARK: UITableViewDataSource
@@ -103,7 +110,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   //MARK: UITableViewDelegate
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? EventChatListTableViewCell else {
+    guard let cell = tableView.cellForRow(at: indexPath) as? EventChatListTableViewCell else {
       fatalError("fatal error: EventChatListViewController cell is not a EventChatListTableViewCell")
     }
     
@@ -133,3 +140,5 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     return addChatButton
   }
 }
+
+

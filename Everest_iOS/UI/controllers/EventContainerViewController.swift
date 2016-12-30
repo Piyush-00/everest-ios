@@ -40,7 +40,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     }
     didSet {
       displayCurrentViewControllerView()
-      title = _currentViewController?.navigationBarTitle
+      self.title = _currentViewController?.navigationBarTitle
       self.navigationController?.navigationBar.isHidden = _currentViewController is UINavigationController
       self.navigationItem.rightBarButtonItem = _currentViewController?.rightBarButtonItem ?? settingsButton
     }
