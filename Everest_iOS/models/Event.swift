@@ -128,7 +128,9 @@ class Event {
   
   public func createEvent(completionHandler: @escaping (Bool) -> ()) {
     
-    let params = ["EventName": "eventName", "Description": "description", "UserId" : "58644b07da6a862f3c1605be" , "Location" : "location"] as [String : Any]
+    let userID = "586683c48015475c9ca5be03"
+    
+    let params = ["EventName": name, "Description": description ?? "", "UserId" : userID, "Location" : location ?? ""]
     
     Http.multipartRequest(requestURL: t(Routes.Api.CreateNewEvent), image: self.headerImage, parameters: params) {
       response in

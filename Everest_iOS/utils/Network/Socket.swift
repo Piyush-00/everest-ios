@@ -9,6 +9,11 @@
 import Foundation
 import SocketIO
 
+struct Namespace {
+  static let newsFeed = "/newsfeed"
+  static let chat = "/chat"
+}
+
 class Socket : NSObject {
 
   private static let socket = SocketIOClient(socketURL: URL(string: t())!)

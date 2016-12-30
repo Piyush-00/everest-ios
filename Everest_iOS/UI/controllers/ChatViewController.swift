@@ -22,9 +22,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
-  private let userID = "58448aedbef3300530bbb835"
-  private let newsFeedID = "5850c22ddabe3d01ff24a753"
-  private let eventID = "5850c22ddabe3d01ff24a752"
+  private let userID = "586683c48015475c9ca5be03"
+  private let newsFeedID = "586685728015475c9ca5be06"
+  private let eventID = "586685728015475c9ca5be05"
   
   private var isNewChat: Bool = false
   
@@ -56,7 +56,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   convenience init(withChatPeople chatPeople: [ChatPerson]) {
     self.init(nibName: nil, bundle: nil)
-    let testPerson = ChatPerson(name: "testPerson", id: "58644aa5da6a862f3c1605bd")
+    let testPerson = ChatPerson(name: "testPerson", id: "586684018015475c9ca5be04")
     //self.chatPeople = chatPeople
     self.chatPeople = [testPerson]
     isNewChat = true
@@ -205,11 +205,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       }
       
       //SKO - self chat person
-      queryString += "&\(key)=58644b07da6a862f3c1605be"
+      queryString += "&\(key)=\(userID)"
       
-      let params = ["UserID": "58644b07da6a862f3c1605be", "FirstName": "Sebastian", "LastName": "oinoi", "Message": inputText, "ProfileImageURL": ""] as [String: Any]
+      let params = ["UserID": userID, "FirstName": "Sebastian", "LastName": "oinoi", "Message": inputText, "ProfileImageURL": ""]
       
-      Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, "5865679fd1cdcc31d4741563") + queryString), parameters: params) { response in
+      Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, eventID) + queryString), parameters: params) { response in
         switch response.result {
         case .success (let json):
           print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")

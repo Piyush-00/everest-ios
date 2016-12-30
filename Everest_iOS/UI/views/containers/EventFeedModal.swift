@@ -9,9 +9,9 @@
 import UIKit
 
 class EventFeedModal: UIView, UITextViewDelegate {
-  private let userID = "583a10da2db1b150f71760a3"
-  private let newsFeedID = "584472a41ef0ebd8e34c006d"
-  private let eventID = "584472a41ef0ebd8e34c006c"
+  private let userID = "586683c48015475c9ca5be03"
+  private let newsFeedID = "586685728015475c9ca5be06"
+  private let eventID = "586685728015475c9ca5be05"
   private let headerView = UIView()
   private let contentView = UIView()
   private let footerView = UIView()
