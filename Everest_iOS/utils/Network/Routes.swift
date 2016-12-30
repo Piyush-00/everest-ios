@@ -14,6 +14,7 @@ struct Routes {
     static let SetUpUserProfile: String = "/setUserProfileFields?id="
     static let CreateNewEvent: String = "/createEvent"
     static let SignInUser: String = "/signInUser"
+    static let CreateNewChat: String = "/event/%@/createChat"
   }
   struct Socket {
     struct NewsFeed {

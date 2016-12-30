@@ -26,6 +26,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let newsFeedID = "5850c22ddabe3d01ff24a753"
   private let eventID = "5850c22ddabe3d01ff24a752"
   
+  private var isNewChat: Bool = false
+  
   private var _chatPeople: [ChatPerson] = []
   
   private var chatPeople: [ChatPerson] {
@@ -54,7 +56,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   convenience init(withChatPeople chatPeople: [ChatPerson]) {
     self.init(nibName: nil, bundle: nil)
-    self.chatPeople = chatPeople
+    let testPerson = ChatPerson(name: "testPerson", id: "58644aa5da6a862f3c1605bd")
+    //self.chatPeople = chatPeople
+    self.chatPeople = [testPerson]
+    isNewChat = true
   }
   
   //TODO: Convenience init with chatID, latestMessage, lowerbound
@@ -187,6 +192,35 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func didTapSendButton(inputText: String) {
     print(inputText)
+    if isNewChat {
+      var queryString = ""
+      let key = "participants"
+      
+      for chatPerson in chatPeople {
+        if chatPerson.id == chatPeople.first!.id {
+          queryString += "?\(key)=\(chatPerson.id)"
+        } else {
+          queryString += "&\(key)=\(chatPerson.id)"
+        }
+      }
+      
+      //SKO - self chat person
+      queryString += "&\(key)=58644b07da6a862f3c1605be"
+      
+      let params = ["UserID": "58644b07da6a862f3c1605be", "FirstName": "Sebastian", "LastName": "oinoi", "Message": inputText, "ProfileImageURL": ""] as [String: Any]
+      
+      Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, "5865679fd1cdcc31d4741563") + queryString), parameters: params) { response in
+        switch response.result {
+        case .success (let json):
+          print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")
+          break
+        case .failure (let error):
+          print(error)
+        }
+      }
+    } else {
+      
+    }
     //SKU - Add in socket Emit function here
   }
 }

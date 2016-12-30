@@ -140,5 +140,3 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     return addChatButton
   }
 }
-
-
