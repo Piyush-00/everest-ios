@@ -36,6 +36,8 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   let tableView = UITableView()
   let searchController = UISearchController(searchResultsController: nil)
   
+  private let eventId = "586685728015475c9ca5be05"
+  
   private let cellReuseIdentifier = "Cell"
   
   var eventPeopleData: [ListPerson] = []
@@ -45,12 +47,6 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     super.viewDidLoad()
     
     let appStyle = AppStyle.sharedInstance
-    
-    let evd1 = ListPerson(id: "231", role: .admin, firstName: "Sebastian", lastName: "Kolosa", picture: nil, content: "content")
-    let evd2 = ListPerson(id: "123123123", role: .attendee, firstName: "Zain", lastName: "Khan", picture: nil, content: "content 2 lol")
-    
-    eventPeopleData.append(evd1)
-    eventPeopleData.append(evd2)
     
     searchController.dimsBackgroundDuringPresentation = false
     searchController.searchResultsUpdater = self
@@ -71,6 +67,55 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     self.navigationItem.rightBarButtonItem = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
     
     setupConstraints()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    let url = t(String(format: Routes.Api.FetchAllUsers, eventId))
+    
+    Http.getRequest(requestURL: url) { response in
+      switch response.result {
+      case .success (let json):
+        guard let json = json as? Dictionary<String, Any>,
+          let admins = json["Admins"] as? [Any],
+          let attendees = json["Attendees"] as? [Any]
+          else { return }
+        
+        let adminListPeople = admins.map { (admin: Any) -> ListPerson? in
+          guard let admin = admin as? Dictionary<String, Any>,
+            let id = admin["_id"] as? String,
+            let firstName = admin["FirstName"] as? String,
+            let lastName = admin["LastName"] as? String
+            else { return nil }
+          
+          let listPerson = ListPerson(id: id, role: .admin, firstName: firstName, lastName: lastName, picture: nil, content: nil)
+          
+          return listPerson
+        }
+        
+        let attendeeListPeople = attendees.map { (attendee: Any) -> ListPerson? in
+          guard let attendee = attendee as? Dictionary<String, Any>,
+            let id = attendee["_id"] as? String,
+            let firstName = attendee["FirstName"] as? String,
+            let lastName = attendee["LastName"] as? String
+            else { return nil }
+          
+          let listPerson = ListPerson(id: id, role: .attendee, firstName: firstName, lastName: lastName, picture: nil, content: nil)
+          
+          return listPerson
+        }
+        
+        var listPeople = adminListPeople + attendeeListPeople
+        
+        listPeople = listPeople.filter { $0 != nil }
+        
+        self.eventPeopleData = listPeople as! [ListPerson]
+        self.tableView.reloadData()
+      case .failure (let error):
+        print(error)
+      }
+    }
   }
   
   private func setupConstraints() {

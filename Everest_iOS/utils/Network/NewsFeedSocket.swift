@@ -8,12 +8,15 @@
 
 import Foundation
 
-class NewsFeedSocket {
+class NewsFeedSocket: Socket {
+  override init() {
+    super.init()
+    self.setNamespace(to: .newsFeed)
+  }
   
-  
-  static func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {
+  func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {
     let params = ["user_id": userID,"event_id": eventID]
-    Socket.emit(channel: Routes.Socket.NewsFeed.Subscribe, parameters: params) { response in
+    self.emit(channel: Routes.Socket.NewsFeed.Subscribe, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String,Any> {
         if (jsonResult["valid"] != nil) {
           completionHandler(jsonResult["valid"]! as! Bool)
@@ -27,8 +30,8 @@ class NewsFeedSocket {
     }
   }
   
-  static func onNewPost(completionHandler: @escaping (Dictionary<String,Any>) -> ()) {
-    Socket.on(channel: Routes.Socket.NewsFeed.NewPost){ response in
+  func onNewPost(completionHandler: @escaping (Dictionary<String,Any>) -> ()) {
+    self.on(channel: Routes.Socket.NewsFeed.NewPost){ response in
       if let jsonResult = response as? Dictionary<String,Any> {
         completionHandler(jsonResult)
       } else {
@@ -37,11 +40,11 @@ class NewsFeedSocket {
     }
   }
   
-  static func createNewPost(userID: String, firstName: String, lastName: String, profilePicURL: String, eventID: String, newsFeedID: String, post: String,  completionHandler: @escaping (Bool) -> () ) {
+  func createNewPost(userID: String, firstName: String, lastName: String, profilePicURL: String, eventID: String, newsFeedID: String, post: String,  completionHandler: @escaping (Bool) -> () ) {
 
     let params = ["user_id": userID, "event_id": eventID, "room": newsFeedID, "post": post, "firstName": firstName, "lastName": lastName, "profilePicURL": profilePicURL, "timeStamp" : AppUtil.formatISODate()]
 
-    Socket.emit(channel: Routes.Socket.NewsFeed.AddPost, parameters: params) { response in
+    self.emit(channel: Routes.Socket.NewsFeed.AddPost, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String,Any> {
         if (jsonResult["valid"] != nil) {
           completionHandler(jsonResult["valid"]! as! Bool)

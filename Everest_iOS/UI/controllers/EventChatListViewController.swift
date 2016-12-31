@@ -9,14 +9,33 @@
 import UIKit
 import FontAwesome_swift
 
+struct EventChatData {
+  var picture: UIImage?
+  var names: [String]
+  var message: String
+  var timestamp: String
+  var id: String
+}
+
+struct ChatListMessage {
+  var pictureUrl: String?
+  var message: String
+  var timestamp: String
+  //var messageNumber: Int // add msgnumber prop in chat vc (and lower bound msg number?)
+}
+
 class EventChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventContainerViewProtocol {
   private let eventChatListTabButton = EventTabBarButtonView()
   private var addChatButton: UIBarButtonItem!
   private let tableView = UITableView()
   
+  let socket = ChatSocket()
+  
   private let cellReuseIdentifier = "Cell"
   
   private var eventChatData: [EventChatData] = []
+  
+  private var cellHashMap: [String: EventChatListTableViewCell] = [:]
   
   override init(nibName: String?, bundle: Bundle?) {
     super.init(nibName: nibName, bundle: bundle)
@@ -34,14 +53,6 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     addChatButton = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .plus, textColor: UIColor.black, size: CGSize(width: appStyle.tabBarButtonIconSize, height: appStyle.tabBarButtonIconSize)), style: .plain, target: self, action: #selector(didTapAddChatButton))
     
-    let ecd = EventChatData(withPicture: nil, names: ["Sebastian", "Zain", "Hayes"], latestMessage: "latest message lmao", timestamp: "18:49", id: nil)
-    let ecd2 = EventChatData(withPicture: nil, names: ["Sebastian", "Zain", "Hayes"], latestMessage: "latest message lmao", timestamp: "18:49", id: nil)
-    let ecd3 = EventChatData(withPicture: nil, names: ["Sebastian", "Zain", "Hayes"], latestMessage: "latest message lmao", timestamp: "18:49", id: nil)
-    
-    eventChatData.append(ecd)
-    eventChatData.append(ecd2)
-    eventChatData.append(ecd3)
-    
     tableView.register(EventChatListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     tableView.delegate = self
     tableView.dataSource = self
@@ -53,7 +64,35 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     self.view.addSubview(tableView)
     self.navigationItem.rightBarButtonItem = addChatButton
+    
+    socket.establishConnection { response in
+      print("established chat socket: \(response)")
+    }
+    
+    socket.onNewMessage { response in
+      guard let chatId = response["ChatId"] as? String,
+        let pictureUrl = response["PicturePictureURL"] as? String,
+        let message = response["Message"] as? String,
+        let isoString = response["Timestamp"] as? String
+        else { return }
+      
+      let timestamp = AppUtil.timestampStringFromISOString(isoString)
+      
+      let chatListMessage = ChatListMessage(pictureUrl: pictureUrl, message: message, timestamp: timestamp)
+      
+      if let cell = self.cellHashMap[chatId] {
+        //NOTE: might need to update tableview to see result
+        cell.updateContent(using: chatListMessage)
+      }
+    }
+    
     setupConstraints()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    //TODO: get request for list of chats --> subscribe to chat rooms here too or in cellfor row?
   }
   
 //  //SKO - Temporary fix to bug where tableView portion was under navigationBar
@@ -76,6 +115,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   
   @objc private func didTapAddChatButton(sender: UIBarButtonItem) {
     let eventChatPeopleListViewController = EventChatPeopleListViewController()
+    eventChatPeopleListViewController.socket = socket
     self.navigationController?.pushViewController(eventChatPeopleListViewController, animated: true)
   }
   
@@ -86,13 +126,15 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
       fatalError("fatal error: EventChatListViewController cell is not a EventChatListTableViewCell")
     }
     
-    let eventChatDataInstance = eventChatData[indexPath.row]
+    let eventChatDataElement = eventChatData[indexPath.row]
     
-    cell.picture = eventChatDataInstance.picture
-    cell.names = eventChatDataInstance.names
-    cell.message = eventChatDataInstance.latestMessage
-    cell.timestamp = eventChatDataInstance.timestamp
-    cell.chatId = eventChatDataInstance.id
+    cellHashMap[eventChatDataElement.id] = cell
+    
+    cell.picture = eventChatDataElement.picture
+    cell.names = eventChatDataElement.names
+    cell.message = eventChatDataElement.message
+    cell.timestamp = eventChatDataElement.timestamp
+    cell.chatId = eventChatDataElement.id
     
     cell.setContentHorizontalMargin(to: tableView.separatorInset.left)
     

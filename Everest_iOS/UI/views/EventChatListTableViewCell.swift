@@ -17,9 +17,13 @@ class EventChatListTableViewCell: UITableViewCell {
   
   var chatId: String?
   
-  var names: [String]? {
+  var names: [String] = [] {
     didSet {
-        namesLabel.text = "Sebastian, Hayes, Zain"
+      var str = ""
+      for name in names {
+        str += (name == names.last) ? "\(name)" : "\(name), "
+      }
+      namesLabel.text = str
     }
   }
   
@@ -132,5 +136,12 @@ class EventChatListTableViewCell: UITableViewCell {
   func setContentHorizontalMargin(to margin: CGFloat) {
     cellContentLeadingConstraint.constant = margin
     cellContentTrailingConstraint.constant = -margin
+  }
+  
+  func updateContent(using latestMessage: ChatListMessage) {
+    profilePictureImageView.downloadedFrom(link: t("/" + (latestMessage.pictureUrl ?? "[DEFAULT IMAGE]"))) { _ in
+      self.timestamp = latestMessage.timestamp
+      self.message = latestMessage.message
+    }
   }
 }

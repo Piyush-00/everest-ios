@@ -16,6 +16,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   private let eventFeedTabButton = EventTabBarButtonView()
   
+  let socket = NewsFeedSocket()
+  
   private let userID = "586683c48015475c9ca5be03"
   private let newsFeedID = "586685728015475c9ca5be06"
   private let eventID = "586685728015475c9ca5be05"
@@ -71,15 +73,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     setupConstraints()
     
-    Socket.establishConnection() { response in
+    socket.establishConnection() { response in
+      print("socket connected: \(response)")
       if response {
-        NewsFeedSocket.joinNewsFeedRoom(userID: self.userID, eventID: self.eventID, completionHandler: { response in
+        self.socket.joinNewsFeedRoom(userID: self.userID, eventID: self.eventID, completionHandler: { response in
           print("joinNewsFeedRoom: \(response)")
         })
       }
     }
     
-    NewsFeedSocket.onNewPost() { response in
+    socket.onNewPost() { response in
       var postData = response
       if let profilePictureUrl = postData["profilePicURL"] as? String {
         let profilePictureImageView = UIImageView()
@@ -111,6 +114,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   func didClickPostButton(sender: UIButton) {
     let eventFeedModalContainer = EventFeedModalContainer()
+    eventFeedModalContainer.socket = socket
     
     self.view.addSubview(eventFeedModalContainer)
     

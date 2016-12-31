@@ -34,11 +34,12 @@ class Event {
   private var headerImageUrl: String?
   private var headerImage: UIImage?
   private var attendeeCharacteristics: [String]?
+  private var id: String?
   
   //SKO - will be used by RealmEvent as separator between attendeeCharacteristics when concatenated
   static let attendeeCharacteristicsSeparator = "%^&"
 
-  init(name: String = "", description: String = "", location: String = "", date: String = "", startTime: String = "", endTime: String = "", headerImageUrl: String = "", attendeeCharacteristics: [String] = []) {
+  init(name: String = "", description: String = "", location: String = "", date: String = "", startTime: String = "", endTime: String = "", headerImageUrl: String = "", attendeeCharacteristics: [String] = [], id: String? = nil) {
     self.name = name
     self.description = description
     self.location = location
@@ -47,6 +48,7 @@ class Event {
     self.endTime = endTime
     self.headerImageUrl = headerImageUrl
     self.attendeeCharacteristics = attendeeCharacteristics
+    self.id = id
   }
   
   //SKU - Getters and setters for all properties of the class
@@ -86,6 +88,10 @@ class Event {
     self.headerImage = image
   }
   
+  public func setId(to id: String) {
+    self.id = id
+  }
+  
   public func getName() -> String {
     return self.name
   }
@@ -120,6 +126,10 @@ class Event {
   
   public func getHeaderImage() -> UIImage? {
     return self.headerImage
+  }
+  
+  public func getId() -> String? {
+    return self.id
   }
   
   public func isUserSignedIn() -> String? {

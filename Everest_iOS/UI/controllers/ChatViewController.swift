@@ -18,6 +18,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let cellReuseIdentifier = "Cell"
   private var previousUser: String?
   
+  var socket: ChatSocket?
+  
   private let postButtonDiameter: CGFloat = 60.0
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
@@ -85,7 +87,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
+    
+    
+    
     setupConstraints()
     
 //    Socket.establishConnection() { response in

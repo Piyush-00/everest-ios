@@ -65,6 +65,25 @@ class AppUtil {
     return dateFormatter.string(from: Date())
   }
   
+  class func timestampStringFromISOString(_ string: String) -> String {
+    let timestamp: String
+    let date: Date
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    dateFormatter.calendar = Calendar(identifier: .iso8601)
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+    
+    date = dateFormatter.date(from: string)!
+    
+    dateFormatter.dateFormat = "HH:mm"
+    
+    timestamp = dateFormatter.string(from: date)
+    
+    return timestamp
+  }
+  
   class func presentEventSettingsActionSheet(using viewController: UIViewController) {
     let alertController = AppStyle.sharedInstance.eventSettingsActionSheet()
     viewController.present(alertController, animated: true, completion: nil)

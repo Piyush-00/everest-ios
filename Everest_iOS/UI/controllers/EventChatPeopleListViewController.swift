@@ -14,6 +14,7 @@ struct ChatPerson {
 }
 
 class EventChatPeopleListViewController: EventPeopleListViewController {
+  var socket: ChatSocket?
   private var chatPeople: [ChatPerson] = []
   
   private var listPeople: [ListPerson] {
@@ -32,6 +33,7 @@ class EventChatPeopleListViewController: EventPeopleListViewController {
   
   @objc private func didTapDoneButton(sender: UIBarButtonItem) {
     let eventChatViewController = ChatViewController(withChatPeople: chatPeople)
+    eventChatViewController.socket = socket
     self.navigationController?.pushViewController(eventChatViewController, animated: true)
   }
   
