@@ -138,20 +138,24 @@ class Event {
   
   public func createEvent(completionHandler: @escaping (Bool) -> ()) {
     
-    let userID = "586683c48015475c9ca5be03"
+    guard let userId = Session.manager.user?.id else {
+      print("user not signed in")
+      return
+    }
     
-    let params = ["EventName": name, "Description": description ?? "", "UserId" : userID, "Location" : location ?? ""]
+    let params = ["EventName": name, "Description": description ?? "", "UserId" : userId, "Location" : location ?? ""]
     
     Http.multipartRequest(requestURL: t(Routes.Api.CreateNewEvent), image: self.headerImage, parameters: params) {
       response in
       switch response.result {
-      case .success :
+      case .success (let json):
         
         if let httpStatusCode = response.response?.statusCode {
           switch (httpStatusCode) {
           case 200:
-              completionHandler(true)
-            
+            self.setId(to: ((json as! Dictionary<String,Any>)["EventID"] as! String))
+            Session.manager.event = self
+            completionHandler(true)
           default:
             print("default case")
             completionHandler(false)

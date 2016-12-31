@@ -58,6 +58,7 @@ class Http  {
           upload.responseJSON { response in
             completion(response)
           }
+          break
         default:
           print("Encoding Error")
         //SKU - TODO: How do we handle encoding errors?

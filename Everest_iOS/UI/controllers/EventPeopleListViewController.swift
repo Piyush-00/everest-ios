@@ -36,7 +36,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   let tableView = UITableView()
   let searchController = UISearchController(searchResultsController: nil)
   
-  private let eventId = "586685728015475c9ca5be05"
+  private let eventId = Session.manager.event?.getId() ?? ""
   
   private let cellReuseIdentifier = "Cell"
   

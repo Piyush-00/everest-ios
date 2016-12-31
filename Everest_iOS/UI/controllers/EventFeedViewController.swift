@@ -18,9 +18,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   let socket = NewsFeedSocket()
   
-  private let userID = "586683c48015475c9ca5be03"
-  private let newsFeedID = "586685728015475c9ca5be06"
-  private let eventID = "586685728015475c9ca5be05"
+  private let userID = Session.manager.user?.id ?? ""
+  private let eventID = Session.manager.event?.getId() ?? ""
   
   private var cellData: [Dictionary<String, Any>] = []
   private let cellReuseIdentifier = "Cell"
@@ -85,13 +84,20 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     socket.onNewPost() { response in
       var postData = response
       if let profilePictureUrl = postData["profilePicURL"] as? String {
-        let profilePictureImageView = UIImageView()
-        profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
-          success in
-          postData["profilePicURL"] = nil
-          postData["profileImage"] = profilePictureImageView.image
+        if profilePictureUrl == "" {
+          //no profile image set
+          //TODO: set profileImage to default image
           self.cellData.append(postData)
           self.displayNewPost()
+        } else {
+          let profilePictureImageView = UIImageView()
+          profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
+            success in
+            postData["profilePicURL"] = nil
+            postData["profileImage"] = profilePictureImageView.image
+            self.cellData.append(postData)
+            self.displayNewPost()
+          }
         }
       }
     }

@@ -9,9 +9,8 @@
 import UIKit
 
 class EventFeedModal: UIView, UITextViewDelegate {
-  private let userID = "586683c48015475c9ca5be03"
-  private let newsFeedID = "586685728015475c9ca5be06"
-  private let eventID = "586685728015475c9ca5be05"
+  private let user = Session.manager.user
+  private let eventID = Session.manager.event?.getId() ?? ""
   private let headerView = UIView()
   private let contentView = UIView()
   private let footerView = UIView()
@@ -189,7 +188,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
     
     displayLoadingButton()
     
-    socket.createNewPost(userID: userID, firstName:"firstName", lastName: "lastName", profilePicURL: "public/uploads/file-1480200461591.png", eventID: eventID, newsFeedID: newsFeedID, post: post!, completionHandler: { response in
+    socket.createNewPost(userID: user?.id ?? "", firstName: user?.getFirstName() ?? "", lastName: user?.getLastName() ?? "", profilePicURL: user?.getProfileImageURL() ?? "", eventID: eventID, post: post!, completionHandler: { response in
       print("createNewPost: \(response)")
       self.superview?.removeFromSuperview()
     })

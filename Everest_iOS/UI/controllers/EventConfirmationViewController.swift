@@ -169,7 +169,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
           if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
             let eventContainerViewController = EventContainerViewController()
-            Session.manager.event = self.event
             eventNavigationController.viewControllers = [eventContainerViewController]
             appDelegate.navigationController = nil
             appDelegate.window?.rootViewController = eventNavigationController

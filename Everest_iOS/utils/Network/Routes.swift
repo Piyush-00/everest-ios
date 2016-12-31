@@ -11,7 +11,7 @@ import Foundation
 struct Routes {
   struct Api {
     static let CreateNewUser: String = "/createNewUser"
-    static let SetUpUserProfile: String = "/setUserProfileFields?id="
+    static let SetUpUserProfile: String = "/setUserProfileFields"
     static let CreateNewEvent: String = "/createEvent"
     static let SignInUser: String = "/signInUser"
     static let CreateNewChat: String = "/event/%@/createChat"

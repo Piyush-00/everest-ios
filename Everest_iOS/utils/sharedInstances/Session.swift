@@ -16,7 +16,11 @@ class Session {
   
   static let manager = Session()
   
-  var user: User?
+  var user: User? {
+    willSet {
+      
+    }
+  }
   var event: Event?
   var userState: State = .loggedOut
   
@@ -34,7 +38,7 @@ class Session {
     }
   }
   
-  func updateUserState(){
+  func updateUserState() {
     
     //SKU - Check the state of the app.
     checkState()

@@ -24,9 +24,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
-  private let userID = "586683c48015475c9ca5be03"
-  private let newsFeedID = "586685728015475c9ca5be06"
-  private let eventID = "586685728015475c9ca5be05"
+  private let userID = Session.manager.user?.id
+  private let eventID = Session.manager.event?.getId() ?? ""
   
   private var isNewChat: Bool = false
   
