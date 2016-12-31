@@ -175,7 +175,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   }
   
   var navigationBarTitle: String? {
-    return NSLocalizedString("event chat navigation", comment: "event navigation header")
+    return NSLocalizedString("event chat list navigation", comment: "event navigation header")
   }
   
   var rightBarButtonItem: UIBarButtonItem? {

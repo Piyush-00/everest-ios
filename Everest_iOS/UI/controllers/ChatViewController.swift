@@ -38,13 +38,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     set {
       _chatPeople = newValue
-      if _chatPeople.isEmpty {
-        self.title = "Chat"
-      } else {
-        for chatPerson in _chatPeople {
-          self.title = self.title ?? "" + ((chatPerson.id == chatPeople.last!.id) ? "\(chatPerson.name)" : "\(chatPerson.name), ")
-        }
-      }
+      self.title = NSLocalizedString("event chat navigation", comment: "event navigation header")
     }
   }
   
@@ -58,9 +52,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   convenience init(withChatPeople chatPeople: [ChatPerson]) {
     self.init(nibName: nil, bundle: nil)
-    let testPerson = ChatPerson(name: "testPerson", id: "586684018015475c9ca5be04")
-    //self.chatPeople = chatPeople
-    self.chatPeople = [testPerson]
+    self.chatPeople = chatPeople
     isNewChat = true
   }
   
@@ -197,6 +189,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   func didTapSendButton(inputText: String) {
     print(inputText)
     if isNewChat {
+      isNewChat = false
       var queryString = ""
       let key = "participants"
       

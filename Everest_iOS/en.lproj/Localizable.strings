@@ -151,7 +151,10 @@
 "event feed navigation" = "Feed";
 
 /* event navigation header */
-"event chat navigation" = "Chats";
+"event chat list navigation" = "Chats";
+
+/* event navigation header */
+"event chat navigation" = "Chat";
 
 /* event navigation header */
 "event people list navigation" = "People";
