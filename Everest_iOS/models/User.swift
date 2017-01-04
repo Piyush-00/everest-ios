@@ -15,6 +15,10 @@ class User {
   private var LastName: String?
   private var ProfileImageURL: String?
   
+  var id: String? {
+    return Keychain.get(key: Keys.sharedInstance.UserID) as String? ?? ""
+  }
+  
   //SKU - First Name
   public func setFirstName(firstName: String, keyChain: Bool = false){
     self.FirstName = firstName
@@ -199,28 +203,59 @@ class User {
   public func signUpProfile (image: UIImage? = nil, firstName: String? = nil, lastName: String? = nil, completionHandler: @escaping (Bool) -> ()) {
     
     let params = ["FirstName": firstName, "LastName": lastName]
+    let queryString = "?id=\(User.getUserID()!)&isimageset="
+    var url = t(Routes.Api.SetUpUserProfile + queryString)
     
-    Http.multipartRequest(requestURL: t(Routes.Api.SetUpUserProfile + User.getUserID()!), image: image, parameters: params) {
-      response in
-      switch response.result {
-      case .success (let JSON):
-        
-        if let httpStatusCode = response.response?.statusCode {
-          switch (httpStatusCode) {
-          case 200:
-            if let jsonResult = JSON as? Dictionary<String,Any> {
-              self.setProfileImageURL(profileImageURL: jsonResult["ProfileImageURL"]! as! String, keyChain: true)
-              self.setFirstName(firstName: firstName!, keyChain: true)
-              self.setLastName(lastName: lastName!, keyChain: true)
-              completionHandler(true)
+    if let image = image {
+      url += "true"
+      Http.multipartRequest(requestURL: url, image: image, parameters: params) {
+        response in
+        switch response.result {
+        case .success (let JSON):
+          
+          if let httpStatusCode = response.response?.statusCode {
+            switch (httpStatusCode) {
+            case 200:
+              if let jsonResult = JSON as? Dictionary<String,Any> {
+                self.setProfileImageURL(profileImageURL: jsonResult["ProfileImageURL"]! as! String, keyChain: true)
+                self.setFirstName(firstName: firstName!, keyChain: true)
+                self.setLastName(lastName: lastName!, keyChain: true)
+                
+                Session.manager.user = self
+                
+                completionHandler(true)
+              }
+            default:
+              print("default case")
+              completionHandler(false)
             }
-          default:
-            print("default case")
-            completionHandler(false)
           }
+        case .failure(let error):
+          print(error)
         }
-      case .failure(let error):
-        print(error)
+      }
+    } else {
+      url += "false"
+      Http.postRequest(requestURL: url) { response in
+        switch response.result {
+        case .success (let JSON):
+          if let httpStatusCode = response.response?.statusCode {
+            switch (httpStatusCode) {
+            case 200:
+              if let jsonResult = JSON as? Dictionary<String,Any> {
+                self.setProfileImageURL(profileImageURL: "", keyChain: true)
+                self.setFirstName(firstName: firstName!, keyChain: true)
+                self.setLastName(lastName: lastName!, keyChain: true)
+                completionHandler(true)
+              }
+            default:
+              print("default case")
+              completionHandler(false)
+            }
+          }
+        case .failure(let error):
+          print(error)
+        }
       }
     }
   }

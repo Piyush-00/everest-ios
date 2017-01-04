@@ -16,6 +16,11 @@ class Session {
   
   static let manager = Session()
   
+  var isActiveEvent: Bool {
+    let eventId = Keychain.get(key: Keys.sharedInstance.EventID) as String?
+    return eventId != nil && eventId != ""
+  }
+  
   var user: User?
   var event: Event?
   var userState: State = .loggedOut
@@ -34,7 +39,7 @@ class Session {
     }
   }
   
-  func updateUserState(){
+  func updateUserState() {
     
     //SKU - Check the state of the app.
     checkState()

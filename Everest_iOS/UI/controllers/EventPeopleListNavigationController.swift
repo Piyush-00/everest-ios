@@ -50,4 +50,8 @@ class EventPeopleListNavigationController: UINavigationController, EventContaine
   var navigationBarTitle: String? {
     return nil
   }
+  
+  var rightBarButtonItem: UIBarButtonItem? {
+    return nil
+  }
 }

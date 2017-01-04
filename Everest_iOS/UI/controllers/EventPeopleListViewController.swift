@@ -8,29 +8,47 @@
 
 import UIKit
 
+class ListPerson {
+  enum Role: String {
+    case admin = "host"
+    case attendee = "guest"
+  }
+  
+  var id: String
+  var role: Role
+  var firstName: String
+  var lastName: String
+  var picture: UIImage?
+  var content: String?
+  var isSelected: Bool = false
+  var pictureUrl: String? = nil
+  
+  init(id: String, role: Role, firstName: String, lastName: String, picture: UIImage?, content: String?, pictureUrl: String?) {
+    self.id = id
+    self.role = role
+    self.firstName = firstName
+    self.lastName = lastName
+    self.picture = picture
+    self.content = content
+    self.pictureUrl = pictureUrl
+  }
+}
+
 class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  private let tableView = UITableView()
-  private let searchController = UISearchController(searchResultsController: nil)
+  let tableView = UITableView()
+  let searchController = UISearchController(searchResultsController: nil)
+  
+  private let eventId = Session.manager.event?.getId() ?? ""
   
   private let cellReuseIdentifier = "Cell"
   
-  private var eventPeopleData: [EventPersonData] = []
-  private var filteredEventPeopleData: [EventPersonData] = []
+  var eventPeopleData: [ListPerson] = []
+  var filteredEventPeopleData: [ListPerson] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     let appStyle = AppStyle.sharedInstance
-    
-    let evd1 = EventPersonData(withPicture: nil, name: "Sebastian Kolosa", content: "Swift, Objective-C, AngularJS, HTML/CSS woeifnwoefinweofinweofinweoifn", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
-    let evd2 = EventPersonData(withPicture: nil, name: "Sathoshi Kumarawadu", content: "NodeJS, ExpressJS, Swift, MongoDB", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
-    let evd3 = EventPersonData(withPicture: nil, name: "Hayes Lee", content: "ReactJS, UI/UX, HTML/CSS, SQL", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.attendee, person: nil)
-    let evd4 = EventPersonData(withPicture: nil, name: "Zain Khan", content: "NodeJS, ExpressJS, MongoDB, ReactJS", timestamp: nil, id: nil, type: EventPersonData.EventPersonType.admin, person: nil)
-    
-    eventPeopleData.append(evd1)
-    eventPeopleData.append(evd2)
-    eventPeopleData.append(evd3)
-    eventPeopleData.append(evd4)
     
     searchController.dimsBackgroundDuringPresentation = false
     searchController.searchResultsUpdater = self
@@ -53,6 +71,76 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
     setupConstraints()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    let url = t(String(format: Routes.Api.FetchAllUsers, eventId))
+    
+    Http.getRequest(requestURL: url) { response in
+      switch response.result {
+      case .success (let json):
+        guard let json = json as? Dictionary<String, Any>,
+          let admins = json["Admins"] as? [Any],
+          let attendees = json["Attendees"] as? [Any]
+          else { return }
+        
+        let adminListPeople = admins.map { (admin: Any) -> ListPerson? in
+          guard let admin = admin as? Dictionary<String, Any>,
+            let id = admin["_id"] as? String,
+            let firstName = admin["FirstName"] as? String,
+            let lastName = admin["LastName"] as? String
+            else { return nil }
+         
+          let profileImageUrl = admin["ProfileImageURL"] as? String
+          
+          let listPerson = ListPerson(id: id, role: .admin, firstName: firstName, lastName: lastName, picture: nil, content: nil, pictureUrl: profileImageUrl)
+          return listPerson
+        }
+        
+        let attendeeListPeople = attendees.map { (attendee: Any) -> ListPerson? in
+          guard let attendee = attendee as? Dictionary<String, Any>,
+            let id = attendee["_id"] as? String,
+            let firstName = attendee["FirstName"] as? String,
+            let lastName = attendee["LastName"] as? String
+            else { return nil }
+          
+          let profileImageUrl = attendee["ProfileImageURL"] as? String
+          
+          let listPerson = ListPerson(id: id, role: .attendee, firstName: firstName, lastName: lastName, picture: nil, content: nil, pictureUrl: profileImageUrl)
+          
+          return listPerson
+        }
+        
+        for adminListPerson in adminListPeople {
+          if let profileImageUrl = adminListPerson?.pictureUrl {
+            let profileImageView = UIImageView()
+            profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
+              adminListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+            }
+          }
+        }
+        
+        for attendeeListPerson in attendeeListPeople {
+          if let profileImageUrl = attendeeListPerson?.pictureUrl {
+            let profileImageView = UIImageView()
+            profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
+              attendeeListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+            }
+          }
+        }
+        
+        var listPeople = adminListPeople + attendeeListPeople
+        
+        listPeople = listPeople.filter { $0 != nil }
+        
+        self.eventPeopleData = listPeople as! [ListPerson]
+        self.tableView.reloadData()
+      case .failure (let error):
+        print(error)
+      }
+    }
+  }
+  
   private func setupConstraints() {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     
@@ -65,11 +153,11 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   func filterContentForSearchText(searchText: String, scope: String = NSLocalizedString("search all", comment: "search filter option")) {
     
     filteredEventPeopleData = eventPeopleData.filter { eventPersonData in
-      let categoryMatch = (scope == NSLocalizedString("search all", comment: "search filter option")) || (scope.lowercased() == eventPersonData.type?.rawValue)
+      let categoryMatch = (scope == NSLocalizedString("search all", comment: "search filter option")) || (scope.lowercased() == eventPersonData.role.rawValue)
       if searchText.isEmpty {
         return categoryMatch
       } else {
-        let parseMatch = (eventPersonData.name!.lowercased().contains(searchText.lowercased())) || (eventPersonData.content!.lowercased().contains(searchText.lowercased()))
+        let parseMatch = eventPersonData.firstName.lowercased().contains(searchText.lowercased()) || eventPersonData.lastName.lowercased().contains(searchText.lowercased()) || (eventPersonData.content ?? "").lowercased().contains(searchText.lowercased())
         return categoryMatch && parseMatch
       }
     }
@@ -89,7 +177,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
       fatalError("fatal error: EventPeopleListViewController cell is not a EventPeopleListTableViewCell")
     }
     
-    var eventPersonData: EventPersonData
+    var eventPersonData: ListPerson
     
     if searchController.isActive {
       eventPersonData = filteredEventPeopleData[indexPath.row]
@@ -97,10 +185,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
       eventPersonData = eventPeopleData[indexPath.row]
     }
     
-    cell.picture = eventPersonData.picture
-    cell.name = eventPersonData.name
-    cell.content = eventPersonData.content
-    cell.person = eventPersonData.person
+    cell.person = eventPersonData
     cell.setContentHorizontalMargin(to: tableView.separatorInset.left)
     
     return cell
@@ -120,18 +205,14 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   //MARK: UITableViewDelegate
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? EventPeopleListTableViewCell else {
-      fatalError("fatal error: EventPeopleListViewController cell is not a EventPeopleListTableViewCell")
-    }
+    guard let cell = tableView.cellForRow(at: indexPath) as? EventPeopleListTableViewCell,
+    let role = cell.person?.role
+    else { fatalError("fatal error: EventPeopleListViewController cell is not a EventPeopleListTableViewCell") }
     
-    switch cell.person {
-    case is Admin:
-      //TODO: show admin profile view inited with cell.person
+    switch role {
+    case .admin:
       break
-    case is Attendee:
-      //TODO: show attendee profile view inited with cell.person
-      break
-    default:
+    case .attendee:
       break
     }
   }

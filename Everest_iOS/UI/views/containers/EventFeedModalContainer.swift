@@ -9,7 +9,12 @@
 import UIKit
 
 class EventFeedModalContainer: UIView {
-  let modal = EventFeedModal()
+  var modal = EventFeedModal()
+  var socket: NewsFeedSocket? {
+    didSet {
+      modal.socket = socket
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -19,6 +24,12 @@ class EventFeedModalContainer: UIView {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
+  }
+  
+  convenience init(withNewsFeedSocket socket: NewsFeedSocket) {
+    self.init(frame: .zero)
+    self.socket = socket
+    modal.socket = self.socket!
   }
   
   private func setup() {

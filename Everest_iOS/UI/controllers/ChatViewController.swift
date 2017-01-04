@@ -18,13 +18,44 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let cellReuseIdentifier = "Cell"
   private var previousUser: String?
   
+  var socket: ChatSocket?
+  
   private let postButtonDiameter: CGFloat = 60.0
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
-  private let userID = "58448aedbef3300530bbb835"
-  private let newsFeedID = "5850c22ddabe3d01ff24a753"
-  private let eventID = "5850c22ddabe3d01ff24a752"
+  private let user = Session.manager.user
+  private let eventID = Session.manager.event?.getId() ?? ""
+  
+  private var isNewChat: Bool = false
+  
+  private var _chatPeople: [ChatPerson] = []
+  
+  private var chatPeople: [ChatPerson] {
+    get {
+      return _chatPeople
+    }
+    set {
+      _chatPeople = newValue
+      self.title = NSLocalizedString("event chat navigation", comment: "event navigation header")
+    }
+  }
+  
+  override init(nibName: String?, bundle: Bundle?) {
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  convenience init(withChatPeople chatPeople: [ChatPerson]) {
+    self.init(nibName: nil, bundle: nil)
+    self.chatPeople = chatPeople
+    isNewChat = true
+  }
+  
+  //TODO: Convenience init with chatID, latestMessage, lowerbound
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,7 +78,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
+    
+    
+    
     setupConstraints()
     
 //    Socket.establishConnection() { response in
@@ -133,11 +166,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     chatMessageCell.profilePictureImage = profileImage
     
     //SKU - Check if the previous message was by the same person
-    if(previousUser == nil || (previousUser != userID)) {
+    if(previousUser == nil || (previousUser != user!.id)) {
       chatMessageCell.renderInitialPostComps()
     }
     //Set the latest post as the "Previous User"
-    previousUser = userID
+    previousUser = user!.id
     
     return chatMessageCell
   }
@@ -154,6 +187,36 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func didTapSendButton(inputText: String) {
     print(inputText)
+    if isNewChat {
+      var queryString = ""
+      let key = "participants"
+      
+      for chatPerson in chatPeople {
+        if chatPerson.id == chatPeople.first!.id {
+          queryString += "?\(key)=\(chatPerson.id)"
+        } else {
+          queryString += "&\(key)=\(chatPerson.id)"
+        }
+      }
+      
+      //SKO - self chat person
+      queryString += "&\(key)=\(user!.id!)"
+      
+      let params = ["UserID": user!.id, "FirstName": user!.getFirstName()!, "LastName": user!.getLastName()!, "Message": inputText, "ProfileImageURL": user!.getProfileImageURL()]
+      
+      Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, eventID) + queryString), parameters: params) { response in
+        switch response.result {
+        case .success (let json):
+          print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")
+          self.isNewChat = false
+          break
+        case .failure (let error):
+          print(error)
+        }
+      }
+    } else {
+      
+    }
     //SKU - Add in socket Emit function here
   }
 }

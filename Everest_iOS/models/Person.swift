@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Person {
+class PersonClass {
   private var _name: String?
   private var _picture: UIImage?
   

@@ -9,27 +9,33 @@
 import Foundation
 import SocketIO
 
-class Socket : NSObject {
+enum namespace: String {
+  case newsFeed = "/newsfeed"
+  case chat = "/chat"
+}
 
-  private static let socket = SocketIOClient(socketURL: URL(string: t())!)
-  static func establishConnection(completionHandler : @escaping (Bool) -> ()) {
+class Socket : NSObject {
+  
+  private let socket = SocketIOClient(socketURL: URL(string: t())!)
+  
+  func establishConnection(completionHandler : @escaping (Bool) -> ()) {
     socket.connect()
     
     socket.on("connect"){ data, ack in
       completionHandler(true)
     }
     socket.on("error"){ _,_ in
-      closeConnection()
+      self.closeConnection()
       completionHandler(false)
     }
   }
   
-  static func closeConnection() {
+  func closeConnection() {
     self.socket.disconnect()
   }
   
-  static func on(channel: String, completionHandler : @escaping (Any?) -> ()) {
-    Socket.socket.on(channel) { data, ack in
+  func on(channel: String, completionHandler : @escaping (Any?) -> ()) {
+    socket.on(channel) { data, ack in
       
       //SKU - Obscure the acknowledgement as we are not using it for now.
       if (data.count > 0) {
@@ -40,9 +46,9 @@ class Socket : NSObject {
     }
   }
   
-  static func emit(channel: String, parameters: [String: Any], completionHandler : @escaping (Any?) -> ()){
+  func emit(channel: String, parameters: [String: Any], completionHandler : @escaping (Any?) -> ()){
     
-    Socket.socket.emitWithAck(channel, parameters).timingOut(after: 0) { data in
+    socket.emitWithAck(channel, parameters).timingOut(after: 0) { data in
       if (data.count > 0) {
         completionHandler(data.first)
       } else {
@@ -51,4 +57,7 @@ class Socket : NSObject {
     }
   }
   
+  func setNamespace(to namespace: namespace) {
+    socket.joinNamespace(namespace.rawValue)
+  }
 }

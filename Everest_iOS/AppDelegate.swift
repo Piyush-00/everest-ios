@@ -19,18 +19,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
       
       Session.manager.updateUserState()
-    
+      
       self.window = UIWindow(frame: UIScreen.main.bounds)
       
-      let rootView = LandingViewController()
-
-      self.navigationController = NavigationController()
-      self.navigationController?.navigationBar.isHidden = true
-      self.navigationController?.viewControllers = [rootView]
+      var rootView: UIViewController
       
+      if Session.manager.isActiveEvent {
+        let event = Event()
+        event.setId(to: Keychain.get(key: Keys.sharedInstance.EventID) as! String)
+        Session.manager.event = event
+        
+        //TODO: make GET request for event information OR in event flow (profile, page, and feed )
+        
+        let eventContainerViewController = EventContainerViewController()
+        let eventNavigationViewController = UINavigationController()
+        
+        eventNavigationViewController.viewControllers = [eventContainerViewController]
+        
+        self.window!.rootViewController = eventNavigationViewController
+      } else {
+        rootView = LandingViewController()
+        self.navigationController = NavigationController()
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.viewControllers = [rootView]
+        self.window!.rootViewController = self.navigationController
+      }
       
-      
-      self.window!.rootViewController = self.navigationController
       self.window?.makeKeyAndVisible()
       
       return true

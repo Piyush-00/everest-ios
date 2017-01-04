@@ -40,6 +40,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.removeBorder()
         passwordTextField.removeBorder()
+        passwordTextField.isSecureTextEntry = true
         confirmPasswordTextField.isSecureTextEntry = true
         confirmPasswordTextField.removeBorder()
         
@@ -119,6 +120,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
       user.signUp(email: emailTextField.text!, password: passwordTextField.text!) { response in
         switch response{
         case true:
+          
           Session.manager.user? = self.user
           //SKU - Update the session information
           Session.manager.checkState()

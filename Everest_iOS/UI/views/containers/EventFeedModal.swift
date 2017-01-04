@@ -9,9 +9,8 @@
 import UIKit
 
 class EventFeedModal: UIView, UITextViewDelegate {
-  private let userID = "583a10da2db1b150f71760a3"
-  private let newsFeedID = "584472a41ef0ebd8e34c006d"
-  private let eventID = "584472a41ef0ebd8e34c006c"
+  private let user = Session.manager.user
+  private let eventID = Session.manager.event?.getId() ?? ""
   private let headerView = UIView()
   private let contentView = UIView()
   private let footerView = UIView()
@@ -19,6 +18,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
   private let wordCountLabel = UILabel()
   private let postTextView = BaseInputTextView(hintText: NSLocalizedString("feed modal text placeholder", comment: "event feed modal text placeholder"))
   private let postButton = UIButton()
+  var socket: NewsFeedSocket?
   private let wordCountMax: Int = 200
   private var wordCount: Int {
     get {
@@ -30,6 +30,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
     set {
       wordCountLabel.text = String(newValue)
       if newValue < 0 {
+        
         if !(wordCountLabel.textColor == UIColor.red.withAlphaComponent(0.6)) {
           wordCountLabel.textColor = UIColor.red.withAlphaComponent(0.6)
         }
@@ -61,6 +62,11 @@ class EventFeedModal: UIView, UITextViewDelegate {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setup()
+  }
+  
+  convenience init(withNewsFeedSocket socket: NewsFeedSocket) {
+    self.init(frame: .zero)
+    self.socket = socket
   }
   
   override func didMoveToSuperview() {
@@ -174,11 +180,15 @@ class EventFeedModal: UIView, UITextViewDelegate {
   }
   
   func didClickPostButton(sender: UIButton) {
+    guard let socket = socket else {
+      return
+    }
+    
     let post = postTextView.text
     
     displayLoadingButton()
     
-    NewsFeedSocket.createNewPost(userID: userID, firstName:"firstName", lastName: "lastName", profilePicURL: "public/uploads/file-1480200461591.png", eventID: eventID, newsFeedID: newsFeedID, post: post!, completionHandler: { response in
+    socket.createNewPost(userID: user?.id ?? "", firstName: user?.getFirstName() ?? "", lastName: user?.getLastName() ?? "", profilePicURL: user?.getProfileImageURL() ?? "", eventID: eventID, post: post!, completionHandler: { response in
       print("createNewPost: \(response)")
       self.superview?.removeFromSuperview()
     })

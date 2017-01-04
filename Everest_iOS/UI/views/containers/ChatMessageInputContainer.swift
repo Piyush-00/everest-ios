@@ -69,6 +69,7 @@ class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   }
   
   //MARK - UITextFieldDelegate
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     self.endEditing(true)
     return false

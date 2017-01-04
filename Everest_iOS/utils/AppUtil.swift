@@ -58,11 +58,26 @@ class AppUtil {
   
   class func formatISODate() -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.calendar = Calendar(identifier: .iso8601)
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
     return dateFormatter.string(from: Date())
+  }
+  
+  class func timestampStringFromISOString(_ string: String) -> String {
+    let timestamp: String
+    let date: Date
+    let dateFormatter = DateFormatter()
+    
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+    
+    date = dateFormatter.date(from: string)!
+    
+    dateFormatter.dateFormat = "h:mm a"
+    dateFormatter.amSymbol = "AM"
+    dateFormatter.pmSymbol = "PM"
+    
+    timestamp = dateFormatter.string(from: date)
+    
+    return timestamp
   }
   
   class func presentEventSettingsActionSheet(using viewController: UIViewController) {

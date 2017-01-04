@@ -151,7 +151,10 @@
 "event feed navigation" = "Feed";
 
 /* event navigation header */
-"event chat navigation" = "Groups";
+"event chat list navigation" = "Chats";
+
+/* event navigation header */
+"event chat navigation" = "Chat";
 
 /* event navigation header */
 "event people list navigation" = "People";
@@ -164,6 +167,9 @@
 
 /* event navigation header */
 "event page navigation" = "Event";
+
+/* event navigation header */
+"event add chat people navigation" = "Select People";
 
 /* event settings options */
 "cancel button" = "Cancel";

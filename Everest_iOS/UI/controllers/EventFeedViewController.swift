@@ -16,9 +16,10 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   private let eventFeedTabButton = EventTabBarButtonView()
   
-  private let userID = "583a10da2db1b150f71760a3"
-  private let newsFeedID = "584472a41ef0ebd8e34c006d"
-  private let eventID = "584472a41ef0ebd8e34c006c"
+  let socket = NewsFeedSocket()
+  
+  private let userID = Session.manager.user?.id ?? ""
+  private let eventID = Session.manager.event?.getId() ?? ""
   
   private var cellData: [Dictionary<String, Any>] = []
   private let cellReuseIdentifier = "Cell"
@@ -58,7 +59,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     tableHeaderImageView.image = appStyle.pictureImageWide
     
     tableView.register(EventFeedTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.tableHeaderView = tableHeaderImageView
     tableView.separatorStyle = .none
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -72,24 +72,34 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     setupConstraints()
     
-    Socket.establishConnection() { response in
+    socket.establishConnection() { response in
+      print("socket connected: \(response)")
       if response {
-        NewsFeedSocket.joinNewsFeedRoom(userID: self.userID, eventID: self.eventID, completionHandler: { response in
+        self.socket.joinNewsFeedRoom(userID: self.userID, eventID: self.eventID, completionHandler: { response in
           print("joinNewsFeedRoom: \(response)")
         })
       }
     }
     
-    NewsFeedSocket.onNewPost() { response in
+    socket.onNewPost() { response in
       var postData = response
       if let profilePictureUrl = postData["profilePicURL"] as? String {
-        let profilePictureImageView = UIImageView()
-        profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
-          success in
-          postData["profilePicURL"] = nil
-          postData["profileImage"] = profilePictureImageView.image
+        if profilePictureUrl == "" {
+          //no profile image set
+          //TODO: set profileImage to default image
           self.cellData.append(postData)
           self.displayNewPost()
+        } else {
+          let profilePictureImageView = UIImageView()
+          profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
+            success in
+            DispatchQueue.main.async {
+              postData["profilePicURL"] = nil
+              postData["profileImage"] = profilePictureImageView.image
+              self.cellData.append(postData)
+              self.displayNewPost()
+            }
+          }
         }
       }
     }
@@ -112,6 +122,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   func didClickPostButton(sender: UIButton) {
     let eventFeedModalContainer = EventFeedModalContainer()
+    eventFeedModalContainer.socket = socket
     
     self.view.addSubview(eventFeedModalContainer)
     
@@ -125,7 +136,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   private func displayNewPost() {
     tableView.beginUpdates()
-    tableView.insertRows(at: [IndexPath(row: cellData.count - 1, section: 0)], with: .automatic)
+    tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     tableView.endUpdates()
   }
   
@@ -134,17 +145,21 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     
-    let postData = cellData[indexPath.row]
+    let reversedCellData = Array(cellData.reversed())
+    
+    let postData = reversedCellData[indexPath.row]
     
     guard let eventFeedCell = cell as? EventFeedTableViewCell,
           let post = postData["post"] as? String,
           let name = postData["name"] as? String,
-          let profileImage = postData["profileImage"] as? UIImage?
+          let profileImage = postData["profileImage"] as? UIImage?,
+          let isoString = postData["timestamp"] as? String
           else { return cell }
     
     eventFeedCell.post = post
     eventFeedCell.name = name
     eventFeedCell.profilePictureImage = profileImage
+    eventFeedCell.timestamp = AppUtil.timestampStringFromISOString(isoString)
     
     return eventFeedCell
   }
@@ -177,5 +192,9 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   var navigationBarTitle: String? {
     return NSLocalizedString("event feed navigation", comment: "event navigation header")
+  }
+  
+  var rightBarButtonItem: UIBarButtonItem? {
+    return nil
   }
 }
