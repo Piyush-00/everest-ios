@@ -220,6 +220,9 @@ class User {
                 self.setProfileImageURL(profileImageURL: jsonResult["ProfileImageURL"]! as! String, keyChain: true)
                 self.setFirstName(firstName: firstName!, keyChain: true)
                 self.setLastName(lastName: lastName!, keyChain: true)
+                
+                Session.manager.user = self
+                
                 completionHandler(true)
               }
             default:

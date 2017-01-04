@@ -16,11 +16,11 @@ class Session {
   
   static let manager = Session()
   
-  var user: User? {
-    willSet {
-      
-    }
+  var isActiveEvent: Bool {
+    return Keychain.get(key: Keys.sharedInstance.EventID) != nil
   }
+  
+  var user: User?
   var event: Event?
   var userState: State = .loggedOut
   

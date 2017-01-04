@@ -24,7 +24,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
-  private let userID = Session.manager.user?.id
+  private let user = Session.manager.user
   private let eventID = Session.manager.event?.getId() ?? ""
   
   private var isNewChat: Bool = false
@@ -166,11 +166,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     chatMessageCell.profilePictureImage = profileImage
     
     //SKU - Check if the previous message was by the same person
-    if(previousUser == nil || (previousUser != userID)) {
+    if(previousUser == nil || (previousUser != user!.id)) {
       chatMessageCell.renderInitialPostComps()
     }
     //Set the latest post as the "Previous User"
-    previousUser = userID
+    previousUser = user!.id
     
     return chatMessageCell
   }
@@ -188,7 +188,6 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   func didTapSendButton(inputText: String) {
     print(inputText)
     if isNewChat {
-      isNewChat = false
       var queryString = ""
       let key = "participants"
       
@@ -201,14 +200,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       }
       
       //SKO - self chat person
-      queryString += "&\(key)=\(userID)"
+      queryString += "&\(key)=\(user!.id!)"
       
-      let params = ["UserID": userID, "FirstName": "Sebastian", "LastName": "oinoi", "Message": inputText, "ProfileImageURL": ""]
+      let params = ["UserID": user!.id, "FirstName": user!.getFirstName()!, "LastName": user!.getLastName()!, "Message": inputText, "ProfileImageURL": user!.getProfileImageURL()]
       
       Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, eventID) + queryString), parameters: params) { response in
         switch response.result {
         case .success (let json):
           print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")
+          self.isNewChat = false
           break
         case .failure (let error):
           print(error)

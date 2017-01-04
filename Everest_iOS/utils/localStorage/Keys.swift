@@ -21,4 +21,5 @@ class Keys {
   let LastName:NSString = "lastName"
   let ProfileImage:NSString = "profileImageURL"
   
+  let EventID:NSString = "eventID"
 }

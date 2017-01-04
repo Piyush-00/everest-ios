@@ -93,10 +93,12 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
           let profilePictureImageView = UIImageView()
           profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
             success in
-            postData["profilePicURL"] = nil
-            postData["profileImage"] = profilePictureImageView.image
-            self.cellData.append(postData)
-            self.displayNewPost()
+            DispatchQueue.main.async {
+              postData["profilePicURL"] = nil
+              postData["profileImage"] = profilePictureImageView.image
+              self.cellData.append(postData)
+              self.displayNewPost()
+            }
           }
         }
       }
@@ -134,7 +136,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   
   private func displayNewPost() {
     tableView.beginUpdates()
-    tableView.insertRows(at: [IndexPath(row: cellData.count - 1, section: 0)], with: .automatic)
+    tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     tableView.endUpdates()
   }
   
@@ -143,17 +145,21 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     
-    let postData = cellData[indexPath.row]
+    let reversedCellData = cellData.reversed() as! Array
+    
+    let postData = reversedCellData[indexPath.row]
     
     guard let eventFeedCell = cell as? EventFeedTableViewCell,
           let post = postData["post"] as? String,
           let name = postData["name"] as? String,
-          let profileImage = postData["profileImage"] as? UIImage?
+          let profileImage = postData["profileImage"] as? UIImage?,
+          let isoString = postData["timestamp"] as? String
           else { return cell }
     
     eventFeedCell.post = post
     eventFeedCell.name = name
     eventFeedCell.profilePictureImage = profileImage
+    eventFeedCell.timestamp = AppUtil.timestampStringFromISOString(isoString)
     
     return eventFeedCell
   }

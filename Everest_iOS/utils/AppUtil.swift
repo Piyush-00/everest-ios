@@ -58,9 +58,6 @@ class AppUtil {
   
   class func formatISODate() -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.calendar = Calendar(identifier: .iso8601)
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
     return dateFormatter.string(from: Date())
   }
@@ -71,13 +68,12 @@ class AppUtil {
     let dateFormatter = DateFormatter()
     
     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-    dateFormatter.calendar = Calendar(identifier: .iso8601)
-    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     
     date = dateFormatter.date(from: string)!
     
-    dateFormatter.dateFormat = "HH:mm"
+    dateFormatter.dateFormat = "h:mm a"
+    dateFormatter.amSymbol = "AM"
+    dateFormatter.pmSymbol = "PM"
     
     timestamp = dateFormatter.string(from: date)
     

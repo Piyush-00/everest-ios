@@ -70,7 +70,7 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
   
     func didTapContinueButton(sender: UIButton) {
       
-      user?.signUpProfile(image: nil, firstName: firstNameTextField.text, lastName: lastNameTextField.text) {
+      user?.signUpProfile(image: profileHeaderContainer?.pictureImageView.image, firstName: firstNameTextField.text, lastName: lastNameTextField.text) {
         response in
         switch response{
           case true:

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeaderContainer: UIView {
+class ProfileHeaderContainer: UIView, ImagePickerAlertProtocol {
     var controller: UIViewController?
     var pictureImageView: UIImageView
     private var imageSize: CGFloat
@@ -75,6 +75,13 @@ class ProfileHeaderContainer: UIView {
         if controller != nil {
             let imagePicker = ImagePickerAlertController(frame: UIScreen.main.bounds, controller: controller!)
             imagePicker.displayAlert()
+            imagePicker.delegate = self
         }
     }
+  
+  //MARK: ImagePickerAlertProtocol
+  
+  func didPickImage(image: UIImage) {
+    pictureImageView.image = image
+  }
 }
