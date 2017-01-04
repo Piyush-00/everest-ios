@@ -21,14 +21,16 @@ class ListPerson {
   var picture: UIImage?
   var content: String?
   var isSelected: Bool = false
+  var pictureUrl: String? = nil
   
-  init(id: String, role: Role, firstName: String, lastName: String, picture: UIImage?, content: String?) {
+  init(id: String, role: Role, firstName: String, lastName: String, picture: UIImage?, content: String?, pictureUrl: String?) {
     self.id = id
     self.role = role
     self.firstName = firstName
     self.lastName = lastName
     self.picture = picture
     self.content = content
+    self.pictureUrl = pictureUrl
   }
 }
 
@@ -88,9 +90,10 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
             let firstName = admin["FirstName"] as? String,
             let lastName = admin["LastName"] as? String
             else { return nil }
+         
+          let profileImageUrl = admin["ProfileImageURL"] as? String
           
-          let listPerson = ListPerson(id: id, role: .admin, firstName: firstName, lastName: lastName, picture: nil, content: nil)
-          
+          let listPerson = ListPerson(id: id, role: .admin, firstName: firstName, lastName: lastName, picture: nil, content: nil, pictureUrl: profileImageUrl)
           return listPerson
         }
         
@@ -101,9 +104,29 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
             let lastName = attendee["LastName"] as? String
             else { return nil }
           
-          let listPerson = ListPerson(id: id, role: .attendee, firstName: firstName, lastName: lastName, picture: nil, content: nil)
+          let profileImageUrl = attendee["ProfileImageURL"] as? String
+          
+          let listPerson = ListPerson(id: id, role: .attendee, firstName: firstName, lastName: lastName, picture: nil, content: nil, pictureUrl: profileImageUrl)
           
           return listPerson
+        }
+        
+        for adminListPerson in adminListPeople {
+          if let profileImageUrl = adminListPerson?.pictureUrl {
+            let profileImageView = UIImageView()
+            profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
+              adminListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+            }
+          }
+        }
+        
+        for attendeeListPerson in attendeeListPeople {
+          if let profileImageUrl = attendeeListPerson?.pictureUrl {
+            let profileImageView = UIImageView()
+            profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
+              attendeeListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+            }
+          }
         }
         
         var listPeople = adminListPeople + attendeeListPeople

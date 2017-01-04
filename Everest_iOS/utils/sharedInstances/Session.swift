@@ -17,7 +17,8 @@ class Session {
   static let manager = Session()
   
   var isActiveEvent: Bool {
-    return Keychain.get(key: Keys.sharedInstance.EventID) != nil
+    let eventId = Keychain.get(key: Keys.sharedInstance.EventID) as String?
+    return eventId != nil && eventId != ""
   }
   
   var user: User?
