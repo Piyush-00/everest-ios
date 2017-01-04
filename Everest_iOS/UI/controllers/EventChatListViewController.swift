@@ -10,7 +10,7 @@ import UIKit
 import FontAwesome_swift
 
 struct EventChatData {
-  var picture: UIImage?
+  var picture: UIImage? //TODO: eventually make non-optional once implement client-side default image
   var names: [String]
   var message: String
   var timestamp: String
@@ -30,6 +30,9 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   private let tableView = UITableView()
   
   let socket = ChatSocket()
+  
+  private let user = Session.manager.user
+  private let event = Session.manager.event
   
   private let cellReuseIdentifier = "Cell"
   
@@ -71,14 +74,15 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     socket.onNewMessage { response in
       guard let chatId = response["ChatId"] as? String,
-        let pictureUrl = response["PicturePictureURL"] as? String,
         let message = response["Message"] as? String,
         let isoString = response["Timestamp"] as? String
         else { return }
       
       let timestamp = AppUtil.timestampStringFromISOString(isoString)
       
-      let chatListMessage = ChatListMessage(pictureUrl: pictureUrl, message: message, timestamp: timestamp)
+      let profilePictureUrl = response["ProfilePictureURL"] as? String
+      
+      let chatListMessage = ChatListMessage(pictureUrl: profilePictureUrl, message: message, timestamp: timestamp)
       
       if let cell = self.cellHashMap[chatId] {
         //NOTE: might need to update tableview to see result
@@ -91,6 +95,60 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    let url = t(String(format: Routes.Api.FetchAllChats, user!.id!, event!.getId()!))
+    
+    Http.getRequest(requestURL: url) { response in
+      switch response.result {
+      case .success(let json):
+        guard let jsonArray = json as? [Dictionary<String, Any>] else { return }
+        
+        var chatData: [EventChatData] = []
+        
+        for (index, json) in jsonArray.enumerated() {
+          guard let id = json["ChatID"] as? String,
+            let participants = json["Participants"] as? [Dictionary<String, Any>],
+            let latestMessageJson = json["LatestMessage"] as? Dictionary<String, Any>
+            else { return }
+          
+          var participantFirstNames: [String] = []
+          
+          for participant in participants {
+            guard let firstName = participant["FirstName"] as? String else { return }
+            participantFirstNames.append(firstName)
+          }
+          
+          guard let message = latestMessageJson["Message"] as? String,
+            let isoString = latestMessageJson["Timestamp"] as? String
+            else { return }
+          
+          let timestamp = AppUtil.timestampStringFromISOString(isoString)
+          
+          if let profileImageUrl = latestMessageJson["ProfileImageURL"] as? String {
+            let profileImageView = UIImageView()
+            profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
+              let eventChatData = EventChatData(picture: profileImageView.image, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
+              chatData.append(eventChatData)
+              if index == (jsonArray.count - 1) {
+                self.eventChatData = chatData
+                self.tableView.reloadData()
+              }
+            }
+          } else {
+            let eventChatData = EventChatData(picture: nil, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
+            chatData.append(eventChatData)
+            if index == (jsonArray.count - 1) {
+              self.eventChatData = chatData
+              self.tableView.reloadData()
+            }
+          }
+        }
+        break
+      case .failure(let error):
+        print(error)
+        break
+      }
+    }
     
     //TODO: get request for list of chats --> subscribe to chat rooms here too or in cellfor row?
   }

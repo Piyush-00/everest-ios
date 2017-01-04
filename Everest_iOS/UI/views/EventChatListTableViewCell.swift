@@ -79,7 +79,7 @@ class EventChatListTableViewCell: UITableViewCell {
     let profilePictureView = UIView()
     
     profilePictureImageView.layer.masksToBounds = true
-    profilePictureImageView.contentMode = .scaleAspectFit
+    profilePictureImageView.contentMode = .scaleAspectFill
     profilePictureImageView.translatesAutoresizingMaskIntoConstraints = false
     
     profilePictureView.layer.cornerRadius = profilePictureViewDiameter / 2.0
@@ -139,9 +139,15 @@ class EventChatListTableViewCell: UITableViewCell {
   }
   
   func updateContent(using latestMessage: ChatListMessage) {
-    profilePictureImageView.downloadedFrom(link: t("/" + (latestMessage.pictureUrl ?? "[DEFAULT IMAGE]"))) { _ in
+    if let pictureUrl = latestMessage.pictureUrl {
+      profilePictureImageView.downloadedFrom(link: t("/" + pictureUrl)) { _ in
+        self.timestamp = latestMessage.timestamp
+        self.message = latestMessage.message
+      }
+    } else {
       self.timestamp = latestMessage.timestamp
       self.message = latestMessage.message
+      //TODO: self.image = DEFAULT_IMAGE
     }
   }
 }

@@ -145,7 +145,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
     
-    let reversedCellData = cellData.reversed() as! Array
+    let reversedCellData = Array(cellData.reversed())
     
     let postData = reversedCellData[indexPath.row]
     
