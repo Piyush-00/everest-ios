@@ -64,15 +64,13 @@ class EventPeopleListTableViewCell: UITableViewCell {
     let profilePictureView = UIView()
     
     profilePictureImageView.layer.masksToBounds = true
-    profilePictureImageView.contentMode = .scaleAspectFit
+    profilePictureImageView.contentMode = .scaleAspectFill
     profilePictureImageView.translatesAutoresizingMaskIntoConstraints = false
     
     profilePictureView.layer.cornerRadius = profilePictureViewDiameter / 2.0
     profilePictureView.layer.masksToBounds = true
     profilePictureView.translatesAutoresizingMaskIntoConstraints = false
     profilePictureView.addSubview(profilePictureImageView)
-    profilePictureView.layer.borderColor = UIColor.black.cgColor
-    profilePictureView.layer.borderWidth = 1.0
     
     nameLabel.font = appStyle.textFontMedium
     nameLabel.textColor = appStyle.regularTextColor
