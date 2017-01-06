@@ -99,8 +99,18 @@ class AppStyle {
     let logoutActionButton = UIAlertAction(title: NSLocalizedString("log out button", comment: "event settings options"), style: .default)
     { action in
       let landingViewCtrl = LandingViewController()
-      let window = (UIApplication.shared.delegate as! AppDelegate).window!
-      window.rootViewController = landingViewCtrl
+      let navigationController = NavigationController()
+      let appDelegate = UIApplication.shared.delegate as! AppDelegate
+      let window = appDelegate.window!
+      
+      navigationController.navigationBar.isHidden = true
+      navigationController.viewControllers = [landingViewCtrl]
+      
+      appDelegate.navigationController = navigationController
+      
+      Keychain.deleteEvent()
+      
+      window.rootViewController = navigationController
     }
     
     alertController.addAction(cancelActionButton)
