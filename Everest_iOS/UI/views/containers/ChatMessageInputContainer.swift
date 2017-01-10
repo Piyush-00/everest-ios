@@ -13,7 +13,7 @@ import UIKit
 
 class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   
-  private let textInputView = UITextField()
+  let textInputView = UITextField()
   private let sendButton = AppStyle.sharedInstance.baseInputButton()
   
   weak var delegate: ChatMessageInputContainerProtocol?
@@ -73,5 +73,9 @@ class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     self.endEditing(true)
     return false
+  }
+  
+  func setButtonTitle(tittle: String) {
+    sendButton.setTitle(tittle, for: .normal)
   }
 }

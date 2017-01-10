@@ -136,4 +136,8 @@ class HeaderViewContainer: UIView {
     func getHeaderViewHeight() -> CGFloat {
         return headerViewHeight
     }
+  
+  func setHeaderViewHeight(_ height: CGFloat) {
+      headerViewHeight = height
+    }
 }
