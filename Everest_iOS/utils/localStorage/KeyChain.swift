@@ -45,6 +45,11 @@ public class Keychain: NSObject {
     }
   }
   
+  static func deleteEvent() {
+    print("deleting key: " + ((Keys.sharedInstance.EventID) as String))
+    self.delete(service: Keys.sharedInstance.EventID, data: "")
+  }
+  
   public class func set(key: NSString, token: NSString) {
     self.save(service: key, data: token)
   }
