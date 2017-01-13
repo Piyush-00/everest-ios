@@ -9,25 +9,32 @@
 import UIKit
 import FontAwesome_swift
 
-class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContainerProtocol {
+class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContainerProtocol, TagInputControllerProtocol, UITextFieldDelegate {
   
   private let headerAndStackView = HeaderAndStackViewContainer(withNavigationBar: true)
   private let headerImageView: UIImageView = UIImageView()
   private let attendeeDescriptionHeaderLabel = UILabel()
   private let tagInputView = ChatMessageInputContainer()
+  private let continueButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("continue", comment: "continue"))
   private var tap = UITapGestureRecognizer()
+  private var attendeeDescriptionField = BaseInputTextField(hintText: NSLocalizedString("about", comment: "Description"))
   
-  var test = TagFlowController()
-  
+  private var tagFlowControllerReference = TagFlowController()
   private var bottomConstraint: NSLayoutConstraint?
   
   //SKU - Properties
-  var headerViewHeight: CGFloat = 100
-  var addButtonIconSize: CGFloat = 25
-  let tags = ["Tech", "Designrdafd", "Humor", "Travel", "Music", "Writing"]
+  private var isAddingProperty: Bool = false
+  private var headerViewHeight: CGFloat = 100
+  private var addButtonIconSize: CGFloat = 25
+  let tags: [String] = ["Interests","Work Experiences"]
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    headerImageView.downloadedFrom(link: t("/public/uploads/file-1484330162931.png"))
+    headerImageView.clipsToBounds = true
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
     
     headerAndStackView.setHeaderViewHeight(headerViewHeight)
     headerAndStackView.setHeaderView(view: headerImageView)
@@ -38,22 +45,26 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     self.view.addSubview(tagInputView)
     
     tagInputView.delegate = self
-    
+    attendeeDescriptionField.delegate = self
 
-    
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     
-    setupComponents()
-    setupConstraints()
     tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
     
+    setupComponents()
+    setupConstraints()
     
-    setupCharacteristics()
-    setupCharacteristics()
-
+    continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
+    continueButtonContainer.button.isEnabled = false
     
-    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    for i in 0...((tags.count)-1) {
+      setupCharacteristics(title: tags[i])
+    }
+    headerAndStackView.addArrangedSubviewToStackView(view: continueButtonContainer)
   }
 
   
@@ -71,88 +82,47 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     
     bottomConstraint = NSLayoutConstraint(item: tagInputView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 60)
     view.addConstraint(bottomConstraint!)
-    
   }
   
   private func setupComponents() {
-    attendeeDescriptionHeaderLabel.text = "Answer these few questions about your self before you join"
+    attendeeDescriptionHeaderLabel.text = NSLocalizedString("attendee join event characteristic", comment: "attendee join event characteristic message")
     attendeeDescriptionHeaderLabel.numberOfLines = 0
     attendeeDescriptionHeaderLabel.lineBreakMode = .byWordWrapping
     attendeeDescriptionHeaderLabel.textAlignment = .center
     attendeeDescriptionHeaderLabel.font = AppStyle.sharedInstance.headerFontMedium
     
-    tagInputView.setButtonTitle(tittle: "Add")
+    tagInputView.setButtonTitle(tittle: NSLocalizedString("add", comment: "add"))
+
+    var headerTextLabel = UILabel()
+    headerTextLabel.text = NSLocalizedString("attendee description", comment: "attendee description message")
+    headerTextLabel.font = AppStyle.sharedInstance.textFontMedium
+    headerTextLabel.translatesAutoresizingMaskIntoConstraints = false
+    headerTextLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    
+    headerAndStackView.addArrangedSubviewToStackView(view: headerTextLabel)
+    headerAndStackView.addArrangedSubviewToStackView(view: attendeeDescriptionField)
   }
   
-  private func setupCharacteristics() {
-   
-    let wrapperView = UIView()
-    let characteristicHeaderLabel = UILabel()
-    let addTagButton = UIButton()
-    
-    wrapperView.addSubview(characteristicHeaderLabel)
-    wrapperView.addSubview(addTagButton)
-    headerAndStackView.addArrangedSubviewToStackView(view: wrapperView)
-    
-    wrapperView.translatesAutoresizingMaskIntoConstraints = false
-    wrapperView.bottomAnchor.constraint(equalTo: characteristicHeaderLabel.bottomAnchor).isActive = true
-    
-    
-    characteristicHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
-    characteristicHeaderLabel.topAnchor.constraint(equalTo: wrapperView.topAnchor).isActive = true
-    characteristicHeaderLabel.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor).isActive = true
-    characteristicHeaderLabel.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -30).isActive = true
-    characteristicHeaderLabel.bottomAnchor.constraint(equalTo: wrapperView.bottomAnchor).isActive = true
-    
-    characteristicHeaderLabel.text = "Interests"
-    characteristicHeaderLabel.numberOfLines = 0
-    characteristicHeaderLabel.lineBreakMode = .byWordWrapping
-    
-    addTagButton.titleLabel?.font = UIFont.fontAwesome(ofSize: addButtonIconSize)
-    addTagButton.setTitle(String.fontAwesomeIcon(name: .plus), for: .normal)
-    addTagButton.setTitleColor(UIColor.black, for: .normal)
-    addTagButton.titleLabel?.numberOfLines = 1
-    addTagButton.titleLabel?.adjustsFontSizeToFitWidth = true
-    addTagButton.titleLabel?.lineBreakMode = .byClipping
-    
-    addTagButton.translatesAutoresizingMaskIntoConstraints = false
-    addTagButton.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor).isActive = true
-    addTagButton.topAnchor.constraint(equalTo: wrapperView.topAnchor).isActive = true
-    addTagButton.widthAnchor.constraint(equalToConstant: addButtonIconSize).isActive = true
-    addTagButton.heightAnchor.constraint(equalToConstant: addButtonIconSize).isActive = true
-    
-    addTagButton.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
-    
-    test = TagFlowController()
-    test.canRemoveCell = true
-    test.setBackgroundColor(AppStyle.sharedInstance.backgroundColor)
-    test.loadData(inputValues: (tags))
-    
-    addChildViewController(test)
-    
-    
-    headerAndStackView.addArrangedSubviewToStackView(view: test.view)
-    
-    test.view.heightAnchor.constraint(equalToConstant: 80).isActive = true
-    
-  }
-  
-  func didTapAddButton() {
-    tagInputView.textInputView.becomeFirstResponder()
-    
+  private func setupCharacteristics(title: String) {
+    var tagInputViewController = TagInputController()
+    tagInputViewController.delegate = self
+    tagInputViewController.setTitle(title: title)
+    addChildViewController(tagInputViewController)
+    headerAndStackView.addArrangedSubviewToStackView(view: tagInputViewController.view)
   }
   
   func KeyboardDidActivate(notification: NSNotification) {
-    
     if (notification.name == NSNotification.Name.UIKeyboardWillShow) {
-      if let userAgent = notification.userInfo {
-        let keyboardFrame = (userAgent[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-        bottomConstraint?.constant = -(keyboardFrame?.height)!
-        addKeyboardDismissListener()
+      if (isAddingProperty) {
+        if let userAgent = notification.userInfo {
+          let keyboardFrame = (userAgent[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+          bottomConstraint?.constant = -(keyboardFrame?.height)!
+          isAddingProperty = false
+        }
       }
+      addKeyboardDismissListener()
     } else if (notification.name == NSNotification.Name.UIKeyboardWillHide) {
       bottomConstraint?.constant = 60
-  
       removeKeyboardDismissListener()
     }
     
@@ -164,7 +134,7 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
   }
   
   func didTapSendButton(inputText: String) {
-    test.addNewTag(inputText: inputText)
+    tagFlowControllerReference.addNewTag(inputText: inputText)
   }
   
   func addKeyboardDismissListener() {
@@ -175,4 +145,45 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     view.removeGestureRecognizer(tap)
   }
   
+  func onTapContinueButton(sender: UIButton){
+    print("hi")
+  }
+  
+  //MARK: TagInputControllerProtocol
+  func didTapAddButton(tagController: TagFlowController) {
+    isAddingProperty = true
+    tagFlowControllerReference = tagController
+    tagInputView.textInputView.becomeFirstResponder()
+  }
+  
+  //MARK: UITextFieldDelegate
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if textField == attendeeDescriptionField {
+      if string != "" {
+        if !continueButtonContainer.button.isEnabled {
+          continueButtonContainer.button.isEnabled = true
+        }
+      } else {
+        if let text = textField.text {
+          if text.characters.count < 2 {
+            if continueButtonContainer.button.isEnabled {
+              continueButtonContainer.button.isEnabled = false
+            }
+          }
+        }
+      }
+    }
+    return true
+  }
+  
+  //MARK: UITextFieldDelegate
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if(textField.nextField == nil){
+      textField.resignFirstResponder()
+    }
+    else {
+      textField.nextField?.becomeFirstResponder()
+    }
+    return true
+  }
 }

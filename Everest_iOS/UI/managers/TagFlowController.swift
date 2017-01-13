@@ -10,7 +10,7 @@ import UIKit
 
 class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
-  var tags : [String]?
+  var tags : [String] = []
   
   private var collectionView: UICollectionView!
   private var sizingCell : PropertyTagCell = PropertyTagCell()
@@ -50,6 +50,7 @@ class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, 
     collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     collectionView.topAnchor.constraint(equalTo: propertyLabel.bottomAnchor, constant: 5).isActive = true
     collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+
   }
   
   func loadData(inputValues: [String]){
@@ -57,7 +58,7 @@ class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, 
   }
   
   func addNewTag(inputText: String){
-    tags?.append(inputText)
+    tags.append(inputText)
     collectionView.reloadData()
   }
   
@@ -70,16 +71,13 @@ class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, 
   }
   
   func configureCell(cell: PropertyTagCell, forIndexPath indexPath: NSIndexPath) {
-    if (tags == nil) {
-      return
-    } else {
-      let tag = tags![indexPath.row]
-      cell.propertyName = tag
-      cell.setTagColor(cellColor)
-      
-      if (canRemoveCell) {
-        cell.addRemoveLabel()
-      }
+    
+    let tag = tags[indexPath.row]
+    cell.propertyName = tag
+    cell.setTagColor(cellColor)
+    
+    if (canRemoveCell) {
+      cell.addRemoveLabel()
     }
   }
   
@@ -90,11 +88,7 @@ class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, 
   
   //MARK - UICollectionViewDataSource
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if (tags == nil) {
-      return 0
-    } else {
-    return tags!.count
-    }
+    return tags.count
   }
   
   //MARK - UICollectionViewDataSource
@@ -115,7 +109,7 @@ class TagFlowController : UIViewController, UICollectionViewDelegateFlowLayout, 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if (canRemoveCell) {
       
-    tags?.remove(at: indexPath.item)
+    tags.remove(at: indexPath.item)
     self.collectionView.deleteItems(at: [indexPath])
     }
   }
