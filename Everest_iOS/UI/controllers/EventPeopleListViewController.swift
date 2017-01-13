@@ -115,8 +115,10 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
           if let profileImageUrl = adminListPerson?.pictureUrl {
             let profileImageView = UIImageView()
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
-              adminListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+              DispatchQueue.main.async {
+                adminListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
                 self.tableView.reloadData()
+              }
             }
           }
         }
@@ -125,8 +127,10 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
           if let profileImageUrl = attendeeListPerson?.pictureUrl {
             let profileImageView = UIImageView()
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
-              attendeeListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
+              DispatchQueue.main.async {
+                attendeeListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
                 self.tableView.reloadData()
+              }
             }
           }
         }
