@@ -129,18 +129,14 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
               let eventChatData = EventChatData(picture: profileImageView.image, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
               chatData.append(eventChatData)
-              if index == (jsonArray.count - 1) {
-                self.eventChatData = chatData
-                self.tableView.reloadData()
-              }
+              self.eventChatData = chatData
+              self.tableView.reloadData()
             }
           } else {
             let eventChatData = EventChatData(picture: nil, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
             chatData.append(eventChatData)
-            if index == (jsonArray.count - 1) {
-              self.eventChatData = chatData
-              self.tableView.reloadData()
-            }
+            self.eventChatData = chatData
+            self.tableView.reloadData()
           }
         }
         break
