@@ -74,7 +74,6 @@ class EventPeopleListTableViewCell: UITableViewCell {
     
     nameLabel.font = appStyle.textFontMedium
     nameLabel.textColor = appStyle.regularTextColor
-    nameLabel.text = "testing"
     
     contentLabel.font = appStyle.textFontSmall
     contentLabel.textColor = appStyle.regularTextColor
