@@ -217,7 +217,7 @@ class User {
             switch (httpStatusCode) {
             case 200:
               if let jsonResult = JSON as? Dictionary<String,Any> {
-                self.setProfileImageURL(profileImageURL: jsonResult["ProfileImageURL"]! as! String, keyChain: true)
+                self.setProfileImageURL(profileImageURL: ( "/" + (jsonResult["ProfileImageURL"]! as! String)), keyChain: true)
                 self.setFirstName(firstName: firstName!, keyChain: true)
                 self.setLastName(lastName: lastName!, keyChain: true)
                 
