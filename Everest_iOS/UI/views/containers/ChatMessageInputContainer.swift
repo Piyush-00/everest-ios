@@ -78,4 +78,16 @@ class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   func setButtonTitle(tittle: String) {
     sendButton.setTitle(tittle, for: .normal)
   }
+  
+  func disableSendButton() {
+    sendButton.isEnabled = false
+  }
+  
+  func enableSendButton() {
+    sendButton.isEnabled = true
+  }
+  
+  func isSendButtonEnabled() -> Bool {
+    return sendButton.isEnabled
+  }
 }

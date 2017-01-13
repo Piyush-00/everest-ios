@@ -45,6 +45,7 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     self.view.addSubview(tagInputView)
     
     tagInputView.delegate = self
+    tagInputView.textInputView.delegate = self
     attendeeDescriptionField.delegate = self
 
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -56,7 +57,6 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     setupConstraints()
     
     continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
-    continueButtonContainer.button.isEnabled = false
     
   }
   
@@ -158,16 +158,18 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
   
   //MARK: UITextFieldDelegate
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    if textField == attendeeDescriptionField {
+    if textField == tagInputView.textInputView {
       if string != "" {
-        if !continueButtonContainer.button.isEnabled {
-          continueButtonContainer.button.isEnabled = true
+        if let text = textField.text {
+          if text.characters.count > 15 {
+            tagInputView.disableSendButton()
+          }
         }
       } else {
         if let text = textField.text {
-          if text.characters.count < 2 {
-            if continueButtonContainer.button.isEnabled {
-              continueButtonContainer.button.isEnabled = false
+          if text.characters.count < 15{
+            if !tagInputView.isSendButtonEnabled() {
+              tagInputView.enableSendButton()
             }
           }
         }
