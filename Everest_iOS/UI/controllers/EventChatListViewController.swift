@@ -105,7 +105,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
         
         var chatData: [EventChatData] = []
         
-        for (index, json) in jsonArray.enumerated() {
+        for json in jsonArray {
           guard let id = json["ChatID"] as? String,
             let participants = json["Participants"] as? [Dictionary<String, Any>],
             let latestMessageJson = json["LatestMessage"] as? Dictionary<String, Any>
@@ -211,6 +211,8 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     let chatViewController = ChatViewController()
+    chatViewController.id = cell.chatId
+    
     self.navigationController?.pushViewController(chatViewController, animated: true)
   }
   

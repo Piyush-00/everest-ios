@@ -18,6 +18,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let cellReuseIdentifier = "Cell"
   private var previousUser: String?
   
+  var id: String?
+  
   var socket: ChatSocket?
   
   private let postButtonDiameter: CGFloat = 60.0
@@ -79,9 +81,27 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(KeyboardDidActivate), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     
-    
-    
     setupConstraints()
+    
+//    socket?.establishConnection() { response in
+//      self.socket?.joinChatRoom(withChatId: self.id ?? "", eventId: self.eventID, userId: self.user!.id!) { response in
+//        print("joinChatRoom: \(response)")
+//      }
+//    }
+    
+    socket?.onNewMessage { response in
+      var postData = response
+      if let profilePictureUrl = postData["profilePicURL"] as? String {
+        let profilePictureImageView = UIImageView()
+        profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
+          success in
+          postData["profilePicURL"] = nil
+          postData["profileImage"] = profilePictureImageView.image
+          self.cellData.append(postData)
+          self.displayPost()
+        }
+      }
+    }
     
 //    Socket.establishConnection() { response in
 //      if response {
@@ -215,7 +235,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
       }
     } else {
-      
+      socket?.createNewMessage(withChatId: self.id ?? "", userId: self.user!.id!, firstName: self.user!.getLastName()!, lastName: self.user!.getLastName()!, profileImageUrl: self.user?.getProfileImageURL() ?? "", message: inputText, andTimestamp: Date()) { success in
+          print(success)
+      }
     }
     //SKU - Add in socket Emit function here
   }
