@@ -111,26 +111,22 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
           return listPerson
         }
         
-        for (index, adminListPerson) in adminListPeople.enumerated() {
+        for adminListPerson in adminListPeople {
           if let profileImageUrl = adminListPerson?.pictureUrl {
             let profileImageView = UIImageView()
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
               adminListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
-              if index == adminListPeople.count - 1 {
                 self.tableView.reloadData()
-              }
             }
           }
         }
         
-        for (index, attendeeListPerson) in attendeeListPeople.enumerated() {
+        for attendeeListPerson in attendeeListPeople {
           if let profileImageUrl = attendeeListPerson?.pictureUrl {
             let profileImageView = UIImageView()
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
               attendeeListPerson?.picture = profileImageView.image //?? DEFAULT IMAGE
-              if index == attendeeListPeople.count - 1 {
                 self.tableView.reloadData()
-              }
             }
           }
         }
@@ -140,7 +136,6 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
         listPeople = listPeople.filter { $0 != nil }
         
         self.eventPeopleData = listPeople as! [ListPerson]
-        self.tableView.reloadData()
       case .failure (let error):
         print(error)
       }
