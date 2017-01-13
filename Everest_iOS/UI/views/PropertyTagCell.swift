@@ -27,6 +27,7 @@ class PropertyTagCell: UICollectionViewCell {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    print(aDecoder)
     setupViews()
   }
   
@@ -45,6 +46,19 @@ class PropertyTagCell: UICollectionViewCell {
     //SKU - Set Default tag color
     backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
     self.layer.cornerRadius = 4
+  }
+  
+  func addRemoveLabel() {
+    let removeLabel = UILabel()
+    removeLabel.font = UIFont.fontAwesome(ofSize: 13)
+    removeLabel.text = String.fontAwesomeIcon(name: .remove)
+    
+    addSubview(removeLabel)
+    
+    removeLabel.translatesAutoresizingMaskIntoConstraints = false
+    removeLabel.trailingAnchor.constraint(equalTo: propertyNameLabel.trailingAnchor, constant: -AppStyle.sharedInstance.tagPropertyMargin/2 - 5).isActive = true
+    removeLabel.centerYAnchor.constraint(equalTo: propertyNameLabel.centerYAnchor).isActive = true
+    
   }
   
   func setTagColor(_ color: UIColor) {

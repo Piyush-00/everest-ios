@@ -212,3 +212,12 @@
 
 /* event person data type */
 "attendee" = "Guest";
+
+/* attendee join event characteristic message*/
+"attendee join event characteristic" = "Answer these few questions about your self before you join" ;
+
+/* attendee description message */
+"attendee description" = "Describe your self in one sentence";
+
+/* add */
+"add" = "Add";

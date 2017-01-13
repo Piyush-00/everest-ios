@@ -183,7 +183,7 @@ class Event {
               self.setDate(date:"Thursday")
               self.setStartTime(startTime: AppUtil.formatDateString(json["StartTime"] as! String))
               self.setEndTime(endTime: AppUtil.formatDateString(json["EndTime"] as! String))
-              self.setHeaderImageUrl(headerImageUrl: t(json["EventImageURL"] as! String?))
+              self.setHeaderImageUrl(headerImageUrl: t("/" + (json["EventImageURL"] as! String?)!))
               completionHandler(true)
             }
           default:

@@ -28,6 +28,7 @@
 		982ECBCD1E06FD8300B1D088 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982ECBCC1E06FD8300B1D088 /* ChatViewController.swift */; };
 		983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E23191DB41A08005DB3F2 /* SignUpViewController.swift */; };
 		983E231C1DB42114005DB3F2 /* SignUpViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */; };
+		98583FE61E1F1A5900BEC507 /* AttendeeJoinEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98583FE51E1F1A5800BEC507 /* AttendeeJoinEventViewController.swift */; };
 		98704A411DEBA495001323FF /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98704A401DEBA495001323FF /* Socket.swift */; };
 		9873BF271DE7E258005ED6A1 /* Env.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9873BF261DE7E258005ED6A1 /* Env.plist */; };
 		9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9873BF281DE7E5A9005ED6A1 /* Routes.swift */; };
@@ -47,6 +48,7 @@
 		98D1E7A91DFE076300F6A8FE /* PropertyTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D1E7A81DFE076300F6A8FE /* PropertyTagCell.swift */; };
 		98D1E7AB1DFE08C700F6A8FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D1E7AA1DFE08C700F6A8FE /* ProfileViewController.swift */; };
 		98D1E7AD1DFE175000F6A8FE /* TagFlowLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D1E7AC1DFE175000F6A8FE /* TagFlowLayoutManager.swift */; };
+		98DA2D301E2916E80081CF07 /* TagInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DA2D2F1E2916E80081CF07 /* TagInputController.swift */; };
 		98E2F8C81DA1F6C600AAC17E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */; };
 		98E2F8CF1DA1F6C600AAC17E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98E2F8CE1DA1F6C600AAC17E /* Assets.xcassets */; };
 		98E2F8D21DA1F6C600AAC17E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E2F8D01DA1F6C600AAC17E /* LaunchScreen.storyboard */; };
@@ -140,6 +142,7 @@
 		982ECBCC1E06FD8300B1D088 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		983E23191DB41A08005DB3F2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		983E231B1DB42114005DB3F2 /* SignUpViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewContainer.swift; sourceTree = "<group>"; };
+		98583FE51E1F1A5800BEC507 /* AttendeeJoinEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeJoinEventViewController.swift; sourceTree = "<group>"; };
 		98704A401DEBA495001323FF /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		9873BF261DE7E258005ED6A1 /* Env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Env.plist; sourceTree = "<group>"; };
 		9873BF281DE7E5A9005ED6A1 /* Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 		98D1E7A81DFE076300F6A8FE /* PropertyTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyTagCell.swift; sourceTree = "<group>"; };
 		98D1E7AA1DFE08C700F6A8FE /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		98D1E7AC1DFE175000F6A8FE /* TagFlowLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagFlowLayoutManager.swift; sourceTree = "<group>"; };
+		98DA2D2F1E2916E80081CF07 /* TagInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagInputController.swift; sourceTree = "<group>"; };
 		98E2F8C41DA1F6C600AAC17E /* Everest_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Everest_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E2F8C71DA1F6C600AAC17E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98E2F8CE1DA1F6C600AAC17E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 				9E15A0B51E08BECD00ABD1C5 /* EventPageViewController.swift */,
 				982ECBCC1E06FD8300B1D088 /* ChatViewController.swift */,
 				981669B21E05A82500D1B6A8 /* EventQRCodeViewController.swift */,
+				98583FE51E1F1A5800BEC507 /* AttendeeJoinEventViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 			children = (
 				98D1E7AC1DFE175000F6A8FE /* TagFlowLayoutManager.swift */,
 				98E53F581DFE2EC600CA1C0D /* TagFlowController.swift */,
+				98DA2D2F1E2916E80081CF07 /* TagInputController.swift */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -805,6 +811,7 @@
 				980894B01DC57DF000499DA3 /* InvalidModalView.swift in Sources */,
 				9E15A0B41E08728400ABD1C5 /* EventPageNavigationController.swift in Sources */,
 				98FAF69F1DF11A5600F3766B /* NewsFeedSocket.swift in Sources */,
+				98DA2D301E2916E80081CF07 /* TagInputController.swift in Sources */,
 				9E94ECD41E0F03DF0031F859 /* Person.swift in Sources */,
 				9E6F37BA1DF4FCDA0080C9AD /* EventFeedModalContainer.swift in Sources */,
 				98F7427E1DC2D07500B3B0D9 /* ModalViewContainer.swift in Sources */,
@@ -875,6 +882,7 @@
 				9E94ECCC1E0E09610031F859 /* EventPeopleListNavigationController.swift in Sources */,
 				98AE46181DAF2ADE0023C9F4 /* BaseInputTextView.swift in Sources */,
 				9E6F37B81DF4F0240080C9AD /* EventFeedModal.swift in Sources */,
+				98583FE61E1F1A5900BEC507 /* AttendeeJoinEventViewController.swift in Sources */,
 				9E1EF5861E15B9C000DD3598 /* EventChatPeopleListViewController.swift in Sources */,
 				9873BF291DE7E5AA005ED6A1 /* Routes.swift in Sources */,
 				98D1E7A91DFE076300F6A8FE /* PropertyTagCell.swift in Sources */,
