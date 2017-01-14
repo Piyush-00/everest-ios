@@ -17,6 +17,7 @@ struct Routes {
     static let CreateNewChat: String = "/event/%@/createChat"
     static let FetchAllUsers: String = "/event/%@/fetchAllUsers"
     static let FetchAllChats: String = "/user/%@/event/%@/fetchAllChats"
+    static let JoinEvent: String = "/Event/%@/JoinEvent/%@/%@"
   }
   struct Socket {
     struct NewsFeed {

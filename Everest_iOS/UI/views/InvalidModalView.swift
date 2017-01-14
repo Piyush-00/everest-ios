@@ -56,6 +56,8 @@ class InvalidModalView: ModalViewContainer {
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
     setupConstraints()
+    
+    scanAgainButtonView.button.addTarget(self, action: #selector(onTapJoinButton(sender:)), for: .touchUpInside)
   }
 
   func setupConstraints(){
@@ -113,5 +115,11 @@ class InvalidModalView: ModalViewContainer {
     scanAgainButtonView.button.layer.borderColor = AppStyle.sharedInstance.invalidColor.cgColor
     scanAgainButtonView.button.layer.borderWidth = 1
     scanAgainButtonView.button.setTitleColor(AppStyle.sharedInstance.invalidColor, for: UIControlState.normal)
+  }
+  
+  @objc private func onTapJoinButton(sender: UIButton) {
+    //SKU - didTapModalBackground protocol is handeled by Landing view controller for removing of view and activating camera session.
+    //TODO Refactor naming of function to be more general
+    delegate?.didTapModalBackground(view: self)
   }
 }

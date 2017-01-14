@@ -35,6 +35,8 @@ class Event {
   private var headerImage: UIImage?
   private var attendeeCharacteristics: [String]?
   private var id: String?
+  private var roleKey: String?
+  private var admin: Bool?
   
   //SKO - will be used by RealmEvent as separator between attendeeCharacteristics when concatenated
   static let attendeeCharacteristicsSeparator = "%^&"
@@ -92,6 +94,14 @@ class Event {
     self.id = id
   }
   
+  public func setRoleKey(key: String) {
+    self.roleKey = key
+  }
+  
+  public func setIsAdmin(_ value: Bool) {
+    self.admin = value
+  }
+  
   public func getName() -> String {
     return self.name
   }
@@ -134,6 +144,14 @@ class Event {
   
   public func isUserSignedIn() -> String? {
     return User.getUserID()
+  }
+  
+  public func getRoleKey() -> String? {
+    return self.roleKey
+  }
+  
+  public func isAdmin() -> Bool? {
+    return self.admin
   }
   
   public func createEvent(completionHandler: @escaping (Bool) -> ()) {
@@ -180,10 +198,19 @@ class Event {
               self.setName(name: json["EventName"] as! String)
               self.setDescription(description: json["Description"] as! String)
               self.setLocation(location: json["Location"] as! String)
+              self.setId(to: json["_id"] as! String)
               self.setDate(date:"Thursday")
               self.setStartTime(startTime: AppUtil.formatDateString(json["StartTime"] as! String))
               self.setEndTime(endTime: AppUtil.formatDateString(json["EndTime"] as! String))
               self.setHeaderImageUrl(headerImageUrl: t("/" + (json["EventImageURL"] as! String?)!))
+              self.setIsAdmin(json["Admin"] as! Bool)
+              if(self.isAdmin())! {
+                self.setRoleKey(key: json["AdminKey"] as! String)
+                print(self.roleKey)
+              } else {
+                self.setRoleKey(key: json["AttendeeKey"] as! String)
+                print(self.roleKey)
+              }
               completionHandler(true)
             }
           default:
@@ -194,6 +221,42 @@ class Event {
       case .failure(let error):
         print(error)
        completionHandler(false)
+      }
+    }
+  }
+  
+  public func joinEvent(shortDesc: String = "", longDesc: String = "", characteristics: [[String: Any]] = [["":[""]]], completionHandler: @escaping (Bool) -> ()) {
+    
+    var roleKeyWord: String
+    if (self.isAdmin())! {
+      roleKeyWord = "admin"
+    } else {
+      roleKeyWord = "attendee"
+    }
+    
+    var test = String(format: Routes.Api.JoinEvent, self.getId()!,roleKeyWord,(Session.manager.user?.id)!) + "?key=" + self.getRoleKey()!
+    
+    let params = ["LongDescription": longDesc, "ShortDescription": shortDesc, "Characteristics": characteristics] as [String : Any]
+    
+    Http.postRequest(requestURL: t(test), parameters: params) {
+      response in
+      switch response.result {
+      case .success (let JSON):
+        if let httpStatusCode = response.response?.statusCode {
+          switch (httpStatusCode) {
+          case 200:
+            if let json = JSON as? Dictionary<String,Any> {
+              self.setId(to: json["EventID"] as! String)
+              Session.manager.event = self
+              completionHandler(true)
+            }
+          default:
+            print("default case")
+            completionHandler(false)
+          }
+        }
+      case .failure(let error):
+        print(error)
       }
     }
   }

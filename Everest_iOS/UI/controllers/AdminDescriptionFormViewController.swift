@@ -13,6 +13,10 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
   private let adminDescriptionTextView = BaseInputTextView(hintText: NSLocalizedString("admin description input placeholder", comment: "admin description input placeholder"))
   private let headerImageView: UIImageView = UIImageView()
   
+  let createEventButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("confirm event", comment: "confirm event button"))
+  
+  var isJoiningEvent = false
+  
   var event: Event?
   
   override func viewDidLoad() {
@@ -23,7 +27,6 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
     
     let adminDescriptionHeaderLabel = UILabel()
     let adminDescriptionInfoLabel = UILabel()
-    let createEventButtonContainer = BaseInputButtonContainer(buttonTitle: NSLocalizedString("confirm event", comment: "confirm event button"))
     
     adminDescriptionHeaderLabel.text = NSLocalizedString("admin description header placeholder", comment: "admin description header placeholder")
     adminDescriptionHeaderLabel.textAlignment = .center
@@ -60,13 +63,29 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    if isJoiningEvent {
+      createEventButtonContainer.button.setTitle(NSLocalizedString("join", comment: "join as admin"), for: .normal)
+    }
+    
     if let headerImage = event?.getHeaderImage() {
       if headerImageView.image != headerImage {
         headerImageView.image = headerImage
       }
     } else {
-      headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+      if(isJoiningEvent) {
+        if let headerImageURL = event?.getHeaderImageUrl() {
+        headerImageView.downloadedFrom(link: headerImageURL)
+        } else {
+          headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+        }
+      } else {
+        headerImageView.image = AppStyle.sharedInstance.pictureImageWide
+      }
     }
+    
+    headerImageView.clipsToBounds = true
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
   }
   
   private func setupConstraints() {
@@ -81,21 +100,43 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
   func didTapCreateEventButton(sender: UIButton) {
     self.view.endEditing(true)
     
-    if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
-      let eventConfirmationViewController = EventConfirmationViewController()
-      eventConfirmationViewController.event = event
-      navigationController.pushViewController(eventConfirmationViewController, animated: true)
+    if isJoiningEvent {
+      event?.joinEvent(longDesc: adminDescriptionTextView.text) { response in
+        switch response {
+        case true:
+          if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
+            let eventContainerViewController = EventContainerViewController()
+            
+            Keychain.set(key: Keys.sharedInstance.EventID, token: (self.event!.getId()!) as NSString)
+            
+            eventNavigationController.viewControllers = [eventContainerViewController]
+            appDelegate.navigationController = nil
+            appDelegate.window?.rootViewController = eventNavigationController
+          }
+          break
+        case false:
+          print("error has occurred")
+        }
+      }
+    } else {
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        let eventConfirmationViewController = EventConfirmationViewController()
+        eventConfirmationViewController.event = event
+        navigationController.pushViewController(eventConfirmationViewController, animated: true)
+      }
     }
   }
   
   func didTapHeader(sender: UITapGestureRecognizer) {
-    let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
-    imagePicker.delegate = self
-    imagePicker.displayAlert()
+    if (!isJoiningEvent) {
+      let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
+      imagePicker.delegate = self
+      imagePicker.displayAlert()
+    }
   }
   
   //MARK: UITextViewDelegate
-  
   func textViewDidChange(_ textView: UITextView) {
     if textView.text == "" {
       adminDescriptionTextView.placeholderLabel.isHidden = false
@@ -114,7 +155,6 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
   }
   
   //MARK: ImagePickerAlertProtocol
-  
   func didPickImage(image: UIImage) {
     headerImageView.image = image
     event?.setHeaderImage(image: image)

@@ -221,3 +221,6 @@
 
 /* add */
 "add" = "Add";
+
+/* join */
+"join" = "Join Event";
