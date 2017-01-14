@@ -164,7 +164,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
       //SKU - If there is a userID, Send the post request to create event.
       event?.createEvent() {
         response in
-        switch response{
+        switch response {
         case true:
           if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)

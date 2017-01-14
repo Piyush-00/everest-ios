@@ -13,9 +13,12 @@ class EventModalView: ModalViewContainer {
   var headerContentView: UIImageView
   var eventNameTextView, eventDescriptionTextView, eventDateTextView, eventLocationTextView: BaseInputTextView
   var joinEventButtonView: BaseInputButtonContainer
+  
+  private let event: Event
 
   
    init(_ event: Event, coder: NSCoder? = nil) {
+    self.event = event
     headerContentView = UIImageView()
     headerContentView.downloadedFrom(link: event.getHeaderImageUrl() ?? "")
     //SKU - 50 character limit on event title
@@ -49,6 +52,8 @@ class EventModalView: ModalViewContainer {
     contentView.addArrangedSubviewToStackView(view: joinEventButtonView)
     contentView.spacing(value: 0)
     
+    
+    
   }
   
   required convenience init(coder aDecoder: NSCoder) {
@@ -58,6 +63,9 @@ class EventModalView: ModalViewContainer {
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
     setupConstraints()
+    
+    joinEventButtonView.button.addTarget(self, action: #selector(onTapJoinButton(sender:)), for: .touchUpInside)
+
   }
   
   func setupConstraints(){
@@ -112,7 +120,37 @@ class EventModalView: ModalViewContainer {
     joinEventButtonView.translatesAutoresizingMaskIntoConstraints = false
     joinEventButtonView.button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 100).isActive = true
     joinEventButtonView.button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -100).isActive = true
-
   }
+  
+  @objc private func onTapJoinButton(sender: UIButton) {
+    //SKU - Check if a User is signed in or not. 
+    
+    let userID = (self.event.isUserSignedIn())!
+    if (userID == "") {
+      //SKU - If there is no userID, Tell user to sign up.
+      
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        let signupViewController = SignUpViewController()
+        signupViewController.initialFlowViewController = (UIApplication.shared.delegate as! AppDelegate).navigationController?.viewControllers[0]
+        navigationController.pushViewController(signupViewController, withAnimation: .fromBottom)
+      }
+    } else {
+      //SKU - If there is a userID, Send the post request to create event.
+      if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
+        
+        if (event.isAdmin()!) {
+          let joinEventFlow = AdminDescriptionFormViewController()
+          joinEventFlow.isJoiningEvent = true
+          joinEventFlow.event = event
+          navigationController.pushViewController(joinEventFlow, withAnimation: .fromBottom)
+        } else {
+          let joinEventFlow = AttendeeJoinEventViewController()
+          joinEventFlow.event = event
+          navigationController.pushViewController(joinEventFlow, withAnimation: .fromBottom)
+        }
+      }
+    }
+  }
+  
 
 }

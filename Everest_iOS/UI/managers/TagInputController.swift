@@ -107,4 +107,8 @@ class TagInputController: UIViewController {
   func loadData(inputValues: [String]) {
     tagFlowView.loadData(inputValues: (inputValues))
   }
+  
+  func getData() -> [String] {
+    return tagFlowView.tags
+  }
 }
