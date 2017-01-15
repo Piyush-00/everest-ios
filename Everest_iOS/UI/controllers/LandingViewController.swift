@@ -63,7 +63,6 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
   }
   
   func didTapCreateEventButton(sender: UIButton) {
-    Keychain.deleteAll()
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let createEventViewController = CreateEventViewController()
       navigationController.pushViewController(createEventViewController, withAnimation: .fromTop)
