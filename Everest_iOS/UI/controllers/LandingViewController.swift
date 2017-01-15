@@ -63,6 +63,7 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
   }
   
   func didTapCreateEventButton(sender: UIButton) {
+    Keychain.deleteAll()
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let createEventViewController = CreateEventViewController()
       navigationController.pushViewController(createEventViewController, withAnimation: .fromTop)
@@ -89,18 +90,23 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     tappedScanButton = !tappedScanButton
     
     if (!tappedScanButton) {
+      
       overlayView.addSubview(headerTextView)
       overlayView.addSubview(subHeaderTextView)
       overlayView.addSubview(createEvenButtonContainer)
-      overlayView.addSubview(loginButtonContainer)
-      overlayView.addSubview(signupButtonContainer)
       
+      if Session.manager.userState == .loggedOut {
+        overlayView.addSubview(loginButtonContainer)
+        overlayView.addSubview(signupButtonContainer)
+        //SKU - Only setup footer constraints if logged out
+        setupFooterConstraints()
+      }
       scanButtoncontainerBottomConstraint.constant = -140
       
       setupHeaderTextViewConstraints()
       setupSubHeaderTextViewConstraints()
       setupCreateEventButtonContainerConstraints()
-      setupFooterConstraints()
+      
       
       scanButtonContainer.button.setTitle("Scan", for: .normal)
     } else {
