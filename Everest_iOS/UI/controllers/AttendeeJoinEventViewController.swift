@@ -26,12 +26,15 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
   private var isAddingProperty: Bool = false
   private var headerViewHeight: CGFloat = 100
   private var addButtonIconSize: CGFloat = 25
+  private var characteristicProperties: [TagInputController] = []
   let tags: [String] = ["Interests","Work Experiences"]
+  
+  var event = Event()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    headerImageView.downloadedFrom(link: t("/public/uploads/file-1484330162931.png"))
+    headerImageView.downloadedFrom(link: event.getHeaderImageUrl()!)
     headerImageView.clipsToBounds = true
     headerImageView.contentMode = .scaleAspectFill
     headerImageView.layer.masksToBounds = true
@@ -57,16 +60,14 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     setupConstraints()
     
     continueButtonContainer.button.addTarget(self, action: #selector(onTapContinueButton(sender:)), for: .touchUpInside)
-    
   }
   
   override func viewDidAppear(_ animated: Bool) {
     for i in 0...((tags.count)-1) {
-      setupCharacteristics(title: tags[i])
+      characteristicProperties.append(setupCharacteristics(title: tags[i]))
     }
     headerAndStackView.addArrangedSubviewToStackView(view: continueButtonContainer)
   }
-
   
   private func setupConstraints() {
     headerAndStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,12 +104,13 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
     headerAndStackView.addArrangedSubviewToStackView(view: attendeeDescriptionField)
   }
   
-  private func setupCharacteristics(title: String) {
+  private func setupCharacteristics(title: String) -> TagInputController{
     var tagInputViewController = TagInputController()
     tagInputViewController.delegate = self
     tagInputViewController.setTitle(title: title)
     addChildViewController(tagInputViewController)
     headerAndStackView.addArrangedSubviewToStackView(view: tagInputViewController.view)
+    return tagInputViewController
   }
   
   func KeyboardDidActivate(notification: NSNotification) {
@@ -146,7 +148,31 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
   }
   
   func onTapContinueButton(sender: UIButton){
-    print("hi")
+    var characteristics: [[String: Any]] = []
+    for i in 0...((tags.count)-1) {
+      var tempObject : [String: Any] = [:]
+      tempObject["Question"] = tags[i]
+      tempObject["Answers"] = characteristicProperties[i].getData()
+      characteristics.append(tempObject)
+    }
+    event.joinEvent(shortDesc: attendeeDescriptionField.text!, characteristics: characteristics) { response in
+      switch response {
+      case true:
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+          let eventNavigationController = UINavigationController(nibName: nil, bundle: nil)
+          let eventContainerViewController = EventContainerViewController()
+          
+          Keychain.set(key: Keys.sharedInstance.EventID, token: self.event.getId()! as NSString)
+          
+          eventNavigationController.viewControllers = [eventContainerViewController]
+          appDelegate.navigationController = nil
+          appDelegate.window?.rootViewController = eventNavigationController
+        }
+        break
+      case false:
+        print("error has occurred")
+      }
+    }
   }
   
   //MARK: TagInputControllerProtocol
