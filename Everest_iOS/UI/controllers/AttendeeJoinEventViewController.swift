@@ -27,7 +27,7 @@ class AttendeeJoinEventViewController: UIViewController, ChatMessageInputContain
   private var headerViewHeight: CGFloat = 100
   private var addButtonIconSize: CGFloat = 25
   private var characteristicProperties: [TagInputController] = []
-  let tags: [String] = ["Interests","Work Experiences"]
+  let tags: [String] = ["Interests","Programming Languages"]
   
   var event = Event()
 

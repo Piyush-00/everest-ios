@@ -50,6 +50,10 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: adminDescriptionTextView)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: createEventButtonContainer)
     
+    headerImageView.clipsToBounds = true
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
+    
     let headerTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
     
     headerAndStackViewContainer.headerView.addGestureRecognizer(headerTapGestureRecognizer)

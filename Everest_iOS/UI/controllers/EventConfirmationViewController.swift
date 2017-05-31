@@ -50,6 +50,10 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     eventCategoryLabel.font = appStyle.headerFontMedium
     eventCategoryLabel.text = NSLocalizedString("event", comment: "event label")
     
+    headerImageView.clipsToBounds = true
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
+    
     eventTitleTextField.text = event?.getName()
     eventTitleTextField.delegate = self
     
@@ -113,7 +117,6 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
       adminDescriptionCategoryLabel.font = appStyle.headerFontMedium
       adminDescriptionCategoryLabel.text = NSLocalizedString("admin description header placeholder", comment: "admin description header placeholder")
     
-      adminDescriptionTextView.text = "eventObject.adminDescriptionText"
       adminDescriptionTextView.tag = 5
       adminDescriptionTextView.delegate = self
     

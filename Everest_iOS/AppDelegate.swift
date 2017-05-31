@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-      
+      //Keychain.deleteAll()
       Session.manager.updateUserState()
       
       self.window = UIWindow(frame: UIScreen.main.bounds)

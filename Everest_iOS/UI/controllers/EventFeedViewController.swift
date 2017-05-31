@@ -91,7 +91,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
           self.displayNewPost()
         } else {
           let profilePictureImageView = UIImageView()
-          profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
+          profilePictureImageView.downloadedFrom(link: t(profilePictureUrl)) {
             success in
             DispatchQueue.main.async {
               postData["profilePicURL"] = nil

@@ -79,6 +79,10 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     totalButtonContainer.addSubview(fieldButtonsContainer)
     totalButtonContainer.addSubview(continueButton)
     
+    headerImageView.clipsToBounds = true
+    headerImageView.contentMode = .scaleAspectFill
+    headerImageView.layer.masksToBounds = true
+    
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: eventTitleLabel)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: formSetDescriptionLabel)
     headerAndStackViewContainer.addArrangedSubviewToStackView(view: defaultInputTextFieldOne)

@@ -8,7 +8,7 @@ target 'Everest_iOS' do
   #Pods for Everest_iOS
   pod 'Alamofire', '~> 4.0'
   pod 'RealmSwift'
-  pod 'Socket.IO-Client-Swift', '~> 8.1.2'
+  pod 'Socket.IO-Client-Swift', '~> 10.0'
   pod 'FontAwesome.swift'
 
   target 'Everest_iOSTests' do
