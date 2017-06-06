@@ -18,16 +18,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   private let cellReuseIdentifier = "Cell"
   private var previousUser: String?
   
-  var id: String?
-  
   var socket: ChatSocket?
+  
+  var chatId: String?
   
   private let postButtonDiameter: CGFloat = 60.0
   private let postButtonTrailingMargin: CGFloat = 20.0
   private let postButtonBottomMargin: CGFloat = 20.0
   
   private let user = Session.manager.user
-  private let eventID = Session.manager.event?.getId() ?? ""
+  private let eventID = Session.manager.event?.getId()
   
   private var isNewChat: Bool = false
   
@@ -83,22 +83,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     setupConstraints()
     
-//    socket?.establishConnection() { response in
-//      self.socket?.joinChatRoom(withChatId: self.id ?? "", eventId: self.eventID, userId: self.user!.id!) { response in
-//        print("joinChatRoom: \(response)")
-//      }
-//    }
+    if !isNewChat {
+      joinChatRoomSocket()
+    }
     
     socket?.onNewMessage { response in
       var postData = response
-      if let profilePictureUrl = postData["profilePicURL"] as? String {
+      if let profilePictureUrl = postData["ProfileImageURL"] as? String {
         let profilePictureImageView = UIImageView()
         profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) {
           success in
-          postData["profilePicURL"] = nil
-          postData["profileImage"] = profilePictureImageView.image
-          self.cellData.append(postData)
-          self.displayPost()
+          DispatchQueue.main.async {
+            postData["profilePicURL"] = nil
+            postData["profileImage"] = profilePictureImageView.image
+            self.cellData.append(postData)
+            self.displayPost()
+          }
         }
       }
     }
@@ -148,6 +148,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     tableView.endUpdates()
   }
   
+  private func joinChatRoomSocket() {
+    if let chatId = self.chatId,
+      let eventId = self.eventID,
+      let userId = self.user?.id {
+      self.socket?.joinChatRoom(withChatId: chatId, eventId: eventId, userId: userId) { response in
+        print("joinChatRoom: \(response)")
+      }
+    }
+  }
+  
   func KeyboardDidActivate(notification: NSNotification) {
     
     if (notification.name == NSNotification.Name.UIKeyboardWillShow) {
@@ -173,14 +183,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     let postData = cellData[indexPath.row]
     
     guard let chatMessageCell = cell as? ChatViewCell,
-          let post = postData["post"] as? String,
-          let name = postData["name"] as? String,
-          let userID = postData["userID"] as? String,
+          let message = postData["Message"] as? String,
+          let name = postData["FirstName"] as? String,
+          let userID = postData["UserID"] as? String,
 //          let timeStamp = "15:55",
-          let profileImage = postData["profileImage"] as? UIImage?
-          else {  return cell }
+          let profileImage = postData["profileImage"] as? UIImage
+          else { return cell }
     
-    chatMessageCell.post = post
+    chatMessageCell.post = message
     chatMessageCell.name = name
     chatMessageCell.timeStamp = "15:55"
     chatMessageCell.profilePictureImage = profileImage
@@ -207,6 +217,24 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func didTapSendButton(inputText: String) {
     print(inputText)
+    
+    let addChatMessageClosure: () -> () = {
+      if let chatId = self.chatId,
+            let userId = self.user?.id,
+            let firstName = self.user?.getFirstName(),
+            let lastName = self.user?.getLastName(),
+            let profileImageURL = self.user?.getProfileImageURL() {
+              self.socket?.createNewMessage(withChatId: chatId,
+                                            userId: userId,
+                                            firstName: firstName,
+                                            lastName: lastName,
+                                            profileImageUrl: profileImageURL,
+                                            message: inputText) { success in
+                                              print("Create new chat message: \(success)")
+            }
+          } 
+    }
+    
     if isNewChat {
       var queryString = ""
       let key = "participants"
@@ -223,21 +251,23 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       queryString += "&\(key)=\(user!.id!)"
       
       let params = ["UserID": user!.id, "FirstName": user!.getFirstName()!, "LastName": user!.getLastName()!, "Message": inputText, "ProfileImageURL": user!.getProfileImageURL()]
-      
-      Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, eventID) + queryString), parameters: params) { response in
-        switch response.result {
-        case .success (let json):
-          print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")
-          self.isNewChat = false
-          break
-        case .failure (let error):
-          print(error)
+      if let eventId = self.eventID {
+        Http.postRequest(requestURL: t(String(format: Routes.Api.CreateNewChat, eventId) + queryString), parameters: params) { response in
+          switch response.result {
+          case .success (let json):
+            print("CHATID: \((json as! Dictionary<String, Any>)["ChatID"] as! String)")
+            self.chatId = (json as! Dictionary<String, Any>)["ChatID"] as? String
+            self.joinChatRoomSocket()
+            addChatMessageClosure()
+            self.isNewChat = false
+            break
+          case .failure (let error):
+            print(error)
+          }
         }
       }
     } else {
-      socket?.createNewMessage(withChatId: self.id ?? "", userId: self.user!.id!, firstName: self.user!.getLastName()!, lastName: self.user!.getLastName()!, profileImageUrl: self.user?.getProfileImageURL() ?? "", message: inputText, andTimestamp: Date()) { success in
-          print(success)
-      }
+      addChatMessageClosure()
     }
     //SKU - Add in socket Emit function here
   }

@@ -211,7 +211,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     let chatViewController = ChatViewController()
-    chatViewController.id = cell.chatId
+    chatViewController.chatId = cell.chatId
     
     self.navigationController?.pushViewController(chatViewController, animated: true)
   }

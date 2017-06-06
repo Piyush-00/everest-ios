@@ -17,7 +17,7 @@ class ChatSocket: Socket {
   func joinChatRoom(withChatId chatId: String, eventId: String, userId: String, completionHandler: @escaping (Bool) -> ()) {
     let params: Dictionary<String, Any> = ["ChatID": chatId, "EventID": eventId, "UserID": userId]
     
-    self.emit(channel: Routes.Socket.NewsFeed.Subscribe, parameters: params) { response in
+    self.emit(channel: Routes.Socket.Chat.Subscribe, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String, Any> {
         let result = jsonResult["valid"] as? Bool ?? false
         completionHandler(result)
@@ -37,8 +37,8 @@ class ChatSocket: Socket {
     }
   }
   
-  func createNewMessage(withChatId chatId: String, userId: String, firstName: String, lastName: String, profileImageUrl: String, message: String, andTimestamp timestamp: Date, completionHandler: @escaping (Bool) -> ()) {
-    let params: Dictionary<String, Any> = ["ChatID": chatId, "UserID": userId, "FirstName": firstName, "LastName": lastName, "ProfileImageURL": profileImageUrl, "Message": message, "Timestamp": timestamp]
+  func createNewMessage(withChatId chatId: String, userId: String, firstName: String, lastName: String, profileImageUrl: String, message: String, completionHandler: @escaping (Bool) -> ()) {
+    let params: Dictionary<String, Any> = ["ChatID": chatId, "UserID": userId, "FirstName": firstName, "LastName": lastName, "ProfileImageURL": profileImageUrl, "Message": message]
     
     self.emit(channel: Routes.Socket.Chat.AddMessage, parameters: params) { response in
       if let jsonResult = response as? Dictionary<String, Any> {
