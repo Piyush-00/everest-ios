@@ -73,6 +73,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     socket.onNewMessage { response in
+      print("Chat Socket: onNewMessage")
       guard let chatId = response["ChatId"] as? String,
         let message = response["Message"] as? String,
         let isoString = response["Timestamp"] as? String
@@ -212,7 +213,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     let chatViewController = ChatViewController()
     chatViewController.chatId = cell.chatId
-    
+    chatViewController.socket = socket
     self.navigationController?.pushViewController(chatViewController, animated: true)
   }
   
