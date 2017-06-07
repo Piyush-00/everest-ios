@@ -16,5 +16,5 @@ https://app.nuclino.com/teams/13:11577/documents/Everest-Coding-Practises-28310c
 https://app.nuclino.com/teams/13:11577/documents/iOS-Coding-Conventions-764d5dd7-a7dd-4f98-806e-6c8014b6d3a0    
 
 Any questions regarding the EverestApp Project, contact:  
+- Sathoshi Kumarawadu 
 - Sebastian Kolosa
-- Sathoshi Kumarawadu  
