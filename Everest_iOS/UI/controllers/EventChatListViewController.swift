@@ -89,10 +89,12 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
             //NOTE: might need to update tableview to see result
             cell.setContent(usingData: chatCellData)
           } else {
-            //TODO: - fix bug where else block running even after first message if new chat
             self.eventChatData.append(chatCellData)
-            let _ = self.tableView(self.tableView, cellForRowAt: IndexPath(row: self.eventChatData.count - 1, section: 0))
-            self.tableView.reloadData()
+            let indexPath = IndexPath(row: self.eventChatData.count - 1, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+            if let cell = self.tableView.cellForRow(at: indexPath) as? EventChatListTableViewCell {
+              self.cellHashMap[chatId] = cell
+            }
           }
         }
       }
