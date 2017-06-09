@@ -24,6 +24,7 @@ extension EventContainerViewProtocol {
 }
 
 class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
+  private let appStyle = AppStyle.sharedInstance
   private var settingsButton: UIBarButtonItem!
   private let contentView = UIView()
   private let eventTabBar = EventTabBarView()
@@ -41,7 +42,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     didSet {
       displayCurrentViewControllerView()
       self.title = _currentViewController?.navigationBarTitle
-      self.navigationController?.navigationBar.isHidden = _currentViewController is UINavigationController
+      self.navigationController?.isNavigationBarHidden = _currentViewController is UINavigationController
       self.navigationItem.rightBarButtonItem = _currentViewController?.rightBarButtonItem ?? settingsButton
     }
   }
@@ -61,8 +62,6 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
   }
   
   private func setup() {
-    let appStyle = AppStyle.sharedInstance
-    
     let eventFeedViewController = EventFeedViewController()
     let eventChatListViewController = EventChatListViewController()
     let eventPeopleListNavigationController = EventPeopleListNavigationController(nibName: nil, bundle: nil)
@@ -81,6 +80,8 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     
     settingsButton = appStyle.eventSettingsBarButtonItem(withTarget: self, andAction: #selector(didTapSettingsButton))
     self.navigationItem.rightBarButtonItem = settingsButton
+    
+    edgesForExtendedLayout = []
     
     setupConstraints()
   }

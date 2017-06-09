@@ -29,7 +29,6 @@ class EventPageViewController: UIViewController {
     headerAndStackViewContainer.backgroundColor = .white
     
     self.view.addSubview(headerAndStackViewContainer)
-    self.edgesForExtendedLayout = []
     
     headerAndStackViewContainer.baseInputView.spacing(value: 10.0)
     

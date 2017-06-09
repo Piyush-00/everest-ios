@@ -72,6 +72,7 @@
 		9E1F3D241E131A5000E33B43 /* EventChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F3D231E131A5000E33B43 /* EventChatListViewController.swift */; };
 		9E1F3D281E13242D00E33B43 /* EventChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1F3D271E13242D00E33B43 /* EventChatListTableViewCell.swift */; };
 		9E2CB00C1DF90FBD00464953 /* EventContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CB00B1DF90FBD00464953 /* EventContainerViewController.swift */; };
+		9E3655B81EEA297F00F4A5E4 /* EventNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3655B71EEA297F00F4A5E4 /* EventNavigationViewController.swift */; };
 		9E4534491DBD4EBF00D06929 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4534481DBD4EBF00D06929 /* AppStyle.swift */; };
 		9E45344B1DBD634000D06929 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45344A1DBD634000D06929 /* AppUtil.swift */; };
 		9E45344F1DBEEA7200D06929 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E45344D1DBEEA7200D06929 /* Localizable.strings */; };
@@ -192,6 +193,7 @@
 		9E1F3D231E131A5000E33B43 /* EventChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatListViewController.swift; sourceTree = "<group>"; };
 		9E1F3D271E13242D00E33B43 /* EventChatListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatListTableViewCell.swift; sourceTree = "<group>"; };
 		9E2CB00B1DF90FBD00464953 /* EventContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventContainerViewController.swift; sourceTree = "<group>"; };
+		9E3655B71EEA297F00F4A5E4 /* EventNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNavigationViewController.swift; sourceTree = "<group>"; };
 		9E4534481DBD4EBF00D06929 /* AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		9E45344A1DBD634000D06929 /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		9E45344E1DBEEA7200D06929 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		98AE460F1DAF2ADE0023C9F4 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9E3655B71EEA297F00F4A5E4 /* EventNavigationViewController.swift */,
 				98AE46101DAF2ADE0023C9F4 /* CreateEventViewController.swift */,
 				9E94ECCB1E0E09610031F859 /* EventPeopleListNavigationController.swift */,
 				9E94ECCD1E0E09F10031F859 /* EventPeopleListViewController.swift */,
@@ -853,6 +856,7 @@
 				983E231A1DB41A08005DB3F2 /* SignUpViewController.swift in Sources */,
 				98EF2DF21DBF155F000D7288 /* UIViewController.swift in Sources */,
 				982ECBCB1E06498100B1D088 /* ChatViewCell.swift in Sources */,
+				9E3655B81EEA297F00F4A5E4 /* EventNavigationViewController.swift in Sources */,
 				98E632791E0742A3000F8875 /* ChatMessageInputContainer.swift in Sources */,
 				981BB8E31DFDE3D400EDC9FE /* HeaderContainer.swift in Sources */,
 				9E15A0B01E08726100ABD1C5 /* EventChatNavigationController.swift in Sources */,

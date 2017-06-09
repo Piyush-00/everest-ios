@@ -12,16 +12,10 @@ import FontAwesome_swift
 struct EventChatData {
   var picture: UIImage? //TODO: eventually make non-optional once implement client-side default image
   var names: [String]
+  var senderName: String
   var message: String
   var timestamp: String
   var id: String
-}
-
-struct ChatListMessage {
-  var pictureUrl: String?
-  var message: String
-  var timestamp: String
-  //var messageNumber: Int // add msgnumber prop in chat vc (and lower bound msg number?)
 }
 
 class EventChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventContainerViewProtocol {
@@ -53,7 +47,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   override func viewDidLoad() {
     super.viewDidLoad()
     let appStyle = AppStyle.sharedInstance
-    
+   
     addChatButton = UIBarButtonItem(image: UIImage.fontAwesomeIcon(name: .plus, textColor: UIColor.black, size: CGSize(width: appStyle.tabBarButtonIconSize, height: appStyle.tabBarButtonIconSize)), style: .plain, target: self, action: #selector(didTapAddChatButton))
     
     tableView.register(EventChatListTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
@@ -74,20 +68,33 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     socket.onNewMessage { response in
       print("Chat Socket: onNewMessage")
-      guard let chatId = response["ChatId"] as? String,
+      //TODO: - Get names array and set to names label
+      //TODO: - Get name of person who sent message, prepend to message
+      //TODO: - Get timestamp of when message sent
+      guard let chatId = response["ChatID"] as? String,
         let message = response["Message"] as? String,
-        let isoString = response["Timestamp"] as? String
+//        let isoString = response["Timestamp"] as? String
+        let senderName = response["FirstName"] as? String
         else { return }
       
-      let timestamp = AppUtil.timestampStringFromISOString(isoString)
+//      let timestamp = AppUtil.timestampStringFromISOString(isoString)
       
-      let profilePictureUrl = response["ProfilePictureURL"] as? String
-      
-      let chatListMessage = ChatListMessage(pictureUrl: profilePictureUrl, message: message, timestamp: timestamp)
-      
-      if let cell = self.cellHashMap[chatId] {
-        //NOTE: might need to update tableview to see result
-        cell.updateContent(using: chatListMessage)
+      if let profilePictureUrl = response["ProfileImageURL"] as? String {
+        let profilePictureImageView = UIImageView()
+        profilePictureImageView.downloadedFrom(link: t("/" + profilePictureUrl)) { _ in
+          
+          let chatCellData = EventChatData(picture: profilePictureImageView.image, names: ["\(senderName)"], senderName: senderName, message: message, timestamp: "12:00", id: chatId)
+          
+          if let cell = self.cellHashMap[chatId] {
+            //NOTE: might need to update tableview to see result
+            cell.setContent(usingData: chatCellData)
+          } else {
+            //TODO: - fix bug where else block running even after first message if new chat
+            self.eventChatData.append(chatCellData)
+            let _ = self.tableView(self.tableView, cellForRowAt: IndexPath(row: self.eventChatData.count - 1, section: 0))
+            self.tableView.reloadData()
+          }
+        }
       }
     }
     
@@ -128,13 +135,13 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
           if let profileImageUrl = latestMessageJson["ProfileImageURL"] as? String {
             let profileImageView = UIImageView()
             profileImageView.downloadedFrom(link: t("/" + profileImageUrl)) { _ in
-              let eventChatData = EventChatData(picture: profileImageView.image, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
+              let eventChatData = EventChatData(picture: profileImageView.image, names: participantFirstNames, senderName: "senderName", message: message, timestamp: timestamp, id: id)
               chatData.append(eventChatData)
               self.eventChatData = chatData
               self.tableView.reloadData()
             }
           } else {
-            let eventChatData = EventChatData(picture: nil, names: participantFirstNames, message: message, timestamp: timestamp, id: id)
+            let eventChatData = EventChatData(picture: nil, names: participantFirstNames, senderName: "senderName", message: message, timestamp: timestamp, id: id)
             chatData.append(eventChatData)
             self.eventChatData = chatData
             self.tableView.reloadData()
@@ -185,12 +192,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
     
     cellHashMap[eventChatDataElement.id] = cell
     
-    cell.picture = eventChatDataElement.picture
-    cell.names = eventChatDataElement.names
-    cell.message = eventChatDataElement.message
-    cell.timestamp = eventChatDataElement.timestamp
-    cell.chatId = eventChatDataElement.id
-    
+    cell.setContent(usingData: eventChatDataElement)
     cell.setContentHorizontalMargin(to: tableView.separatorInset.left)
     
     return cell

@@ -259,6 +259,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.chatId = (json as! Dictionary<String, Any>)["ChatID"] as? String
             self.joinChatRoomSocket()
             addChatMessageClosure()
+            if let navigationControllerViewControllers = self.navigationController?.viewControllers {
+              var newViewControllers = navigationControllerViewControllers
+              newViewControllers.remove(at: navigationControllerViewControllers.count - 2)
+              self.navigationController?.viewControllers = newViewControllers
+            }
             self.isNewChat = false
             break
           case .failure (let error):

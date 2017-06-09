@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TODO: make GET request for event information OR in event flow (profile, page, and feed )
         
         let eventContainerViewController = EventContainerViewController()
-        let eventNavigationViewController = UINavigationController()
+        let eventNavigationViewController = EventNavigationViewController(nibName: nil, bundle: nil)
         
         eventNavigationViewController.viewControllers = [eventContainerViewController]
         

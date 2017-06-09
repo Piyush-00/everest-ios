@@ -64,6 +64,17 @@ class EventChatListTableViewCell: UITableViewCell {
     }
   }
   
+  var id: String?
+  
+  convenience init(cellData: EventChatData) {
+    self.init(style: .default, reuseIdentifier: nil)
+    picture = cellData.picture
+    names = cellData.names
+    message = "\(cellData.senderName): \(cellData.message)"
+    timestamp = cellData.timestamp
+    id = cellData.id
+  }
+  
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setup()
@@ -138,16 +149,11 @@ class EventChatListTableViewCell: UITableViewCell {
     cellContentTrailingConstraint.constant = -margin
   }
   
-  func updateContent(using latestMessage: ChatListMessage) {
-    if let pictureUrl = latestMessage.pictureUrl {
-      profilePictureImageView.downloadedFrom(link: t("/" + pictureUrl)) { _ in
-        self.timestamp = latestMessage.timestamp
-        self.message = latestMessage.message
-      }
-    } else {
-      self.timestamp = latestMessage.timestamp
-      self.message = latestMessage.message
-      //TODO: self.image = DEFAULT_IMAGE
-    }
+  func setContent(usingData cellData: EventChatData) {
+    self.picture = cellData.picture
+    self.names = cellData.names
+    self.message = "\(cellData.senderName): \(cellData.message)"
+    self.timestamp = cellData.timestamp
+    self.id = cellData.id
   }
 }

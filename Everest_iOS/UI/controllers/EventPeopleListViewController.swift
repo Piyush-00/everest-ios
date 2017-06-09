@@ -221,6 +221,11 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
       break
     }
   }
+  
+  //MARK: - deinit
+  deinit {
+    searchController.view.removeFromSuperview()
+  }
 }
 
 extension EventPeopleListViewController: UISearchResultsUpdating {
