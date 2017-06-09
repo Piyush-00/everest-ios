@@ -64,15 +64,13 @@ class EventChatListTableViewCell: UITableViewCell {
     }
   }
   
-  var id: String?
-  
   convenience init(cellData: EventChatData) {
     self.init(style: .default, reuseIdentifier: nil)
     picture = cellData.picture
     names = cellData.names
     message = "\(cellData.senderName): \(cellData.message)"
     timestamp = cellData.timestamp
-    id = cellData.id
+    chatId = cellData.id
   }
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -150,10 +148,10 @@ class EventChatListTableViewCell: UITableViewCell {
   }
   
   func setContent(usingData cellData: EventChatData) {
-    self.picture = cellData.picture
-    self.names = cellData.names
-    self.message = "\(cellData.senderName): \(cellData.message)"
-    self.timestamp = cellData.timestamp
-    self.id = cellData.id
+    picture = cellData.picture
+    names = cellData.names
+    message = "\(cellData.senderName): \(cellData.message)"
+    timestamp = cellData.timestamp
+    chatId = cellData.id
   }
 }
