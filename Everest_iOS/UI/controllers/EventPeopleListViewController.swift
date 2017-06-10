@@ -73,7 +73,7 @@ class EventPeopleListViewController: UIViewController, UITableViewDelegate, UITa
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+    //TODO: - Fix bug where table cell row becoming unselected when pop back to EventChatPeopleListViewController
     let url = t(String(format: Routes.Api.FetchAllUsers, eventId))
     
     Http.getRequest(requestURL: url) { response in
