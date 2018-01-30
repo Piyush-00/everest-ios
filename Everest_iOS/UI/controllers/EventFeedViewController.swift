@@ -120,7 +120,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     postButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: -postButtonBottomMargin).isActive = true
   }
   
-  func didClickPostButton(sender: UIButton) {
+  @objc func didClickPostButton(sender: UIButton) {
     let eventFeedModalContainer = EventFeedModalContainer()
     eventFeedModalContainer.socket = socket
     

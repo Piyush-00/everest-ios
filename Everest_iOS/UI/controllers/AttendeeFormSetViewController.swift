@@ -156,7 +156,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     continueButton.heightAnchor.constraint(equalToConstant: AppStyle.sharedInstance.baseInputTextFieldHeight).isActive = true
   }
   
-  func didTapAddFieldButton(sender: UIButton) {
+  @objc func didTapAddFieldButton(sender: UIButton) {
     if let nextInputPlaceholder = placeholderTextArray.popLast() {
       let nextInputTextField = BaseInputTextField(hintText: nextInputPlaceholder)
       headerAndStackViewContainer.baseInputView.addArrangedSubviewToStackView(view: nextInputTextField, aboveView: totalButtonContainer)
@@ -181,7 +181,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     }
   }
   
-  func didTapRemoveFieldButton(sender: UIButton) {
+  @objc func didTapRemoveFieldButton(sender: UIButton) {
     if let lastInputTextField = inputTextFieldsArray.popLast() {
       if let lastPlaceholderText = lastInputTextField.placeholder {
         lastInputTextField.removeFromSuperview()
@@ -199,7 +199,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     }
   }
   
-  func didTapContinueButton(sender: UIButton) {
+  @objc func didTapContinueButton(sender: UIButton) {
     self.view.endEditing(true)
     
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
@@ -216,7 +216,7 @@ class AttendeeFormSetViewController: UIViewController, UITextFieldDelegate, Imag
     }
   }
   
-  func didTapHeader(sender: UITapGestureRecognizer) {
+  @objc func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
     imagePicker.delegate = self
     imagePicker.displayAlert()

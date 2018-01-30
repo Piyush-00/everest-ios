@@ -129,7 +129,7 @@ class EventContainerViewController: UIViewController, EventTabBarViewDelegate {
     currentViewController.removeFromParentViewController()
   }
   
-  func didTapSettingsButton(sender: UIBarButtonItem) {
+  @objc func didTapSettingsButton(sender: UIBarButtonItem) {
     AppUtil.presentEventSettingsActionSheet(using: self)
   }
   

@@ -16,7 +16,9 @@ enum namespace: String {
 
 class Socket : NSObject {
   
-  private let socket = SocketIOClient(socketURL: URL(string: t())!)
+  private let socket = SocketManager(socketURL: URL(string: t())!).defaultSocket
+  
+  var nsp: namespace?
   
   func establishConnection(completionHandler : @escaping (Bool) -> ()) {
     socket.connect()
@@ -57,7 +59,7 @@ class Socket : NSObject {
     }
   }
   
-  func setNamespace(to namespace: namespace) {
-    socket.joinNamespace(namespace.rawValue)
+  func joinNamespace() {
+    socket.joinNamespace()
   }
 }

@@ -96,7 +96,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     //SKO - on-click listener
-    func onTapContinueButton(sender: UIButton) {
+    @objc func onTapContinueButton(sender: UIButton) {
       self.view.endEditing(true)
       
       if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
@@ -137,7 +137,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
       } else {
         if let text = textField.text {
-          if text.characters.count < 2 {
+          if text.count < 2 {
             if continueButtonContainer.button.isEnabled {
               continueButtonContainer.button.isEnabled = false
             }
@@ -166,7 +166,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         return true
     }
     
-    func didTapHeader(sender: UITapGestureRecognizer) {
+    @objc func didTapHeader(sender: UITapGestureRecognizer) {
         let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
         imagePicker.delegate = self
         imagePicker.displayAlert()

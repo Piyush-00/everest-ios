@@ -95,7 +95,7 @@ class SignUpViewContainer: UIView {
   }
   
   //SKU - Calculate the height of the keyboard to account for the scroll view.
-  internal func keyboardDidShow(notification: NSNotification) {
+  @objc internal func keyboardDidShow(notification: NSNotification) {
     scrollViewContentViewHeightConstaint.isActive = false
     scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60) + headerViewHeight)
     scrollViewContentViewHeightConstaint.isActive = true
@@ -104,7 +104,7 @@ class SignUpViewContainer: UIView {
   }
   
   //SKU - Calculate the height of the keyboard to account for the scroll view.
-  internal func keyboardWillHide(notification: NSNotification) {
+  @objc internal func keyboardWillHide(notification: NSNotification) {
     
     scrollViewContentViewHeightConstaint.isActive = false
     self.scrollViewContentViewHeightConstaint = self.scrollViewContentView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.height - 60))

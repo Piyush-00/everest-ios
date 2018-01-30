@@ -71,7 +71,7 @@ class ProfileHeaderContainer: UIView, ImagePickerAlertProtocol {
         self.controller = controller
     }
     
-    func didTap(sender: UITapGestureRecognizer) {
+    @objc func didTap(sender: UITapGestureRecognizer) {
         if controller != nil {
             let imagePicker = ImagePickerAlertController(frame: UIScreen.main.bounds, controller: controller!)
             imagePicker.displayAlert()

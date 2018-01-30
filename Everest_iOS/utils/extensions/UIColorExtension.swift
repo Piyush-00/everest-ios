@@ -24,7 +24,7 @@ extension UIColor {
   
     convenience init(hex:String) {
       //SKU - If the hex is in the wrong format, return white
-      if (!hex.hasPrefix("#") || ((hex.characters.count) != 7)) {
+      if (!hex.hasPrefix("#") || ((hex.count) != 7)) {
         self.init(red: 0, green: 0, blue: 0, alpha: 255)
       } else {
         
@@ -32,7 +32,7 @@ extension UIColor {
         var int = UInt32()
         Scanner(string: hexValue).scanHexInt32(&int)
         let a, r, g, b: UInt32
-        switch hexValue.characters.count {
+        switch hexValue.count {
         case 3: // RGB (12-bit)
           (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
         case 6: // RGB (24-bit)

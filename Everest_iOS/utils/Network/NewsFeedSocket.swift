@@ -11,7 +11,8 @@ import Foundation
 class NewsFeedSocket: Socket {
   override init() {
     super.init()
-    self.setNamespace(to: .newsFeed)
+    nsp = .newsFeed
+    joinNamespace()
   }
   
   func joinNewsFeedRoom(userID: String, eventID: String, completionHandler: @escaping (Bool) -> () ) {

@@ -78,7 +78,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
     headerAndStackViewContainer.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
   }
   
-  func didTapCreateEventButton(sender: UIButton) {
+  @objc func didTapCreateEventButton(sender: UIButton) {
     self.view.endEditing(true)
     
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
@@ -88,7 +88,7 @@ class AdminDescriptionFormViewController: UIViewController, UITextViewDelegate, 
     }
   }
   
-  func didTapHeader(sender: UITapGestureRecognizer) {
+  @objc func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
     imagePicker.delegate = self
     imagePicker.displayAlert()

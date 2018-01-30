@@ -174,7 +174,7 @@ class EventTabBarView: UIView {
     _currentTabBarButton = tabBarButton
   }
   
-  func didTapTabBarButton(sender: UIButton) {
+  @objc func didTapTabBarButton(sender: UIButton) {
     guard let tabBarButton = sender.superview as? EventTabBarButtonView else {
       fatalError("fatal error: tabBarButton.button is not a subview of EventTabBarButtonView")
     }
@@ -182,7 +182,7 @@ class EventTabBarView: UIView {
     delegate?.eventTabBar(self, didTapTabButton: tabBarButton)
   }
   
-  func didTapHamburgerTabButton(sender: UIButton) {
+  @objc func didTapHamburgerTabButton(sender: UIButton) {
     isTabPoppedUp = !isTabPoppedUp
   }
   

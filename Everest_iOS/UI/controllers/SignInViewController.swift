@@ -81,7 +81,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     headerLabel.trailingAnchor.constraint(equalTo: viewContainer.headerView.trailingAnchor).isActive = true
   }
   
-  func didTapSignInButton(sender: UIButton) {
+  @objc func didTapSignInButton(sender: UIButton) {
     user.signIn(email: (emailTextField?.text!)!, password: (passwordTextField?.text!)!) { response in
       switch response{
       case true:
@@ -103,7 +103,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
   }
   
-  func didTapForgotPasswordButton(sender: UIButton) {
+  @objc func didTapForgotPasswordButton(sender: UIButton) {
     print("forgot password button pressed")
   }
   

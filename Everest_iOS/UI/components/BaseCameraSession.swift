@@ -47,13 +47,13 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   //SKU - Configure appropriate input sensors
   private func configureInput() {
     
-    self.captureSession?.sessionPreset = AVCaptureSessionPreset1920x1080
+    self.captureSession?.sessionPreset = AVCaptureSession.Preset.hd1920x1080
 
-    let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+    let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
     let videoInput: AVCaptureDeviceInput
     
     do {
-      videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+      videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice!)
     } catch {
       //SKU - Remove the capture session and change the background colour of the view to black
       failedSession()
@@ -82,7 +82,7 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   
   //SKO - initialize qr code scanner
   func addOutput() {
-    metaDataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+    metaDataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
   }
   
   //SKO - remove qr code scanner
@@ -91,9 +91,9 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   }
   
   private func configurePreviewLayer(){
-    previewLayerView = AVCaptureVideoPreviewLayer(session: self.captureSession)
-    previewLayerView.videoGravity = AVLayerVideoGravityResizeAspect
-    previewLayerView.connection.videoOrientation = AVCaptureVideoOrientation.portrait
+    previewLayerView = AVCaptureVideoPreviewLayer(session: self.captureSession!)
+    previewLayerView.videoGravity = AVLayerVideoGravity.resizeAspect
+    previewLayerView.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
   }
   
   private func failedSession(){
@@ -107,13 +107,12 @@ class BaseCameraSesssion: UIView, AVCaptureMetadataOutputObjectsDelegate {
   }
   
   //SKO - delegate method that gets fired when a qr code has been found
-  func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+  func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
     removeOutput()
     //SKO - TODO: replace with HTTP class url parsing method to test integrity of url + handle modal display if url correct
     if let metadataObject = metadataObjects.first {
       if let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject {
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-        print(readableObject.stringValue)
         delegate?.didScanQRCode(response: readableObject.stringValue!)
       }
     }

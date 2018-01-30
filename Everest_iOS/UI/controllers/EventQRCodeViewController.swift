@@ -49,7 +49,7 @@ class EventQRCodeViewController : UIViewController {
     contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
   }
   
-  func didTapAdminToggleButton(){
+  @objc func didTapAdminToggleButton(){
     //SKU - Toggle button colors to show active button.
     self.contentView.AttendeeToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputInActiveButtonColor
     self.contentView.AdminToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputButtonColor
@@ -71,7 +71,7 @@ class EventQRCodeViewController : UIViewController {
     }
   }
   
-  func didTapAttendeeToggleButton() {
+  @objc func didTapAttendeeToggleButton() {
     //SKU - Toggle button colors to show active button.
     self.contentView.AttendeeToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputButtonColor
     self.contentView.AdminToggleButton.backgroundColor = AppStyle.sharedInstance.baseInputInActiveButtonColor

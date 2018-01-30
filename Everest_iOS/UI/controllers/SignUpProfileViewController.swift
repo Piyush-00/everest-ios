@@ -68,13 +68,12 @@ class SignUpProfileViewController: UIViewController, UITextFieldDelegate {
         setupConstraints()
     }
   
-    func didTapContinueButton(sender: UIButton) {
+    @objc func didTapContinueButton(sender: UIButton) {
       
       user?.signUpProfile(image: profileHeaderContainer?.pictureImageView.image, firstName: firstNameTextField.text, lastName: lastNameTextField.text) {
         response in
         switch response{
           case true:
-            print(self.user?.getProfileImageURL())
             //SKU - Pop back to the original view that the user came into the sign up flow from
             if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
               if (self.initialFlowViewController != nil){

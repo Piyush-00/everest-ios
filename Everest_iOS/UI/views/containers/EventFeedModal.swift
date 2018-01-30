@@ -22,7 +22,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
   private let wordCountMax: Int = 200
   private var wordCount: Int {
     get {
-      if let wordCount = wordCountLabel.text?.characters.count {
+      if let wordCount = wordCountLabel.text?.count {
         return wordCountMax - wordCount
       }
       return wordCountMax
@@ -175,11 +175,11 @@ class EventFeedModal: UIView, UITextViewDelegate {
     postButton.heightAnchor.constraint(equalToConstant: postButtonHeight).isActive = true
   }
   
-  func didClickCancelButton(sender: UIButton) {
+  @objc func didClickCancelButton(sender: UIButton) {
     self.superview?.removeFromSuperview()
   }
   
-  func didClickPostButton(sender: UIButton) {
+  @objc func didClickPostButton(sender: UIButton) {
     guard let socket = socket else {
       return
     }
@@ -232,7 +232,7 @@ class EventFeedModal: UIView, UITextViewDelegate {
       } else {
         textView.placeholderLabel.isHidden = true
       }
-      wordCount = wordCountMax - textView.text.characters.count
+      wordCount = wordCountMax - textView.text.count
     }
   }
 }

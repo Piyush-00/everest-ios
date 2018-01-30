@@ -85,7 +85,7 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
       let chatListMessage = ChatListMessage(pictureUrl: profilePictureUrl, message: message, timestamp: timestamp)
       
       if let cell = self.cellHashMap[chatId] {
-        //NOTE: might need to update tableview to see result
+        //NOTE: might need to update ta	bleview to see result
         cell.updateContent(using: chatListMessage)
       }
     }
@@ -96,7 +96,8 @@ class EventChatListViewController: UIViewController, UITableViewDelegate, UITabl
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    let url = t(String(format: Routes.Api.FetchAllChats, user!.id!, event!.getId()!))
+//    let url = t(String(format: Routes.Api.FetchAllChats, user!.id!, event!.getId()!))
+    let url = "stub"
     
     Http.getRequest(requestURL: url) { response in
       switch response.result {

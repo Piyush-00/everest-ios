@@ -63,7 +63,7 @@ class HeaderAndStackViewContainer: HeaderViewContainer, BaseInputViewProtocol {
     }
   
     //SKO - Keyboard showed up notification listener
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
       isCurrentlyScrollable = getIsCurrentlyScrollable()
       //SKO - prevent scroll view's content size from increasing every time click on textField
       if !isKeyboardVisible {
@@ -85,7 +85,7 @@ class HeaderAndStackViewContainer: HeaderViewContainer, BaseInputViewProtocol {
       }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
       if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?
         .cgRectValue{
         let keyboardHeight = keyboardSize.height

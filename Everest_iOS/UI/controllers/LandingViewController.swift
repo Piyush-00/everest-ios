@@ -58,18 +58,18 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     }
   }
   
-  func didTapScanButton(sender: UIButton) {
+  @objc func didTapScanButton(sender: UIButton) {
     toggleLandingOverlay()
   }
   
-  func didTapCreateEventButton(sender: UIButton) {
+  @objc func didTapCreateEventButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let createEventViewController = CreateEventViewController()
       navigationController.pushViewController(createEventViewController, withAnimation: .fromTop)
     }
   }
   
-  func didTapSignupButton(sender: UIButton) {
+  @objc func didTapSignupButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signupViewController = SignUpViewController()
       signupViewController.initialFlowViewController = self
@@ -77,7 +77,7 @@ class LandingViewController: UIViewController, BaseCameraSesssionProtocol, Modal
     }
   }
   
-  func didTapLoginButton(sender: UIButton) {
+  @objc func didTapLoginButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signInViewController = SignInViewController()
       navigationController.pushViewController(signInViewController, withAnimation: .fromBottom)

@@ -110,7 +110,7 @@ class HeaderViewContainer: UIView {
             scrollViewContentViewHeightConstaint = scrollViewContentView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -(UIApplication.shared.statusBarFrame.height))
         }
       
-        scrollViewContentViewHeightConstaint.priority = 250
+        scrollViewContentViewHeightConstaint.priority = UILayoutPriority(rawValue: 250)
         scrollViewContentViewHeightConstaint.isActive = true
 
         headerView.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor).isActive = true

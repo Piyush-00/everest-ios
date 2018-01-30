@@ -128,7 +128,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     tableView.endUpdates()
   }
   
-  func KeyboardDidActivate(notification: NSNotification) {
+  @objc func KeyboardDidActivate(notification: NSNotification) {
     
     if (notification.name == NSNotification.Name.UIKeyboardWillShow) {
       if let userAgent = notification.userInfo {

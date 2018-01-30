@@ -11,7 +11,8 @@ import Foundation
 class ChatSocket: Socket {
   override init() {
     super.init()
-    self.setNamespace(to: .chat)
+    nsp = .chat
+    joinNamespace()
   }
   
   func joinChatRoom(withChatId chatId: String, eventId: String, userId: String, completionHandler: @escaping (Bool) -> ()) {

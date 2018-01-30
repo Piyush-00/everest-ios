@@ -97,7 +97,7 @@ class ModalViewContainer: UIView {
     backgroundView.backgroundColor = color.withAlphaComponent(opacity)
   }
   
-  func didTapBackground(){
+  @objc func didTapBackground(){
     delegate?.didTapModalBackground(view: self)
   }
 }

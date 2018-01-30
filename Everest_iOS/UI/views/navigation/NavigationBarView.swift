@@ -45,7 +45,7 @@ class NavigationBarView: UIView {
         self.addSubview(backButton)
     }
     
-    func didTapBackButton(sender: UIButton) {
+    @objc func didTapBackButton(sender: UIButton) {
         if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
             navigationController.popViewController(withAnimation: navigationController.getPopAnimationType())
         }

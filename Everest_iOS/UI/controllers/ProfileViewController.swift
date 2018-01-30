@@ -106,19 +106,19 @@ class ProfileViewController : UIViewController {
     headerAndStackView.contentViewHeightConstraint?.isActive = true
   }
   
-  func didTapEditButton(sender: UIBarButtonItem) {
+  @objc func didTapEditButton(sender: UIBarButtonItem) {
     self.navigationItem.rightBarButtonItem = barSaveButton
     self.navigationItem.leftBarButtonItem = barCancelButton
     //TODO: Put view into editing mode
   }
   
-  func didTapCancelButton(sender: UIBarButtonItem) {
+  @objc func didTapCancelButton(sender: UIBarButtonItem) {
     self.navigationItem.leftBarButtonItem = nil
     self.navigationItem.rightBarButtonItem = barEditButton
     //TODO: Put view back into viewing mode
   }
   
-  func didTapSaveButton(sender: UIBarButtonItem) {
+  @objc func didTapSaveButton(sender: UIBarButtonItem) {
     self.navigationItem.rightBarButtonItem = barEditButton
     self.navigationItem.leftBarButtonItem = nil
     //TODO: Make POST request with new profile data

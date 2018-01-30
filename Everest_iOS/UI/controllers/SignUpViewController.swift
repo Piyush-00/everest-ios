@@ -115,7 +115,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         headerTextView.heightAnchor.constraint(equalTo: viewContainer.headerView.heightAnchor).isActive = true
     }
     
-    func didTapSignupButton(sender: UIButton) {
+    @objc func didTapSignupButton(sender: UIButton) {
     
       user.signUp(email: emailTextField.text!, password: passwordTextField.text!) { response in
         switch response{
@@ -136,7 +136,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
       }
     }
   
-  func didTapLoginButton(sender: UIButton) {
+  @objc func didTapLoginButton(sender: UIButton) {
     if let navigationController = (UIApplication.shared.delegate as! AppDelegate).navigationController {
       let signInViewController = SignInViewController()
       //SKU - If there is an initial view controller, let signInViewController know about it.

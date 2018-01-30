@@ -62,7 +62,7 @@ class ChatMessageInputContainer: UIView, UITextFieldDelegate {
   }
   
   @objc private func didTapSendButton(){
-    if ((textInputView.text?.characters.count)! > 0) {
+    if ((textInputView.text?.count)! > 0) {
       delegate?.didTapSendButton(inputText: textInputView.text!)
       textInputView.clearText()
     }

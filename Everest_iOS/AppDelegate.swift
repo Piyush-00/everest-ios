@@ -22,11 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
       self.window = UIWindow(frame: UIScreen.main.bounds)
       
-      var rootView: UIViewController
-      
-      if Session.manager.isActiveEvent {
+      if let eventId = Keychain.get(key: Keys.sharedInstance.EventID), Session.manager.isActiveEvent {
         let event = Event()
-        event.setId(to: Keychain.get(key: Keys.sharedInstance.EventID) as! String)
+        event.setId(to: eventId as String)
         Session.manager.event = event
         
         //TODO: make GET request for event information OR in event flow (profile, page, and feed )
@@ -38,11 +36,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window!.rootViewController = eventNavigationViewController
       } else {
-        rootView = LandingViewController()
-        self.navigationController = NavigationController()
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.viewControllers = [rootView]
-        self.window!.rootViewController = self.navigationController
+        let event = Event()
+        Session.manager.event = event
+        let eventContainerViewController = EventContainerViewController()
+        let eventNavigationViewController = UINavigationController()
+        
+        eventNavigationViewController.viewControllers = [eventContainerViewController]
+        
+        self.window!.rootViewController = eventNavigationViewController
+        
+//        let rootView = LandingViewController()
+//        self.navigationController = NavigationController()
+//        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.viewControllers = [rootView]
+//
+//        self.window!.rootViewController = self.navigationController
       }
       
       self.window?.makeKeyAndVisible()

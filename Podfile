@@ -6,9 +6,8 @@ target 'Everest_iOS' do
   use_frameworks!
   
   #Pods for Everest_iOS
-  pod 'Alamofire', '~> 4.0'
-  pod 'RealmSwift'
-  pod 'Socket.IO-Client-Swift', '~> 8.1.2'
+  pod 'Alamofire'
+  pod 'Socket.IO-Client-Swift'
   pod 'FontAwesome.swift'
 
   target 'Everest_iOSTests' do
@@ -23,11 +22,3 @@ target 'Everest_iOS' do
 
 end
 
-#Xcode 8 RealmSwift requirement
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
-    end
-  end
-end

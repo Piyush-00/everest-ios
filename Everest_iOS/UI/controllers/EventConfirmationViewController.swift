@@ -149,7 +149,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
     headerAndStackViewController.contentViewHeightConstraint?.isActive = true
   }
   
-  func didTapCreateEventButton(sender: UIButton) {
+  @objc func didTapCreateEventButton(sender: UIButton) {
 
     let userID = (event?.isUserSignedIn())!
     if (userID == "") {
@@ -186,7 +186,7 @@ class EventConfirmationViewController: UIViewController, UITextFieldDelegate, UI
   
   }
   
-  func didTapHeader(sender: UITapGestureRecognizer) {
+  @objc func didTapHeader(sender: UITapGestureRecognizer) {
     let imagePicker = ImagePickerAlertController(frame: view.bounds, controller: self)
     imagePicker.delegate = self
     imagePicker.displayAlert()

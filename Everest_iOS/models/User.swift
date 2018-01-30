@@ -34,9 +34,9 @@ class User {
   }
   
   private func getKeyChainFirstName() -> String{
-    return Keychain.get(key: Keys.sharedInstance.FirstName) as! String
+    let firstName = Keychain.get(key: Keys.sharedInstance.FirstName) ?? ""
+    return firstName as String
   }
-
   
   //SKU - Last Name
   public func setLastName(lastName: String, keyChain: Bool = false){
@@ -53,7 +53,8 @@ class User {
   }
   
   private func getKeyChainLastName() -> String{
-    return Keychain.get(key: Keys.sharedInstance.LastName) as! String
+    let lastName = Keychain.get(key: Keys.sharedInstance.LastName) ?? ""
+    return lastName as String
   }
   
   
@@ -72,7 +73,8 @@ class User {
   }
   
   private func getKeyChainProfileImageURL() -> String{
-    return Keychain.get(key: Keys.sharedInstance.ProfileImage) as! String
+    let profileImageURL = Keychain.get(key: Keys.sharedInstance.ProfileImage) ?? ""
+    return profileImageURL as String
   }
   
   
@@ -100,7 +102,8 @@ class User {
   }
   
   public func getKeyChainEmail() -> String{
-    return Keychain.get(key: Keys.sharedInstance.Email) as! String
+    let email = Keychain.get(key: Keys.sharedInstance.Email) ?? ""
+    return email as String
   }
   
   
@@ -110,7 +113,8 @@ class User {
   }
   
   public func getKeyChainPassword() -> String{
-    return Keychain.get(key: Keys.sharedInstance.Password) as! String
+    let password = Keychain.get(key: Keys.sharedInstance.Password) ?? ""
+    return password as String
   }
   
   public func loadKeyChainData() {
@@ -200,9 +204,9 @@ class User {
   
   
   //SKU - SignUpProfileUpdate
-  public func signUpProfile (image: UIImage? = nil, firstName: String? = nil, lastName: String? = nil, completionHandler: @escaping (Bool) -> ()) {
-    
-    let params = ["FirstName": firstName, "LastName": lastName]
+  //TODO: refactor to make firstName and lastName non-optional
+  public func signUpProfile(image: UIImage? = nil, firstName: String? = nil, lastName: String? = nil, completionHandler: @escaping (Bool) -> ()) {
+    let params = ["FirstName": firstName ?? "", "LastName": lastName ?? ""]
     let queryString = "?id=\(User.getUserID()!)&isimageset="
     var url = t(Routes.Api.SetUpUserProfile + queryString)
     
